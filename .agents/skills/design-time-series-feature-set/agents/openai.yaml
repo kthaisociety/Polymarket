@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Time-Series Feature Set"
+  short_description: "Design labels, features, and candidates"
+  default_prompt: "Use $design-time-series-feature-set to propose a time-legal target and feature-set candidate."

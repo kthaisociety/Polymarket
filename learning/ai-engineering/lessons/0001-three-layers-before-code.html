@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 0001 — Three Layers Before Code</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<main>
+  <p class="kicker">Lesson 0001 · about 7 minutes</p>
+  <h1>Three layers before code</h1>
+  <p><strong>Purpose:</strong> avoid building the wrong system correctly.</p>
+
+  <div class="idea">
+    Imagine building a house. The desired life inside it is the goal; the blueprint records constraints; the bricks and wiring are the implementation. Starting with bricks cannot tell you whether the house needed three bedrooms or a laboratory.
+  </div>
+
+  <p>An AI project has the same three layers:</p>
+  <div class="layers">
+    <div class="layer"><strong>1. Product objective</strong>The valuable outcome the system must create.</div>
+    <div class="layer"><strong>2. Specification</strong>The responsibilities, boundaries, decisions, and rules that define an acceptable system.</div>
+    <div class="layer"><strong>3. Implementation</strong>The code, storage, provider, framework, and local mechanisms chosen to realize the specification.</div>
+  </div>
+
+  <h2>Apply it to this repository</h2>
+  <p>The product is a reusable research kernel that investigates whether information available at time <em>t</em> predicts a target at time <em>t+h</em>. The specification requires temporal validity, provenance, reproducibility, protected evidence, and promotion gates. Python, a database, class names, and a particular model provider are implementation choices unless a higher-authority document locks them.</p>
+
+  <p>This distinction is a core AI-engineering habit: models make plausible suggestions, so the surrounding engineering system must preserve intent and make success testable. AI Hero frames successful AI work around clear success criteria and evaluation rather than intuition alone.</p>
+
+  <h2>Retrieval check</h2>
+  <div class="exercise">
+    <p><strong>Which statement is an implementation choice?</strong></p>
+    <button data-answer="wrong">No future information may enter a prediction.</button>
+    <button data-answer="right">Store experiment metadata in PostgreSQL.</button>
+    <button data-answer="wrong">Research findings must preserve provenance.</button>
+    <p id="feedback" class="feedback" aria-live="polite"></p>
+  </div>
+
+  <h2>Your turn</h2>
+  <p>Without reopening the repository documents, write one sentence for each:</p>
+  <ol>
+    <li>What product are we building?</li>
+    <li>Name one rule the implementation must preserve.</li>
+    <li>Name one implementation choice that is still free.</li>
+  </ol>
+  <p>Send those three sentences to your agent. Your answers—not completing this page—determine what lesson comes next.</p>
+
+  <h2>Primary sources</h2>
+  <ul>
+    <li><a href="../../../README.md">This repository's README and source-of-truth hierarchy</a></li>
+    <li><a href="https://www.aihero.dev/ai-engineer-roadmap">AI Hero: The AI Engineer Roadmap</a></li>
+    <li><a href="https://www.aihero.dev/skills">AI Hero: AI Skills for Real Engineers</a></li>
+  </ul>
+  <p class="small">Ask follow-up questions whenever a distinction feels fuzzy.</p>
+</main>
+<script>
+  const feedback = document.querySelector('#feedback');
+  document.querySelectorAll('button[data-answer]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const correct = button.dataset.answer === 'right';
+      feedback.className = `feedback ${correct ? 'correct' : 'wrong'}`;
+      feedback.textContent = correct
+        ? 'Correct. The specification can require durable metadata without deciding PostgreSQL.'
+        : 'Not quite. That is a required property of an acceptable system, not merely a coding mechanism.';
+    });
+  });
+</script>
+</body>
+</html>

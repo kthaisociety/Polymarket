@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fundamentals Review"
+  short_description: "Critique seam contracts against locked principles"
+  default_prompt: "Use $fundamentals-review to independently critique this provisional seam contract against the Insurance project's locked fundamentals."

@@ -1,0 +1,78 @@
+# Data-foundation implementation map
+
+Status: **generic temporal boundary and Polymarket production-tape adapter implemented; live
+production acceptance blocked on local read-only tunnel access; immutable DB snapshots,
+resolution-label availability, and event/group identity remain red**.
+
+## Generic kernel
+
+- Temporal registration: `src/research_agent/data_foundation/`
+- Content-addressed workspace: `src/research_agent/data_workspace/`
+- Registration adversaries: `tests/data_foundation/`
+- Workspace adversaries: `tests/data_workspace/`
+- Data-to-research composition: `tests/integration/test_data_to_research_kernel.py`
+
+The generic kernel keeps `reference_time`, `available_at`, predictor legality, label maturity,
+fitting, and protected exposure as separate boundaries. No source adapter may grant itself later
+scientific or protected authority.
+
+## Polymarket adapter
+
+- Source records and import request:
+  `src/research_agent/data_adapters/polymarket/models.py`
+- Public engine read adapter:
+  `src/research_agent/data_adapters/polymarket/reader.py`
+- Temporal registration:
+  `src/research_agent/data_adapters/polymarket/ingestion.py`
+- Fail-closed live smoke:
+  `src/research_agent/data_adapters/polymarket/smoke.py`
+- Causal and command adversaries:
+  `tests/data_adapters/polymarket/`
+
+```mermaid
+flowchart LR
+    IDS["Explicit contract IDs"] --> READ["Engine public market reads"]
+    CURSORS["History and forward cursors"] --> READ
+    READ --> CONTRACTS["Contract, outcome, payout metadata"]
+    READ --> FILLS["Taker-side fills"]
+    CONTRACTS --> VALIDATE["Exact identity validation"]
+    FILLS --> VALIDATE
+    VALIDATE --> WINDOW["Inclusive block-window filter"]
+    WINDOW --> REGISTER["ObservationRegistrar"]
+    REGISTER --> CATALOG["Domain-neutral DataCatalogSnapshot"]
+    WINDOW --> DIGEST["Exact read digest"]
+```
+
+Each retained print produces price, absolute size, signed size, and block observations. Dimensions
+bind `market_id`, `outcome_index`, `outcome_token`, and `fill_uid`. Source and provenance bind the
+fill, transaction when present, block, and cursor vintage.
+
+The availability rule is `polymarket-onchain-block-inclusion/v1`: `fill_time` represents public
+chain observability. It does not represent collector or database arrival. Confirmation and
+collector delay remain caveats on every observation.
+
+Resolved payouts are read as authoritative contract metadata but are not registered as target
+observations. The public read interface does not provide exact resolution availability, so doing so
+would invent `available_at`. Event/group identity is also absent, so event-grouped validation is a
+red gate rather than a silent market-ID fallback.
+
+## Snapshot limitation
+
+The cursor window is not an immutable database snapshot. The scope-repair backfill may insert a row
+inside an existing window. The source digest makes a rerun observably different, and the adversary
+proves that the registration identity moves, but the live database cannot reconstruct the prior
+bytes. Protected evaluation needs retained immutable input bytes or an external database snapshot
+identity.
+
+## Verification
+
+```bash
+PYTHONPATH=src:../../engine/src uv run pytest tests/data_adapters/polymarket -q
+PYTHONPATH=src:../../engine/src uv run ruff check \
+  src/research_agent/data_adapters/polymarket tests/data_adapters/polymarket
+PYTHONPATH=src:../../engine/src uv run basedpyright \
+  src/research_agent/data_adapters/polymarket tests/data_adapters/polymarket
+```
+
+The real smoke additionally requires the approved `human_ro` tunnel and `BDL__DB__URL`. A missing
+connection exits `BLOCKED`, not green.

@@ -1,0 +1,11 @@
+*:Zone.Identifier
+.DS_Store
+__pycache__/
+factory/dashboard.html
+.venv/
+.ipynb_checkpoints/
+data/bolagsverket/api/credentials.txt
+data/bolagsverket/api/*.zip
+~$*
+factory/app/runs/
+archive/**/*.zip

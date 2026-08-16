@@ -1,0 +1,87 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f4f1e8;
+  --paper: #fffdf7;
+  --ink: #20231f;
+  --muted: #62685f;
+  --accent: #285943;
+  --accent-soft: #dce9df;
+  --line: #d7d2c5;
+  --correct: #176b3a;
+  --wrong: #9b2c2c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.62;
+}
+
+main {
+  width: min(760px, calc(100% - 32px));
+  margin: 40px auto;
+  padding: clamp(24px, 6vw, 64px);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 14px 40px rgb(40 36 28 / 10%);
+}
+
+h1, h2 { line-height: 1.15; }
+h1 { font-size: clamp(2rem, 6vw, 3.5rem); margin-top: 0; }
+h2 { margin-top: 2.3rem; }
+
+.kicker, .small {
+  color: var(--muted);
+  font-family: system-ui, sans-serif;
+  font-size: .85rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.idea, .exercise {
+  margin: 1.5rem 0;
+  padding: 1.2rem 1.4rem;
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft);
+}
+
+.layers { display: grid; gap: .7rem; margin: 1.4rem 0; }
+.layer { padding: .85rem 1rem; border: 1px solid var(--line); }
+.layer strong { display: block; font-family: system-ui, sans-serif; }
+
+button {
+  display: block;
+  width: 100%;
+  margin: .6rem 0;
+  padding: .8rem 1rem;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+
+button:hover, button:focus { background: var(--accent-soft); }
+.feedback { min-height: 1.6rem; font-family: system-ui, sans-serif; font-weight: 650; }
+.correct { color: var(--correct); }
+.wrong { color: var(--wrong); }
+
+a { color: var(--accent); }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #181b18; --paper: #222722; --ink: #edf1e9; --muted: #b5bdb2;
+    --accent: #9bd0ae; --accent-soft: #293a30; --line: #485048;
+    --correct: #8fe1a9; --wrong: #ff9f9f;
+  }
+}
+
+@media print {
+  body, main { background: white; color: black; }
+  main { box-shadow: none; border: 0; margin: 0; width: 100%; }
+}

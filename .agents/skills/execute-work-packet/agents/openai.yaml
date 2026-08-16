@@ -1,0 +1,4 @@
+interface:
+  display_name: "Execute Work Packet"
+  short_description: "Solve bounded work with verified state handoffs"
+  default_prompt: "Use $execute-work-packet to scope, solve, validate, and close the next bounded architectural transition."

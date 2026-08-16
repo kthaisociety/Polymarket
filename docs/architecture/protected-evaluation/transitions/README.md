@@ -1,0 +1,16 @@
+# Protected-evaluation transition contracts
+
+- [`freeze.assess-eligibility`](assess-freeze-eligibility.md)
+- [`freeze.seal-system`](seal-frozen-system.md)
+- [`backtest.request-evaluation`](request-backtest.md)
+- [`backtest.authorize-request`](authorize-backtest.md)
+- [`backtest.bind-protected-view`](bind-protected-data-view.md)
+- [`exposure.record-disclosure`](record-protected-exposure.md)
+- [`backtest.execute-scenario`](execute-backtest-scenario.md)
+- [`backtest.seal-run`](seal-backtest-run.md)
+- [`evaluation.measure-run`](measure-backtest-run.md)
+- [`finding.validate-report`](validate-finding.md)
+- [`finding.publish-validated-claim`](publish-validated-finding.md)
+- [`ledger.record-negative-result`](record-negative-result.md)
+- [`ledger.preserve-scientific-history`](preserve-scientific-ledger.md)
+- [`governance.retry-privileged-operation`](retry-privileged-operation.md)

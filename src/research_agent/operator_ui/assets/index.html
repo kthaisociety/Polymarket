@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Read-only operator view for ongoing and finalized time-series research."
+    />
+    <title>Research Office</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="institutional-band" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Research Office home">
+        <span class="wordmark-primary">Research Office</span>
+        <span class="wordmark-secondary">Time-series research system</span>
+      </a>
+      <div class="header-meta">
+        <span>Operator library</span>
+        <span class="read-only-label">Read only</span>
+      </div>
+    </header>
+
+    <nav class="primary-nav" aria-label="Research library views">
+      <button class="nav-tab is-active" type="button" data-view="ongoing">
+        Ongoing Research
+        <span class="nav-count" id="ongoing-count">—</span>
+      </button>
+      <button class="nav-tab" type="button" data-view="finalized">
+        Finalized Research Reports
+        <span class="nav-count" id="finalized-count">—</span>
+      </button>
+    </nav>
+
+    <main id="app" class="app-shell" aria-live="polite">
+      <section class="loading-state">
+        <p class="eyebrow">RESEARCH LIBRARY</p>
+        <h1>Loading authoritative records…</h1>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Presentation is a projection, never scientific authority.</span>
+      <span id="library-mode">READ_ONLY_RESEARCH_PROJECTION</span>
+    </footer>
+  </body>
+</html>

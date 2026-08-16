@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analyze Time-Series Data"
+  short_description: "Understand data before modeling it"
+  default_prompt: "Use $analyze-time-series-data to investigate this dataset and propose the next research step."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Backtest Gate"
+  short_description: "Challenge freeze and backtest readiness"
+  default_prompt: "Use $review-backtest-gate to audit whether this candidate is ready to request protected evaluation."

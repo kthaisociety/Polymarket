@@ -1,0 +1,4 @@
+interface:
+  display_name: "System Eval Design"
+  short_description: "Derive traceable composite tests and AI evals"
+  default_prompt: "Use $system-eval-design to derive traceable composite tests and behavioral eval families from this architecture."

@@ -1,0 +1,68 @@
+"""Immutable scientific definitions, exact expressions, and legal materialization."""
+
+from research_agent.formalization.definitions import (
+    EnsembleDefinition,
+    FailureAction,
+    FeatureAlignment,
+    FeatureDefinition,
+    FeatureSet,
+    FittedModel,
+    HistoryKind,
+    HistorySemantics,
+    ModelDefinition,
+    PredictiveSystemDefinition,
+    TemporalMapping,
+)
+from research_agent.formalization.expressions import (
+    CompiledFeatureExpression,
+    CompiledOperation,
+    ExpressionOperator,
+    FeatureCompiler,
+    FeatureExpression,
+    OperationMode,
+)
+from research_agent.formalization.lineage import MaterialChange, record_material_change
+from research_agent.formalization.materialization import (
+    FeatureMaterializationError,
+    FeatureMaterializer,
+    FeatureSeries,
+    FeatureSeriesStatus,
+    FeatureValue,
+    FeatureValueStatus,
+    FittedStateRequiredError,
+    FittedTransformState,
+    InvalidFittedStateError,
+    TemporalAccessError,
+)
+
+__all__ = [
+    "CompiledFeatureExpression",
+    "CompiledOperation",
+    "EnsembleDefinition",
+    "ExpressionOperator",
+    "FailureAction",
+    "FeatureAlignment",
+    "FeatureCompiler",
+    "FeatureDefinition",
+    "FeatureExpression",
+    "FeatureMaterializationError",
+    "FeatureMaterializer",
+    "FeatureSeries",
+    "FeatureSeriesStatus",
+    "FeatureSet",
+    "FeatureValue",
+    "FeatureValueStatus",
+    "FittedModel",
+    "FittedStateRequiredError",
+    "FittedTransformState",
+    "HistoryKind",
+    "HistorySemantics",
+    "InvalidFittedStateError",
+    "MaterialChange",
+    "ModelDefinition",
+    "OperationMode",
+    "PredictiveSystemDefinition",
+    "TemporalAccessError",
+    "TemporalMapping",
+    "record_material_change",
+]

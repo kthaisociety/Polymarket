@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 0002 &mdash; uv sync as a reproducibility contract</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<main>
+  <p class="kicker">Lesson 0002 &middot; about 8 minutes</p>
+  <h1><code>uv sync</code> is a reproducibility contract</h1>
+  <p><strong>Purpose:</strong> make &ldquo;it works here&rdquo; mean something another machine can reproduce.</p>
+  <div class="idea">
+    Think of a restaurant. <code>pyproject.toml</code> is the menu: what the kitchen promises. <code>uv.lock</code> is the exact purchasing sheet. <code>.venv</code> is today's stocked kitchen. <code>uv sync</code> restocks the kitchen to match the sheet.
+  </div>
+  <h2>The three states</h2>
+  <div class="layers">
+    <div class="layer"><strong>1. Declared intent &middot; pyproject.toml</strong>Human-edited Python and direct dependency requirements.</div>
+    <div class="layer"><strong>2. Exact resolution &middot; uv.lock</strong>The versions uv selected, including transitive dependencies.</div>
+    <div class="layer"><strong>3. Installed reality &middot; .venv/</strong>The machine-local environment that runs our code.</div>
+  </div>
+  <p><code>uv sync</code> reconciles these states. It creates <code>.venv</code> when needed, re-locks unless told not to, installs locked packages, and by default removes undeclared extras.</p>
+  <h2>Why this repository starts there</h2>
+  <p>Milestone 1 is test-first. Before the first domain type, a clean checkout needs one trustworthy quality path:</p>
+  <pre><code>uv sync
+uv run pytest
+uv run ruff check .
+uv run ruff format --check .
+uv run basedpyright</code></pre>
+  <p>For a scientific agent this is also provenance. Different numerical-library versions can make &ldquo;same code and data&rdquo; a different experiment. Environment identity therefore belongs beside code revision, data identity, configuration, and seeds.</p>
+  <h2>Command ownership</h2>
+  <div class="layers">
+    <div class="layer"><strong><code>uv add</code> changes intent</strong>Declare or change a dependency.</div>
+    <div class="layer"><strong><code>uv lock</code> changes resolution</strong>Resolve the graph without focusing on installation.</div>
+    <div class="layer"><strong><code>uv sync</code> changes installed reality</strong>Make the environment agree with project state.</div>
+    <div class="layer"><strong><code>uv run</code> executes inside reality</strong>Check the environment, then run the command.</div>
+  </div>
+  <h2>Local development versus CI</h2>
+  <p>Plain <code>uv sync</code> may update <code>uv.lock</code>. In CI, <code>uv sync --locked</code> should fail if metadata and the committed lock disagree. <code>--frozen</code> instead trusts the existing lock without checking whether it reflects new declarations.</p>
+  <h2>The boundary</h2>
+  <p>Syncing does not freeze data, OS libraries, provider responses, hardware, seeds, network services, or source code. It closes dependency drift; our provenance design must close the other gaps.</p>
+  <h2>Retrieval check</h2>
+  <div class="exercise" data-quiz data-correct="Correct. Sync reconciles installed reality with resolved project state." data-wrong="Not quite. That describes uv add or uv run.">
+    <p><strong>Which sentence best describes <code>uv sync</code>?</strong></p>
+    <button data-answer="wrong">Change the project's declared dependency requirements.</button>
+    <button data-answer="right">Reconcile the environment with resolved dependencies.</button>
+    <button data-answer="wrong">Run tests inside the project's environment.</button>
+    <p class="feedback" data-feedback aria-live="polite"></p>
+  </div>
+  <h2>Your turn</h2>
+  <p><code>pyproject.toml</code> declares package A, but <code>uv.lock</code> lacks A. CI runs <code>uv sync --locked</code>. Predict what happens and explain why in one sentence; send it to your agent for feedback.</p>
+  <h2>Primary sources</h2>
+  <ul>
+    <li><a href="https://docs.astral.sh/uv/concepts/projects/sync/">uv: Locking and syncing</a></li>
+    <li><a href="https://docs.astral.sh/uv/concepts/projects/layout/">uv: Project structure and files</a></li>
+    <li><a href="../../../docs/specification/PLANS.md">Repository test-first plan</a></li>
+    <li><a href="../reference/uv-project-environments.html">Quick reference: uv environment map</a></li>
+  </ul>
+  <p class="small"><a href="0001-three-layers-before-code.html">Previous lesson</a> &middot; Ask follow-up questions whenever a distinction feels fuzzy.</p>
+</main>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

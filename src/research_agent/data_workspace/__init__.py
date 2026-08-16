@@ -1,0 +1,53 @@
+"""Generic content-addressed acquisition and offline derivation workspace."""
+
+from research_agent.data_workspace.scouting import (
+    RecordedSourceScoutProvider,
+    ScoutedFetchReceipt,
+    ScoutedFetchStatus,
+    ScoutingConflictError,
+    ScoutingResolutionError,
+    ScoutingStatus,
+    SourceCandidate,
+    SourceScoutingReceipt,
+    SourceScoutingReport,
+    SourceScoutingReportRef,
+    SourceScoutingService,
+    SourceSearchRequest,
+)
+from research_agent.data_workspace.workspace import (
+    CatalogEntry,
+    DataWorkspace,
+    DerivedDatasetRef,
+    DeriveReceipt,
+    DeriveStatus,
+    FetchReceipt,
+    FetchRequest,
+    FetchStatus,
+    SourceSnapshotRef,
+    VerificationReceipt,
+)
+
+__all__ = [
+    "CatalogEntry",
+    "DataWorkspace",
+    "DeriveReceipt",
+    "DeriveStatus",
+    "DerivedDatasetRef",
+    "FetchReceipt",
+    "FetchRequest",
+    "FetchStatus",
+    "RecordedSourceScoutProvider",
+    "ScoutedFetchReceipt",
+    "ScoutedFetchStatus",
+    "ScoutingConflictError",
+    "ScoutingResolutionError",
+    "ScoutingStatus",
+    "SourceCandidate",
+    "SourceScoutingReceipt",
+    "SourceScoutingReport",
+    "SourceScoutingReportRef",
+    "SourceScoutingService",
+    "SourceSearchRequest",
+    "SourceSnapshotRef",
+    "VerificationReceipt",
+]

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reference &mdash; uv project environments</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<main>
+  <p class="kicker">Reference &middot; Python project environments</p>
+  <h1>The uv environment map</h1>
+  <div class="layers">
+    <div class="layer"><strong>Intent &middot; pyproject.toml</strong>Permitted Python and direct dependencies; human-managed.</div>
+    <div class="layer"><strong>Resolution &middot; uv.lock</strong>Exact resolved graph; commit it and let uv manage it.</div>
+    <div class="layer"><strong>Reality &middot; .venv/</strong>Disposable installed environment; do not commit it.</div>
+  </div>
+  <pre><code>pyproject.toml &rarr; resolve/check uv.lock &rarr; make .venv match</code></pre>
+  <h2>Command compass</h2>
+  <table>
+    <thead><tr><th>Intent</th><th>Command</th></tr></thead>
+    <tbody>
+      <tr><td>Declare dependency</td><td><code>uv add package</code></td></tr>
+      <tr><td>Resolve lock</td><td><code>uv lock</code></td></tr>
+      <tr><td>Reconcile environment</td><td><code>uv sync</code></td></tr>
+      <tr><td>Run in environment</td><td><code>uv run pytest</code></td></tr>
+      <tr><td>Reject stale lock</td><td><code>uv sync --locked</code></td></tr>
+    </tbody>
+  </table>
+  <h2>Version-control rule</h2>
+  <pre><code>commit: pyproject.toml, uv.lock, .python-version (if used)
+ignore: .venv/</code></pre>
+  <div class="idea"><strong>Boundary:</strong> package locking does not freeze the OS, data, APIs, model behavior, seeds, or source revision.</div>
+  <p class="small"><a href="../lessons/0002-uv-sync-as-reproducibility-contract.html">Companion lesson</a></p>
+</main>
+</body>
+</html>
