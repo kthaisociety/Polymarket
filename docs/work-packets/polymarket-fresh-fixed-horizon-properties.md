@@ -97,3 +97,29 @@ Passing the cost screen retains a quote-validation lead only. Sampled probabilit
 asks, fills, depth, queue position, capacity, or executable PnL. A failed gate is retained without
 threshold or feature retuning, and no protected data is requested by this packet.
 
+## Transition receipt
+
+Status: **COMPLETE — REVERSAL FORMALIZATION GATE PASSED**.
+
+The frozen source SHA-256 is
+`aa1c19e9ad0293b6f6719617aef39cafdf8cb8f474c2f88421f2f6278c8c0b13`; the successful receipt
+SHA-256 is `7fab2899d9f29c6b559f1dd1bfe3754c324243a6f38b1453659abd2e387aeeb2`.
+An exact rerun converged to identical receipt bytes.
+
+Chronos scored 6,185 OOF shocks from 410 markets/128 test events. Reversal-first incidence was
+46.47%. The six-feature model improved observation/event Brier from `.24974/.25172` to
+`.23959/.23867`, pooled/event AP from `.47052/.50340` to `.58142/.68837`, and top-quintile lift
+from `+.00354` to `+.15861`; it won 87/128 events and passed every predictive clause. The 12-feature
+model improved Brier to `.22917/.22937`, AP to `.62234/.70303`, and top-quintile lift to `+.21439`,
+also passing every incremental clause.
+
+The full model's one-cent sampled-price falsifier passed on 370 rows/69 events with
+observation/event-macro net change `+.06150/+.04328`, 76.8% positive event means, and at least 42
+rows after either shock sign. This retains a quote-validation lead only. The six-feature screen
+failed the negative-shock breadth rule with six rows.
+
+The movement-incidence control confirmed predictable activity state. The rare boundary-entry
+control showed useful state ranking but no incremental support for the full path model. Exactly
+five development price fields were accessed; all ancestor and protected events remained absent.
+Under the predeclared decision, the fixed-horizon reversal target advances to authored-candidate
+construction without protected exposure.

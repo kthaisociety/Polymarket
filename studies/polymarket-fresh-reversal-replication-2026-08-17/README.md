@@ -1,6 +1,6 @@
 # Fresh-event post-jump reversal-hazard replication
 
-Epistemic status: **PREDECLARED — NO FRESH RESULT YET**.
+Epistemic status: **FRESH DEVELOPMENT REPLICATION PASSED — NOT PROTECTED OR EXECUTION-VALIDATED**.
 
 This study applies the fixed post-jump competing-risk question to the expanded production corpus
 through the ancestor-bound fresh-replication capability. It may see only events absent from the
@@ -35,8 +35,6 @@ The byte-identical source succeeded through the same public runner under a recor
 [`resource-retry-receipts/01_fresh_reversal_replication.json`](resource-retry-receipts/01_fresh_reversal_replication.json),
 SHA-256 `e777f93b48c87604d845dfd08160036449b2accdd13277a0acf55d243d658c77`.
 An exact replay converged to the same receipt bytes.
-
-Epistemic status: **FRESH DEVELOPMENT REPLICATION PASSED — NOT PROTECTED OR EXECUTION-VALIDATED**.
 
 - 6,174 OOF shocks, 2,929 reversal-first/3,245 other, 410 markets, 128 test events;
 - primary six-feature state/shock gate passed: observation/event Brier `0.24084/0.23902` versus
