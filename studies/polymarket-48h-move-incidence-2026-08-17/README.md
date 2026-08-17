@@ -26,3 +26,10 @@ pass as a probability model: mean prediction was `0.71007` against `0.52000` inc
 fixed `0.10` calibration tolerance. No formal candidate, freeze, or protected request is authorized
 under this packet. The retained lead is narrower: state/staleness ranks 48-hour sampled movement
 risk in development, while an expanding all-history ridge has a materially nonstationary level.
+
+A single predeclared calibration revision replaced the expanding intercept with the last four
+eligible training events' incidence while preserving the exact slopes and features. It brought mean
+prediction to `0.57858` and observation Brier to `0.16596`, but worsened event-macro Brier to
+`0.14741`, pooled average precision to `0.82781`, and late-half event-macro Brier to `0.14015`; only
+7/15 events improved against the unadjusted candidate. The fixed gate failed, the calibration
+revision budget is closed, and the binary branch remains an uncalibrated development ranking lead.
