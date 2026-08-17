@@ -135,7 +135,41 @@ second selected target. The candidate uses:
 - fold-standardized ridge with fixed penalty 0.1 and expanding legal training history.
 
 Formalization must preserve the cross-contract population claim. The current authored candidate
-manifest accepts one exact dimension-value slice, and its program invocation exposes neither the
-decision clock nor registered lifecycle close time. Reducing the candidate to one contract would
-change the question. These are now explicit run-exposed harness seams to resolve before formal
-development replay; they are not reasons to substitute a weaker candidate or expose protected data.
+manifest originally accepted one exact dimension-value slice. The generic panel-population repair
+now preserves the claim while restricting every invocation to one exact contract slice.
+
+Time-to-close is not carried into formal replay. The retained corpus records the current production
+`close_time`, but that field is updatable and has no historical revision/availability clock.
+Registering today's value as known at every historical decision would be leakage. Trial 03 already
+tested a no-expiry rival, so formal trial 04 uses that exact legal six-feature alternative rather
+than inventing a substitute.
+
+## Formal authored panel trial 04
+
+The formal harness evaluated one event-equal historical-mean baseline and one fixed-penalty
+six-feature ridge across the authorized development panel. It selected the first, middle, and last
+legal six-hour decision per market: 459 declared keys across 155 markets, with 419 legal expanding
+out-of-fold predictions covering 22 event groups after the 40-row training warm-up.
+
+| Model | Observation-weighted MSE | Event-macro MSE | Event wins |
+|---|---:|---:|---:|
+| event-equal historical mean | 0.006012 | 0.008803 | — |
+| six-feature activity ridge | **0.005546** | **0.008159** | 15/22 |
+
+The ridge improves observation-weighted MSE by `0.0004661` and also improves event-macro MSE. The
+exact candidate source SHA-256 is
+`009c5ae7745e41822bf3e3bc66ac2dfc3fed11f69dfbf46d0c0991bbc40b1d5d`; its evidence preserves the
+baseline trial as direct ancestry and records only `market_probability` history, outcome-path,
+training-row, fitted-state, and feature-value capability accesses.
+
+This is encouraging relative evidence but it **fails the predeclared absolute credibility threshold
+of MSE <= 0.003**. It is therefore not freeze-eligible. The result is retained as formal,
+selection-exposed revise/negative evidence. It does not authorize the final 7 event groups/45
+markets, and it does not establish direction or executable trading value. The decision-time
+expanding replay also differs from trials 01–03's whole-event folds, so the two estimates answer
+related but non-identical development questions.
+
+The run required roughly fifteen minutes for about 3,500 isolated program invocations. That is a
+real usability limit for broad autonomous formal search; any batching or worker reuse must preserve
+phase separation, per-key information scope, label maturity, and refit semantics in a separate
+implementation packet.

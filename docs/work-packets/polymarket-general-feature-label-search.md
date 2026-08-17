@@ -101,3 +101,14 @@ improve multiple legal six-hour labels across chronological event groups.
    decision-time interface; and the registered formal catalog has no lifecycle close-time field.
    The research packet therefore adds a separate implementation dependency before formal replay.
    Protected data remains outside both packets.
+5. Commit `8187784d` resolves the generic panel-population seam without broadening catalog or field
+   authority. Historical time-to-expiry remains blocked: the current production close time is
+   mutable and the retained source has no revision/availability clock. Formal replay therefore
+   uses the already-tested six-feature no-expiry rival.
+6. Formal authored panel receipt 04, source SHA-256
+   `0c4fcbdb0b33fc55dd32a889b1d740337ebf516eef28de80aac436aa74221da5`, evaluated 459 declared
+   development keys and produced 419 legal OOF predictions across 22 event groups. The fixed ridge
+   improved observation MSE from `0.006012` to `0.005546`, event-macro MSE from `0.008803` to
+   `0.008159`, and won 15/22 events. Its absolute MSE still failed the predeclared `0.003`
+   credibility threshold, so it is retained as formal revise/negative evidence and is not
+   freeze-eligible. Protected values remain unexposed.
