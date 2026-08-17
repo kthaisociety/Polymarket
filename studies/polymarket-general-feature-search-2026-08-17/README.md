@@ -173,3 +173,58 @@ The run required roughly fifteen minutes for about 3,500 isolated program invoca
 real usability limit for broad autonomous formal search; any batching or worker reuse must preserve
 phase separation, per-key information scope, label maturity, and refit semantics in a separate
 implementation packet.
+
+## Formal-loss diagnostic 05/06
+
+Attempt 05 was denied before data access because one call used an unavailable runtime interface.
+The denied receipt records no accesses and remains part of the research history. Corrected source
+06 used the same question and reproduced formal receipt 04 exactly: both baseline and ridge MSE
+differences are zero.
+
+The failure is concentrated rather than uniform:
+
+- the largest 1% and 5% of rows contribute 49.1% and 79.8% of ridge squared error;
+- one market contributes 18.5%; the top five and ten contribute 54.6% and 68.2%;
+- 59 moves of at least five cents have MSE `0.03500`;
+- near-absorbed contracts with boundary distance at most `.02` have MSE `0.000145`;
+- central contracts with boundary distance above `.25` have MSE `0.01667`;
+- last selected lifecycle observations have MSE `0.00904`, versus `0.00563` for first and
+  `0.00189` for middle observations.
+
+This explains why the broad absolute-magnitude gate fails despite consistent relative
+improvement. The model is already accurate for quiescent near-boundary rows; a small number of
+central/large transitions dominate the remaining loss.
+
+## Hurdle-model trial 07
+
+Two fixed five-cent mixture recipes were tested on the exact 459-key replay. Every auxiliary gate,
+conditional mean, and conditional ridge was refit from legally matured rows with event-equal
+weights. The large-move gate's mean prediction (`14.70%`) was close to the observed rate (`14.08%`),
+but the mixtures did not provide stable magnitude forecasts.
+
+| Model | Observation MSE | Event-macro MSE | Event wins vs ridge |
+|---|---:|---:|---:|
+| activity ridge | 0.0055461 | 0.0081588 | — |
+| hurdle + conditional means | 0.0055129 | 0.0081519 | 8/22 |
+| hurdle + conditional ridges | 0.0058144 | 0.0084748 | 8/22 |
+
+The conditional-means gain is too small and unstable, and both models fail the absolute `0.003`
+gate. The two-recipe budget is exhausted and the family is rejected.
+
+## Two-cent large-move classifier trials 08/09
+
+The next distinct label used the two-cent large-move indicator fixed in benchmark 01. The
+pre-formal gate required Brier/MSE at most `0.15`, improvement over the event-rate baseline under
+both aggregate weightings, and at least 12/22 event wins.
+
+| Model | Observation Brier | Event-macro Brier | Event wins |
+|---|---:|---:|---:|
+| event-rate baseline | 0.20821 | 0.21607 | — |
+| compact six-feature ridge | **0.16278** | 0.19697 | 16/22 |
+| 11-feature state-plus-dynamics ridge | 0.17432 | **0.18313** | 16/22 |
+
+Both models improve the baseline and are directionally consistent with the earlier whole-event
+study, but both fail the absolute `0.15` gate. The richer feature set improves equal-event loss while
+worsening observation-weighted loss, showing a real estimand tradeoff rather than a universal
+improvement. Neither classifier is formalized, and the family is closed without threshold or
+subset search.

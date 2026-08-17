@@ -112,3 +112,46 @@ improve multiple legal six-hour labels across chronological event groups.
    `0.008159`, and won 15/22 events. Its absolute MSE still failed the predeclared `0.003`
    credibility threshold, so it is retained as formal revise/negative evidence and is not
    freeze-eligible. Protected values remain unexposed.
+7. Loss diagnostic attempt 05 was denied before any data access because the source called one
+   unavailable runtime interface. Its denied receipt and zero-access provenance are retained.
+   Corrected diagnostic 06, SHA-256
+   `20445367ff299f2e8d7ce187b90de0e66bf8774d052dedd4be6b60a1936650f7`, exactly reproduced both
+   formal MSE values. The largest 1%/5% of rows contribute 49.1%/79.8% of ridge loss; one market
+   contributes 18.5% and the top five 54.6%. Moves of at least five cents have MSE `0.0350`, while
+   near-absorbed contracts have MSE `0.000145` and central contracts have MSE `0.01667`.
+8. The next trial budget is fixed at two materially distinct model recipes on the same exact legal
+   features, label, sample, expanding maturity boundary, event weights, and penalty: (a) a
+   five-cent large-move ridge gate mixed with fold-local conditional means; (b) the same gate mixed
+   with fold-local conditional ridges, with an explicitly declared intercept-only warm-up until
+   each regime has eight legal rows. Either candidate must beat the existing ridge under both
+   observation and event-macro MSE, win a majority of event groups, and still satisfy absolute MSE
+   `<= 0.003` to become credible. No threshold search or third mixture recipe is permitted in this
+   family.
+9. Hurdle receipt 07, SHA-256
+   `8447428937ec57bc98b1db4941905287b0222fd0f46e9e0370c52e7590585fce`, exhausted that budget.
+   Conditional means improved observation MSE only from `0.0055461` to `0.0055129`, won 8/22
+   events, and remained above the absolute gate. Conditional ridges worsened MSE to `0.0058144`.
+   Both are rejected before formalization; the threshold and recipes will not be searched further.
+10. The next distinct label is the pre-existing fixed two-cent large-move indicator, not another
+    magnitude-model revision. Its six-feature no-expiry linear-probability ridge retains penalty
+    `0.1`, exact sample/maturity/event weights, and event-rate baseline. A pre-formal replay must
+    achieve Brier/MSE `<= 0.15`, beat the baseline under observation and event-macro weighting, and
+    win at least 12/22 event groups. This is one fixed classifier trial; the two-cent threshold was
+    declared in benchmark 01 and is not retuned from formal loss diagnostics.
+11. Classifier receipt 08, SHA-256
+    `6f8f900131330ae0e315e879d143258cb39cebd76da4db6b91c19561c3c97273`, improved Brier from
+    `0.20821` to `0.16278`, improved event-macro Brier from `0.21607` to `0.19697`, and won 16/22
+    events. It nevertheless failed the fixed absolute `0.15` gate and is rejected before formal
+    replay.
+12. One ancestry-supported revision is permitted: benchmark 01's exact 11-feature no-expiry
+    `state_plus_dynamics` set replaces the compact six-feature set while retaining the two-cent
+    label, sample, folds, event weights, penalty `0.1`, and the same `0.15`/12-event gate. It adds
+    raw probability, fixed-.005 logit state, 24-hour variance, bipower jump variation, and raw
+    six-hour change; no expiry or newly selected interaction enters. Failure closes this classifier
+    family before formalization.
+13. State-plus-dynamics receipt 09, SHA-256
+    `dc8d3348eb593e9c23f37684bd163d37a55e592b67fd09bab43785752e615948`, improved event-macro
+    Brier to `0.18313` and won 16/22 events, but observation-weighted Brier was `0.17432`, worse
+    than compact receipt 08's `0.16278` and above the fixed `0.15` gate. The bounded classifier
+    family is closed as negative development evidence. Neither candidate proceeds to formal or
+    protected evaluation.
