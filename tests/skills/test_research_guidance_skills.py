@@ -76,9 +76,10 @@ def test_polymarket_startup_is_lean_optional_and_fail_closed() -> None:
     assert "$design-time-series-feature-set" in skill
     assert "$review-backtest-gate" in skill
     assert "human_ro" in boundary
-    assert "not resolution-availability time" in boundary
-    assert "do not reconstruct immutable prior" in boundary
-    assert "Event/group identity is unavailable" in boundary
+    assert "close time is not resolution availability" in boundary
+    assert "cursor bounds are not immutable" in boundary
+    assert "retained server `event_id`" in boundary
+    assert "recorded `resolved_time`" in boundary
     assert "write terminal question memory" in boundary
 
 

@@ -56,8 +56,11 @@ If authoritative sources conflict, follow
   Polymarket adapter.
 - Registered fill tapes can reach the constrained exploratory analysis harness with exact actual
   access and persisted receipt identities.
-- Exact resolution availability, authoritative event/group identity, historical quote state, and
-  immutable live-database snapshots remain unavailable. These block honest real protected outcome
-  research; documentation cannot waive them.
+- The server now exposes append-only resolution timestamps, payouts, event identity, and historical
+  sampled prices. The bounded corpus command retains exact bytes and registers separate predictor
+  and label clocks, closing those former red gates for that retained corpus only.
+- Historical executable quotes remain distinct from sampled probabilities. Live fill/cursor reads
+  are still mutable unless separately retained, and development/protected composition must operate
+  from the retained corpus rather than claiming the live database itself is immutable.
 - Standalone `ModelProvider` context does not automatically load repository skill files. Repository-
   aware agents use them explicitly until a separate version-bound routing transition is implemented.

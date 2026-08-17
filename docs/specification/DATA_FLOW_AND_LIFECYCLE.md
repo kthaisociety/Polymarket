@@ -373,15 +373,17 @@ database. This creates concrete requirements:
    conveniences.
 4. **Cursor vintage limitations remain visible.** Cursor bounds and digests detect changed reads
    but cannot reconstruct immutable prior database bytes.
-5. **Contract and event identity differ.** Exact contract identity is registered; question text and
-   authoritative event/group identity are not currently available to Chronos.
+5. **Contract and event identity differ.** The live fill path registers contract identity only. The
+   retained resolution corpus also preserves question text and server `event_id`; grouped research
+   must bind to that exact corpus rather than infer groups elsewhere.
 6. **Protected status is metadata backed by governed content identity.** File location alone does
    not decide development versus protected evidence, but identical or already accessible bytes
    cannot be relabeled fresh through another path/resource ID. Protected registration carries an
    authority-verified content manifest, epistemic-period identity, and unseen/`PREEXPOSED` status.
-7. **A legal resolution target is not yet available.** Current payout metadata lacks the exact
-   historical resolution-availability rule required for honest labels. Later transaction-state
-   targets remain exploratory and exposed to microstructure mechanics.
+7. **Resolution targets require the retained corpus.** Append-only payout facts use recorded
+   `resolved_time` as label availability and retained canonical bytes as source identity. Fill-only
+   payout metadata remains descriptive; later transaction-state targets remain exposed to
+   microstructure mechanics.
 8. **Secrets are not scientific data.** Credentials/API secrets must be removed from the data surface and supplied through a separate capability/secret mechanism before sandbox integration.
 
 ## 12. First vertical slices

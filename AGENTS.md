@@ -23,9 +23,10 @@ validation, feature importance, backtest overfitting, and deflated performance. 
 of automatic defaults. Every adopted procedure remains an explicit, testable scientific choice.
 
 For Polymarket data, production access is read-only. Source adapters may translate facts from the
-engine's public read surface but cannot mutate engine tables, infer missing availability, treat a
-block window as an immutable snapshot, or promote a resolved payout into a legal label without an
-exact resolution-availability rule.
+engine's public read surface or issue bounded parameterized SELECTs through a proved `human_ro`
+transaction; they cannot mutate engine tables or infer missing availability. A block window remains
+mutable. The retained resolution corpus may register payouts as labels only because it preserves
+exact source bytes and uses the append-only resolution fact's `resolved_time` as availability.
 
 ## Instruction hierarchy
 

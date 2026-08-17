@@ -157,9 +157,11 @@ The database adapter is intentionally narrower than the researcher. It registers
 signed flow, and exact blocks. The researcher remains free to write new analysis, feature, label,
 and model code inside the existing constrained execution and evaluation boundaries.
 
-Resolved payouts are exposed as contract metadata but are not yet registered as legal labels. The
-public engine read surface does not expose the exact resolution-availability time or event/group
-identity required for honest outcome-label and grouped-CV research. Those are explicit red gates.
+The original fill-tape path still treats resolved payouts as descriptive metadata. A separate
+resolved-corpus path consumes the server's append-only resolution timestamp/payout facts,
+server-recorded event identity, and historical sampled prices. It retains exact canonical bytes
+before registration, so outcome labels mature only at recorded settlement and event-grouped
+research does not invent independence.
 
 Block bounds are also not an immutable database snapshot. The scope-repair backfill may insert rows
 inside an already recorded cursor window. Chronos binds a digest to every read so reruns detect the
@@ -206,6 +208,23 @@ Output remains `EXPLORATORY` and has no formal, protected, promotion, or durable
 Retained live analyses and negative results are indexed in the
 [exploratory research ledger](studies/README.md); that ledger does not replace terminal runtime
 question memory.
+
+Retain and register a bounded resolved-market corpus after opening the same tunnel:
+
+    PYTHONPATH=src:../../engine/src \
+      uv run python -m research_agent.data_adapters.polymarket.corpus_snapshot \
+      --as-of <timezone-aware-ISO-8601> \
+      --min-points <minimum-per-contract> \
+      --max-markets <hard-bound> \
+      --outcome-index 0 \
+      --fidelity 60 \
+      --workspace <ignored-local-data-root> \
+      --receipt <sanitized-receipt.json>
+
+The read executes in one read-only repeatable-read transaction, selects only complete binary
+contracts with exact event and settlement identity, and retains canonical content-addressed bytes.
+The receipt contains identities, coverage, and caveats but no questions, prices, payouts, DSN, or
+credentials. Registration alone is not scientific evidence and does not expose a protected split.
 
 ## Explore the architecture visually
 

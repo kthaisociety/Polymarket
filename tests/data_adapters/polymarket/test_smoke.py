@@ -54,6 +54,10 @@ def _proved_role(**overrides: object) -> Mapping[str, object]:
         "can_update_markets": False,
         "can_insert_fills": False,
         "can_update_fills": False,
+        "can_insert_price_series": False,
+        "can_update_price_series": False,
+        "can_insert_resolutions": False,
+        "can_update_resolutions": False,
     }
     role.update(overrides)
     return role
@@ -75,6 +79,10 @@ def test_smoke_accepts_only_the_complete_read_only_proof() -> None:
         ("can_insert_fills", True),
         ("can_update_fills", True),
         ("can_update_fills", None),
+        ("can_insert_price_series", True),
+        ("can_update_price_series", True),
+        ("can_insert_resolutions", True),
+        ("can_update_resolutions", True),
     ],
 )
 def test_smoke_rejects_incomplete_or_writable_role_proof(key: str, value: object) -> None:

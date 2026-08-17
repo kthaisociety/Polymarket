@@ -55,5 +55,6 @@ pipeline.
 Return the exact scope and caveats, question and rivals, first analysis, optional idea families worth
 considering, explicit exclusions, falsifier, next skill, and epistemic status `EXPLORATORY`.
 
-Never claim a legal resolution label, immutable historical snapshot, independent cross-contract
-replication, freeze eligibility, validation, promotion, or durable memory merely from this memo.
+Never claim a legal resolution label, immutable historical snapshot, or event-grouped independence
+from a fill-only memo. A verified retained resolution corpus may supply those exact data semantics,
+but it still does not grant freeze eligibility, validation, promotion, or durable memory.

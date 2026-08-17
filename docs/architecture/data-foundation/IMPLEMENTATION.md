@@ -1,9 +1,9 @@
 # Data-foundation implementation map
 
-Status: **generic temporal boundary and Polymarket production-tape adapter implemented; live
-production read and capability-constrained authored exploration accepted through independently
-packaged read-only commands; immutable DB snapshots, resolution-label availability, and
-event/group identity remain red**.
+Status: **generic temporal boundary, Polymarket production-tape adapter, and retained resolved-
+contract corpus adapter implemented. Live fill exploration is accepted; exact event grouping,
+on-chain label availability, and immutable retained source bytes are proved for bounded
+price-series corpora. Development/protected composition over that corpus remains separate work**.
 
 ## Generic kernel
 
@@ -64,10 +64,10 @@ The availability rule is `polymarket-onchain-block-inclusion/v1`: `fill_time` re
 chain observability. It does not represent collector or database arrival. Confirmation and
 collector delay remain caveats on every observation.
 
-Resolved payouts are read as authoritative contract metadata but are not registered as target
-observations. The public read interface does not provide exact resolution availability, so doing so
-would invent `available_at`. Event/group identity is also absent, so event-grouped validation is a
-red gate rather than a silent market-ID fallback.
+On the fill-tape path, resolved payouts remain descriptive contract metadata rather than target
+observations. That interface has neither exact resolution availability nor event grouping, so it
+cannot support resolution labels or event-grouped validation. The retained corpus below is a
+separate executable path with the additional facts and immutable bytes those claims require.
 
 ## Snapshot limitation
 
@@ -76,6 +76,32 @@ inside an existing window. The source digest makes a rerun observably different,
 proves that the registration identity moves, but the live database cannot reconstruct the prior
 bytes. Protected evaluation needs retained immutable input bytes or an external database snapshot
 identity.
+
+## Retained resolution corpus
+
+The production run exposed that the server now carries facts the original fill-only adapter did
+not consume: `event_id`, append-only `market.resolutions` with `resolved_time`, and historical
+`market.price_series`. Chronos now has a separate direct read-only corpus boundary:
+
+- strict records and selection policy: `data_adapters/polymarket/models.py`;
+- parameterized SELECT-only reader: `data_adapters/polymarket/reader.py`;
+- canonical retention and temporal registration: `data_adapters/polymarket/corpus.py`;
+- repeatable-read `human_ro` composition: `data_adapters/polymarket/database.py`;
+- public command: `data_adapters/polymarket/corpus_snapshot.py`;
+- causal/retention tests: `tests/data_adapters/polymarket/test_resolution_corpus.py`.
+
+The retained object, not the mutable database, anchors downstream identity. Sampled prices use
+their source timestamp for both reference and availability under
+`polymarket-clob-price-sample/v1`. A settlement payout describes the contract close but becomes
+available only at the append-only resolution fact's `resolved_time` under
+`polymarket-onchain-resolution/v1`. Server `event_id` remains a grouping dimension. Contracts that
+settle before their declared close are excluded from this close-anchored corpus instead of having
+their lifecycle silently rewritten.
+
+The accepted live corpus contains 200 resolved contracts across 31 event groups and 71,467
+60-second price samples. Its exact canonical bytes are retained outside Git under the ignored local
+data root and identified by the sanitized study receipt. This registration is data, not development
+evidence, protected evidence, or memory.
 
 ## Verification
 

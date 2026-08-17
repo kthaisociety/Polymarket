@@ -2,10 +2,12 @@
 
 ## Exact source and field meaning
 
-- Production reads use the engine's public market-read surface under the proved `human_ro` role.
-  The session and transaction must be read-only, and insert/update privileges must remain denied.
-- A contract is identified by its exact market/condition identity. Human question text and an
-  authoritative event/group identity are not currently present in the Chronos research view.
+- Production reads use either the engine's public market-read surface or the bounded corpus
+  adapter's parameterized SELECTs under the proved `human_ro` role. The session and transaction
+  must be read-only, and insert/update privileges must remain denied.
+- The fill view identifies a contract by exact market/condition identity but has no event grouping.
+  The retained resolution corpus additionally preserves server `event_id`, question, lifecycle,
+  sampled price path, and append-only settlement identity.
 - The adapter registers taker-side fills. `trade_price` is the executed outcome-token price;
   `signed_trade_size` follows the adapter's declared aggressor convention; `outcome_index` selects
   the outcome token. Any YES-equivalent or complement mapping is an authored transformation whose
@@ -14,17 +16,19 @@
   `polymarket-onchain-block-inclusion/v1` public-chain observability rule. This does not establish
   collector receipt time, confirmation latency, or off-chain quote availability.
 
-## Current red gates
+## Path-specific gates
 
-- Contract close time is not resolution-availability time. Resolved payout metadata is not yet a
-  legal historical label.
-- Cursor bounds plus a source digest detect changed reads but do not reconstruct immutable prior
-  database bytes. A protected study needs retained source bytes or an external snapshot identity.
-- Event/group identity is unavailable. Related contracts cannot be treated as independent folds or
-  replications, and grouped cross-validation cannot be claimed authoritative.
+- On the fill-only path, close time is not resolution availability, cursor bounds are not immutable
+  bytes, and event grouping remains unavailable. Do not use that path for resolution labels or
+  independent cross-contract folds.
+- The resolved-corpus path closes those gates only for its exact content-addressed object: labels
+  become available at recorded `resolved_time`, and folds may group by retained server `event_id`.
+  A different live read does not inherit that identity.
 - The registered source is a fill tape, not historical top-of-book state. Transaction-price
   effects may be bid/ask bounce or aggressor-direction mechanics; a midpoint claim requires a
   separately registered legal quote source.
+- Historical `price_series` values are sampled probabilities, not guaranteed executable quotes.
+  Costs, spread, and order-book execution claims require a separately retained legal source.
 
 ## Authority separation
 

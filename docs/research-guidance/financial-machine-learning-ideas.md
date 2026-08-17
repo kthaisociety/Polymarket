@@ -53,12 +53,12 @@ therefore requires explicit choices:
 - **Clock:** elapsed time, trade count, cumulative size, cumulative notional, imbalance, block, or
   event trigger. They answer different questions.
 - **Outcome:** a later print, a path statistic, or eventual resolution. The first is exposed to
-  spread mechanics; the last is not yet a legal label because exact resolution availability is
-  absent.
+  spread mechanics; the last is legal only from the retained resolution corpus that binds payout
+  to recorded settlement availability.
 - **Population dependence:** contracts may share an event or mutually constrain one another.
-  Authoritative event/group identity is currently missing.
+  Use retained server `event_id` for corpus grouping; do not infer it on the fill-only path.
 - **Historical identity:** cursor windows are not immutable snapshots. Development and especially
-  protected use require exact retained bytes or an external snapshot identity.
+  protected use require the exact retained corpus bytes or another external snapshot identity.
 
 These are not reasons to avoid research. They determine which exploratory claims are honest today.
 

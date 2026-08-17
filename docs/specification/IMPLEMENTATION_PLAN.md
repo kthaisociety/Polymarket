@@ -233,8 +233,8 @@ Use Polymarket contract time series as the primary live integration forcing func
 - open-ended exploratory questions and falsifiers;
 - authored labels/features/models when legal targets exist;
 - temporal development validation and retained negative trials;
-- independently governed protected evaluation only after immutable inputs, label availability, and
-  event/group identity are resolved;
+- independently governed protected evaluation from exact retained corpus bytes with resolution
+  availability and event grouping fixed before disclosure;
 - multidimensional evidence and an issued finding/rejection trail.
 
 The purpose is not to maximize model performance initially. It is to expose failures in the
