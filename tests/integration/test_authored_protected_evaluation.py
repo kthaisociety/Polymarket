@@ -159,17 +159,19 @@ def _schema() -> DatasetSchema:
         environment_id=ENVIRONMENT,
         provenance_ref="fixture:authored-interaction-schema",
         fields=(
-            FieldDefinition("x1", "Signal one", "float", "index", (), "First input."),
-            FieldDefinition("x2", "Signal two", "float", "index", (), "Second input."),
+            FieldDefinition("x1", "Signal one", "float", "index", ("market_id",), "First input."),
+            FieldDefinition("x2", "Signal two", "float", "index", ("market_id",), "Second input."),
             FieldDefinition(
                 "future_poison",
                 "Future poison",
                 "float",
                 "index",
-                (),
+                ("market_id",),
                 "Released only after every protected decision.",
             ),
-            FieldDefinition("y", "Next outcome", "float", "units", (), "One-day outcome."),
+            FieldDefinition(
+                "y", "Next outcome", "float", "units", ("market_id",), "One-day outcome."
+            ),
         ),
     )
 
@@ -178,9 +180,10 @@ def _row(
     schema: DatasetSchema,
     field_id: str,
     value: float,
-    reference_day: int,
-    available_day: int,
+    timing: tuple[int, int],
+    market_id: str,
 ) -> ObservationInput:
+    reference_day, available_day = timing
     return ObservationInput(
         schema.field_ref(field_id),
         value,
@@ -191,12 +194,13 @@ def _row(
         "fixture:authored-protected",
         f"fixture:{field_id}:{reference_day}:{value}",
         "fixture-release-v1",
-        (),
+        (("market_id", market_id),),
     )
 
 
 def _catalog(start: int, stop: int, *, poison_value: float = 999_999.0) -> DataCatalogSnapshot:
     schema = _schema()
+    market_id = "protected-market" if start >= 25 else "development-market"
     rows: list[ObservationInput] = []
     for day in range(start, stop):
         left = -1.0 if day % 2 else 1.0
@@ -204,10 +208,16 @@ def _catalog(start: int, stop: int, *, poison_value: float = 999_999.0) -> DataC
         label = 3.0 * left * right
         rows.extend(
             (
-                _row(schema, "x1", left, day, day),
-                _row(schema, "x2", right, day, day),
-                _row(schema, "future_poison", poison_value, day, 90),
-                _row(schema, "y", label, day + 1, day + 1),
+                _row(schema, "x1", left, (day, day), market_id),
+                _row(schema, "x2", right, (day, day), market_id),
+                _row(
+                    schema,
+                    "future_poison",
+                    poison_value,
+                    (day, 90),
+                    market_id,
+                ),
+                _row(schema, "y", label, (day + 1, day + 1), market_id),
             )
         )
     registration = ObservationRegistrar().register(schema, tuple(rows))
@@ -249,6 +259,7 @@ def predict():
             missing_value_policy="exclude_example",
             evidence_refs=("exploration:interaction-hypothesis",),
             provenance_refs=("researcher:authored-program",),
+            population_dimension_names=("market_id",),
         ),
         rationale="Test a researcher-invented nonlinear interaction.",
         parent_trial_ids=(),
@@ -271,6 +282,7 @@ def _plan(
     promotion_mse_threshold: float = 1e-12,
 ) -> AuthoredProtectedPlan:
     manifest = _manifest(catalog)
+    dimensions = catalog.observations[0].dimensions
     scope = ProtectedResourceScope(
         resource_id="protected-authored-catalog",
         resource_version="v1",
@@ -286,8 +298,12 @@ def _plan(
         name="authored protected walk-forward",
         version=1,
         kind=ScenarioKind.HISTORICAL_WALK_FORWARD,
-        decision_sample_keys=tuple(SampleKey(ORIGIN + DAY * day) for day in range(36, 45)),
-        training_candidate_keys=tuple(SampleKey(ORIGIN + DAY * day) for day in range(25, 44)),
+        decision_sample_keys=tuple(
+            SampleKey(ORIGIN + DAY * day, dimensions) for day in range(36, 45)
+        ),
+        training_candidate_keys=tuple(
+            SampleKey(ORIGIN + DAY * day, dimensions) for day in range(25, 44)
+        ),
         outcome_recorded_at=ORIGIN + DAY * 55,
         training_protocol_ref="protocol:authored-expanding-v1",
         window_policy=TrainingWindowPolicy(
@@ -360,6 +376,7 @@ def _request(
     task_ref: str = TASK,
     reopen: QuestionReopenDeclaration | None = None,
 ) -> InvestigationRequest:
+    dimensions = catalog.observations[0].dimensions
     return InvestigationRequest(
         question=ResearchQuestion(
             "question:authored-interaction",
@@ -369,7 +386,7 @@ def _request(
             ("observation:research-question",),
         ),
         catalog=catalog,
-        sample_keys=tuple(SampleKey(ORIGIN + DAY * day) for day in range(2, 24)),
+        sample_keys=tuple(SampleKey(ORIGIN + DAY * day, dimensions) for day in range(2, 24)),
         current_time=ORIGIN + DAY * 30,
         budget=DevelopmentBudget(1, 6, 8, "mse", 1e-12),
         random_seed=17,
@@ -400,6 +417,7 @@ def _manifest_json(manifest: AuthoredCandidateManifest) -> dict[str, object]:
         },
         "minimum_outcome_points": manifest.minimum_outcome_points,
         "population_dimensions": [list(item) for item in manifest.population_dimensions],
+        "population_dimension_names": list(manifest.population_dimension_names),
         "feature_names": list(manifest.feature_names),
         "missing_value_policy": manifest.missing_value_policy,
         "evidence_refs": list(manifest.evidence_refs),
@@ -686,6 +704,13 @@ def test_exact_frozen_authored_source_executes_through_protected_walk_forward(
     assert all(decision.fit is not None for decision in run.decisions)
     assert all(decision.prediction is not None for decision in run.decisions)
     assert all(decision.outcome is not None for decision in run.decisions)
+    development_evidence = coordinator.resolve_evidence(receipt.evidence_id)
+    assert {dict(key.dimensions)["market_id"] for key in development_evidence.row_keys} == {
+        "development-market"
+    }
+    assert {dict(decision.dimensions)["market_id"] for decision in run.decisions} == {
+        "protected-market"
+    }
     assert tuple(
         decision.prediction.value for decision in run.decisions if decision.prediction
     ) == tuple(decision.outcome.value for decision in run.decisions if decision.outcome)

@@ -813,7 +813,7 @@ class AuthoredBacktestEngine:
         key: SampleKey,
     ) -> tuple[dict[str, float], str, tuple[str, ...], tuple[ProgramAccess, ...]]:
         manifest = candidate.manifest
-        if key.dimensions != tuple(sorted(manifest.population_dimensions)):
+        if not manifest.admits_population(key.dimensions):
             raise _DecisionFailureError(
                 _Stage.INFORMATION,
                 ProtectedFailureCode.DIMENSION_SCOPE_UNSUPPORTED,

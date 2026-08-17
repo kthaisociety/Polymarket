@@ -602,6 +602,137 @@ def predict():
     )
 
 
+def test_authored_panel_candidate_keeps_each_population_history_isolated() -> None:
+    schema = DatasetSchema(
+        dataset_id="panel-series",
+        version="v1",
+        environment_id="development-world",
+        provenance_ref="fixture:panel-series",
+        fields=(
+            FieldDefinition(
+                "x1",
+                "Panel series",
+                "float",
+                "index",
+                ("market_id",),
+                "One independently observed series per market.",
+            ),
+        ),
+    )
+    markets = (("market-a", 1.0), ("market-b", 100.0))
+    rows = tuple(
+        ObservationInput(
+            field_ref=schema.field_ref("x1"),
+            value=level,
+            reference_time=ORIGIN + DAY * day,
+            available_at=ORIGIN + DAY * day,
+            vintage_id="initial",
+            revision_number=0,
+            source_ref=f"fixture:panel-series:{market_id}:{day}",
+            provenance_ref=f"fixture:panel-series:{market_id}:{day}",
+            availability_rule_version="fixture-release-v1",
+            dimensions=(("market_id", market_id),),
+        )
+        for day in range(1, 25)
+        for market_id, level in markets
+    )
+    catalog = DataCatalogSnapshot(
+        schema.environment_id,
+        (ObservationRegistrar().register(schema, rows),),
+    )
+    source = """
+def make_features():
+    return {"level": history("x1")[-1]["value"]}
+
+def make_label():
+    return outcome_path()[-1]["value"]
+
+def fit():
+    rows = training_rows()
+    return {"training_count": len(rows)}
+
+def predict():
+    return feature_values()["level"] + 0.0 * model_state()["training_count"]
+"""
+    question = ResearchQuestion(
+        question_id="question:panel-history-isolation",
+        text="Can one authored recipe operate across independently scoped market histories?",
+        environment_id=catalog.environment_id,
+        task_ref="task:panel-history-isolation",
+        evidence_refs=("observation:panel-hypothesis",),
+    )
+    proposal = AuthoredProgramProposal(
+        source=source,
+        manifest=AuthoredCandidateManifest(
+            question_id=question.question_id,
+            environment_id=catalog.environment_id,
+            predictor_fields=(schema.field_ref("x1"),),
+            outcome_field=schema.field_ref("x1"),
+            horizon=TemporalOffset.elapsed(DAY),
+            minimum_outcome_points=1,
+            population_dimensions=(),
+            feature_names=("level",),
+            missing_value_policy="fail_trial",
+            evidence_refs=("observation:panel-hypothesis",),
+            provenance_refs=("researcher:test-provider",),
+            population_dimension_names=("market_id",),
+        ),
+        rationale="Apply one fixed recipe while keeping each market's information slice exact.",
+        parent_trial_ids=(),
+    )
+    request = InvestigationRequest(
+        question=question,
+        catalog=catalog,
+        sample_keys=tuple(
+            SampleKey(ORIGIN + DAY * day, (("market_id", market_id),))
+            for day in range(2, 23)
+            for market_id, _ in markets
+        ),
+        current_time=ORIGIN + DAY * 30,
+        budget=DevelopmentBudget(1, 6, 8, "mse", 0.0),
+        random_seed=23,
+    )
+
+    result = AutonomousInvestigation().run(request, _OneProposalResearcher(proposal))
+
+    evidence = result.evidence[-1]
+    assert result.disposition is DevelopmentDisposition.CREDIBLE
+    assert evidence.metrics == (("mse", 0.0),)
+    assert {dict(key.dimensions)["market_id"] for key in evidence.row_keys} == {
+        "market-a",
+        "market-b",
+    }
+    assert set(evidence.predictions) == {1.0, 100.0}
+
+
+def test_authored_panel_candidate_rejects_field_dimension_schema_mismatch() -> None:
+    catalog = _world()
+    proposal = _proposal(catalog)
+    panel_manifest = replace(
+        proposal.manifest,
+        population_dimension_names=("market_id",),
+    )
+    panel_proposal = replace(proposal, manifest=panel_manifest)
+
+    with pytest.raises(ValueError, match="field differs"):
+        AutonomousInvestigation().run(
+            _request(catalog),
+            _OneProposalResearcher(panel_proposal),
+        )
+
+
+def test_authored_candidate_cannot_mix_exact_and_panel_population_meanings() -> None:
+    catalog = _world()
+    manifest = _proposal(catalog).manifest
+
+    with pytest.raises(ValueError, match="cannot mix"):
+        replace(
+            manifest,
+            population_dimensions=(("market_id", "market-a"),),
+            population_dimension_names=("market_id",),
+        )
+
+
 def test_unreleased_future_poison_cannot_change_development_evidence() -> None:
     low = _world(poison_multiplier=1.0)
     high = _world(poison_multiplier=999_999.0)
@@ -1001,6 +1132,7 @@ def _manifest_json(manifest: AuthoredCandidateManifest) -> dict[str, object]:
         },
         "minimum_outcome_points": manifest.minimum_outcome_points,
         "population_dimensions": [list(item) for item in manifest.population_dimensions],
+        "population_dimension_names": list(manifest.population_dimension_names),
         "feature_names": list(manifest.feature_names),
         "missing_value_policy": manifest.missing_value_policy,
         "evidence_refs": list(manifest.evidence_refs),

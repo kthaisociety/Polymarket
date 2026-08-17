@@ -96,7 +96,12 @@ class CandidatePublisher:
         elif expected_parent_trial_id not in proposal.parent_trial_ids:
             raise ValueError("candidate revision must include the immediately prior trial")
         for field in (*manifest.predictor_fields, manifest.outcome_field):
-            request.catalog.resolve_schema(field)
+            schema = request.catalog.resolve_schema(field)
+            definition = schema.resolve_ref(field)
+            if manifest.population_dimension_names and (
+                tuple(sorted(definition.dimensions)) != manifest.population_dimension_names
+            ):
+                raise ValueError("candidate field differs from the declared panel dimension schema")
         digest = hashlib.sha256(proposal.source.encode()).hexdigest()
         payload = {
             "source_sha256": digest,
@@ -286,13 +291,16 @@ class AuthoredDevelopmentEvaluator:
         candidate: AuthoredCandidate,
     ) -> tuple[list[_Example], list[ProgramAccess], list[ProgramAccess]]:
         manifest = candidate.manifest
-        dimensions = tuple(sorted(manifest.population_dimensions))
-        if any(key.dimensions != dimensions for key in request.sample_keys):
-            raise ValueError("sample population differs from the exact candidate population")
+        if any(not manifest.admits_population(key.dimensions) for key in request.sample_keys):
+            raise ValueError("sample population differs from the candidate population declaration")
         examples: list[_Example] = []
         feature_accesses: list[ProgramAccess] = []
         label_accesses: list[ProgramAccess] = []
-        for key in sorted(request.sample_keys, key=lambda item: item.decision_time):
+        for key in sorted(
+            request.sample_keys,
+            key=lambda item: (item.decision_time, item.dimensions),
+        ):
+            dimensions = key.dimensions
             information = InformationSetBuilder().build(
                 request.catalog,
                 decision_time=key.decision_time,

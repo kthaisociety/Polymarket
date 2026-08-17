@@ -159,6 +159,7 @@ class AuthoredCandidateManifest:
     missing_value_policy: str
     evidence_refs: tuple[str, ...]
     provenance_refs: tuple[str, ...]
+    population_dimension_names: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         if not all(
@@ -188,15 +189,41 @@ class AuthoredCandidateManifest:
             not item for item in self.feature_names
         ):
             raise ValueError("authored feature output names must be unique and explicit")
-        dimension_names = tuple(name for name, _ in self.population_dimensions)
-        if len(set(dimension_names)) != len(dimension_names):
-            raise ValueError("candidate population dimensions must be unique")
+        exact_dimensions, panel_names = _canonical_population_scope(
+            self.population_dimensions,
+            self.population_dimension_names,
+        )
+        object.__setattr__(self, "population_dimensions", exact_dimensions)
+        object.__setattr__(self, "population_dimension_names", panel_names)
         if self.missing_value_policy not in {"exclude_example", "fail_trial"}:
             raise ValueError("unknown authored candidate missing-value policy")
+
+    def admits_population(self, dimensions: tuple[tuple[str, str], ...]) -> bool:
+        """Return whether one exact sample slice has the declared population meaning."""
+        canonical = tuple(sorted(dimensions))
+        if self.population_dimension_names:
+            return tuple(name for name, _ in canonical) == self.population_dimension_names
+        return canonical == self.population_dimensions
 
     @property
     def identity(self) -> str:
         return stable_identity("authored-candidate-manifest", self)
+
+
+def _canonical_population_scope(
+    exact_dimensions: tuple[tuple[str, str], ...],
+    panel_names: tuple[str, ...],
+) -> tuple[tuple[tuple[str, str], ...], tuple[str, ...]]:
+    if any(not name or not value for name, value in exact_dimensions):
+        raise ValueError("candidate population dimensions must be explicit")
+    exact_names = tuple(name for name, _ in exact_dimensions)
+    if len(set(exact_names)) != len(exact_names):
+        raise ValueError("candidate population dimensions must be unique")
+    if any(not name for name in panel_names) or len(set(panel_names)) != len(panel_names):
+        raise ValueError("candidate panel dimension names must be unique and explicit")
+    if exact_dimensions and panel_names:
+        raise ValueError("candidate population cannot mix exact and panel dimensions")
+    return tuple(sorted(exact_dimensions)), tuple(sorted(panel_names))
 
 
 @dataclass(frozen=True, slots=True)

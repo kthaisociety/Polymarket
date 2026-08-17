@@ -57,12 +57,16 @@ answer.
 `CandidatePublisher` resolves every declared field against the exact catalog, binds question,
 environment, code digest, rationale, exploratory evidence, provenance, and parent trials, then
 publishes into a non-copyable authority-owned registry. The evaluator refuses a merely self-hashed
-candidate.
+candidate. A manifest may bind either one exact dimension-value slice or one complete
+dimension-name schema. Schema-only panel candidates require every declared field and `SampleKey`
+to carry that exact schema; the schema is scientific identity, not permission to choose data.
 
 For each simulated decision, the evaluator builds an `InformationSet` using `available_at`, then
 passes only declared observations whose `reference_time` is no later than the decision. It builds a
 separate outcome path inside the declared horizon, matching the exact population and requiring
 availability by the development clock. Feature and label entrypoints execute in separate workers.
+Panel candidates repeat this construction independently for each key's exact dimension values and
+order same-time keys deterministically. One invocation never receives another entity's history.
 
 Expanding out-of-fold evaluation admits a training example only when its label matured by the
 validation decision. Each fit worker receives only training features and labels. Each prediction
@@ -166,6 +170,9 @@ rewrite the database and recompute every identity.
   closed.
 - **Green:** the four phase interfaces and actual access provenance come from the harness, not from
   authored claims.
+- **Green:** one exact authored recipe develops across multiple entity values without cross-slice
+  history, rejects mismatched field/sample schemas, and replays after freeze on a new protected
+  entity value under the same frozen schema.
 - **Green:** trusted runtime composition registers only question/data/budget, the registration is
   visible in reconstructed context, a provider action supplies authored source, and the exact
   development evidence is visible in the next packet.

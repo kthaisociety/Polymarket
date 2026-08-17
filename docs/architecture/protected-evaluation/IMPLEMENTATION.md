@@ -69,6 +69,9 @@ The implementation now also provides:
 - exact immutable `EvaluationScenario`, `EvaluationSpec`, `PromotionStandard`, and
   `ClaimDefinition` identities; changing decision sample keys including population dimensions,
   metrics, thresholds, authority policy, or bounded claim substance changes identity;
+- authored panel candidates whose frozen dimension-name schema may apply to authority-declared
+  protected entity values not present in development; every protected invocation remains filtered
+  to the decision key's exact values, and a schema mismatch is retained as dimension-scope failure;
 - `BacktestEngine` validation against the authoritative issued frozen-system, permit, and view
   registries, with system, scenario, scope, environment, protocol, and exact frozen ancestry
   correspondence checked before exposure or protected-content resolution;

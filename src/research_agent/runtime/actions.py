@@ -322,6 +322,7 @@ def _decode_candidate_manifest(value: Mapping[str, object]) -> AuthoredCandidate
             "evidence_refs",
             "provenance_refs",
         },
+        optional={"population_dimension_names"},
     )
     predictor_values = value.get("predictor_fields")
     if not isinstance(predictor_values, (list, tuple)):
@@ -349,6 +350,10 @@ def _decode_candidate_manifest(value: Mapping[str, object]) -> AuthoredCandidate
         missing_value_policy=_required_str(value, "missing_value_policy"),
         evidence_refs=_string_tuple(value.get("evidence_refs"), "evidence_refs"),
         provenance_refs=_string_tuple(value.get("provenance_refs"), "provenance_refs"),
+        population_dimension_names=_string_tuple(
+            value.get("population_dimension_names", ()),
+            "population_dimension_names",
+        ),
     )
 
 

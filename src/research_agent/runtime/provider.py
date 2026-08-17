@@ -500,6 +500,7 @@ def _authored_manifest_schema() -> dict[str, object]:
                     "items": {"type": "string"},
                 },
             },
+            "population_dimension_names": _string_array_schema(),
             "feature_names": _string_array_schema(),
             "missing_value_policy": {
                 "type": "string",
