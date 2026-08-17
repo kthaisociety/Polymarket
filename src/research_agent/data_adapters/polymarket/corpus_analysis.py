@@ -53,6 +53,8 @@ _OUTCOME_FIELDS = (
 )
 _MIN_DEVELOPMENT_EVENTS = 2
 _TEMPORAL_RESERVED_FIELD_COUNT = 4
+_DEVELOPMENT_PARTITION_METHOD = "whole-event-chronological-latest-resolution/v1"
+_REPLICATION_PARTITION_METHOD = "whole-event-chronological-fresh-replication/v1"
 
 
 @dataclass(frozen=True, slots=True)
@@ -65,6 +67,11 @@ class PolymarketEventPartition:
     protected_event_count: int
     development_market_count: int
     protected_market_count: int
+    partition_method: str = _DEVELOPMENT_PARTITION_METHOD
+    ancestor_snapshot_ref: str | None = None
+    ancestor_event_count: int = 0
+    embargoed_event_count: int = 0
+    embargoed_market_count: int = 0
 
 
 @dataclass(frozen=True, slots=True)
@@ -122,29 +129,121 @@ def build_polymarket_development_analysis(  # noqa: PLR0913
     registered_event_fields: tuple[PolymarketRegisteredEventField, ...] = (),
 ) -> PolymarketDevelopmentAnalysis:
     """Hide the latest whole-event block and expose only earlier events to the sandbox."""
-    if protected_numerator <= 0 or protected_denominator <= protected_numerator or not session_id:
-        msg = "Polymarket event partition requires a non-empty session and proper fraction"
-        raise ValueError(msg)
+    _validate_partition_request(session_id, protected_numerator, protected_denominator)
     corpus = snapshot.corpus
     ordered_events = _ordered_events(corpus)
-    protected_count = (
-        len(ordered_events) * protected_numerator + protected_denominator - 1
-    ) // protected_denominator
+    protected_count = _protected_event_count(
+        len(ordered_events), protected_numerator, protected_denominator
+    )
     development_count = len(ordered_events) - protected_count
-    if development_count < _MIN_DEVELOPMENT_EVENTS or protected_count < 1:
-        msg = "Polymarket corpus has too few event groups for development and protection"
-        raise ValueError(msg)
+    _validate_partition_size(development_count, protected_count)
     development_events = ordered_events[:development_count]
     development_set = frozenset(development_events)
-    development_contracts = tuple(
-        contract for contract in corpus.contracts if contract.event_id in development_set
-    )
-    protected_market_count = len(corpus.contracts) - len(development_contracts)
     partition_id = _partition_identity(
         snapshot.ref.uri,
         ordered_events,
         protected_numerator,
         protected_denominator,
+    )
+    protected_market_count = sum(
+        contract.event_id not in development_set for contract in corpus.contracts
+    )
+    return _compose_development_analysis(
+        snapshot,
+        session_id=session_id,
+        development_events=development_events,
+        partition_id=partition_id,
+        protected_event_count=protected_count,
+        protected_market_count=protected_market_count,
+        resource_limits=resource_limits,
+        registered_event_fields=registered_event_fields,
+    )
+
+
+def build_polymarket_replication_analysis(  # noqa: PLR0913
+    snapshot: PolymarketCorpusSnapshot,
+    ancestor_snapshot: PolymarketCorpusSnapshot,
+    *,
+    session_id: str,
+    protected_numerator: int = 1,
+    protected_denominator: int = 5,
+    resource_limits: ResourceLimits | None = None,
+    registered_event_fields: tuple[PolymarketRegisteredEventField, ...] = (),
+) -> PolymarketDevelopmentAnalysis:
+    """Expose only fresh pre-protection events absent from an exact ancestor corpus."""
+    _validate_partition_request(session_id, protected_numerator, protected_denominator)
+    corpus = snapshot.corpus
+    ancestor = ancestor_snapshot.corpus
+    _validate_replication_ancestor(corpus, ancestor)
+    ordered_events = _ordered_events(corpus)
+    ancestor_events = _ordered_events(ancestor)
+    ancestor_set = frozenset(ancestor_events)
+    if not ancestor_set.issubset(ordered_events):
+        msg = "replication ancestor events are not contained in the expanded corpus"
+        raise ValueError(msg)
+    protected_count = _protected_event_count(
+        len(ordered_events), protected_numerator, protected_denominator
+    )
+    standard_development_count = len(ordered_events) - protected_count
+    standard_development_events = ordered_events[:standard_development_count]
+    standard_development_set = frozenset(standard_development_events)
+    development_events = tuple(
+        event_id for event_id in standard_development_events if event_id not in ancestor_set
+    )
+    _validate_partition_size(len(development_events), protected_count)
+    protected_set = frozenset(ordered_events[standard_development_count:])
+    embargoed_set = standard_development_set & ancestor_set
+    protected_market_count = sum(
+        contract.event_id in protected_set for contract in corpus.contracts
+    )
+    embargoed_market_count = sum(
+        contract.event_id in embargoed_set for contract in corpus.contracts
+    )
+    partition_id = _replication_partition_identity(
+        snapshot.ref.uri,
+        ancestor_snapshot.ref.uri,
+        (ordered_events, ancestor_events, development_events),
+        protected_numerator,
+        protected_denominator,
+    )
+    return _compose_development_analysis(
+        snapshot,
+        session_id=session_id,
+        development_events=development_events,
+        partition_id=partition_id,
+        protected_event_count=protected_count,
+        protected_market_count=protected_market_count,
+        partition_method=_REPLICATION_PARTITION_METHOD,
+        ancestor_snapshot_ref=ancestor_snapshot.ref.uri,
+        ancestor_event_count=len(ancestor_events),
+        embargoed_event_count=len(embargoed_set),
+        embargoed_market_count=embargoed_market_count,
+        resource_limits=resource_limits,
+        registered_event_fields=registered_event_fields,
+    )
+
+
+def _compose_development_analysis(  # noqa: PLR0913
+    snapshot: PolymarketCorpusSnapshot,
+    *,
+    session_id: str,
+    development_events: tuple[str, ...],
+    partition_id: str,
+    protected_event_count: int,
+    protected_market_count: int,
+    partition_method: str = _DEVELOPMENT_PARTITION_METHOD,
+    ancestor_snapshot_ref: str | None = None,
+    ancestor_event_count: int = 0,
+    embargoed_event_count: int = 0,
+    embargoed_market_count: int = 0,
+    resource_limits: ResourceLimits | None = None,
+    registered_event_fields: tuple[PolymarketRegisteredEventField, ...] = (),
+) -> PolymarketDevelopmentAnalysis:
+    """Compose one already-authorized event partition into sandbox capabilities."""
+    corpus = snapshot.corpus
+    development_set = frozenset(development_events)
+    development_contracts = tuple(
+        contract for contract in corpus.contracts if contract.event_id in development_set
     )
     environment_ref = f"polymarket-development-environment:{partition_id}"
     price_ref = f"polymarket-development-prices:{partition_id}"
@@ -207,9 +306,14 @@ def build_polymarket_development_analysis(  # noqa: PLR0913
         partition_id=partition_id,
         snapshot_ref=snapshot.ref.uri,
         development_event_ids=development_events,
-        protected_event_count=protected_count,
+        protected_event_count=protected_event_count,
         development_market_count=len(development_contracts),
         protected_market_count=protected_market_count,
+        partition_method=partition_method,
+        ancestor_snapshot_ref=ancestor_snapshot_ref,
+        ancestor_event_count=ancestor_event_count,
+        embargoed_event_count=embargoed_event_count,
+        embargoed_market_count=embargoed_market_count,
     )
     return PolymarketDevelopmentAnalysis(
         partition,
@@ -218,6 +322,67 @@ def build_polymarket_development_analysis(  # noqa: PLR0913
         registered_event_views,
         harness,
         artifacts,
+    )
+
+
+def _validate_partition_request(session_id: str, numerator: int, denominator: int) -> None:
+    if numerator <= 0 or denominator <= numerator or not session_id:
+        msg = "Polymarket event partition requires a non-empty session and proper fraction"
+        raise ValueError(msg)
+
+
+def _protected_event_count(event_count: int, numerator: int, denominator: int) -> int:
+    return (event_count * numerator + denominator - 1) // denominator
+
+
+def _validate_partition_size(development_count: int, protected_count: int) -> None:
+    if development_count < _MIN_DEVELOPMENT_EVENTS or protected_count < 1:
+        msg = "Polymarket corpus has too few event groups for development and protection"
+        raise ValueError(msg)
+
+
+def _validate_replication_ancestor(
+    corpus: PolymarketCorpus,
+    ancestor: PolymarketCorpus,
+) -> None:
+    current = corpus.request
+    previous = ancestor.request
+    compatible_request = (
+        current.environment_id == previous.environment_id
+        and current.outcome_index == previous.outcome_index
+        and current.fidelity == previous.fidelity
+        and current.min_points == previous.min_points
+        and current.max_markets >= previous.max_markets
+        and current.as_of >= previous.as_of
+    )
+    if not compatible_request or len(corpus.contracts) <= len(ancestor.contracts):
+        msg = "replication corpus is not a compatible strict expansion of its ancestor"
+        raise ValueError(msg)
+    prefix = corpus.contracts[: len(ancestor.contracts)]
+    if any(
+        _contract_temporal_identity(expanded) != _contract_temporal_identity(original)
+        for expanded, original in zip(prefix, ancestor.contracts, strict=True)
+    ):
+        msg = "replication ancestor contract identity is not an exact corpus prefix"
+        raise ValueError(msg)
+    resolution_by_market = {item.market_id: item for item in corpus.resolutions}
+    if any(
+        resolution_by_market.get(item.market_id) is None
+        or resolution_by_market[item.market_id].resolved_time != item.resolved_time
+        for item in ancestor.resolutions
+    ):
+        msg = "replication ancestor resolution chronology changed in the expanded corpus"
+        raise ValueError(msg)
+
+
+def _contract_temporal_identity(contract: PolymarketCorpusContract) -> tuple[object, ...]:
+    return (
+        contract.market_id,
+        contract.event_id,
+        contract.market_type,
+        contract.open_time,
+        contract.close_time,
+        tuple((item.outcome_index, item.outcome_token) for item in contract.outcomes),
     )
 
 
@@ -347,7 +512,32 @@ def _partition_identity(
     payload = json.dumps(
         {
             "denominator": denominator,
-            "method": "whole-event-chronological-latest-resolution/v1",
+            "method": _DEVELOPMENT_PARTITION_METHOD,
+            "numerator": numerator,
+            "ordered_events": ordered_events,
+            "snapshot_ref": snapshot_ref,
+        },
+        separators=(",", ":"),
+        sort_keys=True,
+    ).encode()
+    return hashlib.sha256(payload).hexdigest()
+
+
+def _replication_partition_identity(
+    snapshot_ref: str,
+    ancestor_snapshot_ref: str,
+    event_groups: tuple[tuple[str, ...], tuple[str, ...], tuple[str, ...]],
+    numerator: int,
+    denominator: int,
+) -> str:
+    ordered_events, ancestor_events, development_events = event_groups
+    payload = json.dumps(
+        {
+            "ancestor_events": ancestor_events,
+            "ancestor_snapshot_ref": ancestor_snapshot_ref,
+            "denominator": denominator,
+            "development_events": development_events,
+            "method": _REPLICATION_PARTITION_METHOD,
             "numerator": numerator,
             "ordered_events": ordered_events,
             "snapshot_ref": snapshot_ref,
@@ -363,4 +553,5 @@ __all__ = [
     "PolymarketEventPartition",
     "PolymarketRegisteredEventField",
     "build_polymarket_development_analysis",
+    "build_polymarket_replication_analysis",
 ]

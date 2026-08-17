@@ -18,6 +18,7 @@ from research_agent.data_adapters.polymarket.corpus_analysis import (
     PolymarketEventPartition,
     PolymarketRegisteredEventField,
     build_polymarket_development_analysis,
+    build_polymarket_replication_analysis,
 )
 from research_agent.data_adapters.polymarket.ingestion import (
     PolymarketIngestionResult,
@@ -81,6 +82,7 @@ __all__ = [
     "PolymarketSourceExpansionError",
     "analyze_registered_polymarket_tape",
     "build_polymarket_development_analysis",
+    "build_polymarket_replication_analysis",
     "expand_scouted_price_history",
     "expansion_receipt_json",
     "ingest_polymarket_contract_tape",

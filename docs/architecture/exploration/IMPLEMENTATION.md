@@ -46,8 +46,21 @@ partition-derived chronological event ordinals, exact question text, and selecte
 The latter fields support semantic discovery and prevent outcome meaning from being inferred from
 an array position. Protected event values and arbitrary source metadata remain absent and denied.
 
+Expanded-corpus replication may additionally bind one exact ancestor snapshot. The composition
+verifies compatible selection identity plus the ancestor contract prefix and resolution chronology,
+then exposes only pre-protection events absent from the ancestor. All ancestor events and the
+expanded snapshot's latest whole-event block are omitted before authored code receives an
+`AuthorizedDataView`; receipts retain both snapshot identities and separate embargo/protection
+counts. The ordinary single-snapshot partition and receipt identity remain unchanged.
+
 Verification for the pure-square-root seam:
 
 ```bash
 .venv/bin/pytest -q tests/exploration/test_analysis_sandbox.py
+```
+
+Verification for retained-corpus and fresh-replication authority:
+
+```bash
+.venv/bin/pytest -q tests/data_adapters/polymarket/test_resolution_corpus.py
 ```

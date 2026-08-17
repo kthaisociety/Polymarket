@@ -22,6 +22,7 @@ from research_agent.data_adapters.polymarket import (
     PolymarketRegisteredEventField,
     PolymarketResolutionRecord,
     build_polymarket_development_analysis,
+    build_polymarket_replication_analysis,
     corpus_snapshot,
     register_polymarket_resolution_corpus,
     run_corpus_studies,
@@ -246,11 +247,11 @@ def test_public_corpus_command_without_database_url_is_explicitly_blocked(
     assert "password" not in json.dumps(payload).casefold()
 
 
-def _event_grouped_corpus() -> PolymarketCorpus:
+def _event_grouped_corpus(event_count: int = 5) -> PolymarketCorpus:
     contracts: list[PolymarketCorpusContract] = []
     resolutions: list[PolymarketResolutionRecord] = []
     prices: list[PolymarketPricePoint] = []
-    for event_number in range(5):
+    for event_number in range(event_count):
         market_id = f"market-{event_number}"
         event_id = f"event-{event_number}"
         token = f"yes-{event_number}"
@@ -293,8 +294,19 @@ def _event_grouped_corpus() -> PolymarketCorpus:
                 for point_number in range(3)
             ]
         )
-    request = replace(_request(), max_markets=5)
+    request = replace(_request(), max_markets=event_count)
     return PolymarketCorpus(request, tuple(contracts), tuple(resolutions), tuple(prices))
+
+
+def _corpus_prefix(corpus: PolymarketCorpus, contract_count: int) -> PolymarketCorpus:
+    market_ids = frozenset(item.market_id for item in corpus.contracts[:contract_count])
+    return replace(
+        corpus,
+        request=replace(corpus.request, max_markets=contract_count),
+        contracts=corpus.contracts[:contract_count],
+        resolutions=tuple(item for item in corpus.resolutions if item.market_id in market_ids),
+        prices=tuple(item for item in corpus.prices if item.market_id in market_ids),
+    )
 
 
 def test_development_analysis_hides_latest_whole_event_and_is_counterfactual_stable() -> None:
@@ -341,12 +353,147 @@ result = structured_return(
     second_result = second.run(source=source, session_id="session", action_id="second")
 
     assert first.partition.development_event_ids == tuple(f"event-{number}" for number in range(4))
+    assert (
+        first.partition.partition_id
+        == "e2246f40f6c26b7824375f0ab60d75dff6c2e420ae679b79109c355a0facd18c"
+    )
     assert first.partition.protected_event_count == 1
     assert protected_market.market_id not in first.price_view.fields["market_id"]
     assert first.price_view.fields == second.price_view.fields
     assert first.outcome_view.fields == second.outcome_view.fields
     assert first_result.status is AnalysisStatus.SUCCEEDED
     assert first_result.details == second_result.details
+
+
+def test_replication_analysis_exposes_only_fresh_events_before_expanded_protection() -> None:
+    """An ancestor corpus and the expanded final block remain absent from replication views."""
+    expanded = _event_grouped_corpus(10)
+    ancestor = _corpus_prefix(expanded, 5)
+
+    analysis = build_polymarket_replication_analysis(
+        PolymarketCorpusStore.from_corpus(expanded),
+        PolymarketCorpusStore.from_corpus(ancestor),
+        session_id="fresh-replication",
+    )
+    expected_events = ("event-5", "event-6", "event-7")
+    protected_count = len(expanded.contracts) - len(ancestor.contracts) - len(expected_events)
+
+    assert analysis.partition.development_event_ids == expected_events
+    assert analysis.partition.partition_method == ("whole-event-chronological-fresh-replication/v1")
+    assert (
+        analysis.partition.ancestor_snapshot_ref
+        == PolymarketCorpusStore.from_corpus(ancestor).ref.uri
+    )
+    assert analysis.partition.ancestor_event_count == len(ancestor.contracts)
+    assert analysis.partition.embargoed_event_count == len(ancestor.contracts)
+    assert analysis.partition.protected_event_count == protected_count
+    assert analysis.partition.development_market_count == len(expected_events)
+    assert analysis.partition.embargoed_market_count == len(ancestor.contracts)
+    assert analysis.partition.protected_market_count == protected_count
+    assert set(analysis.price_view.fields["event_id"]) == set(expected_events)
+    assert set(analysis.outcome_view.fields["event_id"]) == set(expected_events)
+
+
+def test_replication_analysis_is_stable_to_ancestor_and_expanded_protected_values() -> None:
+    """Changing hidden old or final values cannot affect fresh capability contents or results."""
+    expanded = _event_grouped_corpus(10)
+    ancestor = _corpus_prefix(expanded, 5)
+    first = build_polymarket_replication_analysis(
+        PolymarketCorpusStore.from_corpus(expanded),
+        PolymarketCorpusStore.from_corpus(ancestor),
+        session_id="fresh-replication",
+    )
+    hidden_markets = {"market-4", "market-9"}
+    changed_contracts = tuple(
+        replace(
+            contract,
+            question="HIDDEN VALUE CHANGED",
+            outcomes=(
+                replace(contract.outcomes[0], payout=Decimal(1)),
+                replace(contract.outcomes[1], payout=Decimal(0)),
+            ),
+        )
+        if contract.market_id in hidden_markets
+        else contract
+        for contract in expanded.contracts
+    )
+    changed = replace(
+        expanded,
+        contracts=changed_contracts,
+        resolutions=tuple(
+            replace(item, payouts=(Decimal(1), Decimal(0)))
+            if item.market_id in hidden_markets
+            else item
+            for item in expanded.resolutions
+        ),
+        prices=tuple(
+            replace(item, price=Decimal("0.99")) if item.market_id in hidden_markets else item
+            for item in expanded.prices
+        ),
+    )
+    second = build_polymarket_replication_analysis(
+        PolymarketCorpusStore.from_corpus(changed),
+        PolymarketCorpusStore.from_corpus(ancestor),
+        session_id="fresh-replication",
+    )
+    source = """
+prices = read("polymarket-development-prices", "market_probability")
+labels = read("polymarket-development-outcomes", "resolution_payout")
+result = structured_return(
+    "Fresh-only means.",
+    {"price_mean": sum(prices) / len(prices), "label_mean": sum(labels) / len(labels)},
+)
+"""
+
+    first_result = first.run(source=source, session_id="fresh-replication", action_id="first")
+    second_result = second.run(source=source, session_id="fresh-replication", action_id="second")
+
+    assert first.price_view.fields == second.price_view.fields
+    assert first.outcome_view.fields == second.outcome_view.fields
+    assert first_result.status is AnalysisStatus.SUCCEEDED
+    assert first_result.details == second_result.details
+
+
+@pytest.mark.parametrize("mutation", ["order", "event", "resolution"])
+def test_replication_analysis_rejects_changed_ancestor_identity_or_chronology(
+    mutation: str,
+) -> None:
+    """A caller cannot use a merely similar corpus to establish a fresh replication boundary."""
+    expanded = _event_grouped_corpus(10)
+    ancestor = _corpus_prefix(expanded, 5)
+    if mutation == "order":
+        ancestor = replace(
+            ancestor,
+            contracts=(ancestor.contracts[1], ancestor.contracts[0], *ancestor.contracts[2:]),
+            resolutions=(
+                ancestor.resolutions[1],
+                ancestor.resolutions[0],
+                *ancestor.resolutions[2:],
+            ),
+        )
+    elif mutation == "event":
+        ancestor = replace(
+            ancestor,
+            contracts=(
+                replace(ancestor.contracts[0], event_id="changed-event"),
+                *ancestor.contracts[1:],
+            ),
+        )
+    else:
+        ancestor = replace(
+            ancestor,
+            resolutions=(
+                replace(ancestor.resolutions[0], resolved_time=RESOLVED + timedelta(minutes=1)),
+                *ancestor.resolutions[1:],
+            ),
+        )
+
+    with pytest.raises(ValueError, match="ancestor"):
+        build_polymarket_replication_analysis(
+            PolymarketCorpusStore.from_corpus(expanded),
+            PolymarketCorpusStore.from_corpus(ancestor),
+            session_id="fresh-replication",
+        )
 
 
 def test_development_analysis_denies_an_ungranted_field_before_disclosure() -> None:
@@ -584,3 +731,82 @@ result = structured_return("large", {"prices": prices})
             source_sha256="source-sha",
             observation=observation,
         )
+
+
+def test_default_study_receipt_schema_remains_unchanged(tmp_path: Path) -> None:
+    """Adding the replication path cannot change byte identity for ordinary study receipts."""
+    analysis = build_polymarket_development_analysis(
+        PolymarketCorpusStore.from_corpus(_event_grouped_corpus()),
+        session_id="session",
+    )
+    observation = analysis.run(
+        source='result = structured_return("ok", {"value": 1})',
+        session_id="session",
+        action_id="ordinary",
+    )
+
+    receipt = run_corpus_studies._receipt_payload(  # noqa: SLF001
+        analysis=analysis,
+        source_path=tmp_path / "ordinary.py",
+        source_sha256="source-sha",
+        observation=observation,
+    )
+
+    assert "ancestor_snapshot_ref" not in receipt
+    assert "ancestor_event_count" not in receipt
+    assert "embargoed_event_count" not in receipt
+    assert "embargoed_market_count" not in receipt
+
+
+def test_public_study_runner_builds_fresh_replication_view_from_exact_ancestry(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """The offline entry point binds two retained snapshots into one fresh-only receipt."""
+    expanded = _event_grouped_corpus(10)
+    ancestor = _corpus_prefix(expanded, 5)
+    store = PolymarketCorpusStore(tmp_path / "corpus")
+    expanded_ref = store.retain(expanded).ref
+    ancestor_ref = store.retain(ancestor).ref
+    source_path = tmp_path / "fresh_events.py"
+    source_path.write_text(
+        """
+events = read("polymarket-development-outcomes", "event_id")
+result = structured_return("Fresh event count.", {"event_count": len(set(events))})
+"""
+    )
+    receipt_directory = tmp_path / "receipts"
+
+    status = run_corpus_studies.main(
+        [
+            "--snapshot-sha256",
+            expanded_ref.content_sha256,
+            "--snapshot-size",
+            str(expanded_ref.size_bytes),
+            "--ancestor-snapshot-sha256",
+            ancestor_ref.content_sha256,
+            "--ancestor-snapshot-size",
+            str(ancestor_ref.size_bytes),
+            "--workspace",
+            str(store.root),
+            "--source",
+            str(source_path),
+            "--receipt-directory",
+            str(receipt_directory),
+            "--session-id",
+            "fresh-replication",
+        ]
+    )
+    output = json.loads(capsys.readouterr().out)
+    receipt = output["receipts"][0]
+    expected_event_count = len({"event-5", "event-6", "event-7"})
+
+    assert status == 0
+    assert receipt["status"] == AnalysisStatus.SUCCEEDED.value
+    assert receipt["partition_method"] == "whole-event-chronological-fresh-replication/v1"
+    assert receipt["ancestor_snapshot_ref"] == ancestor_ref.uri
+    assert receipt["development_event_count"] == expected_event_count
+    assert receipt["details"] == {"event_count": expected_event_count}
+    assert receipt["embargoed_event_count"] == len(ancestor.contracts)
+    assert receipt["protected_values_exposed"] is False
+    assert receipt_directory.joinpath("fresh_events.json").is_file()

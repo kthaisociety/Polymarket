@@ -63,4 +63,9 @@ Git.
   credentials emitted or stored.
 - Formal references/durable effects: empty.
 
-The next permitted step is an identity/chronology-only overlap audit. New price paths remain unread.
+The identity/chronology audit exposed a concrete authority defect: the ordinary expanded 80/20
+partition would place events from the original sealed block inside development. The bounded repair
+is recorded in
+[`polymarket-fresh-replication-boundary.md`](polymarket-fresh-replication-boundary.md). Its
+fresh-replication view excludes every original-corpus event as well as the expanded final block
+before any authored study can read values.

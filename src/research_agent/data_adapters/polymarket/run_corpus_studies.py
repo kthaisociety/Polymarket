@@ -16,6 +16,7 @@ from research_agent.data_adapters.polymarket.corpus import (
 )
 from research_agent.data_adapters.polymarket.corpus_analysis import (
     build_polymarket_development_analysis,
+    build_polymarket_replication_analysis,
 )
 from research_agent.exploration import AnalysisStatus
 
@@ -28,6 +29,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--snapshot-sha256", required=True)
     parser.add_argument("--snapshot-size", required=True, type=int)
+    parser.add_argument("--ancestor-snapshot-sha256")
+    parser.add_argument("--ancestor-snapshot-size", type=int)
     parser.add_argument("--workspace", required=True, type=Path)
     parser.add_argument("--source", required=True, action="append", type=Path)
     parser.add_argument("--receipt-directory", required=True, type=Path)
@@ -44,10 +47,22 @@ def main(argv: Sequence[str] | None = None) -> int:
             arguments.snapshot_size,
         )
         snapshot = PolymarketCorpusStore(arguments.workspace).load(ref)
-        analysis = build_polymarket_development_analysis(
-            snapshot,
-            session_id=arguments.session_id,
+        ancestor_ref = _optional_ancestor_ref(
+            arguments.ancestor_snapshot_sha256,
+            arguments.ancestor_snapshot_size,
         )
+        if ancestor_ref is None:
+            analysis = build_polymarket_development_analysis(
+                snapshot,
+                session_id=arguments.session_id,
+            )
+        else:
+            ancestor_snapshot = PolymarketCorpusStore(arguments.workspace).load(ancestor_ref)
+            analysis = build_polymarket_replication_analysis(
+                snapshot,
+                ancestor_snapshot,
+                session_id=arguments.session_id,
+            )
         receipts: list[dict[str, object]] = []
         for index, source_path in enumerate(arguments.source):
             source = source_path.read_text()
@@ -85,6 +100,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0
 
 
+def _optional_ancestor_ref(
+    content_sha256: str | None,
+    size_bytes: int | None,
+) -> PolymarketCorpusSnapshotRef | None:
+    if (content_sha256 is None) != (size_bytes is None):
+        msg = "ancestor snapshot digest and size must be supplied together"
+        raise ValueError(msg)
+    if content_sha256 is None or size_bytes is None:
+        return None
+    return PolymarketCorpusSnapshotRef(content_sha256, size_bytes)
+
+
 def _receipt_payload(
     *, analysis: object, source_path: Path, source_sha256: str, observation: object
 ) -> dict[str, object]:
@@ -101,12 +128,12 @@ def _receipt_payload(
     if observation.status is AnalysisStatus.SUCCEEDED and observation.details is None:
         msg = "successful study details cannot remain only in an ephemeral artifact store"
         raise ValueError(msg)
-    return {
+    payload: dict[str, object] = {
         "status": observation.status.value,
         "epistemic_status": observation.epistemic_status,
         "snapshot_ref": analysis.partition.snapshot_ref,
         "partition_id": analysis.partition.partition_id,
-        "partition_method": "whole-event-chronological-latest-resolution/v1",
+        "partition_method": analysis.partition.partition_method,
         "development_event_count": len(analysis.partition.development_event_ids),
         "protected_event_count": analysis.partition.protected_event_count,
         "development_market_count": analysis.partition.development_market_count,
@@ -134,6 +161,16 @@ def _receipt_payload(
         "formal_object_refs": list(observation.formal_object_refs),
         "durable_state_effects": list(observation.durable_state_effects),
     }
+    if analysis.partition.ancestor_snapshot_ref is not None:
+        payload.update(
+            {
+                "ancestor_snapshot_ref": analysis.partition.ancestor_snapshot_ref,
+                "ancestor_event_count": analysis.partition.ancestor_event_count,
+                "embargoed_event_count": analysis.partition.embargoed_event_count,
+                "embargoed_market_count": analysis.partition.embargoed_market_count,
+            }
+        )
+    return payload
 
 
 def _persist_receipt(payload: dict[str, object], path: Path) -> None:
