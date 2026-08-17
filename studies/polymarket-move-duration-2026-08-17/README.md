@@ -1,7 +1,6 @@
 # Time to next meaningful probability move
 
-Epistemic status: **FORMAL DEVELOPMENT CANDIDATE — FREEZE PREDECLARATION REPLAY PENDING —
-PROTECTED DATA UNEXPOSED**.
+Epistemic status: **FROZEN DEVELOPMENT CANDIDATE — PROTECTED DATA UNEXPOSED**.
 
 This study asks whether legal decision-time path persistence predicts elapsed time until the next
 retained Polymarket probability at least two cents away from its current level. It does not predict
@@ -68,10 +67,20 @@ Every predeclared formal credibility condition passed. Actual accesses show feat
 `history(market_probability)`, labels used that history plus `outcome_path()`, fitting used only
 `training_rows()`, and prediction used only `feature_values()` plus `model_state()`.
 
-This evidence is not yet frozen. The completed direct-evaluator request did not carry a protected
-protocol predeclaration, and `AuthoredFreezeService` correctly refuses to freeze evidence lacking
-one. An identical coordinator replay with protocol identities declared before execution is required.
-No protected values or protected backtest have been requested.
+The direct-evaluator request did not carry a protected protocol predeclaration, and
+`AuthoredFreezeService` correctly refused to freeze that request. Source 04 then predeclared the
+exact protected data scope, decision-time rule, training protocol, evaluation protocol, validation
+standard, claim template, and freeze standard before replaying the same three authored models
+through `RuntimeInvestigationCoordinator`.
+
+The replay reproduced the exact selected candidate
+`authored-candidate:bb76fb6846cd5bb935934e16d53c520865f5649d230c53b0cc1ca5c3e1be770d`
+and evidence
+`authored-development-evidence:7729af09c56fed64323cc805df708ab2643ec547aa90877dda30e53a6e9c5372`.
+An independently identified freeze authority accepted the predeclared gate and sealed
+`frozen-system:65af99a116e6ddabc965b7317ac18162665d05501f0fb77aec6b6b2a6ac19c42`.
+This is a frozen development identity, not protected validation or a trading claim. No protected
+values were loaded and no protected backtest was run.
 
 The exact three-model run took about 38 minutes because every feature, label, fit, and prediction
 phase starts a separate constrained worker. That is a demonstrated autonomous-loop throughput seam,
@@ -91,5 +100,9 @@ not a reason to weaken the scientific sample or gate.
   `98ebb1311edd5b65fb33ee83d393f7ad6a976248dcf411bc8958fa1c1e334206`.
 - Formal receipt SHA-256:
   `bccc524a0600b04a29fffa6ea82bdafdfe6a57856f7793eb57b0907661376690`.
+- Coordinator freeze-replay driver SHA-256:
+  `58ae71b26d7736f53843e514019a06cfbfe3b154e0bb3575994670ab6b5cc3be`.
+- Coordinator freeze-replay receipt SHA-256:
+  `00a7d84ab97be39f83e36206137cf88a40a1e372e14ecfa750e0ccd599a5ccd4`.
 - All executions accessed only development price identity, event ordinal, observation ordinal/time,
   and sampled probability; all report `protected_values_exposed=false` and no protected run.

@@ -126,3 +126,20 @@ control or feature compression; it does not authorize formalization, freezing, o
    `RuntimeInvestigationCoordinator`, require candidate/evidence identity equality with receipt 03,
    and submit only the matching credible pair to an independently identified freeze authority.
    Source 04 may seal the candidate but must not load or evaluate protected values.
+8. Source 04 is fixed at SHA-256
+   `58ae71b26d7736f53843e514019a06cfbfe3b154e0bb3575994670ab6b5cc3be`. Its predeclaration binds
+   the retained snapshot's final-seven-event data scope, the exact greedy 48-hour decision rule,
+   event-equal expanding training, duration MAE/MSE evaluation, protected-improvement validation,
+   first-passage claim template, and formal-duration freeze standard. The replay must match formal
+   candidate `authored-candidate:bb76fb6846cd5bb935934e16d53c520865f5649d230c53b0cc1ca5c3e1be770d`
+   and evidence
+   `authored-development-evidence:7729af09c56fed64323cc805df708ab2643ec547aa90877dda30e53a6e9c5372`
+   exactly before the independent authority can seal it.
+9. Source 04 succeeded with receipt SHA-256
+   `00a7d84ab97be39f83e36206137cf88a40a1e372e14ecfa750e0ccd599a5ccd4`. The coordinator replay
+   reproduced both exact identities and all declared formal metrics. Independent authority
+   `authority:independent-polymarket-duration-freeze` accepted the predeclared development rule and
+   sealed
+   `frozen-system:65af99a116e6ddabc965b7317ac18162665d05501f0fb77aec6b6b2a6ac19c42`.
+   The receipt records `protected_values_exposed=false` and `protected_backtest_run=false`; freezing
+   the development identity does not itself authorize or execute protected evaluation.
