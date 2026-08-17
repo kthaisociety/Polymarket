@@ -73,3 +73,12 @@ Frozen formal driver:
 `f8694e97fc353936e0044321fe0803704f6f67b9bef2278a557ed2d68dccaa25`. The driver publishes both
 programs through `CandidatePublisher` and evaluates them through `AuthoredDevelopmentEvaluator`;
 the model programs retain no filesystem, network, import, or outcome-at-prediction authority.
+
+The first invocation failed before catalog registration because the derived price rows were not in
+the corpus-required market/time order. No candidate or evidence was created. The safe failure is
+retained in
+[`formal-receipts/02_formal_time_legal_reversal_failed.json`](formal-receipts/02_formal_time_legal_reversal_failed.json).
+A corrected driver changes only that ordering and otherwise executes the byte-identical parent
+trial: [`source/03_formal_time_legal_reversal_ordered.py`](source/03_formal_time_legal_reversal_ordered.py),
+SHA-256 `5e4a71d2337a663b8ff62efd1c58e529599f2074cfbe09b53c26892b3a78efcc`.
+Its result is retained separately.
