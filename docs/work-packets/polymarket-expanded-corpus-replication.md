@@ -49,3 +49,18 @@ read-only proof, contract/event/price counts, and acquisition caveats. Repositor
 refer to the ignored object by content identity. The object bytes and all credentials stay outside
 Git.
 
+## Acquisition receipt
+
+- Status: **SUCCEEDED — REGISTERED DATA, NOT SCIENTIFIC EVIDENCE**.
+- Snapshot:
+  `polymarket-corpus:8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6`,
+  318,684,407 canonical bytes.
+- Sanitized receipt SHA-256:
+  `1d68857a24188c6767df27352794dd390e81f5cea119cdf4436cdbcbc4876a4f`.
+- Coverage: 1,000 contracts, 235 events, 1,180,437 price observations, 1,000 resolution
+  observations.
+- Authority: `human_ro`, default/transaction read-only true, repeatable-read isolation; no
+  credentials emitted or stored.
+- Formal references/durable effects: empty.
+
+The next permitted step is an identity/chronology-only overlap audit. New price paths remain unread.
