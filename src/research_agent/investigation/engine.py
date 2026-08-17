@@ -748,7 +748,9 @@ def _observation_json(observation: RegisteredObservation) -> dict[str, JsonValue
         "field_id": observation.field_ref.field_id,
         "value": cast("JsonValue", observation.value),
         "reference_time": observation.reference_time.isoformat(),
+        "reference_time_epoch_seconds": observation.reference_time.timestamp(),
         "available_at": observation.available_at.isoformat(),
+        "available_at_epoch_seconds": observation.available_at.timestamp(),
         "dimensions": [list(item) for item in observation.dimensions],
     }
 

@@ -72,6 +72,9 @@ For each simulated decision, the evaluator builds an `InformationSet` using `ava
 passes only declared observations whose `reference_time` is no later than the decision. It builds a
 separate outcome path inside the declared horizon, matching the exact population and requiring
 availability by the development clock. Feature and label entrypoints execute in separate workers.
+Each exposed observation carries the same reference and availability timestamps in ISO and epoch
+seconds; the numeric form permits elapsed-time features and labels without granting another clock
+or parser capability. Development and protected execution use the same payload contract.
 Panel candidates repeat this construction independently for each key's exact dimension values and
 order same-time keys deterministically. Exact `history()` never crosses the sample slice. A
 `context_history()` invocation receives other slices only when its manifest dependency explicitly

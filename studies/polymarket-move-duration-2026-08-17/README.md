@@ -1,7 +1,7 @@
 # Time to next meaningful probability move
 
-Epistemic status: **EXPLORATORY DEVELOPMENT CANDIDATE — FORMAL REPLAY PENDING — PROTECTED DATA
-UNEXPOSED**.
+Epistemic status: **FORMAL DEVELOPMENT CANDIDATE — FREEZE PREDECLARATION REPLAY PENDING —
+PROTECTED DATA UNEXPOSED**.
 
 This study asks whether legal decision-time path persistence predicts elapsed time until the next
 retained Polymarket probability at least two cents away from its current level. It does not predict
@@ -45,7 +45,37 @@ plus trailing quiet-run hours under the fixed `.005` step threshold.
 The retained hypothesis is therefore narrow: recent sampled-price staleness predicts future sampled
 first-passage time. This may be useful for modeling update/movement timing, but it may also reflect
 the retained observation process. It is not a trading or directional claim. One exact formal
-authored replay is required before any freeze decision.
+authored replay was therefore required before any freeze decision.
+
+## Formal authored replay
+
+Formal source 03 evaluated the event-equal mean, exact state-only ridge, and selected state-staleness
+ridge over the same 1,053 declared keys. The authored evaluator produced 1,013 legal expanding OOF
+predictions across 22 event groups:
+
+- event-equal mean observation/event-macro MAE: `0.37797/0.37575`;
+- state-only observation/event-macro MAE: `0.25945/0.25928`;
+- state-staleness observation/event-macro MAE: `0.21633/0.21683`;
+- state-only observation/event-macro MSE: `0.10689/0.10471`;
+- state-staleness observation/event-macro MSE: `0.08621/0.08177`;
+- state-staleness early/late event-macro MAE: `0.22280/0.21087`, versus
+  `0.26760/0.25096` for state-only;
+- event wins versus state-only: 18 of 22; largest positive improvement share: `0.12924`;
+- 467 capped and 546 uncapped outcomes, with 16 mixed event groups;
+- mean prediction `0.60123` versus mean outcome `0.59824`.
+
+Every predeclared formal credibility condition passed. Actual accesses show features used only
+`history(market_probability)`, labels used that history plus `outcome_path()`, fitting used only
+`training_rows()`, and prediction used only `feature_values()` plus `model_state()`.
+
+This evidence is not yet frozen. The completed direct-evaluator request did not carry a protected
+protocol predeclaration, and `AuthoredFreezeService` correctly refuses to freeze evidence lacking
+one. An identical coordinator replay with protocol identities declared before execution is required.
+No protected values or protected backtest have been requested.
+
+The exact three-model run took about 38 minutes because every feature, label, fit, and prediction
+phase starts a separate constrained worker. That is a demonstrated autonomous-loop throughput seam,
+not a reason to weaken the scientific sample or gate.
 
 ## Exact evidence
 
@@ -57,6 +87,9 @@ authored replay is required before any freeze decision.
   `1128d26eb4c51e11b61a77f2b6d1db80b58e71b02abf638f99b4e1ae3cac21d1`.
 - Compression receipt SHA-256:
   `d8694d86d9a788fba41a709f4f06a014446ef8b10797248bc68642ea12e2e25d`.
-- Both executions accessed only development price identity, event ordinal, observation ordinal/time,
-  and sampled probability; both report `protected_values_exposed=false` and no durable effects.
-
+- Formal driver SHA-256:
+  `98ebb1311edd5b65fb33ee83d393f7ad6a976248dcf411bc8958fa1c1e334206`.
+- Formal receipt SHA-256:
+  `bccc524a0600b04a29fffa6ea82bdafdfe6a57856f7793eb57b0907661376690`.
+- All executions accessed only development price identity, event ordinal, observation ordinal/time,
+  and sampled probability; all report `protected_values_exposed=false` and no protected run.

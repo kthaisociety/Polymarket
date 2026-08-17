@@ -44,6 +44,9 @@ restricted to a predefined feature vocabulary.
   match; the harness performs the match and decision-time cutoff.
 - `make_label()` reads only through those same decision-time histories and `outcome_path()`, then
   returns one finite JSON label or `None` under the declared insufficiency policy.
+- Observation payloads expose the already-authorized reference and availability clocks as both
+  timezone-aware ISO strings and numeric epoch seconds, so authored duration calculations do not
+  require a host parser or weaken temporal authority.
 - `fit()` reads only through `training_rows()` and returns finite JSON model state.
 - `predict()` reads only through `model_state()` and `feature_values()` and returns one
   finite prediction.

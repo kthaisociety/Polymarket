@@ -234,8 +234,20 @@ def make_features():
     return {"interaction": left[-1]["value"] * right[-1]["value"]}
 
 def make_label():
-    current = history("x1")[-1]["value"]
-    return outcome_path()[-1]["value"] + 0.0 * current
+    current = history("x1")[-1]
+    future = outcome_path()[-1]
+    elapsed_seconds = (
+        future["reference_time_epoch_seconds"] - current["reference_time_epoch_seconds"]
+    )
+    availability_delay = (
+        future["available_at_epoch_seconds"] - future["reference_time_epoch_seconds"]
+    )
+    return (
+        future["value"]
+        + 0.0 * current["value"]
+        + 0.0 * elapsed_seconds
+        + 0.0 * availability_delay
+    )
 
 def fit():
     rows = training_rows()

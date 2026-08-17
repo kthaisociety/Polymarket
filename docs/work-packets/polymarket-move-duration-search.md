@@ -92,3 +92,37 @@ control or feature compression; it does not authorize formalization, freezing, o
    did not materially improve the compact result. This exact compact representation is eligible
    for one authored formal development replay; it is not frozen and protected data remain
    unexposed.
+4. Formal source 03 must replay the exact greedy 48-hour key algorithm and label through authored
+   `history()` and `outcome_path()` interfaces. It evaluates a three-trial ancestry: event-equal
+   duration mean, the exact three-feature state ridge, then the selected five-feature state-staleness
+   ridge; all use penalty `0.1` and event-equal fitting. The compact candidate is freeze-eligible
+   only if it produces at least 500 OOF predictions across 12 events, with at least 100 capped and
+   100 uncapped outcomes and 10 mixed events; has observation and event-macro MAE and MSE no worse
+   than `0.30`/`0.15`; beats both comparators under all four aggregate losses; lowers event-macro
+   MAE by at least 5% versus state-only; improves both chronological halves; wins at least 60% of
+   events versus state-only; has largest positive event-MAE improvement share at most `0.50`; and
+   keeps mean prediction within `0.10` normalized duration of the observed mean. Failure rejects
+   the exact candidate. Passing establishes only freeze eligibility; a separate freeze transition
+   and independently authorized protected plan would still be required.
+5. Authoring source 03 exposed a generic formal-program interface gap before candidate execution:
+   authorized timestamps were strings only, so elapsed duration could not be computed without an
+   unavailable parser. The narrow repair exposes the same reference and availability clocks as
+   epoch seconds in both development and protected observation payloads. It grants no new rows or
+   fields and is covered by unchanged-source development/protected integration execution.
+6. Formal source 03, driver SHA-256
+   `98ebb1311edd5b65fb33ee83d393f7ad6a976248dcf411bc8958fa1c1e334206`, passed the exact gate.
+   Receipt SHA-256 `bccc524a0600b04a29fffa6ea82bdafdfe6a57856f7793eb57b0907661376690`
+   contains 1,013 OOF predictions over 22 events. State-staleness improved observation/event-macro
+   MAE from `0.25945/0.25928` to `0.21633/0.21683`, improved MSE from `0.10689/0.10471` to
+   `0.08621/0.08177`, improved both halves, and won 18/22 events. Its mean prediction `0.60123`
+   closely matched mean outcome `0.59824`. The candidate is scientifically freeze-eligible under
+   the declared gate, but it is not authority-frozen.
+7. Freeze audit found the direct formal request lacked `ProtectedEvaluationPredeclaration`.
+   Chronos therefore cannot freeze source 03 evidence. Source 04 must declare, before replay, the
+   exact retained-corpus final-seven-event data protocol; greedy non-overlapping 48-hour decision
+   protocol; event-equal expanding training protocol; duration MAE/MSE evaluation protocol;
+   validation, claim-template, protected-scope, and freeze-standard identities. It must then replay
+   the exact three sources, manifests, keys, budget, and ancestry through
+   `RuntimeInvestigationCoordinator`, require candidate/evidence identity equality with receipt 03,
+   and submit only the matching credible pair to an independently identified freeze authority.
+   Source 04 may seal the candidate but must not load or evaluate protected values.
