@@ -107,4 +107,17 @@ depth, queue, fill, slippage, or capacity fact may be inferred.
 
 ## Transition receipt
 
-Status: **PREDECLARED — FRESH VALUES UNREAD**.
+Status: **ACTIVE — FIRST EXECUTION FAILED OPERATIONALLY BEFORE A SCIENTIFIC RESULT**.
+
+The real public runner verified the exact snapshot ancestry and constructed partition
+`2144b8338515271f342738c3ed7ad62565d98343c3e3284353780b436fbd9a40`: 157 fresh development
+events/562 markets, 31 embargoed ancestor events/217 markets, and 47 protected events/221 markets.
+It then failed with `MemoryError` under the fixed 512 MB authored-worker limit. Five permitted price
+fields were accessed; details are null, protected exposure is false, and formal references/durable
+effects are empty.
+
+The immutable operational-failure receipt SHA-256 is
+`5f216aa4d2df03eecfb9c6eb4b68822b158db5eb7642d16fe2aef9f3f540e20d`. It is not a negative
+scientific result and cannot pass or fail any predeclared gate. The source, population, models, and
+gates remain frozen. A retry is permitted only after a resource-policy seam is repaired, under a
+new conflict-free receipt path that preserves this failed attempt.
