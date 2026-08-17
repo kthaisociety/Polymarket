@@ -265,3 +265,37 @@ kinematics was worse than state-only under every primary Brier and ranking view.
 are rejected before formalization. The state-only comparators reveal a potentially useful
 selection-exposed relationship between current probability state and transition hazard, but they
 were not the predeclared advancing candidates and are not a frozen system.
+
+### Non-overlap, elapsed-time alignment, and formal entry replay 14–16
+
+Source 14 removed adjacent-label dependence by moving to a fixed 24-observation decision stride.
+The entry state model retained 65 positives in 1,339 OOF rows, beat the rate baseline under both
+Brier views, won 13/15 events, and raised pooled average precision from `0.0355` to `0.2073`. Escape
+had only 30 positives and failed its fixed minimum-coverage rule despite strong relative metrics.
+
+Because 24 observations could span as much as 30 hours, source 15 then matched the formal temporal
+meaning exactly: greedily selected decisions at least 24 elapsed hours apart, with the label taken
+from the last observation no later than 24 hours and at least 18 hours of future coverage. Entry
+again passed on 56 positives/1,358 OOF rows: state Brier was `0.04375/0.07121` versus baseline
+`0.04453/0.07819` under observation/event weighting, pooled/event AP was `0.2168/0.4941` versus
+`0.0394/0.1045`, and the state model won 12/16 events.
+
+Formal source 16 published the exact event-rate ancestor and three-feature state logistic candidate
+through the authored panel harness. It declared 1,565 interior-risk keys and produced 1,522 legal
+decision-time OOF predictions with 76 positive labels across 24 events. The run took roughly 34
+minutes because every feature, label, fit, and prediction phase remained process-isolated.
+
+| Formal metric | Event-rate baseline | State logistic |
+|---|---:|---:|
+| observation Brier | 0.04696 | **0.04494** |
+| event-macro Brier | 0.08375 | **0.07987** |
+| pooled average precision | 0.0797 | **0.2176** |
+| event-macro average precision | 0.1431 | **0.3610** |
+| event wins | — | 21/24 |
+| top-score precision | 5.23% | **23.03%** |
+| event-macro mean prediction / incidence | 0.0452 / 0.0898 | 0.0405 / 0.0898 |
+
+The model is useful as mechanism evidence and risk ranking, but it is not a credible calibrated
+probability system under the declared claim. It failed absolute Brier `<= .04` and the factor-two
+event-macro calibration floor. The candidate is therefore a formal negative, not frozen, and no
+protected evaluation was run.

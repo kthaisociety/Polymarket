@@ -206,3 +206,54 @@ improve multiple legal six-hour labels across chronological event groups.
     pooled/event average precision (`0.2279/0.3541` versus `0.1561/0.3484`). Both exact candidates
     are rejected before formalization. The remaining strong state-only ranking is selection-exposed
     hypothesis evidence, not an eligible model, and the kinematics family is closed.
+20. The surviving state-hazard observation receives one fixed dependence control before any new
+    candidate is authored: source 14 replays the exact rate, three-feature state, and 11-feature
+    kinematics recipes on decisions `24, 48, 72, ...`, so successive 24-hour labels do not overlap.
+    The kinematics metrics are audit-only and cannot reopen that closed family. A state label may
+    become candidate-design input only if the non-overlap OOF sample retains at least 40 positives;
+    state beats the rate baseline under observation and event-macro Brier and pooled and
+    event-macro average precision; state wins a majority of represented events; its fixed top-score
+    set has at least twice the unconditional precision; and its event-macro mean forecast lies
+    within a factor of two of the event-macro observed hazard. No starting phase, stride, feature,
+    label, penalty, or solver change is permitted after this declaration.
+21. Non-overlap receipt 14, SHA-256
+    `0beaa7e0cddf89d1fe54544157a8106b91e849fc51941d8a5d5f0a2999064367`, passed the exact state
+    robustness rule for entry: 65 positives/1,339 rows; observation/event Brier
+    `0.04569/0.06920` versus rate `0.04805/0.07588`; pooled/event average precision
+    `0.2073/0.5000` versus `0.0355/0.1096`; and 13/15 event wins. Escape retained strong relative
+    metrics but only 30 positives, below the fixed 40-positive gate, so it cannot advance.
+22. Formal authored targets use exact elapsed horizons, while receipt 14 used the 24th later
+    retained observation whose elapsed span could reach 30 hours. Before formalization, one
+    semantic-alignment replay must therefore replace that approximation with the last observation
+    available no later than exactly 24 elapsed hours and require at least 18 hours of future
+    coverage. Decisions are selected greedily from ordinal 24 onward with at least 24 elapsed hours
+    between selected decisions, matching the formal key algorithm and preventing label overlap.
+    Source 15 reuses the exact labels, state/full recipes, penalty, folds, solver, and state gate from
+    receipt 14. Entry may proceed only if it again passes; escape remains closed, and the audit-only
+    full model cannot reopen kinematics.
+23. Semantic-alignment receipt 15, SHA-256
+    `2666fd26fee6a4ac02433fe71a1e1c3b5c339e383171a7dc44bf91ac7e5f88ed`, again passed entry:
+    56 positives/1,358 rows; state Brier `0.04375/0.07121` versus rate `0.04453/0.07819` under
+    observation/event views; pooled/event average precision `0.2168/0.4941` versus
+    `0.0394/0.1045`; and 12/16 event wins. Entry is now eligible for one exact authored formal
+    replay. Source 16 must use the same greedy elapsed-time keys, interior-only risk population,
+    exact 24-hour horizon and last available outcome, probability/boundary-distance/fixed-.005-logit
+    features, event-equal four-update ridge logistic with penalty `.1`, and event-rate ancestry
+    baseline. Formal credibility requires at least 40 positive OOF labels, candidate Brier `<= .04`,
+    lower observation and event-macro Brier than baseline, higher pooled and event-macro average
+    precision, majority event wins, fixed top-score precision at least twice the OOF rate, and
+    event-macro mean prediction within a factor of two of event-macro incidence. Failure is retained
+    and ends this entry candidate; success permits freezing work but does not itself authorize the
+    protected block.
+24. Formal source 16, SHA-256
+    `5e64b0efbf21d80806671839c1b3c99444cf03c135ab488e74165ac09fbe63a3`, completed the exact
+    authored replay over 1,565 declared keys, 1,522 OOF predictions, 76 positives, and 24 event
+    groups. The state model improved observation Brier from `0.04696` to `0.04494`, event-macro
+    Brier from `0.08375` to `0.07987`, pooled average precision from `0.0797` to `0.2176`, and
+    event-macro average precision from `0.1431` to `0.3610`, with 21/24 event wins and 23.0%
+    top-score precision at 4.99% incidence. It nevertheless failed two fixed credibility clauses:
+    Brier exceeded `.04`, and event-macro mean prediction `0.04050` was below half of observed
+    event-macro incidence `0.08976`. The exact candidate is closed as a formal negative. It is not
+    frozen, and the protected seven events/45 markets remain unexposed. The roughly 34-minute run
+    also confirms the already-recorded per-phase isolation throughput limitation at realistic panel
+    size; that operational evidence does not change the scientific disposition.
