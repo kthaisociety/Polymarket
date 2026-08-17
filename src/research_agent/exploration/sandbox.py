@@ -12,6 +12,7 @@ import hashlib
 import io
 import json
 import linecache
+import math
 import multiprocessing
 import resource
 import traceback
@@ -296,10 +297,12 @@ _SAFE_CALLS: Final[frozenset[str]] = frozenset(
         "bool",
         "dict",
         "enumerate",
+        "exp",
         "float",
         "int",
         "len",
         "list",
+        "log",
         "max",
         "min",
         "print",
@@ -322,10 +325,12 @@ _SAFE_BUILTINS: Final[dict[str, object]] = {
     "bool": bool,
     "dict": dict,
     "enumerate": enumerate,
+    "exp": math.exp,
     "float": float,
     "int": int,
     "len": len,
     "list": list,
+    "log": math.log,
     "max": max,
     "min": min,
     "range": range,

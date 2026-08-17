@@ -302,7 +302,8 @@ class AuthoredDevelopmentEvaluator:
                 field.field_id: [
                     _observation_json(item)
                     for item in information.for_field(field)
-                    if item.reference_time <= key.decision_time and item.dimensions == dimensions
+                    if item.reference_time <= key.decision_time
+                    and tuple(sorted(item.dimensions)) == dimensions
                 ]
                 for field in manifest.predictor_fields
             }
@@ -317,7 +318,7 @@ class AuthoredDevelopmentEvaluator:
                 item
                 for item in request.catalog.observations
                 if item.field_ref == manifest.outcome_field
-                and item.dimensions == dimensions
+                and tuple(sorted(item.dimensions)) == dimensions
                 and key.decision_time < item.reference_time <= outcome_end
                 and item.available_at <= request.current_time
             ]
@@ -334,6 +335,7 @@ class AuthoredDevelopmentEvaluator:
                 candidate.source,
                 ProgramInvocation(
                     "make_label",
+                    histories=histories,
                     outcome=[_observation_json(item) for item in outcome],
                 ),
             )

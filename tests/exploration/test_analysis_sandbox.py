@@ -79,6 +79,27 @@ result = structured_return(
     assert "self-reported provenance was ignored" in observation.warnings
 
 
+def test_pure_log_and_exp_support_authored_boundary_transforms() -> None:
+    """Boundary-aware research can author a true logit without host interfaces."""
+    observation = _harness().run(
+        _request(
+            """
+values = read("development-view", "signal")
+probability = values[0] / 4.0
+logit = log(probability / (1.0 - probability))
+recovered = 1.0 / (1.0 + exp(-logit))
+result = structured_return("pure logit", {"logit": logit, "recovered": recovered})
+""",
+            "signal",
+        )
+    )
+
+    assert observation.status is AnalysisStatus.SUCCEEDED
+    assert observation.details is not None
+    assert observation.details["logit"] == pytest.approx(-1.0986122886681098)
+    assert observation.details["recovered"] == pytest.approx(0.25)
+
+
 def test_policy_denies_requested_field_without_exposing_values() -> None:
     """Policy denial occurs without returning the requested field value."""
     harness = _harness()

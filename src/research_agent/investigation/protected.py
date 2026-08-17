@@ -829,7 +829,8 @@ class AuthoredBacktestEngine:
             field.field_id: [
                 _observation_json(item)
                 for item in information.for_field(field)
-                if item.reference_time <= key.decision_time and item.dimensions == key.dimensions
+                if item.reference_time <= key.decision_time
+                and tuple(sorted(item.dimensions)) == key.dimensions
             ]
             for field in manifest.predictor_fields
         }
@@ -918,7 +919,7 @@ class AuthoredBacktestEngine:
         observations = tuple(
             item
             for item in information.for_field(manifest.outcome_field)
-            if item.dimensions == key.dimensions
+            if tuple(sorted(item.dimensions)) == key.dimensions
             and key.decision_time < item.reference_time <= outcome_end
         )
         if len(observations) < manifest.minimum_outcome_points:
@@ -928,10 +929,32 @@ class AuthoredBacktestEngine:
                 "authored outcome path is incomplete",
                 (information.information_set_id,),
             )
+        historical_information = InformationSetBuilder().build(
+            catalog,
+            decision_time=key.decision_time,
+            requested_fields=manifest.predictor_fields,
+        )
+        histories = {
+            field.field_id: [
+                _observation_json(item)
+                for item in historical_information.for_field(field)
+                if item.reference_time <= key.decision_time
+                and tuple(sorted(item.dimensions)) == key.dimensions
+            ]
+            for field in manifest.predictor_fields
+        }
+        if any(not values for values in histories.values()):
+            raise _DecisionFailureError(
+                _Stage.INFORMATION,
+                ProtectedFailureCode.INFORMATION_SET_NOT_READY,
+                "legal authored label history is insufficient",
+                (historical_information.information_set_id,),
+            )
         result = self._programs.invoke(
             candidate.source,
             ProgramInvocation(
                 "make_label",
+                histories=histories,
                 outcome=[_observation_json(item) for item in observations],
             ),
         )

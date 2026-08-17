@@ -498,6 +498,110 @@ def test_question_to_authored_code_to_temporal_evidence_is_one_real_path() -> No
     assert researcher.contexts[0].prior_evidence == ()
 
 
+def test_same_series_history_can_define_a_future_move_label() -> None:
+    schema = DatasetSchema(
+        dataset_id="dimensioned-series",
+        version="v1",
+        environment_id="development-world",
+        provenance_ref="fixture:dimensioned-series",
+        fields=(
+            FieldDefinition(
+                "x1",
+                "Dimensioned series",
+                "float",
+                "index",
+                ("z_market", "a_token"),
+                "Schema-order dimensions deliberately differ from canonical name order.",
+            ),
+        ),
+    )
+    dimensions = (("z_market", "market-1"), ("a_token", "yes"))
+    rows = tuple(
+        ObservationInput(
+            field_ref=schema.field_ref("x1"),
+            value=float(day % 3),
+            reference_time=ORIGIN + DAY * day,
+            available_at=ORIGIN + DAY * day,
+            vintage_id="initial",
+            revision_number=0,
+            source_ref="fixture:dimensioned-series",
+            provenance_ref=f"fixture:dimensioned-series:{day}",
+            availability_rule_version="fixture-release-v1",
+            dimensions=dimensions,
+        )
+        for day in range(1, 25)
+    )
+    catalog = DataCatalogSnapshot(
+        schema.environment_id,
+        (ObservationRegistrar().register(schema, rows),),
+    )
+    source = """
+def make_features():
+    values = history("x1")
+    return {"level": values[-1]["value"]}
+
+def make_label():
+    current = history("x1")[-1]["value"]
+    future = outcome_path()[-1]["value"]
+    return abs(future - current)
+
+def fit():
+    rows = training_rows()
+    return {"mean": sum(row["label"] for row in rows) / len(rows)}
+
+def predict():
+    return model_state()["mean"]
+"""
+    question = ResearchQuestion(
+        question_id="question:same-series-future-move",
+        text="Can the history of a series predict its next absolute move?",
+        environment_id=catalog.environment_id,
+        task_ref="task:same-series-future-move",
+        evidence_refs=("observation:same-series-hypothesis",),
+    )
+    proposal = AuthoredProgramProposal(
+        source=source,
+        manifest=AuthoredCandidateManifest(
+            question_id=question.question_id,
+            environment_id=catalog.environment_id,
+            predictor_fields=(schema.field_ref("x1"),),
+            outcome_field=schema.field_ref("x1"),
+            horizon=TemporalOffset.elapsed(DAY),
+            minimum_outcome_points=1,
+            population_dimensions=dimensions,
+            feature_names=("level",),
+            missing_value_policy="exclude_example",
+            evidence_refs=("observation:same-series-hypothesis",),
+            provenance_refs=("researcher:test-provider",),
+        ),
+        rationale="Predict the next absolute move using only history available at the decision.",
+        parent_trial_ids=(),
+    )
+    request = InvestigationRequest(
+        question=question,
+        catalog=catalog,
+        sample_keys=tuple(SampleKey(ORIGIN + DAY * day, dimensions) for day in range(2, 23)),
+        current_time=ORIGIN + DAY * 30,
+        budget=DevelopmentBudget(
+            max_trials=1,
+            minimum_training_rows=6,
+            minimum_oof_predictions=8,
+            primary_metric="mse",
+            credible_at_or_below=10.0,
+        ),
+        random_seed=19,
+    )
+
+    result = AutonomousInvestigation().run(request, _OneProposalResearcher(proposal))
+
+    assert result.disposition is DevelopmentDisposition.CREDIBLE
+    assert result.evidence[-1].predictions
+    assert any(
+        access.interface == "history" and access.field_id == "x1"
+        for access in result.evidence[-1].label_accesses
+    )
+
+
 def test_unreleased_future_poison_cannot_change_development_evidence() -> None:
     low = _world(poison_multiplier=1.0)
     high = _world(poison_multiplier=999_999.0)

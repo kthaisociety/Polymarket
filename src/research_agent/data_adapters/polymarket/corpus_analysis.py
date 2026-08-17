@@ -127,9 +127,7 @@ def build_polymarket_development_analysis(
     price_ref = f"polymarket-development-prices:{partition_id}"
     outcome_ref = f"polymarket-development-outcomes:{partition_id}"
     contract_by_market = {item.market_id: item for item in development_contracts}
-    event_ordinals = {
-        event_id: ordinal for ordinal, event_id in enumerate(development_events)
-    }
+    event_ordinals = {event_id: ordinal for ordinal, event_id in enumerate(development_events)}
     price_columns, ordinals = _development_price_columns(
         corpus,
         contract_by_market,
@@ -229,9 +227,7 @@ def _development_outcome_columns(
         columns["event_id"].append(contract.event_id)
         columns["event_chronological_ordinal"].append(event_ordinals[contract.event_id])
         columns["question"].append(contract.question)
-        columns["outcome_label"].append(
-            contract.outcomes[corpus.request.outcome_index].label
-        )
+        columns["outcome_label"].append(contract.outcomes[corpus.request.outcome_index].label)
         columns["open_time_epoch_seconds"].append(contract.open_time.timestamp())
         columns["close_time_epoch_seconds"].append(contract.close_time.timestamp())
         columns["resolved_time_epoch_seconds"].append(resolution.resolved_time.timestamp())

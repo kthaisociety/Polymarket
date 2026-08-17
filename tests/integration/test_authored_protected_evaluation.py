@@ -223,7 +223,8 @@ def make_features():
     return {"interaction": left[-1]["value"] * right[-1]["value"]}
 
 def make_label():
-    return outcome_path()[-1]["value"]
+    current = history("x1")[-1]["value"]
+    return outcome_path()[-1]["value"] + 0.0 * current
 
 def fit():
     rows = training_rows()

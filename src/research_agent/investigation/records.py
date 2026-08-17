@@ -184,8 +184,6 @@ class AuthoredCandidateManifest:
             raise ValueError("predictor dependencies cross the candidate environment")
         if self.outcome_field.environment_id != self.environment_id:
             raise ValueError("outcome dependency crosses the candidate environment")
-        if self.outcome_field in self.predictor_fields:
-            raise ValueError("outcome field cannot also be a predictor dependency")
         if len(set(self.feature_names)) != len(self.feature_names) or any(
             not item for item in self.feature_names
         ):
