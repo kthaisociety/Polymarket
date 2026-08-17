@@ -1,0 +1,26 @@
+{
+  "schema_version": "source-scout-response/v1",
+  "candidates": [
+    {
+      "title": "XTracker exact Elon Musk July 25-27 post records",
+      "resource_url": "https://xtracker.polymarket.com/api/users/elonmusk/posts?platform=X&startDate=2026-07-25T16%3A00%3A00.000Z&endDate=2026-07-27T15%3A59%3A59.000Z",
+      "landing_page_url": "https://xtracker.polymarket.com/docs",
+      "publisher": "Polymarket XTracker",
+      "description": "Public JSON post records for one exact user, platform, and UTC interval.",
+      "why_relevant": "Per-post creation and tracker-import times can support conservative historical post-count and pace features for the matching development event.",
+      "temporal_coverage": "Exact requested interval; verify from acquired records and tracking metadata.",
+      "frequency": "Event records with per-post timestamps; tracker polling cadence is not contractually guaranteed.",
+      "license": "Public API terms not stated in the documentation; retain only for reproducible research audit.",
+      "access_notes": "Unauthenticated documented public GET endpoint; UTC bounds used without timezone=EST because offset-bearing timezone queries shifted the observed interval.",
+      "risks": [
+        "historical deletions and revisions are not exposed",
+        "import polling delay varies and must be used as availability",
+        "single-event evidence does not establish generality"
+      ],
+      "evidence_urls": [
+        "https://xtracker.polymarket.com/docs",
+        "https://xtracker.polymarket.com/user/elonmusk"
+      ]
+    }
+  ]
+}

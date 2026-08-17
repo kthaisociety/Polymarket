@@ -1,0 +1,18 @@
+{
+  "schema_version": "polymarket-xtracker-source-acquisition/v1",
+  "epistemic_status": "ACQUIRED_AND_DERIVED_NOT_A_RESEARCH_RESULT",
+  "scouting_request_id": "15d3c30ce73dd6f03f459a5fc4d8327391727d414e4230c3c2c60b8b6d32ca87",
+  "scouting_report_id": "853af2b2c8f2ad93592b01894c91a0d7780fd2cd08a392c157b6493e6d3cbdc5",
+  "selected_candidate_id": "4b1bb93508d57df10baf2e026ffc789d4ec1f3c5cdb4719c7e3af164288e754f",
+  "request_sha256": "2a25e431927f432e5fa6843a31a9897cbde2d5ec340607dfcd3076e40c67a0b0",
+  "source_ref": "source:8027afa5c6b13a6ead8057e028070c6b2961ca357e8c75e936dc54dd7ebd561a",
+  "source_content_sha256": "722881d2fcdae5c212c4360a51594919fe5cbb33bae60cc03093ce535c787584",
+  "source_size_bytes": 18391,
+  "derive_code_sha256": "7f3d5bce6d5aecdd3188ddfd25318b1d2cbeb088514855f8195e39e5ae02646d",
+  "derived_ref": "derived:d87436c70b5631ece9377c424f5c8b07718e8d63827f1eadafaa73e750b5e389",
+  "derived_output_sha256": "d6bff8cb95025d4ef81d497547625c3ea6fa2211c6d246a363f94672c8bf5783",
+  "derived_parameters_sha256": "419979e0847f129bd74c54baf771b7dd124022ea462f266aef7f842ae09b6132",
+  "protected_data_accessed": false,
+  "production_database_written": false
+}
+

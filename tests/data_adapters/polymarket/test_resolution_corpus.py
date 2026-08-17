@@ -19,13 +19,23 @@ from research_agent.data_adapters.polymarket import (
     PolymarketCorpusRequest,
     PolymarketCorpusStore,
     PolymarketPricePoint,
+    PolymarketRegisteredEventField,
     PolymarketResolutionRecord,
     build_polymarket_development_analysis,
     corpus_snapshot,
     register_polymarket_resolution_corpus,
     run_corpus_studies,
 )
-from research_agent.data_foundation import BoundaryStatus, InformationSetBuilder
+from research_agent.data_foundation import (
+    BoundaryStatus,
+    DatasetSchema,
+    FieldDefinition,
+    InformationSetBuilder,
+    ObservationInput,
+    ObservationRegistrar,
+    RegisteredTemporalDataset,
+)
+from research_agent.data_foundation._identity import stable_identity
 from research_agent.exploration import (
     AnalysisRequest,
     AnalysisStatus,
@@ -391,6 +401,131 @@ result = structured_return(
         "labels": ("Yes", "Yes", "Yes", "Yes"),
     }
     assert "Question 4?" not in result.details["questions"]
+
+
+def _registered_event_field(
+    event_id: str,
+    *,
+    environment_id: str = "test-polymarket-corpus",
+) -> PolymarketRegisteredEventField:
+    schema = DatasetSchema(
+        dataset_id="public-event-series",
+        version="v1",
+        environment_id=environment_id,
+        provenance_ref="source:public-event-series",
+        fields=(
+            FieldDefinition(
+                "external_count",
+                "External event count",
+                "integer",
+                "count",
+                ("event_id", "source_item_id"),
+                "One externally observed event with an explicit availability time.",
+            ),
+        ),
+    )
+    dataset = ObservationRegistrar().register(
+        schema,
+        (
+            ObservationInput(
+                field_ref=schema.field_ref("external_count"),
+                value=1,
+                reference_time=OPENED + timedelta(hours=1),
+                available_at=OPENED + timedelta(hours=1, minutes=5),
+                vintage_id="source-item-1",
+                revision_number=0,
+                source_ref="source:exact",
+                provenance_ref="derived:exact",
+                availability_rule_version="public-import-time/v1",
+                dimensions=(("event_id", event_id), ("source_item_id", "item-1")),
+            ),
+        ),
+    )
+    approval_id = "approved-temporal-dataset:test"
+    derived_ref_uri = "derived:test"
+    profile_id = "temporal-dataset-profile:test"
+    attestation_id = stable_identity(
+        "registered-temporal-dataset",
+        {
+            "approval_id": approval_id,
+            "derived_ref_uri": derived_ref_uri,
+            "profile_id": profile_id,
+            "registration_id": dataset.registration_id,
+        },
+    )
+    registration = RegisteredTemporalDataset(
+        attestation_id=attestation_id,
+        approval_id=approval_id,
+        derived_ref_uri=derived_ref_uri,
+        profile_id=profile_id,
+        dataset=dataset,
+    )
+    return PolymarketRegisteredEventField(
+        view_id="registered-public-event-series",
+        registration=registration,
+        field_id="external_count",
+    )
+
+
+def test_registered_event_field_enters_development_harness_with_temporal_provenance() -> None:
+    """An authority-issued event field enters the same tracked sandbox capability surface."""
+    corpus = _event_grouped_corpus()
+    supplement = _registered_event_field("event-1")
+    analysis = build_polymarket_development_analysis(
+        PolymarketCorpusStore.from_corpus(corpus),
+        session_id="registered-development-field",
+        registered_event_fields=(supplement,),
+    )
+    source = """
+events = read("registered-public-event-series", "event_id")
+available = read("registered-public-event-series", "available_at_epoch_seconds")
+counts = read("registered-public-event-series", "external_count")
+result = structured_return(
+    "Registered event field is available to development code.",
+    {"events": events, "available": available, "counts": counts},
+)
+"""
+
+    result = analysis.run(
+        source=source,
+        session_id="registered-development-field",
+        action_id="registered-field-access",
+    )
+
+    assert result.status is AnalysisStatus.SUCCEEDED
+    assert result.details == {
+        "events": ("event-1",),
+        "available": ((OPENED + timedelta(hours=1, minutes=5)).timestamp(),),
+        "counts": (1,),
+    }
+    assert [item.dataset_ref for item in result.provenance.accesses[-3:]] == [
+        supplement.registration.attestation_id,
+        supplement.registration.attestation_id,
+        supplement.registration.attestation_id,
+    ]
+
+
+@pytest.mark.parametrize(
+    ("event_id", "environment_id", "message"),
+    [
+        ("event-4", "test-polymarket-corpus", "unknown or protected"),
+        ("event-1", "another-environment", "different corpus environment"),
+    ],
+)
+def test_registered_event_field_cannot_cross_protected_or_environment_boundary(
+    event_id: str,
+    environment_id: str,
+    message: str,
+) -> None:
+    """Supplementary observations must belong to this corpus and only its development events."""
+    with pytest.raises(ValueError, match=message):
+        build_polymarket_development_analysis(
+            PolymarketCorpusStore.from_corpus(_event_grouped_corpus()),
+            session_id="registered-development-field",
+            registered_event_fields=(
+                _registered_event_field(event_id, environment_id=environment_id),
+            ),
+        )
 
 
 def test_development_view_issues_authoritative_chronological_event_ordinals() -> None:

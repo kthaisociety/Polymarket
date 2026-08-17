@@ -26,6 +26,7 @@ if TYPE_CHECKING:
         PolymarketCorpus,
         PolymarketCorpusContract,
     )
+    from research_agent.data_foundation import RegisteredTemporalDataset
     from research_agent.exploration.sandbox import JsonValue
 
 _PRICE_VIEW = "polymarket-development-prices"
@@ -51,6 +52,7 @@ _OUTCOME_FIELDS = (
     "price_point_count",
 )
 _MIN_DEVELOPMENT_EVENTS = 2
+_TEMPORAL_RESERVED_FIELD_COUNT = 4
 
 
 @dataclass(frozen=True, slots=True)
@@ -66,12 +68,28 @@ class PolymarketEventPartition:
 
 
 @dataclass(frozen=True, slots=True)
+class PolymarketRegisteredEventField:
+    """One authority-issued temporal field permitted into development exploration."""
+
+    view_id: str
+    registration: RegisteredTemporalDataset
+    field_id: str
+
+    def __post_init__(self) -> None:
+        """Require an explicit non-colliding capability identity."""
+        if not self.view_id or self.view_id in {_PRICE_VIEW, _OUTCOME_VIEW} or not self.field_id:
+            msg = "registered event field requires an explicit unique view and field"
+            raise ValueError(msg)
+
+
+@dataclass(frozen=True, slots=True)
 class PolymarketDevelopmentAnalysis:
     """A development-only sandbox composition over one exact corpus partition."""
 
     partition: PolymarketEventPartition
     price_view: AuthorizedDataView
     outcome_view: AuthorizedDataView
+    registered_event_views: tuple[AuthorizedDataView, ...]
     harness: AnalysisHarness
     artifacts: ArtifactStore
 
@@ -85,18 +103,23 @@ class PolymarketDevelopmentAnalysis:
                 data_access=(
                     DataAccessRequest(self.price_view.view_id, _PRICE_FIELDS),
                     DataAccessRequest(self.outcome_view.view_id, _OUTCOME_FIELDS),
+                    *(
+                        DataAccessRequest(view.view_id, tuple(view.fields))
+                        for view in self.registered_event_views
+                    ),
                 ),
             )
         )
 
 
-def build_polymarket_development_analysis(
+def build_polymarket_development_analysis(  # noqa: PLR0913
     snapshot: PolymarketCorpusSnapshot,
     *,
     session_id: str,
     protected_numerator: int = 1,
     protected_denominator: int = 5,
     resource_limits: ResourceLimits | None = None,
+    registered_event_fields: tuple[PolymarketRegisteredEventField, ...] = (),
 ) -> PolymarketDevelopmentAnalysis:
     """Hide the latest whole-event block and expose only earlier events to the sandbox."""
     if protected_numerator <= 0 or protected_denominator <= protected_numerator or not session_id:
@@ -151,15 +174,29 @@ def build_polymarket_development_analysis(
         environment_ref=environment_ref,
         fields={field: tuple(values) for field, values in outcome_columns.items()},
     )
+    environment_ref = price_view.environment_ref
+    registered_event_views = tuple(
+        _registered_event_view(
+            item,
+            corpus_environment_id=corpus.request.environment_id,
+            development_event_ordinals=event_ordinals,
+            environment_ref=environment_ref,
+        )
+        for item in registered_event_fields
+    )
+    view_ids = (_PRICE_VIEW, _OUTCOME_VIEW, *(view.view_id for view in registered_event_views))
+    if len(set(view_ids)) != len(view_ids):
+        msg = "development analysis view identities must be unique"
+        raise ValueError(msg)
     artifacts = ArtifactStore()
+    views = {view.view_id: view for view in (price_view, outcome_view, *registered_event_views)}
     harness = AnalysisHarness(
-        views={price_view.view_id: price_view, outcome_view.view_id: outcome_view},
+        views=views,
         policy=CapabilityPolicy(
             session_id=session_id,
             environment_ref=environment_ref,
             allowed_fields_by_view={
-                price_view.view_id: frozenset(_PRICE_FIELDS),
-                outcome_view.view_id: frozenset(_OUTCOME_FIELDS),
+                view.view_id: frozenset(view.fields) for view in views.values()
             },
         ),
         artifacts=artifacts,
@@ -174,7 +211,72 @@ def build_polymarket_development_analysis(
         development_market_count=len(development_contracts),
         protected_market_count=protected_market_count,
     )
-    return PolymarketDevelopmentAnalysis(partition, price_view, outcome_view, harness, artifacts)
+    return PolymarketDevelopmentAnalysis(
+        partition,
+        price_view,
+        outcome_view,
+        registered_event_views,
+        harness,
+        artifacts,
+    )
+
+
+def _registered_event_view(
+    requested: PolymarketRegisteredEventField,
+    *,
+    corpus_environment_id: str,
+    development_event_ordinals: dict[str, int],
+    environment_ref: str,
+) -> AuthorizedDataView:
+    registration = requested.registration
+    dataset = registration.dataset
+    if dataset.schema.environment_id != corpus_environment_id:
+        msg = "registered event field belongs to a different corpus environment"
+        raise ValueError(msg)
+    field = dataset.schema.resolve(requested.field_id)
+    if "event_id" not in field.dimensions:
+        msg = "registered development field requires an exact event_id dimension"
+        raise ValueError(msg)
+    reserved = {
+        requested.field_id,
+        "event_chronological_ordinal",
+        "reference_time_epoch_seconds",
+        "available_at_epoch_seconds",
+    }
+    if len(reserved) != _TEMPORAL_RESERVED_FIELD_COUNT or any(
+        dimension in reserved - {requested.field_id} for dimension in field.dimensions
+    ):
+        msg = "registered development dimensions collide with temporal view fields"
+        raise ValueError(msg)
+    observations = tuple(
+        item for item in dataset.observations if item.field_ref.field_id == requested.field_id
+    )
+    if not observations:
+        msg = "registered development field has no observations"
+        raise ValueError(msg)
+    columns: dict[str, list[JsonValue]] = {dimension: [] for dimension in field.dimensions}
+    columns["event_chronological_ordinal"] = []
+    columns["reference_time_epoch_seconds"] = []
+    columns["available_at_epoch_seconds"] = []
+    columns[requested.field_id] = []
+    for observation in observations:
+        dimensions = dict(observation.dimensions)
+        event_id = dimensions["event_id"]
+        if event_id not in development_event_ordinals:
+            msg = "registered event field contains unknown or protected event observations"
+            raise ValueError(msg)
+        for dimension in field.dimensions:
+            columns[dimension].append(dimensions[dimension])
+        columns["event_chronological_ordinal"].append(development_event_ordinals[event_id])
+        columns["reference_time_epoch_seconds"].append(observation.reference_time.timestamp())
+        columns["available_at_epoch_seconds"].append(observation.available_at.timestamp())
+        columns[requested.field_id].append(observation.value)
+    return AuthorizedDataView(
+        view_id=requested.view_id,
+        dataset_ref=registration.attestation_id,
+        environment_ref=environment_ref,
+        fields={name: tuple(values) for name, values in columns.items()},
+    )
 
 
 def _ordered_events(corpus: PolymarketCorpus) -> tuple[str, ...]:
@@ -259,5 +361,6 @@ def _partition_identity(
 __all__ = [
     "PolymarketDevelopmentAnalysis",
     "PolymarketEventPartition",
+    "PolymarketRegisteredEventField",
     "build_polymarket_development_analysis",
 ]

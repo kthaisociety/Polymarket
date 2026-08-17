@@ -16,6 +16,7 @@ from research_agent.data_adapters.polymarket.corpus import (
 from research_agent.data_adapters.polymarket.corpus_analysis import (
     PolymarketDevelopmentAnalysis,
     PolymarketEventPartition,
+    PolymarketRegisteredEventField,
     build_polymarket_development_analysis,
 )
 from research_agent.data_adapters.polymarket.ingestion import (
@@ -73,6 +74,7 @@ __all__ = [
     "PolymarketOutcomeRecord",
     "PolymarketPriceHistoryNeed",
     "PolymarketPricePoint",
+    "PolymarketRegisteredEventField",
     "PolymarketResearchReader",
     "PolymarketResolutionRecord",
     "PolymarketSourceExpansion",

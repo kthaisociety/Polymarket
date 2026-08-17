@@ -1,0 +1,20 @@
+{
+  "data_need": "The official XTracker post records for @elonmusk on X over exactly 2026-07-25T16:00:00Z through 2026-07-27T15:59:59Z, including post creation and tracker import timestamps so historical availability can be registered conservatively.",
+  "max_candidates": 2,
+  "request_id": "15d3c30ce73dd6f03f459a5fc4d8327391727d414e4230c3c2c60b8b6d32ca87",
+  "requirements": [
+    "Polymarket-operated documented public source",
+    "exact UTC event window",
+    "machine-readable immutable acquisition",
+    "per-post creation timestamp",
+    "per-post tracker import timestamp for availability",
+    "no credentials",
+    "development event 739241 only"
+  ],
+  "research_question": "Does exact cumulative XTracker post count and recent posting pace add time-legal predictive information for the development event 739241 Elon Musk July 25-27 post-count bracket contracts beyond their own price paths?",
+  "schema_version": "source-search-request/v1",
+  "search_queries": [
+    "Polymarket XTracker Elon Musk July 25 July 27 2026 posts API"
+  ]
+}
+

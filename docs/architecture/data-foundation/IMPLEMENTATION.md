@@ -113,6 +113,14 @@ outcome label; these let authored code fit legal walk-forward folds and form sem
 without inferring time, outcome meaning, or event membership. Changing any protected price,
 payout, lifecycle fact, question, or outcome leaves every development view and result unchanged.
 
+An independently registered temporal field can also enter that same development sandbox through
+`PolymarketRegisteredEventField`. The composition requires the exact corpus environment and an
+`event_id` dimension, rejects every observation outside the existing development partition, and
+records each external field read under the registration attestation. This is a composition seam,
+not source authority: scouting, retention, derivation, semantic approval, and temporal registration
+must already have succeeded. The XTracker study demonstrates the complete path and retains its
+negative model result under `studies/polymarket-xtracker-2026-08-17/`.
+
 ## Verification
 
 ```bash

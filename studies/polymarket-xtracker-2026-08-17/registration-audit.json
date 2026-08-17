@@ -1,0 +1,26 @@
+{
+  "available_at_max": "2026-07-27T15:40:07.496000+00:00",
+  "available_at_min": "2026-07-25T17:35:06.115000+00:00",
+  "catalog_attestation_id": "authoritative-data-catalog:e14c9c90d56c1a44d011b666a18bc797cc3571af7922795217db78c21829ee0b",
+  "catalog_snapshot_id": "catalog:ed6bdfd70f33dd5dc77ef3cf73b411a6d0a1f9d9e7a1012c49733e0520f0c400",
+  "caveats": [
+    "XTRACKER_IMPORTED_AT_IS_CONSERVATIVE_AVAILABILITY",
+    "CURRENT_API_SNAPSHOT_MAY_OMIT_DELETED_OR_REVISED_POSTS",
+    "POST_CONTENT_EXCLUDED_FROM_DERIVED_DATASET"
+  ],
+  "derived_ref": "derived:d87436c70b5631ece9377c424f5c8b07718e8d63827f1eadafaa73e750b5e389",
+  "epistemic_status": "REGISTERED_DEVELOPMENT_DATA_NOT_A_RESEARCH_RESULT",
+  "information_set_at_first_import_count": 2,
+  "information_set_at_market_end_count": 59,
+  "maximum_import_delay_seconds": 274.346,
+  "observation_count": 59,
+  "profile_id": "temporal-dataset-profile:82dfc8d4a99fb505721181ca334689f64bfa5ef4bfca93fccd822722e66136f6",
+  "protected_data_accessed": false,
+  "reference_time_max": "2026-07-27T15:38:01+00:00",
+  "reference_time_min": "2026-07-25T17:31:24+00:00",
+  "registration_attestation_id": "registered-temporal-dataset:0e35d36e060f59ab9b7b353de364e46684e4f0a05c66ba8cb57365aaef4f9890",
+  "registration_id": "registration:bb9a27ac0cd413904476df4aa3b9246e600a051102b84760972d84e7cffa23a6",
+  "schema_id": "schema:7f6e4c1fc543c09751ceefb97680b5dcf3251fa97308f108d2d247abd8faf4f0",
+  "schema_version": "xtracker-temporal-registration-audit/v1"
+}
+
