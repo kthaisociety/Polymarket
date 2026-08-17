@@ -71,25 +71,31 @@ encoding event, sibling, geography, or other domain semantics in the harness.
 For each simulated decision, the evaluator builds an `InformationSet` using `available_at`, then
 passes only declared observations whose `reference_time` is no later than the decision. It builds a
 separate outcome path inside the declared horizon, matching the exact population and requiring
-availability by the development clock. Feature and label entrypoints execute in separate workers.
-Each exposed observation carries the same reference and availability timestamps in ISO and epoch
-seconds; the numeric form permits elapsed-time features and labels without granting another clock
-or parser capability. Development and protected execution use the same payload contract.
+availability by the development clock. Feature and label invocations execute in fresh authored
+namespaces with separate phase grants and access logs. Each exposed observation carries the same
+reference and availability timestamps in ISO and epoch seconds; the numeric form permits
+elapsed-time features and labels without granting another clock or parser capability. Development
+and protected execution use the same payload contract.
 Panel candidates repeat this construction independently for each key's exact dimension values and
 order same-time keys deterministically. Exact `history()` never crosses the sample slice. A
 `context_history()` invocation receives other slices only when its manifest dependency explicitly
 names the shared matching dimensions; `available_at` and decision-time legality remain unchanged.
 
 Expanding out-of-fold evaluation admits a training example only when its label matured by the
-validation decision. Each fit worker receives only training features and labels. Each prediction
-worker receives only fitted JSON state and validation features, never the validation label or
-outcome path. The parent harness computes the declared metric and applies the threshold fixed before
-the first trial.
+validation decision. Each fit invocation receives only training features and labels. Each
+prediction invocation receives only fitted JSON state and validation features, never the validation
+label or outcome path. The parent harness computes the declared metric and applies the threshold
+fixed before the first trial.
 
 The current local worker enforces source, wall-time, address-space, and JSON-result bounds. It
 forbids imports, attribute access, filesystem/process/network interfaces, dynamic calls, classes,
-and runtime introspection. Actual capability calls are recorded by the harness. This syntax-gated
-fork is a real local security boundary but not production hostile-code containment. A broader
+and runtime introspection. Actual capability calls are recorded by the harness. A development or
+protected evaluation opens one bounded worker session instead of forking once per scientific
+invocation; the validated source is compiled once, but every call re-executes it in a new namespace
+with a new builtins dictionary and access recorder. Per-call timeout/result bounds, the session
+memory limit, an explicit invocation bound, and fail-closed worker teardown remain enforced. The
+original one-shot path remains the equivalence reference. This syntax-gated fork is a real local
+security boundary but not production hostile-code containment. A broader
 NumPy/pandas/scikit-learn surface requires the separately verified OS-isolated worker packet; the
 contract must not be weakened by enabling imports in this process.
 
@@ -182,6 +188,10 @@ rewrite the database and recompute every identity.
   closed.
 - **Green:** the four phase interfaces and actual access provenance come from the harness, not from
   authored claims.
+- **Green:** persistent-session and original one-shot execution return exactly equal values and
+  access records for all four phases; mutable authored globals reset between calls, timeout closes
+  the session, result and invocation limits remain active, and a complete development evaluation
+  retains the exact candidate and evidence identities.
 - **Green:** one exact authored recipe develops across multiple entity values without cross-slice
   history, rejects mismatched field/sample schemas, and replays after freeze on a new protected
   entity value under the same frozen schema.
@@ -236,6 +246,9 @@ rewrite the database and recompute every identity.
 ## Honest remaining work
 
 - Extend the worker behind the same protocol to an OS-isolated scientific-library environment.
+- Avoid recomputing identical legal protected training examples across successive decisions. The
+  session change removes process startup only; it does not introduce scientific-result caching or
+  alter walk-forward fitting.
 - Persist candidate/development-evidence/protected-ledger artifacts alongside the now-persisted
   terminal question-memory records; SQLite currently owns only the terminal memory projection.
 - Add hidden application families for unknown lag, interaction, path label, regime transform,

@@ -30,6 +30,7 @@ from research_agent.investigation.program import (
     ProgramResult,
     ScientificProgramError,
     ScientificProgramHarness,
+    ScientificProgramSession,
 )
 from research_agent.investigation.protected import (
     AuthoredBacktestEngine,
@@ -117,6 +118,7 @@ __all__ = [
     "RuntimeTrialReceipt",
     "ScientificProgramError",
     "ScientificProgramHarness",
+    "ScientificProgramSession",
     "ValidatedQuestionMemory",
     "configure_authored_protected_plan_authority",
     "configure_validated_question_memory",

@@ -53,6 +53,7 @@ if TYPE_CHECKING:
 
     from research_agent.data_foundation import DataCatalogSnapshot, RegisteredObservation, SampleKey
     from research_agent.investigation.engine import RuntimeInvestigationCoordinator
+    from research_agent.investigation.program import ScientificProgramSession
     from research_agent.investigation.records import (
         AuthoredCandidate,
         AuthoredDevelopmentEvidence,
@@ -582,10 +583,13 @@ class AuthoredBacktestEngine:
                 decisions=decisions,
                 status=BacktestRunStatus.COMPLETED_WITH_FAILURES,
             )
-        decisions = tuple(
-            self._execute_decision_safely(ordinal, key, catalog, candidate, scenario, exposure)
-            for ordinal, key in enumerate(scenario.decision_sample_keys)
-        )
+        with self._programs.session(candidate.source) as program:
+            decisions = tuple(
+                self._execute_decision_safely(
+                    ordinal, key, catalog, candidate, scenario, exposure, program
+                )
+                for ordinal, key in enumerate(scenario.decision_sample_keys)
+            )
         status = (
             BacktestRunStatus.COMPLETED_WITH_FAILURES
             if any(decision.failures for decision in decisions)
@@ -612,9 +616,10 @@ class AuthoredBacktestEngine:
         candidate: AuthoredCandidate,
         scenario: EvaluationScenario,
         exposure: ExposureRecord,
+        program: ScientificProgramSession,
     ) -> BacktestDecisionRecord:
         try:
-            return self._execute_decision(ordinal, key, catalog, candidate, scenario)
+            return self._execute_decision(ordinal, key, catalog, candidate, scenario, program)
         except _DecisionFailureError as error:
             return self._failed_decision(
                 ordinal,
@@ -645,9 +650,10 @@ class AuthoredBacktestEngine:
         catalog: DataCatalogSnapshot,
         candidate: AuthoredCandidate,
         scenario: EvaluationScenario,
+        program: ScientificProgramSession,
     ) -> BacktestDecisionRecord:
         validation_features, information_id, information_ids, feature_accesses = self._features(
-            catalog, candidate, key
+            catalog, candidate, key, program
         )
         examples = tuple(
             example
@@ -659,6 +665,7 @@ class AuthoredBacktestEngine:
                     candidate,
                     training_key,
                     label_clock=key.decision_time,
+                    program=program,
                 ),
             )
             if example is not None
@@ -688,8 +695,7 @@ class AuthoredBacktestEngine:
             "authored-protected-training-window",
             {"sample_id": sample_id, "policy_id": policy.identity, "row_ids": row_ids},
         )
-        fit_result = self._programs.invoke(
-            candidate.source,
+        fit_result = program.invoke(
             ProgramInvocation(
                 "fit",
                 training=[
@@ -701,7 +707,7 @@ class AuthoredBacktestEngine:
                     }
                     for example in selected
                 ],
-            ),
+            )
         )
         source_fit_id = stable_identity(
             "authored-protected-source-fit",
@@ -739,13 +745,12 @@ class AuthoredBacktestEngine:
             fitted_system_id,
             candidate.manifest.environment_id,
         )
-        prediction_result = self._programs.invoke(
-            candidate.source,
+        prediction_result = program.invoke(
             ProgramInvocation(
                 "predict",
                 state=fit_result.value,
                 features=cast("dict[str, JsonValue]", validation_features),
-            ),
+            )
         )
         prediction_value = _finite_number(prediction_result.value, "protected prediction")
         target_id = _target_id(candidate)
@@ -792,6 +797,7 @@ class AuthoredBacktestEngine:
             key,
             label_clock=scenario.outcome_recorded_at,
             prediction=prediction,
+            program=program,
         )
         return _decision_record(
             ordinal,
@@ -812,6 +818,7 @@ class AuthoredBacktestEngine:
         catalog: DataCatalogSnapshot,
         candidate: AuthoredCandidate,
         key: SampleKey,
+        program: ScientificProgramSession,
     ) -> tuple[dict[str, float], str, tuple[str, ...], tuple[ProgramAccess, ...]]:
         manifest = candidate.manifest
         if not manifest.admits_population(key.dimensions):
@@ -869,13 +876,12 @@ class AuthoredBacktestEngine:
                 "observation_ids": used_ids,
             },
         )
-        result = self._programs.invoke(
-            candidate.source,
+        result = program.invoke(
             ProgramInvocation(
                 "make_features",
                 histories=histories,
                 context_histories=context_histories,
-            ),
+            )
         )
         return (
             _feature_values(result.value, manifest.feature_names),
@@ -891,11 +897,14 @@ class AuthoredBacktestEngine:
         key: SampleKey,
         *,
         label_clock: datetime,
+        program: ScientificProgramSession,
     ) -> _LegalExample | None:
         try:
-            features, _, feature_ids, feature_accesses = self._features(catalog, candidate, key)
+            features, _, feature_ids, feature_accesses = self._features(
+                catalog, candidate, key, program
+            )
             label, matured_at, label_ids, label_accesses = self._label(
-                catalog, candidate, key, label_clock=label_clock
+                catalog, candidate, key, label_clock=label_clock, program=program
             )
         except _DecisionFailureError:
             if candidate.manifest.missing_value_policy == "exclude_example":
@@ -919,6 +928,7 @@ class AuthoredBacktestEngine:
         key: SampleKey,
         *,
         label_clock: datetime,
+        program: ScientificProgramSession,
     ) -> tuple[float, datetime, tuple[str, ...], tuple[ProgramAccess, ...]]:
         manifest = candidate.manifest
         outcome_end = manifest.horizon.apply(key.decision_time)
@@ -979,14 +989,13 @@ class AuthoredBacktestEngine:
                 "legal authored label history is insufficient",
                 (historical_information.information_set_id,),
             )
-        result = self._programs.invoke(
-            candidate.source,
+        result = program.invoke(
             ProgramInvocation(
                 "make_label",
                 histories=histories,
                 context_histories=context_histories,
                 outcome=[_observation_json(item) for item in observations],
-            ),
+            )
         )
         return (
             _finite_number(result.value, "protected outcome"),
@@ -1003,9 +1012,10 @@ class AuthoredBacktestEngine:
         *,
         label_clock: datetime,
         prediction: ProtectedPredictionRecord,
+        program: ScientificProgramSession,
     ) -> ProtectedOutcomeRecord:
         label, matured_at, observation_ids, accesses = self._label(
-            catalog, candidate, key, label_clock=label_clock
+            catalog, candidate, key, label_clock=label_clock, program=program
         )
         source_outcome_id = stable_identity(
             "authored-protected-source-outcome",

@@ -8,7 +8,7 @@ import copy
 from collections.abc import Mapping
 from dataclasses import replace
 from datetime import UTC, datetime, timedelta
-from typing import cast
+from typing import Self, cast
 
 import pytest
 
@@ -30,19 +30,25 @@ from research_agent.exploration import (
 )
 from research_agent.investigation import (
     AuthoredCandidateManifest,
+    AuthoredDevelopmentEvaluator,
     AuthoredFreezeService,
     AuthoredProgramProposal,
     AutonomousInvestigation,
+    CandidatePublisher,
     ContextHistoryDependency,
     DevelopmentBudget,
     DevelopmentDisposition,
     InvestigationConflictError,
     InvestigationRequest,
+    ProgramInvocation,
+    ProgramResult,
     ProtectedEvaluationPredeclaration,
     QuestionStatus,
     ResearcherContext,
     ResearchQuestion,
     RuntimeInvestigationCoordinator,
+    ScientificProgramHarness,
+    ScientificProgramSession,
 )
 from research_agent.protected_evaluation import (
     FreezeEligibilityRegistry,
@@ -497,6 +503,50 @@ def test_question_to_authored_code_to_temporal_evidence_is_one_real_path() -> No
     assert result.evidence[-1].fit_accesses
     assert result.evidence[-1].prediction_accesses
     assert researcher.contexts[0].prior_evidence == ()
+
+
+class _OneShotReferenceHarness(ScientificProgramHarness):
+    """Adapt the original process-per-invocation path to the evaluator session protocol."""
+
+    def session(self, source: str) -> ScientificProgramSession:
+        harness = self
+
+        class _ReferenceSession:
+            def __enter__(self) -> Self:
+                return self
+
+            def __exit__(self, *args: object) -> None:
+                del args
+
+            def invoke(self, invocation: ProgramInvocation) -> ProgramResult:
+                return harness.invoke(source, invocation)
+
+        return cast("ScientificProgramSession", _ReferenceSession())
+
+
+def test_persistent_worker_preserves_exact_development_evidence_identity() -> None:
+    catalog = _world()
+    request = _request(catalog)
+    proposal = _proposal(catalog)
+    persistent_publisher = CandidatePublisher()
+    reference_publisher = CandidatePublisher()
+    persistent_candidate = persistent_publisher.publish(
+        request, proposal, expected_parent_trial_id=None
+    )
+    reference_candidate = reference_publisher.publish(
+        request, proposal, expected_parent_trial_id=None
+    )
+
+    persistent = AuthoredDevelopmentEvaluator(candidates=persistent_publisher.registry).evaluate(
+        request, persistent_candidate
+    )
+    reference = AuthoredDevelopmentEvaluator(
+        candidates=reference_publisher.registry,
+        programs=_OneShotReferenceHarness(),
+    ).evaluate(request, reference_candidate)
+
+    assert persistent_candidate == reference_candidate
+    assert persistent == reference
 
 
 def test_same_series_history_can_define_a_future_move_label() -> None:

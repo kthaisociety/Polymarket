@@ -41,7 +41,7 @@ if TYPE_CHECKING:
     )
     from research_agent.data_foundation.samples import SampleKey
     from research_agent.investigation.memory import QuestionMemoryRecord, ValidatedQuestionMemory
-    from research_agent.investigation.program import JsonValue
+    from research_agent.investigation.program import JsonValue, ScientificProgramSession
     from research_agent.investigation.records import DevelopmentBudget, ProgramAccess
 
 
@@ -205,53 +205,52 @@ class AuthoredDevelopmentEvaluator:
         candidate: AuthoredCandidate,
         trial_id: str,
     ) -> AuthoredDevelopmentEvidence:
-        examples, feature_accesses, label_accesses = self._examples(request, candidate)
-        if len(examples) <= request.budget.minimum_training_rows:
-            raise ValueError("insufficient legal examples for one out-of-fold prediction")
-        predictions: list[float] = []
-        outcomes: list[float] = []
-        row_keys: list[SampleKey] = []
-        fit_accesses: list[ProgramAccess] = []
-        prediction_accesses: list[ProgramAccess] = []
-        for ordinal, validation in enumerate(examples):
-            if ordinal < request.budget.minimum_training_rows:
-                continue
-            training = tuple(
-                item
-                for item in examples[:ordinal]
-                if item.label_matured_at <= validation.key.decision_time
-            )
-            if len(training) < request.budget.minimum_training_rows:
-                continue
-            fit = self._programs.invoke(
-                candidate.source,
-                ProgramInvocation(
-                    "fit",
-                    training=[
-                        {
-                            "decision_time": item.key.decision_time.isoformat(),
-                            "dimensions": [list(value) for value in item.key.dimensions],
-                            "features": cast("dict[str, JsonValue]", item.features),
-                            "label": item.label,
-                        }
-                        for item in training
-                    ],
-                ),
-            )
-            prediction = self._programs.invoke(
-                candidate.source,
-                ProgramInvocation(
-                    "predict",
-                    state=fit.value,
-                    features=cast("dict[str, JsonValue]", validation.features),
-                ),
-            )
-            value = _finite_number(prediction.value, "prediction")
-            predictions.append(value)
-            outcomes.append(validation.label)
-            row_keys.append(validation.key)
-            fit_accesses.extend(fit.accesses)
-            prediction_accesses.extend(prediction.accesses)
+        with self._programs.session(candidate.source) as program:
+            examples, feature_accesses, label_accesses = self._examples(request, candidate, program)
+            if len(examples) <= request.budget.minimum_training_rows:
+                raise ValueError("insufficient legal examples for one out-of-fold prediction")
+            predictions: list[float] = []
+            outcomes: list[float] = []
+            row_keys: list[SampleKey] = []
+            fit_accesses: list[ProgramAccess] = []
+            prediction_accesses: list[ProgramAccess] = []
+            for ordinal, validation in enumerate(examples):
+                if ordinal < request.budget.minimum_training_rows:
+                    continue
+                training = tuple(
+                    item
+                    for item in examples[:ordinal]
+                    if item.label_matured_at <= validation.key.decision_time
+                )
+                if len(training) < request.budget.minimum_training_rows:
+                    continue
+                fit = program.invoke(
+                    ProgramInvocation(
+                        "fit",
+                        training=[
+                            {
+                                "decision_time": item.key.decision_time.isoformat(),
+                                "dimensions": [list(value) for value in item.key.dimensions],
+                                "features": cast("dict[str, JsonValue]", item.features),
+                                "label": item.label,
+                            }
+                            for item in training
+                        ],
+                    )
+                )
+                prediction = program.invoke(
+                    ProgramInvocation(
+                        "predict",
+                        state=fit.value,
+                        features=cast("dict[str, JsonValue]", validation.features),
+                    )
+                )
+                value = _finite_number(prediction.value, "prediction")
+                predictions.append(value)
+                outcomes.append(validation.label)
+                row_keys.append(validation.key)
+                fit_accesses.extend(fit.accesses)
+                prediction_accesses.extend(prediction.accesses)
         if len(predictions) < request.budget.minimum_oof_predictions:
             raise ValueError("insufficient out-of-fold predictions for declared evidence budget")
         metrics = ((request.budget.primary_metric, _metric(request.budget, predictions, outcomes)),)
@@ -295,6 +294,7 @@ class AuthoredDevelopmentEvaluator:
         self,
         request: InvestigationRequest,
         candidate: AuthoredCandidate,
+        program: ScientificProgramSession,
     ) -> tuple[list[_Example], list[ProgramAccess], list[ProgramAccess]]:
         manifest = candidate.manifest
         if any(not manifest.admits_population(key.dimensions) for key in request.sample_keys):
@@ -352,22 +352,20 @@ class AuthoredDevelopmentEvaluator:
                 if manifest.missing_value_policy == "fail_trial":
                     raise ValueError("candidate outcome path is incomplete")
                 continue
-            feature_result = self._programs.invoke(
-                candidate.source,
+            feature_result = program.invoke(
                 ProgramInvocation(
                     "make_features",
                     histories=histories,
                     context_histories=context_histories,
-                ),
+                )
             )
-            label_result = self._programs.invoke(
-                candidate.source,
+            label_result = program.invoke(
                 ProgramInvocation(
                     "make_label",
                     histories=histories,
                     context_histories=context_histories,
                     outcome=[_observation_json(item) for item in outcome],
-                ),
+                )
             )
             features = _feature_values(feature_result.value, manifest.feature_names)
             label = _finite_number(label_result.value, "label")
