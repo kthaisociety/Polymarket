@@ -305,6 +305,7 @@ result = structured_return(
     protected_market = corpus.contracts[-1]
     changed_contract = replace(
         protected_market,
+        question="PROTECTED QUESTION MUST NOT ENTER DEVELOPMENT",
         outcomes=(
             replace(protected_market.outcomes[0], payout=Decimal(1)),
             replace(protected_market.outcomes[1], payout=Decimal(0)),
@@ -351,14 +352,77 @@ def test_development_analysis_denies_an_ungranted_field_before_disclosure() -> N
             action_id="forged-field",
             source=(
                 'result = structured_return("bad", '
-                'read("polymarket-development-outcomes", "question"))'
+                'read("polymarket-development-outcomes", "oracle"))'
             ),
-            data_access=(DataAccessRequest("polymarket-development-outcomes", ("question",)),),
+            data_access=(DataAccessRequest("polymarket-development-outcomes", ("oracle",)),),
         )
     )
 
     assert result.status is AnalysisStatus.DENIED
     assert result.provenance.accesses == ()
+
+
+def test_development_analysis_exposes_contract_questions_for_semantic_discovery() -> None:
+    """Development research can identify a contract's meaning without protected disclosure."""
+    analysis = build_polymarket_development_analysis(
+        PolymarketCorpusStore.from_corpus(_event_grouped_corpus()),
+        session_id="semantic-discovery",
+    )
+    source = """
+markets = read("polymarket-development-outcomes", "market_id")
+questions = read("polymarket-development-outcomes", "question")
+labels = read("polymarket-development-outcomes", "outcome_label")
+result = structured_return(
+    "Development contract catalog.",
+    {"markets": markets, "questions": questions, "labels": labels},
+)
+"""
+
+    result = analysis.run(
+        source=source,
+        session_id="semantic-discovery",
+        action_id="inspect-development-questions",
+    )
+
+    assert result.status is AnalysisStatus.SUCCEEDED
+    assert result.details == {
+        "markets": ("market-0", "market-1", "market-2", "market-3"),
+        "questions": ("Question 0?", "Question 1?", "Question 2?", "Question 3?"),
+        "labels": ("Yes", "Yes", "Yes", "Yes"),
+    }
+    assert "Question 4?" not in result.details["questions"]
+
+
+def test_development_view_issues_authoritative_chronological_event_ordinals() -> None:
+    """Authored walk-forward code must not infer fold order from physical contract order."""
+    corpus = _event_grouped_corpus()
+    physically_reversed = replace(
+        corpus,
+        contracts=tuple(reversed(corpus.contracts)),
+        resolutions=tuple(reversed(corpus.resolutions)),
+    )
+    analysis = build_polymarket_development_analysis(
+        PolymarketCorpusStore.from_corpus(physically_reversed),
+        session_id="chronological-event-authority",
+    )
+    expected = {
+        event_id: ordinal
+        for ordinal, event_id in enumerate(analysis.partition.development_event_ids)
+    }
+
+    price_events = analysis.price_view.fields["event_id"]
+    price_ordinals = analysis.price_view.fields["event_chronological_ordinal"]
+    outcome_events = analysis.outcome_view.fields["event_id"]
+    outcome_ordinals = analysis.outcome_view.fields["event_chronological_ordinal"]
+
+    assert all(
+        expected[event] == ordinal
+        for event, ordinal in zip(price_events, price_ordinals, strict=True)
+    )
+    assert all(
+        expected[event] == ordinal
+        for event, ordinal in zip(outcome_events, outcome_ordinals, strict=True)
+    )
 
 
 def test_study_receipt_rejects_success_detail_left_only_in_ephemeral_artifact(

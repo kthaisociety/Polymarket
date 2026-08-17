@@ -11,6 +11,9 @@ live Polymarket registrations; scientific method remains researcher-authored**.
 - Live command and regression evidence:
   `src/research_agent/data_adapters/polymarket/live_analysis.py` and
   `tests/data_adapters/polymarket/test_live_analysis.py`
+- Retained-corpus development composition and offline study command:
+  `src/research_agent/data_adapters/polymarket/corpus_analysis.py` and
+  `src/research_agent/data_adapters/polymarket/run_corpus_studies.py`
 
 ```mermaid
 flowchart LR
@@ -32,3 +35,9 @@ domain-neutral analysis surface. The retained Polymarket study under
 `studies/polymarket-flow-2026-08-17/` is authored research evidence, not a hard-coded feature tool:
 the application supplies exact values and authority while the researcher supplies the question,
 transformation, diagnostics, and interpretation.
+
+For retained resolution corpora, authored code can read only the earlier whole-event development
+block. The capability supplies sampled probability paths, settlement/lifecycle fields,
+partition-derived chronological event ordinals, exact question text, and selected outcome labels.
+The latter fields support semantic discovery and prevent outcome meaning from being inferred from
+an array position. Protected event values and arbitrary source metadata remain absent and denied.

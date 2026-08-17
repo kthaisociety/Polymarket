@@ -2,8 +2,8 @@
 
 Status: **generic temporal boundary, Polymarket production-tape adapter, and retained resolved-
 contract corpus adapter implemented. Live fill exploration is accepted; exact event grouping,
-on-chain label availability, and immutable retained source bytes are proved for bounded
-price-series corpora. Development/protected composition over that corpus remains separate work**.
+on-chain label availability, immutable retained source bytes, and whole-event development/protected
+composition are proved for bounded price-series corpora**.
 
 ## Generic kernel
 
@@ -88,6 +88,9 @@ not consume: `event_id`, append-only `market.resolutions` with `resolved_time`, 
 - canonical retention and temporal registration: `data_adapters/polymarket/corpus.py`;
 - repeatable-read `human_ro` composition: `data_adapters/polymarket/database.py`;
 - public command: `data_adapters/polymarket/corpus_snapshot.py`;
+- development-only composition and public offline study command:
+  `data_adapters/polymarket/corpus_analysis.py` and
+  `data_adapters/polymarket/run_corpus_studies.py`;
 - causal/retention tests: `tests/data_adapters/polymarket/test_resolution_corpus.py`.
 
 The retained object, not the mutable database, anchors downstream identity. Sampled prices use
@@ -102,6 +105,13 @@ The accepted live corpus contains 200 resolved contracts across 31 event groups 
 60-second price samples. Its exact canonical bytes are retained outside Git under the ignored local
 data root and identified by the sanitized study receipt. This registration is data, not development
 evidence, protected evidence, or memory.
+
+The offline composition orders complete server event groups by their latest recorded resolution,
+hides the final whole-event block, and issues exact development-only price and outcome views. The
+views include the authoritative chronological event ordinal plus contract question and selected
+outcome label; these let authored code fit legal walk-forward folds and form semantic hypotheses
+without inferring time, outcome meaning, or event membership. Changing any protected price,
+payout, lifecycle fact, question, or outcome leaves every development view and result unchanged.
 
 ## Verification
 

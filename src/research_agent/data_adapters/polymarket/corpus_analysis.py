@@ -33,6 +33,7 @@ _OUTCOME_VIEW = "polymarket-development-outcomes"
 _PRICE_FIELDS = (
     "market_id",
     "event_id",
+    "event_chronological_ordinal",
     "observation_ordinal",
     "observed_at_epoch_seconds",
     "market_probability",
@@ -40,6 +41,9 @@ _PRICE_FIELDS = (
 _OUTCOME_FIELDS = (
     "market_id",
     "event_id",
+    "event_chronological_ordinal",
+    "question",
+    "outcome_label",
     "open_time_epoch_seconds",
     "close_time_epoch_seconds",
     "resolved_time_epoch_seconds",
@@ -123,8 +127,20 @@ def build_polymarket_development_analysis(
     price_ref = f"polymarket-development-prices:{partition_id}"
     outcome_ref = f"polymarket-development-outcomes:{partition_id}"
     contract_by_market = {item.market_id: item for item in development_contracts}
-    price_columns, ordinals = _development_price_columns(corpus, contract_by_market)
-    outcome_columns = _development_outcome_columns(corpus, development_contracts, ordinals)
+    event_ordinals = {
+        event_id: ordinal for ordinal, event_id in enumerate(development_events)
+    }
+    price_columns, ordinals = _development_price_columns(
+        corpus,
+        contract_by_market,
+        event_ordinals,
+    )
+    outcome_columns = _development_outcome_columns(
+        corpus,
+        development_contracts,
+        ordinals,
+        event_ordinals,
+    )
     price_view = AuthorizedDataView(
         view_id=_PRICE_VIEW,
         dataset_ref=price_ref,
@@ -180,6 +196,7 @@ def _ordered_events(corpus: PolymarketCorpus) -> tuple[str, ...]:
 def _development_price_columns(
     corpus: PolymarketCorpus,
     contract_by_market: dict[str, PolymarketCorpusContract],
+    event_ordinals: dict[str, int],
 ) -> tuple[dict[str, list[JsonValue]], dict[str, int]]:
     columns: dict[str, list[JsonValue]] = {field: [] for field in _PRICE_FIELDS}
     ordinals: dict[str, int] = {}
@@ -191,6 +208,7 @@ def _development_price_columns(
         ordinals[point.market_id] = ordinal + 1
         columns["market_id"].append(point.market_id)
         columns["event_id"].append(contract.event_id)
+        columns["event_chronological_ordinal"].append(event_ordinals[contract.event_id])
         columns["observation_ordinal"].append(ordinal)
         columns["observed_at_epoch_seconds"].append(point.observed_at.timestamp())
         columns["market_probability"].append(float(point.price))
@@ -201,6 +219,7 @@ def _development_outcome_columns(
     corpus: PolymarketCorpus,
     contracts: tuple[PolymarketCorpusContract, ...],
     ordinals: dict[str, int],
+    event_ordinals: dict[str, int],
 ) -> dict[str, list[JsonValue]]:
     columns: dict[str, list[JsonValue]] = {field: [] for field in _OUTCOME_FIELDS}
     resolution_by_market = {item.market_id: item for item in corpus.resolutions}
@@ -208,6 +227,11 @@ def _development_outcome_columns(
         resolution = resolution_by_market[contract.market_id]
         columns["market_id"].append(contract.market_id)
         columns["event_id"].append(contract.event_id)
+        columns["event_chronological_ordinal"].append(event_ordinals[contract.event_id])
+        columns["question"].append(contract.question)
+        columns["outcome_label"].append(
+            contract.outcomes[corpus.request.outcome_index].label
+        )
         columns["open_time_epoch_seconds"].append(contract.open_time.timestamp())
         columns["close_time_epoch_seconds"].append(contract.close_time.timestamp())
         columns["resolved_time_epoch_seconds"].append(resolution.resolved_time.timestamp())
