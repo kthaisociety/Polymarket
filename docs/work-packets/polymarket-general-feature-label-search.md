@@ -75,3 +75,19 @@ improve multiple legal six-hour labels across chronological event groups.
 - Full interactions improved large-move Brier/MSE from `0.193291/0.174323` to
   `0.132994/0.117383` and won 14/16 events.
 - All signed-change and future-boundary models failed their baselines and are retained rejections.
+- Attribution receipt 02, SHA-256
+  `08cd78ffac3f553b311bfdb391b81a845d95296e377f496adcdc9d7fbe2448ea`, reproduced the exact sample
+  and retained per-event rates/deltas. Boundary distance, 6/24-hour variance, jump concentration,
+  zero-change fraction, and trailing mean absolute change passed both-half concentration gates for
+  both surviving labels. Expiry passed for magnitude but not late-half binary stability; raw change
+  and jump×expiry failed.
+- Coverage remains heterogeneous (1–2,292 rows per test event; binary label rates 0%–76.6%). This
+  does not negate agreeing event/observation metrics, but it blocks a broad homogeneous-process
+  interpretation.
+
+## Trial budget revision
+
+2. Attribution supports a final three-recipe compression trial: a seven-feature activity core,
+   the same core without expiry, and the existing full-interaction recipe. Horizon, labels,
+   sampling, folds, penalty, and gates remain fixed. No additional subset search is permitted before
+   a retain/reject/formalize decision.

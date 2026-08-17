@@ -45,3 +45,62 @@ This result survives the opening gate but is not yet formalized. The next frozen
 stand-alone and leave-group-out features for magnitude and large-move labels, reports per-event
 label rates and error deltas, and checks whether improvement is dominated by expiry, one jump proxy,
 boundary persistence, or a small number of events. No threshold or penalty will be retuned.
+
+## Frozen attribution diagnostic 02
+
+The sample, six-hour horizon, two-cent threshold, event folds, and equal-event fitting remain
+unchanged. Thirteen scalar OLS candidates are tested independently: boundary distance, current
+boundary state, expiry, 6/24-hour variance, bipower jump variation, jump concentration, zero-change
+fraction, six-hour change, mean absolute change, boundary×expiry, jump×expiry, and boundary
+closeness×variance. Predictions are clipped only where label support requires it.
+
+For each magnitude and large-move candidate, the receipt retains all 16 event MSE deltas, early
+(events 8–15) and late (16–23) macro MSE, event win count, and the largest event's share of total
+positive improvement. A mechanism is attribution-credible only if it beats the baseline under both
+aggregate weightings, wins at least 10/16 events, improves both halves, and no single event supplies
+more than half of all positive event-level improvement. Nested group comparisons from benchmark 01
+remain the leave-group evidence; this diagnostic supplies the complementary stand-alone view.
+
+## Attribution diagnostic 02 result
+
+The common sample reproduced exactly: 8,945 development rows, 424 irregular exclusions, and the
+same 16 test events. Stand-alone results show that the full model is not driven by one mysterious
+jump statistic.
+
+| Feature | Magnitude MSE (event / observation) | Wins | Large-move MSE (event / observation) | Wins |
+|---|---:|---:|---:|---:|
+| baseline | 0.003304 / 0.002202 | — | 0.193291 / 0.174323 | — |
+| boundary distance | 0.002833 / 0.001792 | 11/16 | 0.160800 / 0.140096 | 12/16 |
+| time to close | 0.003091 / 0.001591 | 12/16 | 0.191545 / 0.159259 | 10/16 |
+| variance 6h | 0.003173 / 0.002041 | 14/16 | 0.188895 / 0.169676 | 15/16 |
+| variance 24h | 0.003072 / 0.001937 | 14/16 | 0.187110 / 0.166640 | 14/16 |
+| bipower jump variation | 0.003131 / 0.001908 | 14/16 | 0.190581 / 0.167638 | 12/16 |
+| jump concentration | 0.003239 / 0.002092 | 11/16 | 0.190661 / 0.169091 | 11/16 |
+| zero-change fraction | 0.002980 / 0.001972 | 14/16 | 0.152502 / 0.140526 | 15/16 |
+| trailing mean absolute change | 0.002740 / 0.001616 | 15/16 | 0.157228 / 0.135116 | 15/16 |
+
+Raw six-hour change and jump×expiry failed. Boundary×expiry improved event-macro magnitude but made
+observation-weighted magnitude worse, so it also failed the frozen gate. Time-to-close improved the
+binary label in aggregate but failed late-half event stability. Bipower jump variation missed that
+late-half binary gate by a small amount. The robust common mechanism is therefore **activity state
+and staleness persistence conditioned by boundary/expiry state**, not directional drift and not a
+clean continuous-time jump-diffusion claim.
+
+No passing stand-alone result was dominated by one event: the largest positive-improvement shares
+were below 0.28. However, event coverage is highly heterogeneous. Legal test rows range from one to
+2,292 per event, and large-move rates range from 0% to 76.6%. Equal-event and observation-weighted
+metrics agree on the strongest features, but this coverage risk must remain explicit.
+
+## Frozen candidate-compression trial 03
+
+Before formalization, one final bounded model comparison will use the unchanged sample and folds:
+
+1. `activity_core`: boundary distance, current boundary state, expiry, 6-hour variance, jump
+   concentration, zero-change fraction, and trailing mean absolute change;
+2. `activity_no_expiry`: the same set without expiry;
+3. the already declared 15-feature full-interaction recipe.
+
+The fixed ridge penalty remains 0.1. Both magnitude and large-move labels are retained. The compact
+candidate must match or improve the full model under event-macro and observation weighting, retain
+at least 10 event wins versus baseline, and avoid material early/late degradation. Trying additional
+subsets after seeing trial 03 is outside this packet's budget.
