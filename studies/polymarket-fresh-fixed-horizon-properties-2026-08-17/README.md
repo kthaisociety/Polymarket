@@ -1,6 +1,6 @@
 # Fresh-contract fixed-horizon path-property study
 
-Epistemic status: **FIXED-HORIZON DEVELOPMENT GATE PASSED — PROTECTED DATA UNEXPOSED**.
+Epistemic status: **FORMAL DEVELOPMENT REVISION — PROTECTED DATA UNEXPOSED**.
 
 This study asks whether internal sampled-probability state predicts reversal-first, meaningful-move
 incidence, and empirical boundary entry during a fixed 21-hour decision horizon on fresh contracts.
@@ -82,3 +82,33 @@ A corrected driver changes only that ordering and otherwise executes the byte-id
 trial: [`source/03_formal_time_legal_reversal_ordered.py`](source/03_formal_time_legal_reversal_ordered.py),
 SHA-256 `5e4a71d2337a663b8ff62efd1c58e529599f2074cfbe09b53c26892b3a78efcc`.
 Its result is retained separately.
+
+### Strict time-legal result
+
+The corrected driver completed and retained
+[`formal-receipts/03_formal_time_legal_reversal_ordered.json`](formal-receipts/03_formal_time_legal_reversal_ordered.json),
+SHA-256 `03a77f2c6535a4dab6c4c042365bf175516ea46229d29c78dc7233e7684e6f12`.
+Chronos declared 423 earliest-per-market keys and produced 319 OOF predictions after the 100-row
+warm-up. These cover 319 unique markets and 117 event groups with 149 reversals/170 other outcomes.
+
+The formal six-feature candidate retained substantial signal: observation Brier improved from
+`.25076` to `.24402`, event-macro Brier from `.25228` to `.24153`, pooled AP from `.45255` to
+`.60157`, and top-quintile precision/lift reached 65.1%/`+18.37` percentage points. Mean prediction
+`.45444` remained close to incidence `.46708`, and the largest event supplied 6.90% of rows.
+
+It nevertheless **failed the conjunctive formal gate** on two stability clauses:
+
+- 65/117 event wins (55.6%) was below the fixed 60% requirement;
+- late-half event-macro Brier `.25755` was slightly worse than baseline `.25443`, despite a strong
+  early-half improvement (`.22524` versus `.25009`).
+
+Candidate `authored-candidate:1a16b9628578166f38f3ae98bf8a48655342197c8612f277cc326a9db12bb0d2`
+and evidence
+`authored-development-evidence:ecadaca48c07778578ae9ae7ad6d9c175412b9dce6ce525ddb46621b21e2c6cc`
+are retained as formal revise/negative evidence. The program accessed only decision history for
+features, legal outcome paths for labels, training rows for fit, and fitted state/features for
+prediction. No protected backtest ran.
+
+This result downgrades the six-feature model from formalizable candidate to a real but temporally
+unstable lead. The already predeclared 12-feature path model is the only scientifically justified
+revision; trying arbitrary new subsets or thresholds would be post-result fishing.

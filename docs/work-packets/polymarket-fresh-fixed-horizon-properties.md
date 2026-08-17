@@ -150,3 +150,19 @@ claim rather than treating the exploratory receipt as formal evidence.
 - Failure is a formal development rejection or revision and downgrades the fixed-horizon lead. A
   pass publishes exact candidate/trial/evidence identities but does not itself freeze, expose, or
   validate protected data.
+
+### Formal transition
+
+Status: **COMPLETE — SIX-FEATURE FORMAL GATE FAILED, REVISION RETAINED**.
+
+The first driver failed before publication on derived-row ordering and is retained as operational
+failure SHA-256 `2a8f121d3fb4946920ef7f3f62ce92d6ab5dab0e6939a99371a30bb5ebe58d3d`.
+The ordering-only corrected driver SHA-256 is
+`5e4a71d2337a663b8ff62efd1c58e529599f2074cfbe09b53c26892b3a78efcc`; its formal receipt SHA-256
+is `03a77f2c6535a4dab6c4c042365bf175516ea46229d29c78dc7233e7684e6f12`.
+
+The candidate improved observation/event Brier from `.25076/.25228` to `.24402/.24153`, pooled AP
+from `.45255` to `.60157`, and top-quintile precision to 65.1% at `+18.37` percentage-point lift.
+It failed because 65/117 event wins were below 60% and late-half event Brier `.25755` exceeded
+baseline `.25443`. All other fixed clauses passed. The candidate is formal revise/negative evidence
+and is not freeze-eligible; protected exposure remains false.
