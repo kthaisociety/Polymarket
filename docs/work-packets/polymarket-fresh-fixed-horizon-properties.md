@@ -166,3 +166,26 @@ from `.45255` to `.60157`, and top-quintile precision to 65.1% at `+18.37` perce
 It failed because 65/117 event wins were below 60% and late-half event Brier `.25755` exceeded
 baseline `.25443`. All other fixed clauses passed. The candidate is formal revise/negative evidence
 and is not freeze-eligible; protected exposure remains false.
+
+## Final predeclared path-model revision
+
+Revision checkpoint: `bdl-polymarket@433000d7`.
+
+The 12-feature model is eligible for one formal revision because its exact feature set and fixed
+logistic recipe were declared before both fixed-horizon runs and it passed the exploratory
+incremental gate. No feature, threshold, sample, label, or penalty is added after the six-feature
+formal failure.
+
+- Reconstruct the identical 423 declared earliest-per-market keys, derived formal catalog, fixed
+  21-hour label, maturity rule, and 100-row warm-up.
+- Replay the event-rate baseline and six-feature model, then publish the exact 12-feature path model
+  as their direct trial descendant under a three-trial budget.
+- The full model must retain at least 200 OOF rows, 100 markets, 30 events, 75 observations per
+  class, absolute Brier at most `.245`, calibration error at most `.10`, top-quintile lift at least
+  `.12`, and maximum event share at most 20%.
+- It must beat both baseline and six-feature Brier under observation, event-macro, early-half, and
+  late-half views; beat six-feature pooled and event-macro AP; and win at least 60% of represented
+  events directly against six-feature Brier.
+- This is the final feature revision in this branch. Failure retains the mechanism as a useful
+  exploratory ranking tendency but rejects formalization. Pass permits freeze/gate review only; it
+  does not authorize protected exposure.

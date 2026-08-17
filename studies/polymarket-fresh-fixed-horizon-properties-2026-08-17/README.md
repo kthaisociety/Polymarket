@@ -112,3 +112,9 @@ prediction. No protected backtest ran.
 This result downgrades the six-feature model from formalizable candidate to a real but temporally
 unstable lead. The already predeclared 12-feature path model is the only scientifically justified
 revision; trying arbitrary new subsets or thresholds would be post-result fishing.
+
+## Final formal revision
+
+At checkpoint `433000d7`, the exact previously declared 12-feature path-regime model was authorized
+for one final maturity-controlled formal trial on the identical sample. It must improve baseline
+and six-feature evidence, including the late half, or formalization stops without protected data.
