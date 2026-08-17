@@ -68,4 +68,8 @@ one earliest eligible shock per market and delegates exact label-maturity filter
 development evaluator. This addresses overlapping event lifetimes and tests online cross-contract
 prediction; it does not claim the exploratory resolution-ordered folds were already formal.
 
-The exact formal source, candidate identities, and outcome will be retained here after execution.
+Frozen formal driver:
+[`source/02_formal_time_legal_reversal.py`](source/02_formal_time_legal_reversal.py), SHA-256
+`f8694e97fc353936e0044321fe0803704f6f67b9bef2278a557ed2d68dccaa25`. The driver publishes both
+programs through `CandidatePublisher` and evaluates them through `AuthoredDevelopmentEvaluator`;
+the model programs retain no filesystem, network, import, or outcome-at-prediction authority.
