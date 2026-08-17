@@ -118,3 +118,7 @@ revision; trying arbitrary new subsets or thresholds would be post-result fishin
 At checkpoint `433000d7`, the exact previously declared 12-feature path-regime model was authorized
 for one final maturity-controlled formal trial on the identical sample. It must improve baseline
 and six-feature evidence, including the late half, or formalization stops without protected data.
+
+Frozen revision driver:
+[`source/04_formal_full_path_revision.py`](source/04_formal_full_path_revision.py), SHA-256
+`2fa36c181157ae8c1e09540f81b39350b289ca676cd1d5d232c392bcae6a47f3`.
