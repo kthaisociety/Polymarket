@@ -1,7 +1,7 @@
 # Data-foundation implementation map
 
 Status: **generic temporal boundary and Polymarket production-tape adapter implemented; live
-production acceptance blocked on local read-only tunnel access; immutable DB snapshots,
+production read accepted through the independently packaged read-only smoke; immutable DB snapshots,
 resolution-label availability, and event/group identity remain red**.
 
 ## Generic kernel
@@ -26,6 +26,8 @@ scientific or protected authority.
   `src/research_agent/data_adapters/polymarket/ingestion.py`
 - Fail-closed live smoke:
   `src/research_agent/data_adapters/polymarket/smoke.py`
+- Standalone live runtime dependencies: `asyncpg>=0.31.0`, `tenacity>=9`, and
+  `prometheus-client>=0.26.0` in `pyproject.toml`
 - Causal and command adversaries:
   `tests/data_adapters/polymarket/`
 
@@ -75,4 +77,11 @@ PYTHONPATH=src:../../engine/src uv run basedpyright \
 ```
 
 The real smoke additionally requires the approved `human_ro` tunnel and `BDL__DB__URL`. A missing
-connection exits `BLOCKED`, not green.
+connection exits `BLOCKED`, not green. The driver is a direct Chronos runtime dependency because
+the shipped smoke composes the engine's PostgreSQL pool; it must not depend accidentally on the
+parent repository's environment.
+
+The live read-only acceptance was rerun through the standalone Chronos environment. It proved
+`human_ro`, session and transaction read-only settings, and denied insert/update privileges before
+reading one contract, 10,140 fills, and registering 40,560 observations. No DSN or secret is stored
+in this repository or emitted in the receipt.

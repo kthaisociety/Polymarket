@@ -4,7 +4,11 @@ version = "0.1.0"
 description = "An autonomous, evidence-governed time-series research runtime."
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "asyncpg>=0.31.0",
+    "prometheus-client>=0.26.0",
+    "tenacity>=9",
+]
 
 [project.scripts]
 research-agent = "research_agent.cli:main"

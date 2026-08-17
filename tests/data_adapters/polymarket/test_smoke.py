@@ -5,6 +5,8 @@
 from __future__ import annotations
 
 import json
+import tomllib
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 import pytest
@@ -15,6 +17,16 @@ if TYPE_CHECKING:
     from collections.abc import Mapping
 
 BLOCKED_EXIT = 2
+
+
+def test_standalone_package_declares_live_database_driver() -> None:
+    """The documented live smoke must work in Chronos' own environment."""
+    project = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))
+    dependencies = project["project"]["dependencies"]
+
+    assert any(item.startswith("asyncpg>=") for item in dependencies)
+    assert any(item.startswith("prometheus-client>=") for item in dependencies)
+    assert any(item.startswith("tenacity>=") for item in dependencies)
 
 
 def test_smoke_without_approved_database_url_is_explicitly_blocked(

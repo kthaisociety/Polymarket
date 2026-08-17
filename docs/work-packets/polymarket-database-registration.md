@@ -22,7 +22,8 @@ identity. No observation outside the pinned block window may enter the registrat
 - Owning block and transition contract: data-foundation README, implementation map, and
   `data.register-observations`.
 - Relevant adjacent interfaces: `data.build-information-set`, `data.build-training-sample`, the BDL
-  engine's public `market.reads` functions, and `core.db.pool.create_pool`.
+  engine's public `market.reads` functions, and `core.db.pool.create_pool`. The standalone Chronos
+  package directly declares the pool's `asyncpg` runtime dependency.
 - Explicitly excluded work: Kthais imports, engine/database mutation, autonomous question selection,
   feature or target selection, fitting, protected access, validation, memory, and reporting changes.
 - Assumptions: A Polymarket on-chain fill becomes publicly observable at its recorded block time.
@@ -64,18 +65,17 @@ identity. No observation outside the pinned block window may enter the registrat
 ## Boundary revisions
 
 The initial idea of routing through Kthais was rejected. Chronos is an independent vendored kernel.
-Kthais was inspected only to locate the approved production connection pattern. The live DB gate was
-then attempted first. Tailscale is connected and the production hostname resolves. The gate remains
-blocked because this machine's SSH public key is not registered on the production host and the
-documented SOPS executable, age tooling, and age key are unavailable.
+Kthais was inspected only to locate the approved production connection pattern. The original live
+DB gate was blocked by missing workstation access. That blocker was later cleared through approved
+SSH and age-recipient setup. The first standalone live attempt then exposed an undeclared `asyncpg`
+dependency; `polymarket.compose-live-read-environment` records its repair.
 
 ## Transition receipt
 
 ### Result
 
 - Packet: `polymarket.register-contract-tape`
-- Status: **COMPLETE** for the research-only adapter; the live production acceptance gate remains
-  **BLOCKED**.
+- Status: **COMPLETE** for the research-only adapter and live production read-only acceptance gate.
 - Input repository state: `bdl-polymarket@f27716db` with Chronos vendored one-way from
   `insurance-market-data@fb0e8cb49c94a0cbdabb817226e9dcf6279f1083`.
 - Resulting repository state: the commit containing this receipt on
@@ -109,10 +109,11 @@ documented SOPS executable, age tooling, and age key are unavailable.
   unchanged cursor window preserves the block-vintage identifier but changes the source digest.
   Missing blocks, foreign outcomes, duplicate print identities, and unavailable connection
   configuration fail closed.
-- Integration evidence: Tailscale is connected and `bdl-prod` resolves. A production query was not
-  possible because the local SSH public key is not registered on the host and the documented
-  SOPS/age executable and key are unavailable. The smoke CLI returned
-  `READ_ONLY_DATABASE_URL_UNSET` with `live_data_read: false`; no live-data receipt exists.
+- Integration evidence: after approved workstation access was configured, the independently
+  packaged smoke proved the `human_ro` role, both read-only settings, and false insert/update
+  privileges for `market.markets` and `market.fills`. It read one explicit contract, 10,140 fills,
+  and registered 40,560 observations with an exact cursor vintage and source digest. No secret or
+  DSN was emitted or persisted.
 
 ### Knowledge carried forward
 
@@ -121,14 +122,12 @@ documented SOPS executable, age tooling, and age key are unavailable.
 - New facts discovered: the public read surface exposes outcome identity, close time, resolution
   status, payout, fills, and cursors, but not authoritative event/group identity or exact resolution
   availability.
-- Unresolved uncertainty: the role `human_ro`, transaction read-only setting, and lack of
-  `INSERT`/`UPDATE` privileges must still be verified on the live connection.
-- Remaining reds or follow-up dependencies: register the SSH key and supply the approved SOPS/age
-  tooling/key; add authoritative resolution availability before creating outcome labels; expose
+- Unresolved uncertainty: the cursor-bounded database read is not an immutable database snapshot.
+- Remaining reds or follow-up dependencies: add authoritative resolution availability before creating outcome labels; expose
   event/group identity before grouped validation; retain immutable source bytes or a database
   snapshot identity before treating a cursor window as reproducible protected evidence.
 
-This receipt does not prove live database access, historical collector knowledge, an immutable
+This receipt proves bounded live read-only database access, but does not prove historical collector knowledge, an immutable
 database snapshot, label validity, grouped validation, a protected backtest, a research finding, or
-model usefulness. It proves the research-only adapter's fail-closed behavior and its compatibility
-with the production read protocol.
+model usefulness. It proves the research-only adapter's fail-closed behavior, standalone packaging,
+and compatibility with the production read protocol.
