@@ -117,3 +117,38 @@ Design fixed before source 01 reads development values. Epistemic status: `EXPLO
    actual accesses and `protected_values_exposed=false`. One policy-safe revision may remove only
    that cleanup statement. The question, data request, sample, label, features, models, penalty,
    metrics, gates, and output content remain fixed.
+
+## Transition receipt
+
+### Result
+
+- Status: **COMPLETE — DEVELOPMENT REJECTION**.
+- Exact policy-safe source SHA-256:
+  `0083bba4b070b4bf439e8a044b2c9a7ad842762a361c48e77b662579b57cbfe7`.
+- Exact successful receipt SHA-256:
+  `22cc473b7c2397744c9729cd59afbd9a1a1c2b03e69d4ef51c4d170a2156e33d`.
+
+### Evidence
+
+- The unchanged sample produced 1,053 development decisions and 975 OOF rows. OOF labels included
+  278 upward crossings, 229 downward crossings, and both directions in all 15 evaluated events.
+- Observation/event-macro MSE was `0.52000/0.63189` for zero, `0.57565/0.64954` for the
+  earlier-event mean, `0.57299/0.64101` for state, `0.58787/0.66259` for state plus direction, and
+  `0.60322/0.67101` for direction after staleness.
+- The candidate won only 4/15 events against state. Crossing-direction accuracy was `0.54635`,
+  below state and the earlier-event mean at `0.54832`. Candidate mean prediction `0.32271` also
+  missed mean signed label `0.05026` materially.
+- The delayed one-cent-cost long-only diagnostic generated 948 sampled trades. Equal-event mean
+  net change was positive `0.00827`, but observation-weighted mean was negative `-0.00280`; large
+  events 14 and 15 dominated the row-weighted loss. The fixed execution falsifier failed.
+- Actual accesses were exactly market ID, chronological event ordinal, observation ordinal/time,
+  and sampled probability. The receipt records no formal objects, no durable effects, and
+  `protected_values_exposed=false`.
+
+### Disposition
+
+The path-direction and direction-after-staleness hypotheses fail this label/model design. No
+feature, threshold, penalty, or weighting revision is permitted under this packet. No candidate is
+formalized or frozen, and no protected request or terminal-memory update is authorized. The result
+also reinforces the earlier finding that event-equal apparent profitability can disagree with
+observation-weighted evidence when a few large events dominate; neither weighting may be hidden.
