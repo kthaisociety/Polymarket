@@ -228,3 +228,40 @@ study, but both fail the absolute `0.15` gate. The richer feature set improves e
 worsening observation-weighted loss, showing a real estimand tradeoff rather than a universal
 improvement. Neither classifier is formalized, and the family is closed without threshold or
 subset search.
+
+## Boundary-transition hazards 10–13
+
+Coverage source 10 changed the question from unconditional movement to conditional absorption
+hazards. It fixed the absorption region at probabilities at most `.02` or at least `.98`, and
+counted both entry and escape over legal six- and 24-hour horizons before fitting a model. The
+predeclared priority and coverage rule selected the two 24-hour labels:
+
+| Conditional label | OOF at-risk rows | Positives | Represented events | Both-class events |
+|---|---:|---:|---:|---:|
+| interior → boundary in 24h | 5,192 | 238 | 15 | 13 |
+| boundary → interior in 24h | 2,607 | 106 | 12 | 10 |
+
+The transitions are highly one-sided: 237/238 entries and all 106 escapes involve the lower
+boundary. These results cannot be generalized to symmetric absorption at zero and one. They also
+show why unconditional future-boundary prediction was a poor question: entry and escape are rare,
+distinct hazards on different at-risk populations.
+
+The first 25-update logistic source and its eight-update runtime child each reached the sandbox
+wall-clock limit before any field access. Their failed receipts are retained. Final child 13 used
+the same labels, features, folds, event weights, penalty, comparators, and decision gates with four
+fixed Newton updates; it completed in the bounded analysis runtime.
+
+| Label/model | Observation Brier | Event-macro Brier | Pooled AP | Event-macro AP |
+|---|---:|---:|---:|---:|
+| entry rate baseline | 0.04747 | 0.08702 | 0.0363 | 0.1094 |
+| entry state-only | 0.04642 | 0.07629 | 0.2304 | **0.5083** |
+| entry full kinematics | **0.03716** | **0.07259** | **0.3522** | 0.4776 |
+| escape rate baseline | 0.06466 | 0.07037 | 0.0589 | 0.0551 |
+| escape state-only | **0.04780** | **0.05061** | **0.2279** | **0.3541** |
+| escape full kinematics | 0.05275 | 0.05630 | 0.1561 | 0.3484 |
+
+Entry kinematics failed because equal-event average precision degraded versus state-only. Escape
+kinematics was worse than state-only under every primary Brier and ranking view. Both full models
+are rejected before formalization. The state-only comparators reveal a potentially useful
+selection-exposed relationship between current probability state and transition hazard, but they
+were not the predeclared advancing candidates and are not a frozen system.

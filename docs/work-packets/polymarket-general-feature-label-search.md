@@ -155,3 +155,54 @@ improve multiple legal six-hour labels across chronological event groups.
     than compact receipt 08's `0.16278` and above the fixed `0.15` gate. The bounded classifier
     family is closed as negative development evidence. Neither candidate proceeds to formal or
     protected evaluation.
+14. The next branch changes the scientific question from unconditional move magnitude to fixed
+    boundary-transition hazards. Diagnostic 10 will use the already-declared absorption region
+    `[0,.02] ∪ [.98,1]`, six-observation decisions, a 24-observation history warm-up, and only two
+    fixed legal horizons: six observations with elapsed time 4.5–7.5 hours and 24 observations with
+    elapsed time 18–30 hours. It will count, but not model, four conditional labels: interior to
+    boundary (entry) and boundary to interior (escape) at each horizon. A label is model-eligible
+    only when test events 8–23 provide at least 400 rows, 40 positives, 40 negatives, and both
+    classes in at least 8 event groups. At most two eligible labels may advance, selected in the
+    fixed economic priority `entry_24h`, `escape_24h`, `entry_6h`, `escape_6h`. The diagnostic may
+    report side and event heterogeneity, but it cannot tune the `.02` boundary, invent another
+    horizon, fit a model, or authorize protected access.
+15. Coverage receipt 10, SHA-256
+    `2191c8d1c116da54edadfa1e87349efc08cb82e9179946ca3859551d8e260952`, applied the fixed rule.
+    All four labels met the numerical coverage gate, so the priority cap selected `entry_24h` and
+    `escape_24h`. The OOF at-risk sets contain 5,192/238 entry rows/positives across 15 represented
+    events and 2,607/106 escape rows/positives across 12 represented events. Transition direction
+    is extremely asymmetric: 237/238 entries and 106/106 escapes involve the lower boundary. The
+    labels therefore describe this retained outcome-token corpus, not a symmetric universal 0/1
+    process.
+16. The bounded model trial uses only those two selected labels and one fixed 11-feature state and
+    boundary-kinematics representation: probability, boundary distance, fixed-.005 logit,
+    six-/24-hour boundary-distance changes, six-/24-hour realized variance, jump concentration,
+    zero-change fraction, mean absolute change, and log current-regime run length. Fold-local
+    event-equal ridge-logistic models use penalty `0.1`; the nested state comparator uses only the
+    first three features, and the other comparator is the earlier-event hazard rate. A full model
+    may advance only if it beats both comparators under observation and event-macro Brier, beats
+    state-only average precision under pooled and event-macro views, wins a majority of represented
+    events versus state-only, places at least twice the unconditional positive rate in its fixed
+    top-decile score set, and keeps its mean probability within a factor of two of the observed
+    rate. No feature subset, penalty, boundary, horizon, or third model recipe may be searched in
+    this family.
+17. Model source 11, SHA-256
+    `2b7b61352ea26e7cbfbe70e9e534f3d6deec112ab2326449e49660a9a58db7cf`, exceeded the sandbox
+    wall-clock limit before any field access; its failed receipt is retained and contains zero
+    accesses. Corrected child 12 changes no label, feature, penalty, fold, weight, comparator, or
+    gate. It fixes the convex solver budget at eight Newton updates per fold, with no convergence
+    test or data-dependent fallback, so the exact recipe can execute inside the analysis limit.
+18. Eight-update child 12, SHA-256
+    `1060d86bf23ca5e375b676e095fb49edac306a8191cac12373e45634bab1262b`, also reached the wall-clock
+    limit before any field access. Final runtime child 13 retains the exact scientific design and
+    fixes four Newton updates. This is the last runtime-only retry: another timeout closes this
+    logistic implementation route rather than weakening the analysis limit or changing recipes.
+19. Four-update child 13, SHA-256
+    `c00d6ae9595c267f0d92d56dcd4a1d1628f538cfe0d741bfdb45035bb9552c83`, completed with exact
+    ancestry. For entry, full kinematics improved observation/event Brier to `0.03716/0.07259` and
+    pooled average precision to `0.3522`, but event-macro average precision fell from state-only
+    `0.5083` to `0.4776`; the fixed gate therefore failed. For escape, state-only was better than
+    full kinematics under observation/event Brier (`0.04780/0.05061` versus `0.05275/0.05630`) and
+    pooled/event average precision (`0.2279/0.3541` versus `0.1561/0.3484`). Both exact candidates
+    are rejected before formalization. The remaining strong state-only ranking is selection-exposed
+    hypothesis evidence, not an eligible model, and the kinematics family is closed.
