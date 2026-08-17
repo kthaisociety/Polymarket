@@ -5,8 +5,8 @@
 - Packet: `chronos.optimize-protected-example-materialization`.
 - Trigger: the exact Polymarket move-duration holdout started from `bdl-polymarket@08f06e70`
   demonstrated repeated legal-example reconstruction after the worker-reuse repair.
-- Status: design fixed while that protected process remains in flight; executable changes are
-  forbidden until it returns.
+- Status: **COMPLETE**. The original protected process remains in flight against the modules it
+  loaded before this change and was neither restarted nor duplicated.
 
 ## Problem and target outcome
 
@@ -80,3 +80,58 @@ protocol to make the benchmark pass.
 
 After acceptance, rerun only development or synthetic protected fixtures. Never rerun the consumed
 Polymarket holdout to benchmark the optimization.
+
+## Boundary revisions
+
+On 2026-08-17 the user explicitly authorized implementing the queued speed repair while the
+original protected process remained active. Python had already loaded that process's old modules,
+so editing the working tree could not change its frozen execution. The no-restart, no-duplicate,
+and no-holdout-benchmark boundaries remained unchanged.
+
+## Transition receipt
+
+### Result
+
+- Status: **COMPLETE**.
+- Resulting state: protected authored execution retains pure feature and label materializations for
+  one `_execute_once` call, while preserving the exact walk-forward fit/predict schedule.
+
+### Delivered state delta
+
+- Feature results are keyed by exact candidate ID, catalog ID, and `SampleKey`, retaining the value,
+  information identity, observation identities, and observed program accesses.
+- Label inputs are resolved at every legal label clock. Successful label results are keyed by exact
+  candidate, catalog, sample key, and the ordered historical, contextual, and outcome observation
+  identities. A newly available revision therefore invokes the authored label again.
+- Immature, missing, and failed materializations are not retained as negative cache entries.
+- The cache is allocated inside one protected execution and cannot cross executions, requests,
+  candidates, catalogs, plans, processes, or authority boundaries.
+- `fit` and `predict` remain one invocation per declared decision. No fitted state, window, or
+  prediction is cached.
+- `scripts/check.sh` now uses the populated project `.venv` when `uv` is installed but absent from
+  the invoking shell's `PATH`; it still prefers `uv run` when available.
+
+### Evidence
+
+- Cached and uncached reference paths produced exactly equal protected decision records over the
+  nine-decision expanding-window fixture.
+- Authored calls fell from 144 to 20 for `make_features` and from 144 to 20 for `make_label`.
+  `fit` and `predict` remained 9 calls each on both paths.
+- A deterministic ten-run timing comparison took `2.0301471280s` cached versus `3.8796409760s`
+  uncached, a `1.911015x` wall-time speedup on the small integration fixture. Invocation counts,
+  rather than scheduler-sensitive elapsed time, are the semantic performance evidence.
+- Revision poison changed only the later legal label materialization and row identity; maturity
+  poison became eligible later; candidate/catalog/execution changes missed the cache; repeated
+  authored failures remained failures and were re-executed without fallback.
+- The focused authored protected integration suite passed `8` tests.
+- The complete gate passed Ruff format, Ruff lint, basedpyright, and all `460` tests. The first
+  sandboxed attempt passed `440` and was blocked only for `20` localhost-fixture tests; the exact
+  gate then passed outside that socket restriction.
+
+### Honest boundary
+
+The evaluator still resolves exact legal label inputs at each decision clock and still performs
+every statistically required walk-forward refit. This removes redundant authored-program work; it
+does not turn protected evaluation into a vectorized batch estimator or weaken revision semantics.
+The already-running Polymarket holdout uses the old loaded evaluator and receives no speedup from
+this transition.

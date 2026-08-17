@@ -7,7 +7,17 @@ export UV_CACHE_DIR="${UV_CACHE_DIR:-${TMPDIR:-/tmp}/chronos-uv-cache}"
 # The production adapter intentionally composes the containing repository's public engine reads.
 export PYTHONPATH="src:../../engine/src${PYTHONPATH:+:${PYTHONPATH}}"
 
-uv run ruff format --check .
-uv run ruff check .
-uv run basedpyright
-uv run pytest
+if command -v uv >/dev/null 2>&1; then
+  uv run ruff format --check .
+  uv run ruff check .
+  uv run basedpyright
+  uv run pytest
+elif [[ -x .venv/bin/ruff && -x .venv/bin/basedpyright && -x .venv/bin/pytest ]]; then
+  .venv/bin/ruff format --check .
+  .venv/bin/ruff check .
+  .venv/bin/basedpyright
+  .venv/bin/pytest
+else
+  echo "Chronos checks require uv or a populated .venv" >&2
+  exit 127
+fi

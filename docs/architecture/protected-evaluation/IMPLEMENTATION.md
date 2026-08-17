@@ -82,6 +82,11 @@ The implementation now also provides:
 - historical walk-forward execution that independently rebuilds legal `InformationSet I_t`, mature
   `TrainingSample S_t`, and declared `TrainingWindow W_t` at every exact `SampleKey`, then fits the
   exact frozen recipe, predicts without learning, and records the later outcome;
+- a per-execution authored-materialization cache that removes duplicate `make_features` calls for
+  an exact candidate/catalog/sample key and duplicate `make_label` calls only when the ordered
+  historical, contextual, and outcome observation identities are unchanged. Label inputs are still
+  resolved at each legal clock, revisions create cache misses, immature/missing/failed labels are
+  never negatively cached, and `fit` plus `predict` still execute at every declared decision;
 - immutable protected fit, prediction, outcome, failure, decision, and sealed `BacktestRun` records;
   every declared sample key remains represented even when information, sample construction, window
   selection, fitting, prediction, outcome recording, or another formal step fails;

@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 from math import isfinite
 from threading import RLock
@@ -324,6 +324,42 @@ class _LegalExample:
         return stable_identity("authored-protected-training-row", self)
 
 
+@dataclass(frozen=True, slots=True)
+class _FeatureMaterialization:
+    values: dict[str, float]
+    information_id: str
+    observation_ids: tuple[str, ...]
+    accesses: tuple[ProgramAccess, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class _LabelMaterialization:
+    value: float
+    matured_at: datetime
+    observation_ids: tuple[str, ...]
+    accesses: tuple[ProgramAccess, ...]
+
+
+type _ChannelObservationIdentity = tuple[tuple[str, tuple[str, ...]], ...]
+type _FeatureCacheKey = tuple[str, str, SampleKey]
+type _LabelCacheKey = tuple[
+    str,
+    str,
+    SampleKey,
+    _ChannelObservationIdentity,
+    _ChannelObservationIdentity,
+    tuple[str, ...],
+]
+
+
+@dataclass(slots=True)
+class _ProtectedMaterializationCache:
+    """Pure authored materializations scoped to exactly one protected execution."""
+
+    features: dict[_FeatureCacheKey, _FeatureMaterialization] = field(default_factory=dict)
+    labels: dict[_LabelCacheKey, _LabelMaterialization] = field(default_factory=dict)
+
+
 class _Stage(Enum):
     INFORMATION = "information"
     TRAINING = "training"
@@ -583,10 +619,18 @@ class AuthoredBacktestEngine:
                 decisions=decisions,
                 status=BacktestRunStatus.COMPLETED_WITH_FAILURES,
             )
+        materializations = _ProtectedMaterializationCache()
         with self._programs.session(candidate.source) as program:
             decisions = tuple(
                 self._execute_decision_safely(
-                    ordinal, key, catalog, candidate, scenario, exposure, program
+                    ordinal,
+                    key,
+                    catalog,
+                    candidate,
+                    scenario,
+                    exposure,
+                    program,
+                    materializations,
                 )
                 for ordinal, key in enumerate(scenario.decision_sample_keys)
             )
@@ -617,9 +661,18 @@ class AuthoredBacktestEngine:
         scenario: EvaluationScenario,
         exposure: ExposureRecord,
         program: ScientificProgramSession,
+        materializations: _ProtectedMaterializationCache,
     ) -> BacktestDecisionRecord:
         try:
-            return self._execute_decision(ordinal, key, catalog, candidate, scenario, program)
+            return self._execute_decision(
+                ordinal,
+                key,
+                catalog,
+                candidate,
+                scenario,
+                program,
+                materializations,
+            )
         except _DecisionFailureError as error:
             return self._failed_decision(
                 ordinal,
@@ -651,9 +704,14 @@ class AuthoredBacktestEngine:
         candidate: AuthoredCandidate,
         scenario: EvaluationScenario,
         program: ScientificProgramSession,
+        materializations: _ProtectedMaterializationCache,
     ) -> BacktestDecisionRecord:
         validation_features, information_id, information_ids, feature_accesses = self._features(
-            catalog, candidate, key, program
+            catalog,
+            candidate,
+            key,
+            program,
+            materializations,
         )
         examples = tuple(
             example
@@ -666,6 +724,7 @@ class AuthoredBacktestEngine:
                     training_key,
                     label_clock=key.decision_time,
                     program=program,
+                    materializations=materializations,
                 ),
             )
             if example is not None
@@ -798,6 +857,7 @@ class AuthoredBacktestEngine:
             label_clock=scenario.outcome_recorded_at,
             prediction=prediction,
             program=program,
+            materializations=materializations,
         )
         return _decision_record(
             ordinal,
@@ -819,7 +879,12 @@ class AuthoredBacktestEngine:
         candidate: AuthoredCandidate,
         key: SampleKey,
         program: ScientificProgramSession,
+        materializations: _ProtectedMaterializationCache,
     ) -> tuple[dict[str, float], str, tuple[str, ...], tuple[ProgramAccess, ...]]:
+        cache_key = (candidate.candidate_id, catalog.identity, key)
+        cached = materializations.features.get(cache_key)
+        if cached is not None:
+            return cached.values, cached.information_id, cached.observation_ids, cached.accesses
         manifest = candidate.manifest
         if not manifest.admits_population(key.dimensions):
             raise _DecisionFailureError(
@@ -883,11 +948,18 @@ class AuthoredBacktestEngine:
                 context_histories=context_histories,
             )
         )
-        return (
+        materialized = _FeatureMaterialization(
             _feature_values(result.value, manifest.feature_names),
             information_id,
             used_ids,
             result.accesses,
+        )
+        materializations.features[cache_key] = materialized
+        return (
+            materialized.values,
+            materialized.information_id,
+            materialized.observation_ids,
+            materialized.accesses,
         )
 
     def _training_example(
@@ -898,13 +970,23 @@ class AuthoredBacktestEngine:
         *,
         label_clock: datetime,
         program: ScientificProgramSession,
+        materializations: _ProtectedMaterializationCache,
     ) -> _LegalExample | None:
         try:
             features, _, feature_ids, feature_accesses = self._features(
-                catalog, candidate, key, program
+                catalog,
+                candidate,
+                key,
+                program,
+                materializations,
             )
             label, matured_at, label_ids, label_accesses = self._label(
-                catalog, candidate, key, label_clock=label_clock, program=program
+                catalog,
+                candidate,
+                key,
+                label_clock=label_clock,
+                program=program,
+                materializations=materializations,
             )
         except _DecisionFailureError:
             if candidate.manifest.missing_value_policy == "exclude_example":
@@ -929,6 +1011,7 @@ class AuthoredBacktestEngine:
         *,
         label_clock: datetime,
         program: ScientificProgramSession,
+        materializations: _ProtectedMaterializationCache,
     ) -> tuple[float, datetime, tuple[str, ...], tuple[ProgramAccess, ...]]:
         manifest = candidate.manifest
         outcome_end = manifest.horizon.apply(key.decision_time)
@@ -989,6 +1072,20 @@ class AuthoredBacktestEngine:
                 "legal authored label history is insufficient",
                 (historical_information.information_set_id,),
             )
+        history_identity = _channel_observation_identity(histories)
+        context_identity = _channel_observation_identity(context_histories)
+        outcome_identity = tuple(item.observation_id for item in observations)
+        cache_key = (
+            candidate.candidate_id,
+            catalog.identity,
+            key,
+            history_identity,
+            context_identity,
+            outcome_identity,
+        )
+        cached = materializations.labels.get(cache_key)
+        if cached is not None:
+            return cached.value, cached.matured_at, cached.observation_ids, cached.accesses
         result = program.invoke(
             ProgramInvocation(
                 "make_label",
@@ -997,11 +1094,18 @@ class AuthoredBacktestEngine:
                 outcome=[_observation_json(item) for item in observations],
             )
         )
-        return (
+        materialized = _LabelMaterialization(
             _finite_number(result.value, "protected outcome"),
             max(outcome_end, *(item.available_at for item in observations)),
-            tuple(item.observation_id for item in observations),
+            outcome_identity,
             result.accesses,
+        )
+        materializations.labels[cache_key] = materialized
+        return (
+            materialized.value,
+            materialized.matured_at,
+            materialized.observation_ids,
+            materialized.accesses,
         )
 
     def _outcome(
@@ -1013,9 +1117,15 @@ class AuthoredBacktestEngine:
         label_clock: datetime,
         prediction: ProtectedPredictionRecord,
         program: ScientificProgramSession,
+        materializations: _ProtectedMaterializationCache,
     ) -> ProtectedOutcomeRecord:
         label, matured_at, observation_ids, accesses = self._label(
-            catalog, candidate, key, label_clock=label_clock, program=program
+            catalog,
+            candidate,
+            key,
+            label_clock=label_clock,
+            program=program,
+            materializations=materializations,
         )
         source_outcome_id = stable_identity(
             "authored-protected-source-outcome",
@@ -1222,6 +1332,18 @@ def _observation_json(observation: RegisteredObservation) -> dict[str, JsonValue
         "available_at_epoch_seconds": observation.available_at.timestamp(),
         "dimensions": [list(item) for item in observation.dimensions],
     }
+
+
+def _channel_observation_identity(
+    channels: dict[str, list[dict[str, JsonValue]]],
+) -> _ChannelObservationIdentity:
+    return tuple(
+        (
+            field_id,
+            tuple(cast("str", observation["observation_id"]) for observation in observations),
+        )
+        for field_id, observations in channels.items()
+    )
 
 
 def _feature_values(value: JsonValue, expected: tuple[str, ...]) -> dict[str, float]:

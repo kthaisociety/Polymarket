@@ -1,21 +1,26 @@
 """Application proof that frozen authored source reaches protected execution unchanged."""
 
-# ruff: noqa: D103, EM101, PLR0915, PLR2004, TRY003
+# ruff: noqa: D103, EM101, PLR0915, PLR2004, SLF001, TRY003
 
 from __future__ import annotations
 
 import copy
 import json
 import sqlite3
+from collections import Counter
 from dataclasses import replace
 from datetime import UTC, datetime, timedelta
 from hashlib import sha256
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Self, cast
 
 import pytest
 
 if TYPE_CHECKING:
     from pathlib import Path
+
+    from research_agent.investigation.program import ScientificProgramSession
+    from research_agent.investigation.records import AuthoredCandidate
+    from research_agent.protected_evaluation import BacktestDecisionRecord
 
 from research_agent.data_foundation import (
     DataCatalogSnapshot,
@@ -39,6 +44,7 @@ from research_agent.investigation import (
     AuthoredProtectedPlan,
     AuthoredProtectedResolutionService,
     AuthoredResolutionStatus,
+    CandidatePublisher,
     ContextHistoryDependency,
     DevelopmentBudget,
     DevelopmentDisposition,
@@ -55,6 +61,14 @@ from research_agent.investigation import (
     configure_authored_protected_plan_authority,
     configure_validated_question_memory,
 )
+from research_agent.investigation.program import (
+    ProgramInvocation,
+    ProgramResult,
+    ScientificProgramHarness,
+)
+from research_agent.investigation.protected import (
+    _ProtectedMaterializationCache,
+)  # pyright: ignore[reportPrivateUsage]
 from research_agent.protected_evaluation import (
     AuthorizedProtectedDataView,
     BacktestGovernance,
@@ -149,6 +163,30 @@ class _OneAuthoredTrialProvider:
         )
 
 
+class _CountingProgramHarness(ScientificProgramHarness):
+    def __init__(self) -> None:
+        super().__init__()
+        self.counts: Counter[str] = Counter()
+
+    def session(self, source: str) -> ScientificProgramSession:
+        raw = super().session(source)
+        counts = self.counts
+
+        class _CountingSession:
+            def __enter__(self) -> Self:
+                return self
+
+            def __exit__(self, *args: object) -> None:
+                del args
+                raw.close()
+
+            def invoke(self, invocation: ProgramInvocation) -> ProgramResult:
+                counts[invocation.entrypoint] += 1
+                return raw.invoke(invocation)
+
+        return cast("ScientificProgramSession", _CountingSession())
+
+
 def _clock() -> datetime:
     return ORIGIN + DAY * 100
 
@@ -221,6 +259,35 @@ def _catalog(start: int, stop: int, *, poison_value: float = 999_999.0) -> DataC
                 _row(schema, "y", label, (day + 1, day + 1), market_id),
             )
         )
+    registration = ObservationRegistrar().register(schema, tuple(rows))
+    return DataCatalogSnapshot(ENVIRONMENT, (registration,))
+
+
+def _catalog_with_outcome_revision() -> DataCatalogSnapshot:
+    schema = _schema()
+    market_id = "protected-market"
+    rows: list[ObservationInput] = []
+    for day in range(25, 51):
+        left = -1.0 if day % 2 else 1.0
+        right = -1.0 if day % 4 < 2 else 1.0
+        label = 3.0 * left * right
+        rows.extend(
+            (
+                _row(schema, "x1", left, (day, day), market_id),
+                _row(schema, "x2", right, (day, day), market_id),
+                _row(schema, "future_poison", 999_999.0, (day, 90), market_id),
+                _row(schema, "y", label, (day + 1, day + 1), market_id),
+            )
+        )
+    rows.append(
+        replace(
+            _row(schema, "y", -9.0, (26, 38), market_id),
+            vintage_id="revision",
+            revision_number=1,
+            source_ref="fixture:authored-protected-revision",
+            provenance_ref="fixture:y:26:revision",
+        )
+    )
     registration = ObservationRegistrar().register(schema, tuple(rows))
     return DataCatalogSnapshot(ENVIRONMENT, (registration,))
 
@@ -455,6 +522,223 @@ def _field_json(field: FieldRef) -> dict[str, object]:
         "field_id": field.field_id,
         "environment_id": field.environment_id,
     }
+
+
+def _candidate_for(
+    development_catalog: DataCatalogSnapshot,
+    protected_plan: AuthoredProtectedPlan,
+) -> AuthoredCandidate:
+    return CandidatePublisher().publish(
+        _request(development_catalog, protected_plan),
+        _proposal(development_catalog),
+        expected_parent_trial_id=None,
+    )
+
+
+def _direct_decisions(
+    catalog: DataCatalogSnapshot,
+    candidate: AuthoredCandidate,
+    scenario: EvaluationScenario,
+    *,
+    share_materializations: bool,
+) -> tuple[tuple[BacktestDecisionRecord, ...], Counter[str]]:
+    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    harness = _CountingProgramHarness()
+    shared = _ProtectedMaterializationCache()
+    with harness.session(candidate.source) as program:
+        decisions = tuple(
+            engine._execute_decision(  # pyright: ignore[reportPrivateUsage]
+                ordinal,
+                key,
+                catalog,
+                candidate,
+                scenario,
+                program,
+                shared if share_materializations else _ProtectedMaterializationCache(),
+            )
+            for ordinal, key in enumerate(scenario.decision_sample_keys)
+        )
+    return decisions, harness.counts
+
+
+def test_protected_materialization_cache_preserves_decisions_and_refit_frequency() -> None:
+    development_catalog = _catalog(1, 25)
+    protected_catalog = _catalog(25, 51)
+    plan = _plan(protected_catalog)
+    candidate = _candidate_for(development_catalog, plan)
+
+    cached, cached_counts = _direct_decisions(
+        protected_catalog,
+        candidate,
+        plan.scenario,
+        share_materializations=True,
+    )
+    reference, reference_counts = _direct_decisions(
+        protected_catalog,
+        candidate,
+        plan.scenario,
+        share_materializations=False,
+    )
+
+    assert cached == reference
+    assert cached_counts == Counter({"make_features": 20, "make_label": 20, "fit": 9, "predict": 9})
+    assert reference_counts == Counter(
+        {"make_features": 144, "make_label": 144, "fit": 9, "predict": 9}
+    )
+
+
+def test_label_cache_key_tracks_revisions_available_between_decisions() -> None:
+    development_catalog = _catalog(1, 25)
+    protected_catalog = _catalog_with_outcome_revision()
+    plan = _plan(protected_catalog)
+    candidate = _candidate_for(development_catalog, plan)
+    key = SampleKey(ORIGIN + DAY * 25, protected_catalog.observations[0].dimensions)
+    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    materializations = _ProtectedMaterializationCache()
+    harness = _CountingProgramHarness()
+
+    with harness.session(candidate.source) as program:
+        early = engine._training_example(  # pyright: ignore[reportPrivateUsage]
+            protected_catalog,
+            candidate,
+            key,
+            label_clock=ORIGIN + DAY * 36,
+            program=program,
+            materializations=materializations,
+        )
+        unchanged = engine._training_example(  # pyright: ignore[reportPrivateUsage]
+            protected_catalog,
+            candidate,
+            key,
+            label_clock=ORIGIN + DAY * 37,
+            program=program,
+            materializations=materializations,
+        )
+        revised = engine._training_example(  # pyright: ignore[reportPrivateUsage]
+            protected_catalog,
+            candidate,
+            key,
+            label_clock=ORIGIN + DAY * 38,
+            program=program,
+            materializations=materializations,
+        )
+
+    assert early is not None
+    assert unchanged == early
+    assert revised is not None
+    assert early.label == 3.0
+    assert revised.label == -9.0
+    assert revised.feature_observation_ids == early.feature_observation_ids
+    assert revised.label_observation_ids != early.label_observation_ids
+    assert revised.row_id != early.row_id
+    assert harness.counts == Counter({"make_label": 2, "make_features": 1})
+
+
+def test_immature_label_exclusion_is_not_negative_cached() -> None:
+    development_catalog = _catalog(1, 25)
+    protected_catalog = _catalog(25, 51)
+    plan = _plan(protected_catalog)
+    candidate = _candidate_for(development_catalog, plan)
+    key = SampleKey(ORIGIN + DAY * 35, protected_catalog.observations[0].dimensions)
+    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    materializations = _ProtectedMaterializationCache()
+    harness = _CountingProgramHarness()
+
+    with harness.session(candidate.source) as program:
+        immature = engine._training_example(  # pyright: ignore[reportPrivateUsage]
+            protected_catalog,
+            candidate,
+            key,
+            label_clock=ORIGIN + DAY * 35,
+            program=program,
+            materializations=materializations,
+        )
+        mature = engine._training_example(  # pyright: ignore[reportPrivateUsage]
+            protected_catalog,
+            candidate,
+            key,
+            label_clock=ORIGIN + DAY * 36,
+            program=program,
+            materializations=materializations,
+        )
+
+    assert immature is None
+    assert mature is not None
+    assert harness.counts == Counter({"make_features": 1, "make_label": 1})
+
+
+def test_materializations_are_isolated_by_candidate_catalog_and_execution() -> None:
+    development_catalog = _catalog(1, 25)
+    protected_catalog = _catalog(25, 51)
+    changed_catalog = _catalog(25, 51, poison_value=123_456.0)
+    plan = _plan(protected_catalog)
+    candidate = _candidate_for(development_catalog, plan)
+    changed_candidate = CandidatePublisher().publish(
+        _request(development_catalog, plan),
+        replace(_proposal(development_catalog), rationale="A distinct authored candidate."),
+        expected_parent_trial_id=None,
+    )
+    key = SampleKey(ORIGIN + DAY * 36, protected_catalog.observations[0].dimensions)
+    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    materializations = _ProtectedMaterializationCache()
+    harness = _CountingProgramHarness()
+
+    with harness.session(candidate.source) as program:
+        engine._features(  # pyright: ignore[reportPrivateUsage]
+            protected_catalog, candidate, key, program, materializations
+        )
+        engine._features(  # pyright: ignore[reportPrivateUsage]
+            protected_catalog, candidate, key, program, materializations
+        )
+        engine._features(  # pyright: ignore[reportPrivateUsage]
+            changed_catalog, candidate, key, program, materializations
+        )
+        engine._features(  # pyright: ignore[reportPrivateUsage]
+            protected_catalog, changed_candidate, key, program, materializations
+        )
+        engine._features(  # pyright: ignore[reportPrivateUsage]
+            protected_catalog,
+            candidate,
+            key,
+            program,
+            _ProtectedMaterializationCache(),
+        )
+
+    assert harness.counts == Counter({"make_features": 4})
+
+
+def test_failed_authored_materialization_is_not_cached_or_repaired() -> None:
+    development_catalog = _catalog(1, 25)
+    protected_catalog = _catalog(25, 51)
+    plan = _plan(protected_catalog)
+    proposal = _proposal(development_catalog)
+    broken_source = proposal.source.replace(
+        'return {"interaction": left[-1]["value"] * right[-1]["value"]}',
+        'return {"undeclared": 1.0}',
+    )
+    candidate = CandidatePublisher().publish(
+        _request(development_catalog, plan),
+        replace(proposal, source=broken_source),
+        expected_parent_trial_id=None,
+    )
+    key = SampleKey(ORIGIN + DAY * 36, protected_catalog.observations[0].dimensions)
+    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    materializations = _ProtectedMaterializationCache()
+    harness = _CountingProgramHarness()
+
+    with harness.session(candidate.source) as program:
+        for _ in range(2):
+            with pytest.raises(ValueError, match="exact declared ordered outputs"):
+                engine._features(  # pyright: ignore[reportPrivateUsage]
+                    protected_catalog,
+                    candidate,
+                    key,
+                    program,
+                    materializations,
+                )
+
+    assert materializations.features == {}
+    assert harness.counts == Counter({"make_features": 2})
 
 
 @pytest.mark.parametrize(
@@ -737,6 +1021,14 @@ def test_exact_frozen_authored_source_executes_through_protected_walk_forward(
     assert tuple(
         decision.prediction.value for decision in run.decisions if decision.prediction
     ) == tuple(decision.outcome.value for decision in run.decisions if decision.outcome)
+    reference_decisions, _ = _direct_decisions(
+        protected_catalog,
+        candidate,
+        plan.scenario,
+        share_materializations=False,
+    )
+    reference_run = replace(run, decisions=reference_decisions)
+    assert reference_run == run
     poison_ids = {
         item.observation_id
         for item in protected_catalog.observations
@@ -746,6 +1038,16 @@ def test_exact_frozen_authored_source_executes_through_protected_walk_forward(
         poison_ids.isdisjoint(decision.information_observation_ids) for decision in run.decisions
     )
     report = evaluator.measure(run, plan.evaluation_spec)
+    reference_report = evaluator.measure(reference_run, plan.evaluation_spec)
+    assert reference_report == report
+    reference_validation = validator.validate(
+        reference_report,
+        plan.promotion_standard,
+        authority_id=validation_grant.authority_id,
+        requester_id=SESSION,
+        beneficiary_id=TASK,
+    )
+    assert reference_validation.decision_id == resolution.validation_decision_id
     assert report.metric(MetricName.MSE).value == 0.0
     assert report.metric(MetricName.COVERAGE).value == 1.0
     assert report.metric(MetricName.FAILURE_RATE).value == 0.0
