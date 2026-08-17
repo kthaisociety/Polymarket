@@ -13,6 +13,11 @@ from research_agent.data_adapters.polymarket.corpus import (
     PolymarketCorpusStore,
     register_polymarket_resolution_corpus,
 )
+from research_agent.data_adapters.polymarket.corpus_analysis import (
+    PolymarketDevelopmentAnalysis,
+    PolymarketEventPartition,
+    build_polymarket_development_analysis,
+)
 from research_agent.data_adapters.polymarket.ingestion import (
     PolymarketIngestionResult,
     ingest_polymarket_contract_tape,
@@ -51,6 +56,8 @@ __all__ = [
     "PolymarketCorpusSnapshot",
     "PolymarketCorpusSnapshotRef",
     "PolymarketCorpusStore",
+    "PolymarketDevelopmentAnalysis",
+    "PolymarketEventPartition",
     "PolymarketExploratoryAnalysis",
     "PolymarketFillRecord",
     "PolymarketImportRequest",
@@ -60,6 +67,7 @@ __all__ = [
     "PolymarketResearchReader",
     "PolymarketResolutionRecord",
     "analyze_registered_polymarket_tape",
+    "build_polymarket_development_analysis",
     "ingest_polymarket_contract_tape",
     "register_polymarket_resolution_corpus",
 ]

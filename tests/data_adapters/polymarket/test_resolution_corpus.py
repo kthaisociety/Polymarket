@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+from dataclasses import replace
 from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from typing import TYPE_CHECKING, cast
@@ -13,12 +14,24 @@ import pytest
 from research_agent.data_adapters.polymarket import (
     DatabasePolymarketCorpusReader,
     PolymarketCorpus,
+    PolymarketCorpusContract,
+    PolymarketCorpusOutcome,
     PolymarketCorpusRequest,
     PolymarketCorpusStore,
+    PolymarketPricePoint,
+    PolymarketResolutionRecord,
+    build_polymarket_development_analysis,
     corpus_snapshot,
     register_polymarket_resolution_corpus,
+    run_corpus_studies,
 )
 from research_agent.data_foundation import BoundaryStatus, InformationSetBuilder
+from research_agent.exploration import (
+    AnalysisRequest,
+    AnalysisStatus,
+    DataAccessRequest,
+    ResourceLimits,
+)
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -221,3 +234,154 @@ def test_public_corpus_command_without_database_url_is_explicitly_blocked(
     assert payload["status"] == "BLOCKED"
     assert payload["live_data_read"] is False
     assert "password" not in json.dumps(payload).casefold()
+
+
+def _event_grouped_corpus() -> PolymarketCorpus:
+    contracts: list[PolymarketCorpusContract] = []
+    resolutions: list[PolymarketResolutionRecord] = []
+    prices: list[PolymarketPricePoint] = []
+    for event_number in range(5):
+        market_id = f"market-{event_number}"
+        event_id = f"event-{event_number}"
+        token = f"yes-{event_number}"
+        close = CLOSED + timedelta(days=event_number)
+        payout = Decimal(event_number % 2)
+        contracts.append(
+            PolymarketCorpusContract(
+                market_id=market_id,
+                event_id=event_id,
+                market_type="binary",
+                question=f"Question {event_number}?",
+                open_time=OPENED,
+                close_time=close,
+                outcomes=(
+                    PolymarketCorpusOutcome(0, "Yes", token, payout),
+                    PolymarketCorpusOutcome(1, "No", f"no-{event_number}", 1 - payout),
+                ),
+            )
+        )
+        resolutions.append(
+            PolymarketResolutionRecord(
+                market_id=market_id,
+                resolved_time=close + timedelta(hours=1),
+                payouts=(payout, 1 - payout),
+                oracle="uma",
+                question_id=f"question-{event_number}",
+                transaction_hash=f"tx-{event_number}",
+            )
+        )
+        prices.extend(
+            [
+                PolymarketPricePoint(
+                    market_id=market_id,
+                    outcome_index=0,
+                    outcome_token=token,
+                    observed_at=OPENED + timedelta(hours=point_number),
+                    price=Decimal("0.2") + Decimal("0.1") * point_number,
+                    fidelity=60,
+                )
+                for point_number in range(3)
+            ]
+        )
+    request = replace(_request(), max_markets=5)
+    return PolymarketCorpus(request, tuple(contracts), tuple(resolutions), tuple(prices))
+
+
+def test_development_analysis_hides_latest_whole_event_and_is_counterfactual_stable() -> None:
+    """Changing any protected value cannot affect a development capability or authored result."""
+    corpus = _event_grouped_corpus()
+    snapshot = PolymarketCorpusStore.from_corpus(corpus)
+    first = build_polymarket_development_analysis(snapshot, session_id="session")
+    source = """
+prices = read("polymarket-development-prices", "market_probability")
+labels = read("polymarket-development-outcomes", "resolution_payout")
+result = structured_return(
+    "Development-only means.",
+    {"price_mean": sum(prices) / len(prices), "label_mean": sum(labels) / len(labels)},
+)
+"""
+    first_result = first.run(source=source, session_id="session", action_id="first")
+
+    protected_market = corpus.contracts[-1]
+    changed_contract = replace(
+        protected_market,
+        outcomes=(
+            replace(protected_market.outcomes[0], payout=Decimal(1)),
+            replace(protected_market.outcomes[1], payout=Decimal(0)),
+        ),
+    )
+    changed_resolution = replace(corpus.resolutions[-1], payouts=(Decimal(1), Decimal(0)))
+    changed_prices = tuple(
+        replace(point, price=Decimal("0.99"))
+        if point.market_id == protected_market.market_id
+        else point
+        for point in corpus.prices
+    )
+    changed = replace(
+        corpus,
+        contracts=(*corpus.contracts[:-1], changed_contract),
+        resolutions=(*corpus.resolutions[:-1], changed_resolution),
+        prices=changed_prices,
+    )
+    second = build_polymarket_development_analysis(
+        PolymarketCorpusStore.from_corpus(changed),
+        session_id="session",
+    )
+    second_result = second.run(source=source, session_id="session", action_id="second")
+
+    assert first.partition.development_event_ids == tuple(f"event-{number}" for number in range(4))
+    assert first.partition.protected_event_count == 1
+    assert protected_market.market_id not in first.price_view.fields["market_id"]
+    assert first.price_view.fields == second.price_view.fields
+    assert first.outcome_view.fields == second.outcome_view.fields
+    assert first_result.status is AnalysisStatus.SUCCEEDED
+    assert first_result.details == second_result.details
+
+
+def test_development_analysis_denies_an_ungranted_field_before_disclosure() -> None:
+    """The sandbox cannot request a field absent from its exact development capability."""
+    analysis = build_polymarket_development_analysis(
+        PolymarketCorpusStore.from_corpus(_event_grouped_corpus()),
+        session_id="session",
+    )
+
+    result = analysis.harness.run(
+        AnalysisRequest(
+            session_id="session",
+            action_id="forged-field",
+            source=(
+                'result = structured_return("bad", '
+                'read("polymarket-development-outcomes", "question"))'
+            ),
+            data_access=(DataAccessRequest("polymarket-development-outcomes", ("question",)),),
+        )
+    )
+
+    assert result.status is AnalysisStatus.DENIED
+    assert result.provenance.accesses == ()
+
+
+def test_study_receipt_rejects_success_detail_left_only_in_ephemeral_artifact(
+    tmp_path: Path,
+) -> None:
+    """A command cannot call an in-memory-only large result reproducible evidence."""
+    analysis = build_polymarket_development_analysis(
+        PolymarketCorpusStore.from_corpus(_event_grouped_corpus()),
+        session_id="session",
+        resource_limits=ResourceLimits(max_inline_bytes=1),
+    )
+    source = """
+prices = read("polymarket-development-prices", "market_probability")
+result = structured_return("large", {"prices": prices})
+"""
+    observation = analysis.run(source=source, session_id="session", action_id="large")
+
+    assert observation.status is AnalysisStatus.SUCCEEDED
+    assert observation.details is None
+    with pytest.raises(ValueError, match="ephemeral artifact"):
+        run_corpus_studies._receipt_payload(  # noqa: SLF001
+            analysis=analysis,
+            source_path=tmp_path / "large.py",
+            source_sha256="source-sha",
+            observation=observation,
+        )

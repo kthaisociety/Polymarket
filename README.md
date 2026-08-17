@@ -226,6 +226,22 @@ contracts with exact event and settlement identity, and retains canonical conten
 The receipt contains identities, coverage, and caveats but no questions, prices, payouts, DSN, or
 credentials. Registration alone is not scientific evidence and does not expose a protected split.
 
+Run authored studies offline against an exact retained corpus:
+
+    uv run python -m research_agent.data_adapters.polymarket.run_corpus_studies \
+      --snapshot-sha256 <exact-sha256> \
+      --snapshot-size <exact-byte-count> \
+      --workspace <ignored-local-data-root> \
+      --source <authored-study.py> \
+      --receipt-directory <study-receipt-directory>
+
+This composition orders whole server event groups by recorded resolution time, exposes only the
+earlier development block to `AnalysisHarness`, and keeps the final chronological block out of all
+exploratory views. A successful receipt binds the partition, source, actual field accesses, and
+structured result. It remains development evidence and cannot authorize protected evaluation or
+validated question memory. The first real run and its development rejection are retained in the
+[resolution-probability study](studies/polymarket-resolution-research-2026-08-17/).
+
 ## Explore the architecture visually
 
 Start with the [documentation map](docs/README.md), then the

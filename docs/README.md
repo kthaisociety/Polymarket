@@ -59,6 +59,10 @@ If authoritative sources conflict, follow
 - The server now exposes append-only resolution timestamps, payouts, event identity, and historical
   sampled prices. The bounded corpus command retains exact bytes and registers separate predictor
   and label clocks, closing those former red gates for that retained corpus only.
+- The first retained-corpus study executed seven exact authored trials over 24 chronological
+  development events while keeping the final 7 events unavailable. The raw sampled probability
+  beat an unconditional baseline, but momentum and calibration adjustments failed grouped
+  walk-forward controls, so no protected request or validated-memory mutation occurred.
 - Historical executable quotes remain distinct from sampled probabilities. Live fill/cursor reads
   are still mutable unless separately retained, and development/protected composition must operate
   from the retained corpus rather than claiming the live database itself is immutable.
