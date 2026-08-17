@@ -179,6 +179,27 @@ is `human_ro`, transactions default to read-only, and the role lacks update/inse
 then reports only identities, counts, digests, vintage, and caveats. Without `BDL__DB__URL` it exits
 with `BLOCKED` and does not describe any fixture as live evidence.
 
+Run researcher-authored exploration over an exact legal view of a live registration:
+
+    PYTHONPATH=src:../../engine/src \
+      uv run python -m research_agent.data_adapters.polymarket.live_analysis \
+      --market-id <condition-id> \
+      --decision-time <timezone-aware-ISO-8601> \
+      --code <authored-analysis.py> \
+      --field trade_price \
+      --field signed_trade_size \
+      --field outcome_index \
+      --field reference_time_epoch_seconds \
+      --artifact-directory <explicit-output-directory> \
+      --receipt <sanitized-receipt.json>
+
+The command proves the same read-only database contract, registers the tape, builds an
+`InformationSet` at the explicit decision time, exposes only the requested view fields, and runs
+the unchanged code through `AnalysisHarness`. Large sandbox results are persisted only to the
+operator-selected artifact directory; authored code receives no filesystem path or capability.
+The receipt records actual accesses and exact data/code/result identities without credentials.
+Output remains `EXPLORATORY` and has no formal, protected, promotion, or durable-state authority.
+
 ## Explore the architecture visually
 
 Start with the [whole architecture map](docs/architecture/README.md). Each block begins with its

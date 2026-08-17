@@ -35,7 +35,8 @@ pythonpath = ["."]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-extend-exclude = ["archive", "data", "docs", "learning"]
+# Authored study programs retain the exact bytes hashed by their live research receipts.
+extend-exclude = ["archive", "data", "docs", "learning", "studies"]
 
 [tool.ruff.lint]
 select = ["ALL"]
