@@ -1,0 +1,21 @@
+{
+  "schema_version": "source-search-request/v1",
+  "request_id": "7b0b8100b870d32a733cb752e69ec6dbac6740def1ec3bf7c4a65539e7c131dd",
+  "research_question": "Can conservatively available official XTracker post counts support a structurally specified, chronologically evaluated probability model across the repeated development post-count bracket events?",
+  "data_need": "Official Polymarket XTracker post records for the seven July 21-28 development users, plus the White House July 24-31 window, with exact per-post creation and tracker-import timestamps and no post content in derived features.",
+  "search_queries": [
+    "Polymarket XTracker API CZ Zelenskyy NYC Mayor Khamenei Elon Musk Ted Cruz White House Donald Trump July 21 July 31 2026"
+  ],
+  "requirements": [
+    "Polymarket-operated documented public source",
+    "exact UTC market intervals",
+    "machine-readable immutable acquisition",
+    "per-post creation timestamp",
+    "per-post tracker import timestamp used as conservative availability",
+    "correct X or Truth Social platform",
+    "no credentials",
+    "development events only",
+    "source selection by semantic match rather than observed market performance"
+  ],
+  "max_candidates": 8
+}
