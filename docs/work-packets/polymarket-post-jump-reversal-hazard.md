@@ -117,3 +117,36 @@ evidence, snapshot/partition identity, and protected-exposure status. Developmen
 enter a provisional reflection or candidate lesson, but validated Hermes-style memory requires an
 independent learning authority and qualifying evidence; this study cannot self-promote.
 
+## Transition receipt
+
+- Status: **COMPLETE — DEVELOPMENT REJECTION WITH EXECUTION LEAD**.
+- Source SHA-256:
+  `25baa10e9273e19b8ff969e4e9f6659b2ccaf4110f6deb7e485feb34a68fcc3a`.
+- Receipt SHA-256:
+  `65e9a70ce16551f560b38d4e90155fa00fb25b00ddb3c95558fc8bcc7b73b442`.
+- Coverage: 715 eligible shocks; 589 OOF rows, 279 reversal-first/310 other, 77 markets,
+  and 15 test events. Largest market/event shares were 15.6%/46.3%.
+- Earlier-event rate observation/event-macro Brier was `0.25369/0.25255`. State/shock improved it
+  to `0.24577/0.24071`; full path-regime improved it further to `0.24312/0.23359` and won 10/15
+  events versus state/shock.
+- The full candidate still failed the fixed predictive gate: pooled AP slipped from state/shock
+  `0.57211` to `0.56786`, early-half event-macro Brier worsened from `0.23120` to `0.24971`, and
+  top-quintile lift `0.10751` missed the fixed `0.15` threshold. Event-macro AP improved to
+  `0.66697`, so the lead is mixed rather than empty.
+- The independently fixed sampled-price cost falsifier passed all of its clauses: 96 trades/10
+  events, observation/event-macro net `+0.01420/+0.01262` after one cent, 60% positive event
+  means, leave-one-event-out minimum `+0.00886`, and positive means after both shock signs.
+- Exactly five development price fields were accessed; protected exposure is false and formal
+  references/durable effects are empty.
+
+Because prediction and execution were conjunctive gates, the exact branch is not formalized,
+frozen, or sent to protected evaluation. The honest reusable lesson is provisional: internal
+state/shock variables contain cross-contract reversal-regime information and a cost-screened
+contrarian subset, but richer path features are unstable in the earlier half and do not yet clear
+the declared ranking threshold.
+
+The two post-shock receipts were also admitted through the learning service as a bounded
+provisional reflection and candidate skill
+`a42a22ca81c862cb5ee5e61ea81e8e86f1135593d4fe61754a3a828153b105ba`. Candidate receipt SHA-256 is
+`df00bad859f41bc8f24019f0efc61c6b1ce10fbb8bc3075ee072f4e4d023cac9`; validation and publication
+remain null by construction.
