@@ -14,9 +14,12 @@ research-family evaluation and broader scientific worker capability remain subse
 
 ## Project-local research guidance
 
-Three concise repository skills now guide Codex and other repository-aware researchers without
-changing the scientific runtime:
+One Polymarket startup skill and three stage-specific repository skills now guide Codex and other
+repository-aware researchers without changing the scientific runtime:
 
+- `.agents/skills/start-polymarket-research/` establishes exact contract/data/time scope, preserves
+  the adapter's unresolved label/group/snapshot gates, selects a falsifiable first question, and
+  routes to the smallest stage-specific skill;
 - `.agents/skills/analyze-time-series-data/` covers data meaning, time axes, coverage, missingness,
   revisions, aggregation, rival explanations, and traceable exploratory output;
 - `.agents/skills/design-time-series-feature-set/` covers target/label meaning, mechanism-driven
@@ -31,6 +34,11 @@ Each stable `SKILL.md` routes a short reasoning loop and exact output memo. Its
 must name a traceable general failure pattern, applicability, and counterexample; Git preserves the
 prior guidance. `AGENTS.md` routes project research to the smallest applicable skill and states the
 authority boundary explicitly.
+
+`docs/research-guidance/financial-machine-learning-ideas.md` retains optional sampling, labeling,
+overlap, transformation, ensemble, validation, feature-diagnostic, and tuning examples outside the
+default skill context. The active skills contain only selection prompts and authority constraints;
+the catalog is not a prescribed pipeline or architectural source.
 
 These files affect repository-aware Codex behavior only. The standalone provider/runtime does not
 currently discover repository skills or bind their versions into `ContextPacket`; implementing
@@ -224,4 +232,4 @@ uv run basedpyright src/research_agent/investigation tests/investigation \
   tests/integration/test_authored_protected_evaluation.py
 ```
 
-The complete canonical gate is `UV_CACHE_DIR=/tmp/insurance-uv-cache ./scripts/check.sh`.
+The complete canonical gate is `UV_CACHE_DIR=/tmp/chronos-uv-cache ./scripts/check.sh`.

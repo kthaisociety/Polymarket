@@ -29,22 +29,16 @@ exact resolution-availability rule.
 
 ## Instruction hierarchy
 
-Before modifying architecture or scientific behavior, read:
+Start at `docs/README.md` and load context by task. Do not bulk-read `docs/`.
 
-- `docs/architecture/README.md`;
-- the relevant block `README.md`, `transitions/README.md`, and `IMPLEMENTATION.md` under
-  `docs/architecture/`;
-- `CONTEXT.md`;
-- `docs/specification/DECISIONS.md`;
-- `docs/specification/INVARIANTS.md`;
-- the relevant approved contract under `docs/specification/contracts/`;
-- `docs/specification/ARCHITECTURE.md`;
-- `docs/specification/DATA_FLOW_AND_LIFECYCLE.md`;
-- the relevant subsystem document;
-- `docs/specification/TEST_STRATEGY.md`;
-- `docs/specification/ALIGNMENT_AND_DIAGRAMS.md`.
+Before modifying architecture or scientific behavior, always read `CONTEXT.md`, locked decisions,
+invariants, the architecture map, and the owning block's `README.md`, `transitions/README.md`,
+`IMPLEMENTATION.md`, and exact transition contract. Then load only the approved contract,
+cross-cutting specification, test strategy, or adjacent transition that governs an input, output,
+authority, time boundary, identity, state effect, or failure under change.
 
-Treat explicit LOCKED decisions, invariants, and approved contracts as authoritative. Do not
+Treat explicit LOCKED decisions, invariants, and approved contracts as authoritative. Follow
+`docs/specification/ALIGNMENT_AND_DIAGRAMS.md` when sources conflict. Do not
 reinterpret them merely to make implementation easier.
 
 Architectural transitions use semantic names such as `context.build-packet` and
@@ -67,6 +61,8 @@ test passes or its code runs.
 
 For repository-aware authored research, use the smallest applicable project skill:
 
+- `$start-polymarket-research` to establish exact live Polymarket scope, caveats, a falsifiable
+  opening question, and the next stage-specific skill;
 - `$analyze-time-series-data` for data meaning, coverage, anomalies, and exploratory questions;
 - `$design-time-series-feature-set` for target/label, feature-set, and candidate design or revision;
 - `$review-backtest-gate` before requesting freeze/protected evaluation and when interpreting its
@@ -74,8 +70,9 @@ For repository-aware authored research, use the smallest applicable project skil
 
 These skills guide researcher judgment and produce proposals or memos. They do not grant data
 access, formal identity, fitting authority, freeze, protected exposure, validation, promotion, or
-durable-memory authority. Update their principles only from traceable general failure modes, retain
-counterexamples, and preserve prior versions in Git.
+durable-memory authority. Financial method catalogs are optional idea menus, not default pipelines.
+Update principles only from traceable general failure modes, retain counterexamples, and preserve
+prior versions in Git.
 
 ## Working agreement
 

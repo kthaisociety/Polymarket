@@ -12,7 +12,8 @@ Core scientific objective:
 \boxed{\text{Given information available at }t,\text{ discover whether anything predicts }y_{t+h}.}
 \]
 
-Insurance is the first concrete `ResearchTask`; Polymarket/trading is a natural second use case. They are not separate domain adapters by default.
+Chronos's first live adapter is Polymarket; its originating Insurance application is recorded in
+`VENDORED_FROM.md`. They use the same scientific kernel rather than separate domain kernels.
 
 Do not introduce a separate `DomainAdapter` **or `DomainResearchSpec`** layer merely because the target/data semantics differ. The same research kernel receives a different `ResearchTask`, datasets, hypotheses, evaluation criteria, and report framing.
 

@@ -9,12 +9,14 @@ This block implements the missing semantic bridge between exploratory interpreta
 existing deterministic formalization/development/protected machinery. It is explicitly not a
 catalog of domain-specific analysis tools.
 
-Repository-aware researchers may load three small, versioned guidance skills. The skills improve
-scientific judgment but remain outside every authority boundary:
+Repository-aware researchers may begin with one Polymarket scope router and then load the smallest
+of three stage-specific, versioned guidance skills. The skills improve scientific judgment but
+remain outside every authority boundary:
 
 ```mermaid
 flowchart LR
-    Q["Research question"] --> AS["analyze-time-series-data"]
+    Q["Polymarket research mandate"] --> PS["start-polymarket-research"]
+    PS --> AS["analyze-time-series-data"]
     AS --> AE["Exploratory evidence"]
     AE --> FS["design-time-series-feature-set"]
     FS --> C["Authored candidate proposal"]

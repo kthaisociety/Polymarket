@@ -122,5 +122,5 @@ paired-world adapter and deletion mutations are registered.
 - Scope: scientific-library breadth is a separate OS-isolated worker implementation red. The eval
   must not weaken sandboxing or add a method-specific action to make a family solvable.
 
-This design does not prove real-model quality, scientific-library availability, valid insurance
+This design does not prove real-model quality, scientific-library availability, valid live
 backtesting, live provider compatibility, or production containment.

@@ -1,4 +1,4 @@
-# Insurance project fundamentals
+# Chronos project fundamentals
 
 Use this as a routing map, not a substitute for the authoritative repository sources. Follow the cited source when a principle governs the seam under review.
 

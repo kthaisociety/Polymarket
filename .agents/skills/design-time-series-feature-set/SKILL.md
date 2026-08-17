@@ -31,6 +31,10 @@ candidate. Treat it as guidance; the harness remains the authority for legality 
 7. Create a new version with parent-trial ancestry for every meaning-changing revision. Retain
    failed and rejected variants.
 
+When the mechanism calls for additional financial-market alternatives, consult only the relevant
+section of the [optional idea catalog](../../../docs/research-guidance/financial-machine-learning-ideas.md).
+Choose examples because they sharpen a falsifier, never because they appear in the catalog.
+
 ## Return a candidate memo
 
 Return:

@@ -179,7 +179,7 @@ E(BacktestRun, EvaluationSpec)\rightarrow EvaluationReport
 
 The evaluator is a generic mechanism. `EvaluationSpec` defines the task-specific metrics, benchmarks, slices, and robustness views.
 
-Possible insurance metrics:
+Possible continuous-forecasting metrics:
 
 - MAE/RMSE;
 - benchmark improvement;
@@ -225,7 +225,7 @@ quality, calibration where meaningful, temporal/regime stability, error and miss
 concentration in a few dates/entities/outliers, benchmark and ablation comparisons, uncertainty,
 coverage/failure counts, and sensitivity to defensible scenario choices. Trading-only quantities
 such as PnL, turnover, drawdown, or Sharpe-family statistics are supplied by a trading downstream
-task; they are not kernel requirements for insurance or other forecasting tasks.
+task; they are not kernel requirements for probability or other forecasting tasks.
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: execute-work-packet
-description: Scope, solve, validate, and close one bounded Insurance project problem while preserving global architectural context and recording a durable state handoff. Use for material implementation, refactoring, debugging, or architecture work that can be expressed as one semantic transition or similarly coherent responsibility, especially when an agent must work through a larger plan in successive verifiable boxes. Do not use for simple read-only questions or trivial local edits.
+description: Scope, solve, validate, and close one bounded Chronos project problem while preserving global architectural context and recording a durable state handoff. Use for material implementation, refactoring, debugging, or architecture work that can be expressed as one semantic transition or similarly coherent responsibility, especially when an agent must work through a larger plan in successive verifiable boxes. Do not use for simple read-only questions or trivial local edits.
 ---
 
 # Execute Work Packet

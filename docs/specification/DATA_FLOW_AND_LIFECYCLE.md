@@ -358,20 +358,30 @@ durable state + active research episode + evidence refs + permissions
 
 The model receives enough to choose the next action and can pull more through retrieval. Omitting a large table from context does not delete the artifact. The reasoning surface stays narrow while accessible knowledge stays broad.
 
-## 11. Actual retained-data implications
+## 11. Actual Polymarket data implications
 
-The retained data includes monthly, quarterly, and annual predictors, raw source responses, and clean long-format CSVs. This creates concrete requirements:
+The current live adapter registers contract metadata and taker-side fills from the production
+database. This creates concrete requirements:
 
-1. **Dataset registration is required.** File paths and columns cannot be permanent scientific identities.
-2. **Availability policies are required.** Clean files cannot be assumed to provide trustworthy `available_at` values. Source-specific release/vintage rules must be registered or data is ineligible for historical simulation.
-3. **Mixed-frequency alignment is explicit.** As-of joins, release lags, aggregation, carry-forward, and interpolation behavior are feature/target semantics, never silent conveniences.
-4. **Revision/vintage limitations remain visible.** Missing historical vintages become caveats, not hidden assumptions.
-5. **Raw and clean roles differ.** Raw supports provenance; clean supports analysis. Cleaning does not grant temporal admissibility.
+1. **Dataset registration is required.** Database rows, table names, and contract aliases cannot be
+   permanent scientific identities.
+2. **Availability policies are required.** `fill_time` is usable as `available_at` only under the
+   explicit on-chain block-inclusion observability rule. It does not prove collector receipt or
+   confirmation time.
+3. **Outcome mapping is explicit.** Outcome indices, complement/YES-equivalent mappings,
+   aggregation, and activity clocks are authored feature/target semantics, never silent
+   conveniences.
+4. **Cursor vintage limitations remain visible.** Cursor bounds and digests detect changed reads
+   but cannot reconstruct immutable prior database bytes.
+5. **Contract and event identity differ.** Exact contract identity is registered; question text and
+   authoritative event/group identity are not currently available to Chronos.
 6. **Protected status is metadata backed by governed content identity.** File location alone does
    not decide development versus protected evidence, but identical or already accessible bytes
    cannot be relabeled fresh through another path/resource ID. Protected registration carries an
    authority-verified content manifest, epistemic-period identity, and unseen/`PREEXPOSED` status.
-7. **A real target is not yet identified.** The first insurance task needs an internal claims/KPI target, horizon, maturity rule, and authorization—or an explicitly synthetic/proxy target for architecture testing.
+7. **A legal resolution target is not yet available.** Current payout metadata lacks the exact
+   historical resolution-availability rule required for honest labels. Later transaction-state
+   targets remain exploratory and exposed to microstructure mechanics.
 8. **Secrets are not scientific data.** Credentials/API secrets must be removed from the data surface and supplied through a separate capability/secret mechanism before sandbox integration.
 
 ## 12. First vertical slices
@@ -404,18 +414,19 @@ registered synthetic observations with delayed availability
 
 Only then add a fitted predictive system.
 
-## 13. Decisions required before a real insurance run
+## 13. Decisions required before a real protected Polymarket run
 
-1. What exact insurance KPI is the first target?
-2. What downstream decision is the prediction intended to inform?
-3. What are the horizon and decision-time cadence?
-4. When does each target label become legally complete?
-5. Which slice is development evidence and which is protected?
-6. Which predictors have reliable historical release/vintage information?
-7. What mixed-frequency, missingness, and revision policies are acceptable?
-8. What evaluation views and promotion thresholds are predeclared?
+1. What exact contract population, event grouping, decision, and target are being studied?
+2. What is the prediction horizon and decision-time/activity cadence?
+3. When does each target label become legally complete and publicly available?
+4. What immutable source-byte or database-snapshot identity reconstructs every historical view?
+5. Which period/resource is development evidence and which is independently protected?
+6. Are historical fills sufficient, or does the claim require registered quote/order-book state?
+7. What missingness, sparse-print, boundary-price, and outcome-mapping policies are declared?
+8. What evaluation views, baselines, failure rules, and promotion thresholds are predeclared?
 
-Until these are answered, the runtime can be implemented and tested, but a scientifically valid real insurance backtest cannot be claimed.
+Until these are answered and registered, exploratory live analysis is valid but a scientifically
+valid real protected Polymarket backtest cannot be claimed.
 
 ## 14. Completion trace
 

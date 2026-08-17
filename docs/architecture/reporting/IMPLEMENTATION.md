@@ -38,7 +38,7 @@ uv run basedpyright src/research_agent/reporting tests/reporting
 The adversarial suite covers exact machine round trips, multiple presentations sharing one
 scientific fingerprint, attempted claim/metric/caveat replacement, omitted and reordered caveats,
 forged rehashed findings without publication authority, mismatched canonical evidence, rejected
-validation decisions, and a domain-neutral finding without insurance or trading fields.
+validation decisions, and a domain-neutral finding without downstream business or trading fields.
 
 ## Remaining reds and deliberate limits
 

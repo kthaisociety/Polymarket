@@ -27,6 +27,10 @@ it as versioned research guidance, not evidence and not executable authority.
 6. Separate observed facts from interpretations and hypotheses. Propose the next falsifying
    analysis, candidate-design step, or explicit stop.
 
+When a financial-market question needs more alternatives, consult only the relevant section of the
+[optional idea catalog](../../../docs/research-guidance/financial-machine-learning-ideas.md). The
+catalog is a menu of probes, not a workflow to exhaust.
+
 ## Return an analysis memo
 
 Return:

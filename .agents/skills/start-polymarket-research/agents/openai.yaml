@@ -1,0 +1,4 @@
+interface:
+  display_name: "Start Polymarket Research"
+  short_description: "Begin a governed Polymarket study"
+  default_prompt: "Use $start-polymarket-research to scope and begin an authorized Polymarket study."

@@ -1,6 +1,6 @@
 ---
 name: fundamentals-review
-description: Independently critique one provisional Insurance architectural seam contract against the repository's locked fundamentals, authority hierarchy, canonical vocabulary, creativity gradient, failure semantics, and mutation-sensitive test standard. Use after seam-review produces a provisional contract and before grill-with-docs or human arbitration. Do not use to design, lock, reconcile, implement, or edit seams.
+description: Independently critique one provisional Chronos architectural seam contract against the repository's locked fundamentals, authority hierarchy, canonical vocabulary, creativity gradient, failure semantics, and mutation-sensitive test standard. Use after seam-review produces a provisional contract and before grill-with-docs or human arbitration. Do not use to design, lock, reconcile, implement, or edit seams.
 ---
 
 # Fundamentals Review

@@ -50,11 +50,12 @@ def test_backtest_skill_cannot_self_authorize_or_tune_on_protected_results() -> 
     assert "The backtest engine records what happened" in principles
 
 
-def test_agents_routes_three_skills_without_transferring_authority() -> None:
-    """Repository routing names the skills without granting their outputs authority."""
+def test_agents_routes_research_skills_without_transferring_authority() -> None:
+    """Repository routing names startup/stage skills without granting output authority."""
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
 
     for skill in (
+        "$start-polymarket-research",
         "$analyze-time-series-data",
         "$design-time-series-feature-set",
         "$review-backtest-gate",
@@ -62,6 +63,44 @@ def test_agents_routes_three_skills_without_transferring_authority() -> None:
         assert skill in agents
     assert "These skills guide researcher judgment" in agents
     assert "They do not grant data" in agents
+
+
+def test_polymarket_startup_is_lean_optional_and_fail_closed() -> None:
+    """Startup guidance preserves real adapter reds without prescribing a finance recipe."""
+    skill = _read("start-polymarket-research")
+    boundary = _read("start-polymarket-research", "references/polymarket-boundary.md")
+
+    assert "Do not load it by default" in skill
+    assert "menu of possible probes" in skill
+    assert "$analyze-time-series-data" in skill
+    assert "$design-time-series-feature-set" in skill
+    assert "$review-backtest-gate" in skill
+    assert "human_ro" in boundary
+    assert "not resolution-availability time" in boundary
+    assert "do not reconstruct immutable prior" in boundary
+    assert "Event/group identity is unavailable" in boundary
+    assert "write terminal question memory" in boundary
+
+
+def test_financial_method_examples_remain_optional_and_fold_legal() -> None:
+    """Financial ideas expand creativity without becoming mandatory defaults."""
+    catalog = (ROOT / "docs/research-guidance/financial-machine-learning-ideas.md").read_text(
+        encoding="utf-8"
+    )
+    combined = "\n".join(
+        _read(skill, "references/principles.md")
+        for skill in (
+            "analyze-time-series-data",
+            "design-time-series-feature-set",
+            "review-backtest-gate",
+        )
+    )
+
+    assert "optional research guidance" in catalog
+    assert "Do not assemble every section into a canonical pipeline" in catalog
+    assert "fit transformation parameters inside legal folds" in combined
+    assert "No family is a default" in combined
+    assert "Add embargo only for a named" in combined
 
 
 def test_skill_feedback_requires_traceable_generalization_and_counterexample() -> None:

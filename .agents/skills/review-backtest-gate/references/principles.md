@@ -45,3 +45,16 @@
 - A promoted scientific finding remains conditional on its historical world and assumptions; it is
   not automatically a business decision or timeless causal truth.
 - A rejection remains useful history and may motivate a new, explicitly descended candidate.
+
+## Optional financial-model challenges
+
+- Verify that any activity/event sampling rule, transformation order, overlap weight, resampling
+  scheme, ensemble composition, feature diagnostic, and hyperparameter search was fixed or learned
+  inside its declared boundary.
+- Purge exact overlapping label intervals. Add embargo only for a named residual dependence threat;
+  neither repairs non-point-in-time data.
+- Treat out-of-bag scores, in-sample importance, repeated development folds, and the selected metric
+  as exposed evidence. Challenge correlated substitutes, unstable interactions, and hidden trials.
+- Probability loss, calibration, classification, continuous error, and economic metrics answer
+  different questions. Require the metric and claim to match without adding undeclared execution
+  assumptions.

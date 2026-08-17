@@ -28,6 +28,10 @@ interpreting protected evidence.
 5. State what result would falsify the candidate. Recommend `REVISE`, `REJECT`, or
    `REQUEST_INDEPENDENT_ASSESSMENT`; never recommend approval by the benefiting actor.
 
+Use the [optional financial-ML catalog](../../../docs/research-guidance/financial-machine-learning-ideas.md)
+only to challenge a specific sampling, overlap, model, importance, or tuning choice. Its examples do
+not add requirements beyond the candidate's claim and the harness contract.
+
 ## Interpret after exposure
 
 Verify the immutable run and report identities. Interpret headline quality together with coverage,

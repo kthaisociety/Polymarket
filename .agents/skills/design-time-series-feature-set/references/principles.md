@@ -46,3 +46,16 @@
 - Reject or revise when signal is concentrated, unstable, baseline-inferior, leakage-sensitive, or
   dependent on an unexplained transformation.
 - Never promote the best-looking trial merely because the budget ended.
+
+## Optional candidate structures
+
+- Labels may use fixed horizons, first path conditions, continuous future state, or selective
+  primary/secondary decisions. Each expresses a different question and maturity interval.
+- Overlapping label intervals can motivate concurrency diagnostics, uniqueness weights, purging,
+  or block-aware sampling. Weighting changes the estimand and needs an unweighted comparison.
+- Raw levels, changes, bounded-space transforms, rolling normalization, and fractional-memory
+  transforms are alternatives. Select or fit transformation parameters inside legal folds.
+- Simple regularized learners, bagged learners, random feature ensembles, boosting, and authored
+  ensembles trade bias, variance, and selection exposure differently. No family is a default.
+- Impurity, out-of-fold permutation/ablation, single-feature, grouped, and orthogonal diagnostics
+  ask different importance questions. Preserve substitution, interaction, and instability evidence.

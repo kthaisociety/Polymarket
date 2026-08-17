@@ -26,7 +26,7 @@ The researcher may author open-ended computation. The sandbox owns data scope, r
 effects, and provenance. Exploratory output does not become a formal feature, label, fitted model,
 protected result, finding, or durable belief merely because the code ran.
 
-Chronos deliberately carries no bundled insurance study, EIOPA adapter, or copied source dataset.
+Chronos deliberately carries no copied source-repository study, source-specific adapter, or dataset.
 Polymarket values enter through the data-foundation registration boundary and then use this same
 domain-neutral analysis surface. The retained Polymarket study under
 `studies/polymarket-flow-2026-08-17/` is authored research evidence, not a hard-coded feature tool:

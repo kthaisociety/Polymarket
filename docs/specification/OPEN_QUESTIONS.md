@@ -58,7 +58,8 @@ Purging/embargo/CPCV are optional only when the target/label structure creates t
 
 ## 11. EvaluationSpec schema
 
-It must support multidimensional, task-specific metrics/benchmarks/robustness checks. Exact field structure should emerge from the first insurance and market tasks.
+It must support multidimensional, task-specific metrics/benchmarks/robustness checks. Exact field
+structure should continue to emerge from live Polymarket work and later domain applications.
 
 ## 12. Trial-count/multiple-testing formalism
 
@@ -94,4 +95,5 @@ The evaluation scenario must provide explicit decision times. Whether those are 
 
 ## 19. Domain-exclusive downstream modules
 
-Trading execution/allocation or insurance action policies sit after prediction/validated finding. Add them only as separate downstream capabilities when required.
+Trading execution/allocation or other domain action policies sit after prediction/validated
+finding. Add them only as separate downstream capabilities when required.

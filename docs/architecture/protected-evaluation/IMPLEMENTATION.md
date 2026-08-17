@@ -196,7 +196,7 @@ frozen procedure is a failed execution, not a convenient continuation.
   input runs were predeclared.
 
 Task-specific measures remain plugins to this contract. Classification metrics, distributional
-scores, or insurance loss/calibration measures may be appropriate for one target. PnL, drawdown,
+scores, or continuous-forecast loss/calibration measures may be appropriate for one target. PnL,
 turnover, Sharpe-family measures, probabilistic/deflated Sharpe, or probability-of-overfitting
 estimates are appropriate only when the downstream task and their assumptions justify them. Even
 when no numerical multiple-testing correction is applicable, the number and ancestry of tried

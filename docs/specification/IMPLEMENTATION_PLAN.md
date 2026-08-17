@@ -225,19 +225,20 @@ Do not let this subsystem destabilize the first scientific kernel.
 
 ---
 
-## 12. First real task
+## 12. First live task
 
-Use the first insurance predictive-research task as the primary integration forcing function:
+Use Polymarket contract time series as the primary live integration forcing function:
 
-- target: an internal claims/KPI time series chosen by the concrete task;
-- candidate external/internal time series;
-- discover predictive features;
-- development validation;
-- one protected-style backtest workflow;
-- multidimensional evaluation;
-- promoted/rejected finding trail.
+- exact contract identities and registered fill histories;
+- open-ended exploratory questions and falsifiers;
+- authored labels/features/models when legal targets exist;
+- temporal development validation and retained negative trials;
+- independently governed protected evaluation only after immutable inputs, label availability, and
+  event/group identity are resolved;
+- multidimensional evidence and an issued finding/rejection trail.
 
-The purpose is not to maximize model performance initially. It is to expose failures in the autonomous research architecture.
+The purpose is not to maximize model performance initially. It is to expose failures in the
+autonomous research architecture without overstating the current data boundary.
 
 ---
 

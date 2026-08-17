@@ -51,7 +51,8 @@ gate over a frozen candidate—not another tuning fold.
 
 ```mermaid
 flowchart LR
-    QUESTION["Research question"] --> DATA_SKILL["Analyze time-series data"]
+    QUESTION["Polymarket research mandate"] --> START["Start Polymarket research"]
+    START --> DATA_SKILL["Analyze time-series data"]
     DATA_SKILL --> CODE["Researcher writes arbitrary analysis code"]
     CODE --> SANDBOX["Capability-constrained execution"]
     SANDBOX --> OBS["Provisional evidence and actual provenance"]
@@ -64,9 +65,13 @@ flowchart LR
     GATE_SKILL --> REQUEST["Request independent assessment"]
 ```
 
-The three guidance skills are editable Markdown under [`.agents/skills/`](.agents/skills/). They
+The concise startup and three stage-specific guidance skills are editable Markdown under
+[`.agents/skills/`](.agents/skills/). The startup skill preserves the live Polymarket boundary and
+routes optional examples from the larger
+[financial-ML idea catalog](docs/research-guidance/financial-machine-learning-ideas.md). These files
 improve research judgment but cannot authorize data, fitting, freeze, protected access, validation,
-promotion, or memory.
+promotion, or memory. The standalone provider does not currently inject repository skills into its
+context automatically.
 
 ## What is implemented
 
@@ -112,8 +117,7 @@ uv run research-agent ui
 Then visit `http://127.0.0.1:8765/`.
 
 The CLI also exposes generic retained-data operations through `research-agent data`. Polymarket
-research begins from the production database adapter, not from an external insurance dataset or a
-copied CSV.
+research begins from the production database adapter, not from a copied external dataset.
 
 ## Polymarket research boundary
 
@@ -199,10 +203,14 @@ the unchanged code through `AnalysisHarness`. Large sandbox results are persiste
 operator-selected artifact directory; authored code receives no filesystem path or capability.
 The receipt records actual accesses and exact data/code/result identities without credentials.
 Output remains `EXPLORATORY` and has no formal, protected, promotion, or durable-state authority.
+Retained live analyses and negative results are indexed in the
+[exploratory research ledger](studies/README.md); that ledger does not replace terminal runtime
+question memory.
 
 ## Explore the architecture visually
 
-Start with the [whole architecture map](docs/architecture/README.md). Each block begins with its
+Start with the [documentation map](docs/README.md), then the
+[whole architecture map](docs/architecture/README.md). Each block begins with its
 first principle and Mermaid diagram, then links to implementation status and exact transition
 contracts.
 

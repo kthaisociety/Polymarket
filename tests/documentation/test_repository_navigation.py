@@ -6,6 +6,7 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[2]
 README = ROOT / "README.md"
+DOCS_README = ROOT / "docs" / "README.md"
 ARCHITECTURE = ROOT / "docs" / "architecture"
 EXPECTED_ROOT_MERMAID_BLOCKS = 4
 EXPECTED_ROOT_FENCE_MARKERS = 16
@@ -51,6 +52,36 @@ def test_root_readme_local_links_resolve() -> None:
     """Every local entry-point link must reach a current file or directory."""
     for target in _local_links(README.read_text(encoding="utf-8")):
         assert (ROOT / target).exists(), target
+
+
+def test_docs_index_bounds_context_and_classifies_records() -> None:
+    """The documentation entry point prevents historical records becoming default context."""
+    content = DOCS_README.read_text(encoding="utf-8")
+
+    assert "Do not bulk-load `docs/`" in content
+    assert "Canonical authority" in content
+    assert "Historical/provisional" in content
+    assert "not replacement authority" in content
+    assert "$start-polymarket-research" in content
+    for target in _local_links(content):
+        assert (DOCS_README.parent / target).exists(), target
+
+
+def test_active_skill_copy_uses_chronos_identity() -> None:
+    """Vendored Insurance wording cannot remain in active skill metadata."""
+    active = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in (
+            ROOT / ".agents/skills/execute-work-packet/SKILL.md",
+            ROOT / ".agents/skills/fundamentals-review/SKILL.md",
+            ROOT / ".agents/skills/fundamentals-review/references/project-fundamentals.md",
+            ROOT / ".agents/skills/fundamentals-review/agents/openai.yaml",
+        )
+    )
+
+    assert "Chronos" in active
+    assert "Insurance project" not in active
+    assert "Insurance architectural" not in active
 
 
 def test_every_linked_architecture_block_starts_with_mermaid() -> None:

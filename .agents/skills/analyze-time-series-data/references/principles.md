@@ -42,3 +42,29 @@
 - Keep failed analyses and surprising nulls; they constrain the next hypothesis.
 - Stop when semantics or availability are unresolved enough that calculation would manufacture
   precision.
+
+## Optional market-data probes
+
+- Irregular observations may be viewed on clock-time, trade-count, size, notional, imbalance, run,
+  or event-triggered clocks. Compare a view only when its clock matches a named mechanism.
+- Path excursions, activity bursts, price-boundary regimes, interarrival times, and outcome-leg
+  mappings are possible exploratory lenses, not required features.
+- Apparent transaction-price predictability needs rival checks for spread bounce, aggressor
+  direction, matching fragmentation, sparse prints, and a small number of dominant contracts.
+- A transform such as differencing, logit mapping, rolling normalization, or fractional memory is
+  a hypothesis about what information to retain. Diagnose warm-up, boundary behavior, and stability
+  before formalizing it.
+
+## Learned failure pattern: transaction-direction reversal
+
+- Failure evidence: the traced
+  [Polymarket method-probe study](../../../../studies/polymarket-method-probes-2026-08-17/)
+  found raw imbalance/reversal correlations around `-0.46` to `-0.48` that became only `+0.04` to
+  `+0.05` after a two-sided transaction-price control; raw one-fill reversal also collapsed on
+  separate aggressor paths.
+- General principle: before treating signed flow, runs, rolling deviations, or memory transforms as
+  predictive, compare same-aggressor paths or a legal direction-neutral price state. Record whether
+  the transformation merely amplifies bid/ask bounce or side switching.
+- Counterexample: a genuine state response may survive a registered quote-midpoint label,
+  same-direction paths, multiple activity clocks, chronological splits, and unrelated event groups.
+  Do not reject such a result merely because raw prints also exhibit bounce.
