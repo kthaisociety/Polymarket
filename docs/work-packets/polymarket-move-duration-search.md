@@ -143,3 +143,13 @@ control or feature compression; it does not authorize formalization, freezing, o
    `frozen-system:65af99a116e6ddabc965b7317ac18162665d05501f0fb77aec6b6b2a6ac19c42`.
    The receipt records `protected_values_exposed=false` and `protected_backtest_run=false`; freezing
    the development identity does not itself authorize or execute protected evaluation.
+10. The required backtest-gate audit found source 04's readable protocol aliases cannot resolve to
+    the content identities required by an authority-issued `AuthoredProtectedPlan`. Frozen system
+    `65af99a1…` remains immutable but is not protected-ready. Source 05 is fixed at SHA-256
+    `be6215c4fe5f3ae0d4d8e46e5a490499995bf7cc7febe13c7bcfcfa5abf885d5`. Before replay it
+    constructs and authority-issues the exact historical scenario, decision sequence, expanding
+    training candidates, full retained-corpus manifest/scope, MAE/MSE/coverage/failure evaluation,
+    numerical promotion standard, and bounded claim. It must reproduce the exact candidate and
+    development evidence, obtain a new independent freeze over those actual identities, and pass
+    independent governance before the loader is invoked. Loader invocation is irreversible
+    disclosure; every declared protected decision and failure must remain in the sealed report.

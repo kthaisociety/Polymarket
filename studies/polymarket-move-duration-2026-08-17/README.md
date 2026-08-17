@@ -1,6 +1,7 @@
 # Time to next meaningful probability move
 
-Epistemic status: **FROZEN DEVELOPMENT CANDIDATE — PROTECTED DATA UNEXPOSED**.
+Epistemic status: **FROZEN DEVELOPMENT CANDIDATE — EXACT PROTECTED PLAN REPLAY REQUIRED —
+PROTECTED DATA UNEXPOSED**.
 
 This study asks whether legal decision-time path persistence predicts elapsed time until the next
 retained Polymarket probability at least two cents away from its current level. It does not predict
@@ -81,6 +82,13 @@ An independently identified freeze authority accepted the predeclared gate and s
 `frozen-system:65af99a116e6ddabc965b7317ac18162665d05501f0fb77aec6b6b2a6ac19c42`.
 This is a frozen development identity, not protected validation or a trading claim. No protected
 values were loaded and no protected backtest was run.
+
+A subsequent [backtest-gate audit](../../docs/work-packets/polymarket-move-duration-protected-gate.md)
+found that source 04 froze readable protocol aliases rather than the content identities required by
+an authority-issued `AuthoredProtectedPlan`. Chronos correctly cannot resolve those aliases into a
+protected request. The scientific candidate remains frozen, but this frozen protocol binding is not
+protected-ready. The unchanged development ancestry must be replayed with the exact issued plan
+identities and independently frozen again; the existing frozen identity may not be edited.
 
 The exact three-model run took about 38 minutes because every feature, label, fit, and prediction
 phase starts a separate constrained worker. That is a demonstrated autonomous-loop throughput seam,
