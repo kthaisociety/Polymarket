@@ -60,3 +60,12 @@ Exactly five permitted price fields were accessed. Resolution outcomes, question
 metadata, all 31 ancestor events, and all 47 protected events were absent; protected exposure is
 false. This is a fixed-horizon, selection-exposed development confirmation of a cross-contract
 statistical mechanism. It is not quote-validated execution evidence and not protected validation.
+
+## Frozen formal trial
+
+After the exploratory result, a separate formal plan was fixed at checkpoint `50db42dd`. It uses
+one earliest eligible shock per market and delegates exact label-maturity filtering to the authored
+development evaluator. This addresses overlapping event lifetimes and tests online cross-contract
+prediction; it does not claim the exploratory resolution-ordered folds were already formal.
+
+The exact formal source, candidate identities, and outcome will be retained here after execution.

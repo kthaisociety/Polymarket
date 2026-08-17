@@ -123,3 +123,30 @@ control showed useful state ranking but no incremental support for the full path
 five development price fields were accessed; all ancestor and protected events remained absent.
 Under the predeclared decision, the fixed-horizon reversal target advances to authored-candidate
 construction without protected exposure.
+
+## Formal authored trial predeclaration
+
+Predeclaration checkpoint: `bdl-polymarket@50db42dd`.
+
+The exploratory whole-event fold orders events by authoritative resolution chronology, but its
+authored code does not independently prove that every earlier event label matured before every
+later event decision. The formal trial therefore tests a narrower, strictly time-legal online
+claim rather than treating the exploratory receipt as formal evidence.
+
+- Use the same fresh-only catalog and fixed 21-hour label, with no ancestor/protected rows.
+- Select the earliest eligible shock per market under the exact population and coverage rules.
+  This removes repeated-market dependence and is fixed without inspecting model performance.
+- Let `AuthoredDevelopmentEvaluator` admit a training row only after its exact 21-hour label has
+  matured at the validation decision. The evaluator's chronological replay may use matured rows
+  from another contract in the same event; the formal claim is online cross-contract prediction,
+  not untouched-event generalization.
+- Compare an earlier, event-equal reversal-rate program with the fixed six-feature event-equal
+  ridge-logistic program. Both author the same feature and label functions; only fit/predict differ.
+- Require at least 200 OOF rows, 100 markets, 30 events, and 75 observations in each class. The
+  candidate must beat rate under observation and event-macro Brier, early and late event-macro
+  Brier, pooled and event-macro average precision, and at least 60% of represented events. Mean
+  prediction must be within `.10` of incidence, top-quintile lift at least `.08`, and maximum event
+  share no more than 20%. Absolute Brier must be no greater than `.245`.
+- Failure is a formal development rejection or revision and downgrades the fixed-horizon lead. A
+  pass publishes exact candidate/trial/evidence identities but does not itself freeze, expose, or
+  validate protected data.
