@@ -100,6 +100,28 @@ result = structured_return("pure logit", {"logit": logit, "recovered": recovered
     assert observation.details["recovered"] == pytest.approx(0.25)
 
 
+def test_pure_sqrt_supports_authored_statistical_diagnostics() -> None:
+    """Researchers can normalize a statistic without gaining a host interface."""
+    observation = _harness().run(
+        _request(
+            """
+values = read("development-view", "signal")
+root_sum_of_squares = sqrt(sum(value * value for value in values))
+result = structured_return(
+    "pure square root", {"root_sum_of_squares": root_sum_of_squares}
+)
+""",
+            "signal",
+        )
+    )
+
+    assert observation.status is AnalysisStatus.SUCCEEDED
+    assert observation.details == {"root_sum_of_squares": pytest.approx(14.0**0.5)}
+    assert [(access.view_id, access.field_id) for access in observation.provenance.accesses] == [
+        ("development-view", "signal")
+    ]
+
+
 def test_policy_denies_requested_field_without_exposing_values() -> None:
     """Policy denial occurs without returning the requested field value."""
     harness = _harness()
