@@ -68,8 +68,10 @@ co-movement hypothesis and does not assume event contracts are exhaustive or mut
 - The one allowed compression trial selected the 14-feature `sibling_state` recipe: six target-path
   features plus sibling count, mean, maximum, minimum, dispersion, sum, target-minus-mean, and
   target rank. Sibling motion was rejected and is not carried forward.
-- The selected recipe may proceed to an exact authored formal candidate; failed labels and feature
-  groups are retained and are not retuned inside this packet.
+- The selected recipe proceeded to exact authored formal replay and failed. Across 413 OOF
+  predictions/20 event groups it worsened observation MSE (`0.00605519` versus `0.00601997`) and
+  event-macro MSE (`0.00892503` versus `0.00883438`), worsened both chronological halves, and won
+  only 8/20 events. The branch is retained as a formal development rejection and is not retuned.
 - Ruff, strict typing, relevant tests, and coherent local commit remain green. No push or protected
   evaluation occurs.
 
@@ -96,3 +98,31 @@ co-movement hypothesis and does not assume event contracts are exhaustive or mut
    dimension absent from the field schema, public action decoding, and unchanged protected replay.
    The complete Chronos suite passes with 448 tests; Ruff and strict basedpyright are clean. This
    changes access mechanics only and does not make the sibling-state recipe credible by itself.
+4. The formal replay is fixed before execution. It uses at most the first and last legal decision
+   per development market to keep worker cost bounded while preserving at least 200 chronological
+   OOF predictions. A decision requires the same 24-point/18–30-hour target history and original
+   sibling-alignment cohort, plus a target observation 4.5–6 elapsed hours ahead so the authored
+   six-hour horizon and exploratory label agree. The exact rivals are event-equal ridge `0.1` over
+   the six target features and the selected 14-feature sibling-state recipe. The selected recipe
+   must have MSE at most `0.003`, beat target-only under observation and event-macro weighting,
+   improve both chronological event halves, win at least 60% of evaluated events, and have no one
+   event supply more than half its positive event-level improvement. Failure is retained; there is
+   no additional model or subset trial in this packet.
+5. Formal attempt 04 failed before any candidate metric because 305 declared keys yielded fewer
+   than the required 200 label-matured chronological OOF predictions. The source and failure
+   receipt are retained; the sibling-state candidate never executed. One coverage-only revision is
+   allowed: use first, middle, and last legal decisions per market, as in the earlier formal panel.
+   The 200-prediction floor, data, features, label, model, penalty, gates, and protected boundary do
+   not change. Lowering the evidence floor or changing the recipe is not allowed.
+6. Coverage-safe attempt 05 completed both formal model evaluations, then its receipt diagnostic
+   failed because it expected `event_chronological_ordinal` in `SampleKey.dimensions`; the formal
+   price schema carries `event_id` and `market_id`. No metric was persisted or reconstructed from
+   transient state. Source and failure receipt are retained. One reporting-only revision may order
+   event groups by their earliest OOF decision time. Candidate source, exact 457 keys, evidence
+   floor, scientific recipe, and gates remain unchanged.
+7. Reporting-safe attempt 06 succeeded with 413 OOF predictions and exact context-history access
+   provenance. The sibling-state recipe failed its predeclared gate: overall and event-macro MSE
+   were worse than target-only, both early and late event halves worsened, only 8/20 events
+   improved, and absolute MSE exceeded `0.003`. Positive improvements were not over-concentrated
+   (`0.37736` maximum share), but that lone passing condition does not rescue the candidate. The
+   packet is closed as a formal development rejection. Protected values remain unexposed.
