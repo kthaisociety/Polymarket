@@ -107,7 +107,7 @@ depth, queue, fill, slippage, or capacity fact may be inferred.
 
 ## Transition receipt
 
-Status: **ACTIVE — FIRST EXECUTION FAILED OPERATIONALLY BEFORE A SCIENTIFIC RESULT**.
+Status: **COMPLETE — FRESH DEVELOPMENT REPLICATION PASSED**.
 
 The real public runner verified the exact snapshot ancestry and constructed partition
 `2144b8338515271f342738c3ed7ad62565d98343c3e3284353780b436fbd9a40`: 157 fresh development
@@ -121,3 +121,43 @@ The immutable operational-failure receipt SHA-256 is
 scientific result and cannot pass or fail any predeclared gate. The source, population, models, and
 gates remain frozen. A retry is permitted only after a resource-policy seam is repaired, under a
 new conflict-free receipt path that preserves this failed attempt.
+
+The byte-identical source then succeeded under the separately repaired and recorded finite resource
+envelope. Successful receipt SHA-256:
+`e777f93b48c87604d845dfd08160036449b2accdd13277a0acf55d243d658c77`; exact replay produced the
+same conflict-detecting bytes.
+
+### Fresh evidence
+
+- 6,246 eligible shocks across 136 events; 6,174 OOF rows (2,929 reversal-first/3,245 other),
+  410 markets, and 128 test events.
+- Largest market/event row shares were 3.05%/7.81%, well inside the fixed 10%/20% limits.
+- Rate baseline observation/event-macro Brier: `0.25062/0.25222`; pooled/event AP:
+  `0.47947/0.51144`.
+- Six-feature state/shock Brier: `0.24084/0.23902`; pooled/event AP: `0.58844/0.69991`;
+  early/late event Brier `0.23841/0.23963`; 87/128 event wins; top-quintile precision/lift
+  `0.62480/+0.15039`; positive event-lift share 73.4%; improvement concentration 5.43%.
+- Twelve-feature full Brier: `0.23072/0.23025`; pooled/event AP: `0.62789/0.71552`;
+  early/late event Brier `0.23334/0.22716`; 84/128 wins versus state/shock; top-quintile
+  precision/lift `0.68395/+0.20955`; positive event-lift share 77.1%; improvement concentration
+  6.86%.
+- The primary state/shock replication gate and secondary full incremental gate both passed every
+  predeclared clause.
+
+### Sampled-price execution evidence
+
+- State/shock threshold: 165 trades/41 events, observation/event-macro net
+  `+0.10726/+0.08828`, 87.8% positive event means, leave-one-event-out minimum `+0.08314`.
+  The screen failed because only six negative-shock trades were selected versus the fixed minimum
+  of 25; its observed negative-shock mean was positive but cannot rescue the failed breadth clause.
+- Full threshold: 387 trades/70 events, observation/event-macro net `+0.06024/+0.04103`, 74.3%
+  positive event means, leave-one-event-out minimum `+0.03748`, 345 positive-shock and 42
+  negative-shock trades with positive means. This passed every fixed one-cent screen clause.
+- These are sampled probability changes under a complementary-token assumption, not executable
+  historical quotes, and they do not establish slippage, fill, capacity, or deployable PnL.
+
+Exactly five development price fields were accessed. All 31 ancestor events and the expanded final
+47 events remained absent; protected exposure is false and formal references/durable effects are
+empty. Under the predeclared decision, the six-feature statistical property advances to exact
+formal-candidate preparation, while the full-model cost result is retained as a quote-validation
+lead. No protected request is made by this study.
