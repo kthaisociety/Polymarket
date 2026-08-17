@@ -118,3 +118,29 @@ caveats, and zero protected exposure. Repository study history is updated for ev
 Hermes-style validated memory is not a Markdown summary. Only an independently governed protected
 finding or protected rejection may become terminal question memory. Development lessons remain
 explicitly selection-exposed in the research ledger until that authority exists.
+
+## Transition receipt
+
+- Status: **COMPLETE — DEVELOPMENT REJECTION**.
+- Exact source SHA-256:
+  `a923a7f044d771fec5ed03cf904102b038b1d64ae068af55e9377974273f9d01`.
+- Exact receipt SHA-256:
+  `311fc5cbfdeb0925e60146fbc565249db9ec3aa6cfbd3d01880ee85a396939a0`.
+- Breadth: 715 eligible development shocks; 589 OOF rows across 77 markets and 15 later event
+  groups. The largest market supplied 15.6% of rows, but one event supplied 46.3%, failing the
+  declared event-diversity cap.
+- Prediction: shock-only ridge achieved observation/event-macro MSE `0.00868/0.01532`; adding
+  state and staleness worsened them to `0.01088/0.01683`, won only 4/15 events, and failed both the
+  predictive and concentration gates.
+- Process diagnostic: shock-signed future change averaged `-0.01207`, and only 42.3% of meaningful
+  rows continued in the shock direction. Delayed reversal exists as selection-exposed aggregate
+  evidence, not a stable fitted signal.
+- Cost falsifier: 486 sampled trades had observation/event-macro mean net change
+  `+0.00167/+0.01710` after one cent, but only 7/15 event means were positive and YES-side mean was
+  `-0.00717`; the fixed gate failed.
+- Authority: exactly five development price fields were accessed. Protected exposure is false;
+  no formal objects, durable effects, freeze, protected request, or validated memory were created.
+
+The exact continuation/staleness branch is closed. A separately predeclared reversal-incidence
+question may cite this selection-exposed ancestry, but cannot present the observed aggregate
+reversal as confirmation or tune this model family.
