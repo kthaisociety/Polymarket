@@ -99,6 +99,7 @@ class PolymarketDevelopmentAnalysis:
     registered_event_views: tuple[AuthorizedDataView, ...]
     harness: AnalysisHarness
     artifacts: ArtifactStore
+    resource_limits: ResourceLimits
 
     def run(self, *, source: str, session_id: str, action_id: str) -> StructuredObservation:
         """Execute authored source with access only to development-event columns."""
@@ -289,6 +290,10 @@ def _compose_development_analysis(  # noqa: PLR0913
         raise ValueError(msg)
     artifacts = ArtifactStore()
     views = {view.view_id: view for view in (price_view, outcome_view, *registered_event_views)}
+    limits = resource_limits or ResourceLimits(
+        wall_time_seconds=10.0,
+        max_inline_bytes=200_000,
+    )
     harness = AnalysisHarness(
         views=views,
         policy=CapabilityPolicy(
@@ -299,8 +304,7 @@ def _compose_development_analysis(  # noqa: PLR0913
             },
         ),
         artifacts=artifacts,
-        resource_limits=resource_limits
-        or ResourceLimits(wall_time_seconds=10.0, max_inline_bytes=200_000),
+        resource_limits=limits,
     )
     partition = PolymarketEventPartition(
         partition_id=partition_id,
@@ -322,6 +326,7 @@ def _compose_development_analysis(  # noqa: PLR0913
         registered_event_views,
         harness,
         artifacts,
+        limits,
     )
 
 

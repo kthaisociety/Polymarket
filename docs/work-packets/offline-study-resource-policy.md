@@ -5,8 +5,8 @@
 - Packet: `sandbox.declare-offline-study-resources`.
 - Owning architecture block: open-ended exploration.
 - Semantic responsibility: operator-declared bounded resources for exact offline authored studies.
-- Input repository state: the local commit following `bdl-polymarket@60cc1bcd`, including the
-  retained fresh-replication `MemoryError` receipt.
+- Input repository state: `bdl-polymarket@055c6af1`, including the retained fresh-replication
+  `MemoryError` receipt.
 
 ## Objective
 
@@ -50,8 +50,40 @@ without weakening data scope, sandbox syntax, provenance, or protected boundarie
 
 ## Completion evidence
 
-Status: **ACTIVE**. Close only after the declared limits are enforced by the existing worker,
-defaults remain compatible, all tests pass, and the failed receipt remains retained.
+### Result
+
+- Status: **COMPLETE**.
+- Resulting repository state: the local commit containing this receipt.
+
+### Delivered state delta
+
+- The public offline runner accepts explicit positive `--wall-time-seconds`,
+  `--max-memory-bytes`, `--max-inline-bytes`, and `--max-result-bytes` values.
+- Exact values are bound to the existing `AnalysisHarness`/`ResourceLimits`; no new execution or
+  authority path was created.
+- Explicit runs record the full effective resource envelope. Default runs omit it and preserve the
+  prior receipt schema/identity.
+- `PolymarketDevelopmentAnalysis` retains the exact effective limit object used by its harness.
+
+### Evidence
+
+- Focused Polymarket corpus tests: 22 passed, including public-runner binding/receipt coverage,
+  nonpositive-limit denial, default-receipt compatibility, fresh-event authority adversaries, and
+  conflict-detecting receipt persistence.
+- Ruff: clean; basedpyright: 0 errors, 0 warnings, 0 notes.
+- `./scripts/check.sh`: formatting clean, Ruff clean, basedpyright clean, 469 tests passed in
+  27.66 seconds.
+- The original failed receipt remains byte-identical at SHA-256
+  `5f216aa4d2df03eecfb9c6eb4b68822b158db5eb7642d16fe2aef9f3f540e20d`.
+
+### Knowledge carried forward
+
+- Large authored studies need explicit finite resource envelopes; a larger corpus does not justify
+  relaxing data or side-effect authority.
+- The retry must use a new receipt directory, record its actual limits, and keep the scientific
+  source/gates byte-identical.
+- This packet proves resource declaration and binding. It does not prove that any chosen larger
+  limit will be sufficient, nor does it establish a scientific result.
 
 ## Boundary revisions
 

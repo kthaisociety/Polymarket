@@ -18,7 +18,7 @@ from research_agent.data_adapters.polymarket.corpus_analysis import (
     build_polymarket_development_analysis,
     build_polymarket_replication_analysis,
 )
-from research_agent.exploration import AnalysisStatus
+from research_agent.exploration import AnalysisStatus, ResourceLimits
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -35,6 +35,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--source", required=True, action="append", type=Path)
     parser.add_argument("--receipt-directory", required=True, type=Path)
     parser.add_argument("--session-id", default="polymarket-resolution-development-2026-08-17")
+    parser.add_argument("--wall-time-seconds", type=float)
+    parser.add_argument("--max-memory-bytes", type=int)
+    parser.add_argument("--max-inline-bytes", type=int)
+    parser.add_argument("--max-result-bytes", type=int)
     return parser
 
 
@@ -47,6 +51,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             arguments.snapshot_size,
         )
         snapshot = PolymarketCorpusStore(arguments.workspace).load(ref)
+        resource_limits, explicit_resource_limits = _resource_limits(arguments)
         ancestor_ref = _optional_ancestor_ref(
             arguments.ancestor_snapshot_sha256,
             arguments.ancestor_snapshot_size,
@@ -55,6 +60,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             analysis = build_polymarket_development_analysis(
                 snapshot,
                 session_id=arguments.session_id,
+                resource_limits=resource_limits,
             )
         else:
             ancestor_snapshot = PolymarketCorpusStore(arguments.workspace).load(ancestor_ref)
@@ -62,6 +68,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 snapshot,
                 ancestor_snapshot,
                 session_id=arguments.session_id,
+                resource_limits=resource_limits,
             )
         receipts: list[dict[str, object]] = []
         for index, source_path in enumerate(arguments.source):
@@ -77,6 +84,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 source_path=source_path,
                 source_sha256=source_sha256,
                 observation=observation,
+                include_resource_limits=explicit_resource_limits,
             )
             receipt_path = arguments.receipt_directory / f"{source_path.stem}.json"
             _persist_receipt(payload, receipt_path)
@@ -112,8 +120,44 @@ def _optional_ancestor_ref(
     return PolymarketCorpusSnapshotRef(content_sha256, size_bytes)
 
 
+def _resource_limits(arguments: argparse.Namespace) -> tuple[ResourceLimits, bool]:
+    requested = (
+        arguments.wall_time_seconds,
+        arguments.max_memory_bytes,
+        arguments.max_inline_bytes,
+        arguments.max_result_bytes,
+    )
+    explicit = any(value is not None for value in requested)
+    wall_time_seconds = (
+        arguments.wall_time_seconds if arguments.wall_time_seconds is not None else 10.0
+    )
+    max_memory_bytes = (
+        arguments.max_memory_bytes if arguments.max_memory_bytes is not None else 512_000_000
+    )
+    max_inline_bytes = (
+        arguments.max_inline_bytes if arguments.max_inline_bytes is not None else 200_000
+    )
+    max_result_bytes = (
+        arguments.max_result_bytes if arguments.max_result_bytes is not None else 2_000_000
+    )
+    return (
+        ResourceLimits(
+            wall_time_seconds=wall_time_seconds,
+            max_memory_bytes=max_memory_bytes,
+            max_inline_bytes=max_inline_bytes,
+            max_result_bytes=max_result_bytes,
+        ),
+        explicit,
+    )
+
+
 def _receipt_payload(
-    *, analysis: object, source_path: Path, source_sha256: str, observation: object
+    *,
+    analysis: object,
+    source_path: Path,
+    source_sha256: str,
+    observation: object,
+    include_resource_limits: bool = False,
 ) -> dict[str, object]:
     from research_agent.data_adapters.polymarket.corpus_analysis import (  # noqa: PLC0415
         PolymarketDevelopmentAnalysis,
@@ -170,6 +214,16 @@ def _receipt_payload(
                 "embargoed_market_count": analysis.partition.embargoed_market_count,
             }
         )
+    if include_resource_limits:
+        limits = analysis.resource_limits
+        payload["resource_limits"] = {
+            "wall_time_seconds": limits.wall_time_seconds,
+            "max_source_bytes": limits.max_source_bytes,
+            "max_inline_bytes": limits.max_inline_bytes,
+            "max_output_bytes": limits.max_output_bytes,
+            "max_result_bytes": limits.max_result_bytes,
+            "max_memory_bytes": limits.max_memory_bytes,
+        }
     return payload
 
 

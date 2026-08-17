@@ -810,3 +810,81 @@ result = structured_return("Fresh event count.", {"event_count": len(set(events)
     assert receipt["embargoed_event_count"] == len(ancestor.contracts)
     assert receipt["protected_values_exposed"] is False
     assert receipt_directory.joinpath("fresh_events.json").is_file()
+
+
+def test_public_study_runner_binds_and_records_explicit_finite_resource_limits(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """A large offline study can declare enforced limits without changing its data authority."""
+    expanded = _event_grouped_corpus(10)
+    ancestor = _corpus_prefix(expanded, 5)
+    store = PolymarketCorpusStore(tmp_path / "corpus")
+    expanded_ref = store.retain(expanded).ref
+    ancestor_ref = store.retain(ancestor).ref
+    source_path = tmp_path / "bounded.py"
+    source_path.write_text('result = structured_return("Bounded.", {"ok": True})')
+    receipt_directory = tmp_path / "bounded-receipts"
+
+    status = run_corpus_studies.main(
+        [
+            "--snapshot-sha256",
+            expanded_ref.content_sha256,
+            "--snapshot-size",
+            str(expanded_ref.size_bytes),
+            "--ancestor-snapshot-sha256",
+            ancestor_ref.content_sha256,
+            "--ancestor-snapshot-size",
+            str(ancestor_ref.size_bytes),
+            "--workspace",
+            str(store.root),
+            "--source",
+            str(source_path),
+            "--receipt-directory",
+            str(receipt_directory),
+            "--session-id",
+            "bounded-replication",
+            "--wall-time-seconds",
+            "12.5",
+            "--max-memory-bytes",
+            "700000000",
+            "--max-inline-bytes",
+            "300000",
+            "--max-result-bytes",
+            "400000",
+        ]
+    )
+    receipt = json.loads(capsys.readouterr().out)["receipts"][0]
+
+    assert status == 0
+    assert receipt["resource_limits"] == {
+        "wall_time_seconds": 12.5,
+        "max_source_bytes": ResourceLimits().max_source_bytes,
+        "max_inline_bytes": 300_000,
+        "max_output_bytes": ResourceLimits().max_output_bytes,
+        "max_result_bytes": 400_000,
+        "max_memory_bytes": 700_000_000,
+    }
+
+
+def test_public_study_runner_rejects_nonpositive_resource_limits() -> None:
+    """An explicit zero cannot silently restore a default or become an unbounded sentinel."""
+    arguments = run_corpus_studies.build_parser().parse_args(
+        [
+            "--snapshot-sha256",
+            "a" * 64,
+            "--snapshot-size",
+            "1",
+            "--workspace",
+            "/unused/corpus",
+            "--source",
+            "/unused/source.py",
+            "--receipt-directory",
+            "/unused/receipts",
+            "--max-memory-bytes",
+            "0",
+        ]
+    )
+
+    with pytest.raises(ValueError, match="byte limits"):
+        run_corpus_studies._resource_limits(arguments)  # noqa: SLF001

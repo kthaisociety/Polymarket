@@ -53,6 +53,12 @@ expanded snapshot's latest whole-event block are omitted before authored code re
 `AuthorizedDataView`; receipts retain both snapshot identities and separate embargo/protection
 counts. The ordinary single-snapshot partition and receipt identity remain unchanged.
 
+The offline study command also accepts explicit finite wall-time, worker address-space,
+inline-result, and total-result limits. These values bind directly to the existing
+`ResourceLimits`; timeouts, `RLIMIT_AS`, syntax, data capability, side-effect, and provenance
+controls remain enforced. Defaults preserve prior execution and receipt identity. When limits are
+explicit, the receipt records the actual complete resource envelope.
+
 Verification for the pure-square-root seam:
 
 ```bash
