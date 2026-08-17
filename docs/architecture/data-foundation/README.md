@@ -48,6 +48,15 @@ exists. A source adapter or the source-neutral `TemporalRegistrationAuthority` m
 bind exact field meaning, availability, vintage, dimensions, and provenance before values enter the
 kernel.
 
+The first source-specific composition is the official Polymarket CLOB price-history adapter. It
+accepts one exact server-provided outcome token, time window, and fidelity; verifies that the
+selected proposal has the one canonical URL; refuses redirects; retains exact public response
+bytes; parses them offline; and registers sampled probabilities under a versioned availability
+rule. The timestamp is provisionally used as both `reference_time` and `available_at` with an
+explicit caveat: the endpoint does not establish historical revision/deletion behavior, and its
+samples are neither trades nor executable quotes. This local workspace path does not write to the
+production database or grant protected/scientific promotion authority.
+
 ### Proposed `DatasetSetup` responsibility
 
 It should bind exact dataset versions, selected stable fields, population/geography, target and

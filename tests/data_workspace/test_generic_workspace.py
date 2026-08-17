@@ -7,6 +7,7 @@ from __future__ import annotations
 import json
 import shutil
 import threading
+import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import TYPE_CHECKING, cast
@@ -33,9 +34,19 @@ class _TwoShapeApi(BaseHTTPRequestHandler):
     mutable_body = b'{"version":1}'
     captured_authorization = ""
     captured_body = b""
+    redirected_target_calls = 0
 
     def do_GET(self) -> None:
-        if self.path.startswith("/nested"):
+        if self.path == "/redirect":
+            self.send_response(302)
+            _, port = cast("tuple[str, int]", self.server.server_address)
+            self.send_header("Location", f"http://localhost:{port}/redirect-target")
+            self.end_headers()
+            return
+        if self.path.startswith("/redirect-target"):
+            type(self).redirected_target_calls += 1
+            body = self.json_body
+        elif self.path.startswith("/nested"):
             body = self.json_body
         elif self.path.startswith("/mutable"):
             body = self.mutable_body
@@ -62,6 +73,7 @@ class _TwoShapeApi(BaseHTTPRequestHandler):
 @pytest.fixture
 def api_server() -> Iterator[str]:
     _TwoShapeApi.mutable_body = b'{"version":1}'
+    _TwoShapeApi.redirected_target_calls = 0
     server = ThreadingHTTPServer(("127.0.0.1", 0), _TwoShapeApi)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -95,6 +107,25 @@ def test_two_structurally_different_http_apis_use_the_same_generic_boundary(
     assert workspace.verify(tabular).healthy is True
     assert workspace.inspect(nested).manifest_type == "source_snapshot"
     assert workspace.inspect(tabular).manifest_type == "source_snapshot"
+
+
+def test_redirect_policy_refuses_contact_before_an_unapproved_target(
+    tmp_path: Path, api_server: str
+) -> None:
+    workspace = DataWorkspace(tmp_path / "data")
+    host = cast("str", urllib.parse.urlsplit(api_server).hostname)
+
+    receipt = workspace.fetch(
+        FetchRequest(
+            url=f"{api_server}/redirect",
+            allowed_redirect_hosts=(host,),
+            permit_redirects=False,
+        )
+    )
+
+    assert receipt.status is FetchStatus.FAILED
+    assert receipt.error_code == "HTTP_ACQUISITION_FAILED"
+    assert _TwoShapeApi.redirected_target_calls == 0
 
 
 def test_fetch_publishes_no_values_and_byte_mutation_fails_verification(

@@ -27,6 +27,9 @@ Stop instead of inventing any missing authority-critical fact.
    flow imbalance, and event-triggered samples are different views, not interchangeable defaults.
 4. Use `$analyze-time-series-data` to author the first falsifying analysis through the constrained
    surface. Preserve exact code, parameters, actual accesses, receipt, and result identity.
+   If a concrete hypothesis needs a public series absent from the registered corpus, read
+   [references/public-source-expansion.md](references/public-source-expansion.md) and consider the
+   exact scout → retain → register path before analysis. It is an option, not a default expansion.
 5. Retain a null or mechanically explained result. Only a surviving mechanism may continue to
    `$design-time-series-feature-set` and harness-owned temporal development.
 6. Use `$review-backtest-gate` only after development evidence is credible and the real Polymarket

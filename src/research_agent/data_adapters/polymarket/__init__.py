@@ -40,6 +40,14 @@ from research_agent.data_adapters.polymarket.reader import (
     EnginePolymarketResearchReader,
     PolymarketResearchReader,
 )
+from research_agent.data_adapters.polymarket.source_expansion import (
+    PolymarketPriceHistoryNeed,
+    PolymarketSourceExpansion,
+    PolymarketSourceExpansionError,
+    expand_scouted_price_history,
+    expansion_receipt_json,
+    price_history_search_request,
+)
 
 __all__ = [
     "DatabasePolymarketCorpusReader",
@@ -63,11 +71,17 @@ __all__ = [
     "PolymarketImportRequest",
     "PolymarketIngestionResult",
     "PolymarketOutcomeRecord",
+    "PolymarketPriceHistoryNeed",
     "PolymarketPricePoint",
     "PolymarketResearchReader",
     "PolymarketResolutionRecord",
+    "PolymarketSourceExpansion",
+    "PolymarketSourceExpansionError",
     "analyze_registered_polymarket_tape",
     "build_polymarket_development_analysis",
+    "expand_scouted_price_history",
+    "expansion_receipt_json",
     "ingest_polymarket_contract_tape",
+    "price_history_search_request",
     "register_polymarket_resolution_corpus",
 ]

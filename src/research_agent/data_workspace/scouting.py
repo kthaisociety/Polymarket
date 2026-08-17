@@ -1,6 +1,6 @@
 """Provider-neutral source proposals ahead of the existing acquisition boundary."""
 
-# ruff: noqa: EM101, EM102, TRY003, TRY004
+# ruff: noqa: EM101, EM102, PLR0913, TRY003, TRY004
 
 from __future__ import annotations
 
@@ -746,6 +746,9 @@ class SourceScoutingService:
         candidate_id: str,
         max_response_bytes: int = 64 * 1024 * 1024,
         timeout_seconds: float = 30.0,
+        allowed_redirect_hosts: tuple[str, ...] = (),
+        permit_redirects: bool = True,
+        headers: Mapping[str, str] | None = None,
     ) -> ScoutedFetchReceipt:
         """Resolve one issued proposal, then delegate bytes entirely to existing acquisition."""
         try:
@@ -775,6 +778,9 @@ class SourceScoutingService:
                 url=candidate.resource_url,
                 max_response_bytes=max_response_bytes,
                 timeout_seconds=timeout_seconds,
+                allowed_redirect_hosts=allowed_redirect_hosts,
+                permit_redirects=permit_redirects,
+                headers={} if headers is None else headers,
             )
         )
         status = (
@@ -795,6 +801,7 @@ class SourceScoutingService:
                 "report_id": report_ref.report_id,
                 "candidate_id": candidate_id,
                 "request_sha256": fetch_receipt.request_sha256,
+                "fetch_receipt": fetch_receipt.as_dict(),
             }
         )
         self._publish_exact(

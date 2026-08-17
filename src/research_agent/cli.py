@@ -1,6 +1,6 @@
 """Small operator surface for deterministic demos and proof status."""
 
-# ruff: noqa: EM101, EM102, PLR0911, T201, TRY003, TRY004, TRY301
+# ruff: noqa: C901, EM101, EM102, PLR0911, PLR0915, T201, TRY003, TRY004, TRY301
 
 from __future__ import annotations
 
@@ -115,6 +115,24 @@ def build_parser() -> argparse.ArgumentParser:
     acquire_scouted.add_argument("--candidate", required=True)
     acquire_scouted.add_argument("--max-bytes", type=int, default=64 * 1024 * 1024)
     acquire_scouted.add_argument("--timeout-seconds", type=float, default=30.0)
+
+    price_history_request = data_commands.add_parser(
+        "polymarket-price-history-request",
+        help="create an exact external-scout request for one CLOB outcome-token slice",
+    )
+    price_history_request.add_argument("--need", type=Path, required=True)
+    price_history_request.add_argument("--research-question", required=True)
+
+    register_price_history = data_commands.add_parser(
+        "register-polymarket-price-history",
+        help="acquire and temporally register one exact selected official CLOB proposal",
+    )
+    _add_workspace_argument(register_price_history)
+    register_price_history.add_argument("--need", type=Path, required=True)
+    register_price_history.add_argument("--report", required=True)
+    register_price_history.add_argument("--candidate", required=True)
+    register_price_history.add_argument("--max-bytes", type=int, default=16 * 1024 * 1024)
+    register_price_history.add_argument("--timeout-seconds", type=float, default=30.0)
 
     derive = data_commands.add_parser(
         "derive", help="run authored parsing/transformation code offline over verified refs"
@@ -267,6 +285,21 @@ def _add_workspace_argument(parser: argparse.ArgumentParser) -> None:
 def _run_data_command(arguments: argparse.Namespace) -> int:
     """Execute one predictable-JSON data command without echoing raw exceptions."""
     try:
+        if arguments.data_command == "polymarket-price-history-request":
+            from research_agent.data_adapters.polymarket.source_expansion import (  # noqa: PLC0415
+                PolymarketPriceHistoryNeed,
+                price_history_search_request,
+            )
+
+            need = PolymarketPriceHistoryNeed.from_dict(
+                json.loads(_read_bounded_file(arguments.need, 128_000))
+            )
+            request = price_history_search_request(
+                need,
+                research_question=arguments.research_question,
+            )
+            print(json.dumps(request.as_dict(), allow_nan=False, sort_keys=True))
+            return 0
         workspace = DataWorkspace(arguments.workspace)
         if arguments.data_command == "fetch":
             headers = _key_value_arguments(arguments.header, label="header")
@@ -329,6 +362,27 @@ def _run_data_command(arguments: argparse.Namespace) -> int:
             )
             print(json.dumps(receipt.as_dict(), allow_nan=False, sort_keys=True))
             return int(receipt.status is not ScoutedFetchStatus.SUCCEEDED)
+        if arguments.data_command == "register-polymarket-price-history":
+            from research_agent.data_adapters.polymarket.source_expansion import (  # noqa: PLC0415
+                PolymarketPriceHistoryNeed,
+                expand_scouted_price_history,
+            )
+
+            need = PolymarketPriceHistoryNeed.from_dict(
+                json.loads(_read_bounded_file(arguments.need, 128_000))
+            )
+            service = SourceScoutingService(workspace)
+            report_ref = service.resolve_report_uri(arguments.report)
+            expansion = expand_scouted_price_history(
+                workspace,
+                report_ref=report_ref,
+                candidate_id=arguments.candidate,
+                need=need,
+                timeout_seconds=arguments.timeout_seconds,
+                max_response_bytes=arguments.max_bytes,
+            )
+            print(json.dumps(expansion.as_dict(), allow_nan=False, sort_keys=True))
+            return 0
         bindings = _key_value_arguments(arguments.input, label="input")
         inputs = {alias: workspace.resolve(ref_uri) for alias, ref_uri in bindings.items()}
         raw_parameters = json.loads(arguments.parameters)

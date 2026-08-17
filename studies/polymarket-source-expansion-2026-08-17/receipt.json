@@ -1,0 +1,23 @@
+{
+  "availability_rule_version": "polymarket-clob-price-history-observation/v1",
+  "candidate_id": "f8d62fc0b99123cf29d92b1ca914b2eb543fed49f7137dea3266cc7f2b2cd654",
+  "catalog_attestation_id": "authoritative-data-catalog:1433972455d97b77c4e885a6cb039a1711bab275fcc5a0a11160e8dde516f90a",
+  "caveats": [
+    "CLOB price-history samples are historical probability observations, not trades or executable quotes.",
+    "The documented sample timestamp is treated as both reference_time and available_at; the endpoint does not establish historical revision or deletion behavior.",
+    "Sampling fidelity may omit intraperiod path and microstructure information."
+  ],
+  "derived_ref": "derived:a81e4461a23796e3c52e94ff45f84ef4ae2081ffcb2bd596a706ad6bbd5086cd",
+  "first_reference_time": "2026-07-18T01:00:07+00:00",
+  "last_reference_time": "2026-07-18T22:00:10+00:00",
+  "need_id": "polymarket-price-history-need:89f355cf5feaf2d9b4de89a01d0fcb3c03680b16bfd0bfcc365dea2a0f09270d",
+  "observation_count": 22,
+  "production_database_writes": false,
+  "profile_id": "temporal-dataset-profile:5ac400c4af97078796402a83bea1d4a2fe3b5c94aae755be8236a4df737929c6",
+  "registration_attestation_id": "registered-temporal-dataset:156c07d0859fec9f601a0da58d2ec35fb5e1115ef1183650a6e3791a04d61118",
+  "report_ref": "scouting:5fd8a9b238cca3df9614c355c5048735d1ab0b918fffc86a59ae9f7e8329abad",
+  "sample_values_emitted": false,
+  "schema_version": "polymarket-source-expansion-receipt/v1",
+  "source_ref": "source:8ae0d45e50c5c6cc7ac92b35d8da2fe0788902b19aa5c787f55ad5a848031c97",
+  "status": "succeeded"
+}

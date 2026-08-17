@@ -25,11 +25,13 @@ from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
 from types import MappingProxyType
-from typing import TYPE_CHECKING, Final, Protocol, cast
+from typing import TYPE_CHECKING, Final, Protocol, Self, cast
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
+    from http.client import HTTPMessage
     from multiprocessing.connection import Connection
+    from typing import IO
 
     from research_agent.exploration import AuthorizedDataView
 
@@ -134,6 +136,8 @@ class FetchRequest:
     body: bytes | None = None
     max_response_bytes: int = _DEFAULT_MAX_RESPONSE_BYTES
     timeout_seconds: float = 30.0
+    allowed_redirect_hosts: tuple[str, ...] = ()
+    permit_redirects: bool = True
 
     def __post_init__(self) -> None:
         """Detach mutable credentials and validate the acquisition boundary."""
@@ -150,6 +154,18 @@ class FetchRequest:
             raise ValueError(msg)
         object.__setattr__(self, "method", method)
         object.__setattr__(self, "headers", MappingProxyType(dict(self.headers)))
+        redirect_hosts = tuple(host.casefold() for host in self.allowed_redirect_hosts)
+        if (
+            len(set(redirect_hosts)) != len(redirect_hosts)
+            or any(not host or "/" in host for host in redirect_hosts)
+            or (redirect_hosts and parsed.hostname.casefold() not in redirect_hosts)
+        ):
+            msg = "redirect hosts must be unique hostnames containing the request host"
+            raise ValueError(msg)
+        object.__setattr__(self, "allowed_redirect_hosts", redirect_hosts)
+        if not isinstance(self.permit_redirects, bool):
+            msg = "permit_redirects must be a boolean"
+            raise TypeError(msg)
         if self.body is not None:
             object.__setattr__(self, "body", bytes(self.body))
 
@@ -256,6 +272,84 @@ class _Readable(Protocol):
         ...
 
 
+class _ResponseHeaders(Protocol):
+    def get(self, name: str) -> str | None:
+        """Return one response header when present."""
+        ...
+
+    def get_content_type(self) -> str:
+        """Return the parsed response media type."""
+        ...
+
+
+class _ResponseContext(_Readable, Protocol):
+    status: int
+    headers: _ResponseHeaders
+
+    def __enter__(self) -> Self:
+        """Enter the response context."""
+        ...
+
+    def __exit__(self, *args: object) -> None:
+        """Close the response context."""
+        ...
+
+    def geturl(self) -> str:
+        """Return the final response URL."""
+        ...
+
+
+class _RestrictedRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """Refuse a redirect before urllib contacts an unapproved host."""
+
+    def __init__(self, allowed_hosts: tuple[str, ...], *, permit_redirects: bool) -> None:
+        super().__init__()
+        self._allowed_hosts: frozenset[str] = frozenset(allowed_hosts)
+        self._permit_redirects: bool = permit_redirects
+
+    def redirect_request(
+        self,
+        req: urllib.request.Request,
+        fp: IO[bytes],
+        code: int,
+        msg: str,
+        headers: HTTPMessage,
+        newurl: str,
+    ) -> urllib.request.Request | None:
+        """Delegate only same-policy HTTP(S) redirect targets."""
+        if not self._permit_redirects:
+            return None
+        parsed = urllib.parse.urlsplit(newurl)
+        if (
+            parsed.scheme not in {"http", "https"}
+            or parsed.hostname is None
+            or parsed.hostname.casefold() not in self._allowed_hosts
+        ):
+            return None
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+def _open_request(
+    raw_request: urllib.request.Request,
+    request: FetchRequest,
+) -> _ResponseContext:
+    if not request.allowed_redirect_hosts and request.permit_redirects:
+        return cast(
+            "_ResponseContext",
+            urllib.request.urlopen(raw_request, timeout=request.timeout_seconds),  # noqa: S310
+        )
+    opener = urllib.request.build_opener(
+        _RestrictedRedirectHandler(
+            request.allowed_redirect_hosts,
+            permit_redirects=request.permit_redirects,
+        )
+    )
+    return cast(
+        "_ResponseContext",
+        opener.open(raw_request, timeout=request.timeout_seconds),
+    )
+
+
 def _canonical_bytes(value: object) -> bytes:
     try:
         return json.dumps(
@@ -330,6 +424,7 @@ _SAFE_CALLS: Final[frozenset[str]] = frozenset(
         "str",
         "sum",
         "tuple",
+        "unix_utc_iso",
         "zip",
     }
 )
@@ -440,6 +535,12 @@ def _derive_worker(
     def emit(value: JsonValue) -> JsonValue:
         return value
 
+    def unix_utc_iso(value: object) -> str:
+        if isinstance(value, bool) or not isinstance(value, int | float):
+            msg = "Unix timestamp must be numeric"
+            raise TypeError(msg)
+        return datetime.fromtimestamp(value, tz=UTC).isoformat()
+
     namespace: dict[str, object] = {
         "__builtins__": _SAFE_BUILTINS,
         "input_bytes": input_bytes,
@@ -448,6 +549,7 @@ def _derive_worker(
         "csv_input": csv_input,
         "param": param,
         "emit": emit,
+        "unix_utc_iso": unix_utc_iso,
     }
     try:
         tree = _validate_transform_source(source)
@@ -488,9 +590,8 @@ class DataWorkspace:
             method=request.method,
         )
         try:
-            with urllib.request.urlopen(  # noqa: S310
-                raw_request, timeout=request.timeout_seconds
-            ) as response:
+            response_context = _open_request(raw_request, request)
+            with response_context as response:
                 final_url = cast("str", response.geturl())
                 if urllib.parse.urlsplit(final_url).scheme not in {"http", "https"}:
                     return self._failed_fetch(request_sha256, "UNSUPPORTED_REDIRECT_SCHEME")
@@ -524,6 +625,8 @@ class DataWorkspace:
             "request_header_names": sorted(name.lower() for name in request.headers),
             "request_body_sha256": None if request.body is None else _sha256(request.body),
             "request_body_size": 0 if request.body is None else len(request.body),
+            "allowed_redirect_hosts": list(request.allowed_redirect_hosts),
+            "permit_redirects": request.permit_redirects,
             "response_status": status,
             "media_type": media_type,
             "retained_at": datetime.now(UTC).isoformat(),
@@ -896,6 +999,8 @@ class DataWorkspace:
             "headers": sorted(request.headers.items()),
             "body_sha256": None if request.body is None else _sha256(request.body),
             "body_size": 0 if request.body is None else len(request.body),
+            "allowed_redirect_hosts": list(request.allowed_redirect_hosts),
+            "permit_redirects": request.permit_redirects,
         }
         return _sha256(_canonical_bytes(exact))
 

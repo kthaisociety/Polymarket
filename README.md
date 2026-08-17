@@ -79,7 +79,7 @@ context automatically.
 |---|---|
 | Autonomous authored research | A researcher can author arbitrary bounded Python for features, labels, fitting, and prediction through four fixed phase-separated entrypoints. |
 | Temporal data legality | Observations carry `reference_time` and `available_at`; predictor information, label maturity, and training windows are rebuilt independently. |
-| Data workspace | Exact source bytes can be retained, verified, cataloged, and transformed offline before a trusted temporal profile registers them. |
+| Data workspace | Exact source bytes can be scouted externally, selected, retained, verified, cataloged, and transformed offline before a trusted temporal profile registers them. The official CLOB price-history composition is executable end to end. |
 | Development research | Legal temporal folds, fold-local fitting, out-of-fold metrics, feature diagnostics, trial ancestry, revision, and negative evidence are executable. |
 | Protected evaluation | Independent freeze, governance, exposure, historical refitting, immutable runs, measurement, validation, finding or rejection, and canonical reporting are executable. |
 | Research memory | Terminal protected outcomes can be stored in structured question memory, projected to Markdown and Mermaid, and supplied to future context with explicit reopening rules. |
@@ -131,6 +131,13 @@ flowchart TD
     TAPE --> REGISTER
     VINTAGE --> REGISTER
 
+    NEED["Exact optional public-data need"] --> SCOUT["External search agent"]
+    SCOUT --> PROPOSAL["Passive untrusted proposals"]
+    PROPOSAL --> SELECT["Exact selected candidate"]
+    SELECT --> LOCAL["Immutable local source + offline derivation"]
+    LOCAL --> REGISTER
+    PROPOSAL -. "no scientific authority" .-> REGISTER
+
     REGISTER --> ANALYSIS["Open-ended authored analysis"]
     ANALYSIS --> LABELS["Authored target and label semantics"]
     ANALYSIS --> FEATURES["Authored feature set"]
@@ -156,6 +163,14 @@ flowchart TD
 The database adapter is intentionally narrower than the researcher. It registers prices, sizes,
 signed flow, and exact blocks. The researcher remains free to write new analysis, feature, label,
 and model code inside the existing constrained execution and evaluation boundaries.
+
+When a concrete development hypothesis needs another public probability slice, Chronos can also
+turn one passive external-scout proposal into a locally retained and registered official CLOB
+price-history dataset. The selected URL must exactly preserve the declared outcome token, time
+window, and fidelity; redirects and malformed samples fail closed. This expands the local research
+workspace only—it does not fetch into, backfill, or mutate the production database. The procedure
+is documented in the startup skill's
+[public source-expansion reference](.agents/skills/start-polymarket-research/references/public-source-expansion.md).
 
 The original fill-tape path still treats resolved payouts as descriptive metadata. A separate
 resolved-corpus path consumes the server's append-only resolution timestamp/payout facts,
