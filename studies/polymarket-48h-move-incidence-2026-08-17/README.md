@@ -1,6 +1,7 @@
 # Polymarket 48-hour meaningful-move incidence
 
-Epistemic status: **EXPLORATORY DEVELOPMENT REJECTION WITH RANKING LEAD — PROTECTED UNEXPOSED**.
+Epistemic status: **EXPLORATORY PROBABILITY REJECTION WITH MECHANISM-CREDIBLE RANKING LEAD —
+PROTECTED UNEXPOSED**.
 
 This study transfers the exact compact state/staleness mechanism from continuous sampled
 first-passage duration to the binary question of whether a two-cent sampled move occurs within 48
@@ -33,3 +34,17 @@ prediction to `0.57858` and observation Brier to `0.16596`, but worsened event-m
 `0.14741`, pooled average precision to `0.82781`, and late-half event-macro Brier to `0.14015`; only
 7/15 events improved against the unadjusted candidate. The fixed gate failed, the calibration
 revision budget is closed, and the binary branch remains an uncalibrated development ranking lead.
+
+## Fixed ranking-stability diagnostic
+
+A final calibration-free diagnostic fixed a within-event high-score quintile before execution and
+kept all boundary ties. Across 13 eligible mixed events, state/staleness produced an event-macro
+selected-minus-remainder move-incidence lift of `0.43854`, versus `0.32820` for state only. Lift was
+positive in all 13 events, measured `0.40650` in the early half and `0.46601` in the late half, and
+exceeded the state comparator in 8/13 events. The predeclared ranking gate passed.
+
+This makes the retained mechanism more concrete: high state/staleness scores consistently identify
+decisions with substantially greater 48-hour sampled movement incidence. It remains
+selection-exposed development evidence. Ties expanded some selected groups beyond exactly 20%, and
+the test says nothing about direction, executable prices, profit, calibrated probability, or the
+unexposed event block. The packet authorizes no further threshold or capacity search.
