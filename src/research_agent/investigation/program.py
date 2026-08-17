@@ -53,6 +53,7 @@ class ProgramInvocation:
 
     entrypoint: str
     histories: dict[str, list[dict[str, JsonValue]]] | None = None
+    context_histories: dict[str, list[dict[str, JsonValue]]] | None = None
     outcome: list[dict[str, JsonValue]] | None = None
     training: list[dict[str, JsonValue]] | None = None
     state: JsonValue = None
@@ -68,7 +69,14 @@ class ProgramResult:
 
 
 _INTERFACES: Final[frozenset[str]] = frozenset(
-    {"history", "outcome_path", "training_rows", "model_state", "feature_values"}
+    {
+        "history",
+        "context_history",
+        "outcome_path",
+        "training_rows",
+        "model_state",
+        "feature_values",
+    }
 )
 _SAFE_CALLS: Final[frozenset[str]] = frozenset(
     {
@@ -76,6 +84,7 @@ _SAFE_CALLS: Final[frozenset[str]] = frozenset(
         "all",
         "any",
         "bool",
+        "context_history",
         "dict",
         "enumerate",
         "exp",
@@ -240,9 +249,16 @@ def _worker(
         accesses.append(("history", field_id))
         return invocation.histories[field_id]
 
+    def context_history(field_id: str) -> list[dict[str, JsonValue]]:
+        if invocation.context_histories is None or field_id not in invocation.context_histories:
+            raise PermissionError("context history field is outside the exact invocation grant")
+        accesses.append(("context_history", field_id))
+        return invocation.context_histories[field_id]
+
     namespace: dict[str, object] = {
         "__builtins__": _SAFE_BUILTINS,
         "history": history,
+        "context_history": context_history,
         "outcome_path": lambda: require("outcome_path", invocation.outcome),
         "training_rows": lambda: require("training_rows", invocation.training),
         "model_state": lambda: require("model_state", invocation.state),

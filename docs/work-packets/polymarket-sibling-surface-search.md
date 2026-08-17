@@ -90,3 +90,9 @@ co-movement hypothesis and does not assume event contracts are exhaustive or mut
    causality/authority tests. It must not encode sibling selection, event semantics, or feature
    formulas in the harness. After that repair, the exact selected recipe is replayed against its
    six-feature baseline on the same sparse development panel. No protected evaluation is allowed.
+3. The generic seam is implemented as a manifest-bound `ContextHistoryDependency` plus the
+   separately audited `context_history(field_id)` worker interface. Application tests prove exact
+   group matching, exclusion of an unreleased same-group poison observation, rejection of a match
+   dimension absent from the field schema, public action decoding, and unchanged protected replay.
+   The complete Chronos suite passes with 448 tests; Ruff and strict basedpyright are clean. This
+   changes access mechanics only and does not make the sibling-state recipe credible by itself.

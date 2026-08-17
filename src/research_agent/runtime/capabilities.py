@@ -1083,7 +1083,9 @@ class ActionRouter:
                 capability_name="run_authored_development_trial",
                 authorized_dataset_ref=None,
                 selected_field_ids=tuple(
-                    field.field_id for field in action.proposal.manifest.predictor_fields
+                    dict.fromkeys(
+                        field.field_id for field in action.proposal.manifest.information_fields
+                    )
                 ),
                 preview_limit=None,
                 code_sha256=sha256(action.proposal.source.encode()).hexdigest(),

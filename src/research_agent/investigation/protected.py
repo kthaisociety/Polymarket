@@ -12,6 +12,7 @@ from typing import TYPE_CHECKING, cast
 
 from research_agent.data_foundation._identity import stable_identity
 from research_agent.data_foundation.information import InformationSetBuilder
+from research_agent.investigation.context import matching_context_observations
 from research_agent.investigation.program import (
     JsonValue,
     ProgramInvocation,
@@ -823,7 +824,7 @@ class AuthoredBacktestEngine:
         information = InformationSetBuilder().build(
             catalog,
             decision_time=key.decision_time,
-            requested_fields=manifest.predictor_fields,
+            requested_fields=manifest.information_fields,
         )
         histories = {
             field.field_id: [
@@ -834,7 +835,18 @@ class AuthoredBacktestEngine:
             ]
             for field in manifest.predictor_fields
         }
-        if any(not values for values in histories.values()):
+        context_histories = {
+            field_id: [_observation_json(item) for item in values]
+            for field_id, values in matching_context_observations(
+                information,
+                manifest.context_history_dependencies,
+                key.dimensions,
+                key.decision_time,
+            ).items()
+        }
+        if any(not values for values in histories.values()) or any(
+            not values for values in context_histories.values()
+        ):
             raise _DecisionFailureError(
                 _Stage.INFORMATION,
                 ProtectedFailureCode.INFORMATION_SET_NOT_READY,
@@ -842,9 +854,11 @@ class AuthoredBacktestEngine:
                 (information.information_set_id,),
             )
         used_ids = tuple(
-            cast("str", observation["observation_id"])
-            for field in manifest.predictor_fields
-            for observation in histories[field.field_id]
+            dict.fromkeys(
+                cast("str", observation["observation_id"])
+                for observations in (*histories.values(), *context_histories.values())
+                for observation in observations
+            )
         )
         information_id = stable_identity(
             "authored-protected-information-view",
@@ -857,7 +871,11 @@ class AuthoredBacktestEngine:
         )
         result = self._programs.invoke(
             candidate.source,
-            ProgramInvocation("make_features", histories=histories),
+            ProgramInvocation(
+                "make_features",
+                histories=histories,
+                context_histories=context_histories,
+            ),
         )
         return (
             _feature_values(result.value, manifest.feature_names),
@@ -932,7 +950,7 @@ class AuthoredBacktestEngine:
         historical_information = InformationSetBuilder().build(
             catalog,
             decision_time=key.decision_time,
-            requested_fields=manifest.predictor_fields,
+            requested_fields=manifest.information_fields,
         )
         histories = {
             field.field_id: [
@@ -943,7 +961,18 @@ class AuthoredBacktestEngine:
             ]
             for field in manifest.predictor_fields
         }
-        if any(not values for values in histories.values()):
+        context_histories = {
+            field_id: [_observation_json(item) for item in values]
+            for field_id, values in matching_context_observations(
+                historical_information,
+                manifest.context_history_dependencies,
+                key.dimensions,
+                key.decision_time,
+            ).items()
+        }
+        if any(not values for values in histories.values()) or any(
+            not values for values in context_histories.values()
+        ):
             raise _DecisionFailureError(
                 _Stage.INFORMATION,
                 ProtectedFailureCode.INFORMATION_SET_NOT_READY,
@@ -955,6 +984,7 @@ class AuthoredBacktestEngine:
             ProgramInvocation(
                 "make_label",
                 histories=histories,
+                context_histories=context_histories,
                 outcome=[_observation_json(item) for item in observations],
             ),
         )

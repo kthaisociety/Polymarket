@@ -145,6 +145,20 @@ class ProtectedEvaluationPredeclaration:
 
 
 @dataclass(frozen=True, slots=True)
+class ContextHistoryDependency:
+    """One contextual field grant matched to a sample by explicit dimension names."""
+
+    field: FieldRef
+    match_dimension_names: tuple[str, ...]
+
+    def __post_init__(self) -> None:
+        names = tuple(sorted(self.match_dimension_names))
+        if not names or any(not name for name in names) or len(set(names)) != len(names):
+            raise ValueError("context history matching dimensions must be unique and explicit")
+        object.__setattr__(self, "match_dimension_names", names)
+
+
+@dataclass(frozen=True, slots=True)
 class AuthoredCandidateManifest:
     """Scientific meaning surrounding arbitrary researcher-authored source."""
 
@@ -160,6 +174,7 @@ class AuthoredCandidateManifest:
     evidence_refs: tuple[str, ...]
     provenance_refs: tuple[str, ...]
     population_dimension_names: tuple[str, ...] = ()
+    context_history_dependencies: tuple[ContextHistoryDependency, ...] = ()
 
     def __post_init__(self) -> None:
         if not all(
@@ -195,6 +210,11 @@ class AuthoredCandidateManifest:
         )
         object.__setattr__(self, "population_dimensions", exact_dimensions)
         object.__setattr__(self, "population_dimension_names", panel_names)
+        _validate_context_history_dependencies(
+            self.context_history_dependencies,
+            environment_id=self.environment_id,
+            population_names=frozenset(panel_names or tuple(name for name, _ in exact_dimensions)),
+        )
         if self.missing_value_policy not in {"exclude_example", "fail_trial"}:
             raise ValueError("unknown authored candidate missing-value policy")
 
@@ -208,6 +228,18 @@ class AuthoredCandidateManifest:
     @property
     def identity(self) -> str:
         return stable_identity("authored-candidate-manifest", self)
+
+    @property
+    def information_fields(self) -> tuple[FieldRef, ...]:
+        """Return exact and contextual fields needed to build the decision-time information set."""
+        return tuple(
+            dict.fromkeys(
+                (
+                    *self.predictor_fields,
+                    *(item.field for item in self.context_history_dependencies),
+                )
+            )
+        )
 
 
 def _canonical_population_scope(
@@ -224,6 +256,21 @@ def _canonical_population_scope(
     if exact_dimensions and panel_names:
         raise ValueError("candidate population cannot mix exact and panel dimensions")
     return tuple(sorted(exact_dimensions)), tuple(sorted(panel_names))
+
+
+def _validate_context_history_dependencies(
+    dependencies: tuple[ContextHistoryDependency, ...],
+    *,
+    environment_id: str,
+    population_names: frozenset[str],
+) -> None:
+    field_ids = tuple(item.field.field_id for item in dependencies)
+    if len(set(dependencies)) != len(dependencies) or len(set(field_ids)) != len(field_ids):
+        raise ValueError("context history dependencies must be exact and unambiguous")
+    if any(item.field.environment_id != environment_id for item in dependencies):
+        raise ValueError("context history dependencies cross the candidate environment")
+    if any(not set(item.match_dimension_names) <= population_names for item in dependencies):
+        raise ValueError("context history matching dimensions leave the candidate population")
 
 
 @dataclass(frozen=True, slots=True)
@@ -470,6 +517,7 @@ __all__ = [
     "AuthoredCandidateManifest",
     "AuthoredDevelopmentEvidence",
     "AuthoredProgramProposal",
+    "ContextHistoryDependency",
     "DevelopmentBudget",
     "DevelopmentDisposition",
     "InvestigationRequest",

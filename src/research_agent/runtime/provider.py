@@ -488,6 +488,18 @@ def _authored_manifest_schema() -> dict[str, object]:
             "question_id": {"type": "string", "minLength": 1},
             "environment_id": {"type": "string", "minLength": 1},
             "predictor_fields": {"type": "array", "items": _field_ref_schema()},
+            "context_history_dependencies": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "required": ["field", "match_dimension_names"],
+                    "properties": {
+                        "field": _field_ref_schema(),
+                        "match_dimension_names": _string_array_schema(),
+                    },
+                },
+            },
             "outcome_field": _field_ref_schema(),
             "horizon": _temporal_offset_schema(),
             "minimum_outcome_points": {"type": "integer"},

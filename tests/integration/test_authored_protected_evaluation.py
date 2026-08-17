@@ -39,6 +39,7 @@ from research_agent.investigation import (
     AuthoredProtectedPlan,
     AuthoredProtectedResolutionService,
     AuthoredResolutionStatus,
+    ContextHistoryDependency,
     DevelopmentBudget,
     DevelopmentDisposition,
     DurableQuestionMemoryArchive,
@@ -228,7 +229,7 @@ def _proposal(catalog: DataCatalogSnapshot) -> AuthoredProgramProposal:
     schema = catalog.datasets[0].schema
     source = """
 def make_features():
-    left = history("x1")
+    left = context_history("x1")
     right = history("x2")
     return {"interaction": left[-1]["value"] * right[-1]["value"]}
 
@@ -260,6 +261,9 @@ def predict():
             evidence_refs=("exploration:interaction-hypothesis",),
             provenance_refs=("researcher:authored-program",),
             population_dimension_names=("market_id",),
+            context_history_dependencies=(
+                ContextHistoryDependency(schema.field_ref("x1"), ("market_id",)),
+            ),
         ),
         rationale="Test a researcher-invented nonlinear interaction.",
         parent_trial_ids=(),
@@ -410,6 +414,13 @@ def _manifest_json(manifest: AuthoredCandidateManifest) -> dict[str, object]:
         "question_id": manifest.question_id,
         "environment_id": manifest.environment_id,
         "predictor_fields": [_field_json(item) for item in manifest.predictor_fields],
+        "context_history_dependencies": [
+            {
+                "field": _field_json(item.field),
+                "match_dimension_names": list(item.match_dimension_names),
+            }
+            for item in manifest.context_history_dependencies
+        ],
         "outcome_field": _field_json(manifest.outcome_field),
         "horizon": {
             "kind": "elapsed",

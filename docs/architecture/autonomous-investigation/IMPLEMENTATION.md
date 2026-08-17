@@ -61,12 +61,21 @@ candidate. A manifest may bind either one exact dimension-value slice or one com
 dimension-name schema. Schema-only panel candidates require every declared field and `SampleKey`
 to carry that exact schema; the schema is scientific identity, not permission to choose data.
 
+A manifest may additionally declare `ContextHistoryDependency` entries. Each entry binds one exact
+field plus a nonempty subset of the sample dimension names that must match. The publisher verifies
+the names against both population and field schemas. The evaluator—not authored code—constructs the
+matching decision-time rows and exposes them only through the separately audited
+`context_history(field_id)` interface. This supports generic grouped or relational features without
+encoding event, sibling, geography, or other domain semantics in the harness.
+
 For each simulated decision, the evaluator builds an `InformationSet` using `available_at`, then
 passes only declared observations whose `reference_time` is no later than the decision. It builds a
 separate outcome path inside the declared horizon, matching the exact population and requiring
 availability by the development clock. Feature and label entrypoints execute in separate workers.
 Panel candidates repeat this construction independently for each key's exact dimension values and
-order same-time keys deterministically. One invocation never receives another entity's history.
+order same-time keys deterministically. Exact `history()` never crosses the sample slice. A
+`context_history()` invocation receives other slices only when its manifest dependency explicitly
+names the shared matching dimensions; `available_at` and decision-time legality remain unchanged.
 
 Expanding out-of-fold evaluation admits a training example only when its label matured by the
 validation decision. Each fit worker receives only training features and labels. Each prediction
@@ -173,6 +182,10 @@ rewrite the database and recompute every identity.
 - **Green:** one exact authored recipe develops across multiple entity values without cross-slice
   history, rejects mismatched field/sample schemas, and replays after freeze on a new protected
   entity value under the same frozen schema.
+- **Green:** a manifest-bound context dependency exposes only rows matching the declared group
+  dimension, excludes an unreleased same-group poison row, records `context_history` separately,
+  rejects dimensions absent from the field schema, and replays unchanged through protected
+  execution.
 - **Green:** trusted runtime composition registers only question/data/budget, the registration is
   visible in reconstructed context, a provider action supplies authored source, and the exact
   development evidence is visible in the next packet.

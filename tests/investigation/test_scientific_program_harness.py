@@ -66,3 +66,38 @@ def test_actual_capability_accesses_come_from_harness_not_authored_claims() -> N
 
     assert result.value == {"x": 4.0}
     assert tuple((item.interface, item.field_id) for item in result.accesses) == (("history", "x"),)
+
+
+def test_context_history_is_separate_exact_grant_and_access_record() -> None:
+    source = VALID_SOURCE.replace(
+        'return {"x": history("x")[-1]["value"]}',
+        'return {"x": context_history("x")[-1]["value"]}',
+    )
+    harness = ScientificProgramHarness()
+
+    result = harness.invoke(
+        source,
+        ProgramInvocation(
+            "make_features",
+            histories={"x": [{"value": 1.0}]},
+            context_histories={"x": [{"value": 4.0}]},
+        ),
+    )
+
+    assert result.value == {"x": 4.0}
+    assert tuple((item.interface, item.field_id) for item in result.accesses) == (
+        ("context_history", "x"),
+    )
+
+
+def test_undeclared_context_history_is_denied() -> None:
+    source = VALID_SOURCE.replace(
+        'return {"x": history("x")[-1]["value"]}',
+        'return {"x": context_history("x")[-1]["value"]}',
+    )
+
+    with pytest.raises(ScientificProgramError, match="outside the exact invocation grant"):
+        ScientificProgramHarness().invoke(
+            source,
+            ProgramInvocation("make_features", histories={"x": [{"value": 1.0}]}),
+        )

@@ -33,6 +33,7 @@ from research_agent.investigation import (
     AuthoredFreezeService,
     AuthoredProgramProposal,
     AutonomousInvestigation,
+    ContextHistoryDependency,
     DevelopmentBudget,
     DevelopmentDisposition,
     InvestigationConflictError,
@@ -705,6 +706,157 @@ def predict():
     assert set(evidence.predictions) == {1.0, 100.0}
 
 
+def test_authored_context_history_matches_only_declared_sample_dimensions() -> None:
+    schema = DatasetSchema(
+        dataset_id="context-panel",
+        version="v1",
+        environment_id="development-world",
+        provenance_ref="fixture:context-panel",
+        fields=(
+            FieldDefinition(
+                "x1",
+                "Context panel series",
+                "float",
+                "index",
+                ("event_id", "market_id"),
+                "One series per market, grouped by event.",
+            ),
+        ),
+    )
+    members = (
+        ("event-a", "market-a1", 1.0),
+        ("event-a", "market-a2", 3.0),
+        ("event-b", "market-b1", 100.0),
+        ("event-b", "market-b2", 300.0),
+    )
+    rows = (
+        *(
+            ObservationInput(
+                field_ref=schema.field_ref("x1"),
+                value=level,
+                reference_time=ORIGIN + DAY * day,
+                available_at=ORIGIN + DAY * day,
+                vintage_id="initial",
+                revision_number=0,
+                source_ref=f"fixture:context-panel:{event_id}:{market_id}:{day}",
+                provenance_ref=f"fixture:context-panel:{event_id}:{market_id}:{day}",
+                availability_rule_version="fixture-release-v1",
+                dimensions=(("event_id", event_id), ("market_id", market_id)),
+            )
+            for day in range(1, 13)
+            for event_id, market_id, level in members
+        ),
+        ObservationInput(
+            field_ref=schema.field_ref("x1"),
+            value=999_999.0,
+            reference_time=ORIGIN + DAY,
+            available_at=ORIGIN + DAY * 20,
+            vintage_id="initial",
+            revision_number=0,
+            source_ref="fixture:context-panel:future-poison",
+            provenance_ref="fixture:context-panel:future-poison",
+            availability_rule_version="fixture-release-v1",
+            dimensions=(("event_id", "event-a"), ("market_id", "market-future")),
+        ),
+    )
+    catalog = DataCatalogSnapshot(
+        schema.environment_id,
+        (ObservationRegistrar().register(schema, rows),),
+    )
+    source = """
+def make_features():
+    latest = {}
+    for row in context_history("x1"):
+        dimensions = dict(row["dimensions"])
+        latest[dimensions["market_id"]] = row["value"]
+    return {"event_mean": sum(latest[key] for key in latest) / len(latest)}
+
+def make_label():
+    return outcome_path()[-1]["value"]
+
+def fit():
+    return {"training_count": len(training_rows())}
+
+def predict():
+    return feature_values()["event_mean"] + 0.0 * model_state()["training_count"]
+"""
+    question = ResearchQuestion(
+        question_id="question:context-panel",
+        text="Can an authored recipe use a declared same-event context without crossing events?",
+        environment_id=catalog.environment_id,
+        task_ref="task:context-panel",
+        evidence_refs=("observation:context-panel-hypothesis",),
+    )
+    proposal = AuthoredProgramProposal(
+        source=source,
+        manifest=AuthoredCandidateManifest(
+            question_id=question.question_id,
+            environment_id=catalog.environment_id,
+            predictor_fields=(schema.field_ref("x1"),),
+            outcome_field=schema.field_ref("x1"),
+            horizon=TemporalOffset.elapsed(DAY),
+            minimum_outcome_points=1,
+            population_dimensions=(),
+            feature_names=("event_mean",),
+            missing_value_policy="fail_trial",
+            evidence_refs=("observation:context-panel-hypothesis",),
+            provenance_refs=("researcher:test-provider",),
+            population_dimension_names=("event_id", "market_id"),
+            context_history_dependencies=(
+                ContextHistoryDependency(schema.field_ref("x1"), ("event_id",)),
+            ),
+        ),
+        rationale="Use only the manifest-declared event context at each decision.",
+        parent_trial_ids=(),
+    )
+    request = InvestigationRequest(
+        question=question,
+        catalog=catalog,
+        sample_keys=tuple(
+            SampleKey(
+                ORIGIN + DAY * day,
+                (("event_id", event_id), ("market_id", market_id)),
+            )
+            for day in range(2, 11)
+            for event_id, market_id, _ in members
+        ),
+        current_time=ORIGIN + DAY * 20,
+        budget=DevelopmentBudget(1, 4, 8, "mse", 100_000.0),
+        random_seed=29,
+    )
+
+    result = AutonomousInvestigation().run(request, _OneProposalResearcher(proposal))
+
+    evidence = result.evidence[-1]
+    assert set(evidence.predictions) == {2.0, 200.0}
+    assert all(value not in {101.0, 101.5} for value in evidence.predictions)
+    assert any(
+        access.interface == "context_history" and access.field_id == "x1"
+        for access in evidence.feature_accesses
+    )
+
+
+def test_authored_context_history_rejects_dimensions_absent_from_field_schema() -> None:
+    catalog = _world()
+    proposal = _proposal(catalog)
+    manifest = replace(
+        proposal.manifest,
+        context_history_dependencies=(
+            ContextHistoryDependency(
+                catalog.datasets[0].schema.field_ref("x1"),
+                ("market_id",),
+            ),
+        ),
+        population_dimensions=(("market_id", "market-a"),),
+    )
+
+    with pytest.raises(ValueError, match="field schema"):
+        AutonomousInvestigation().run(
+            _request(catalog),
+            _OneProposalResearcher(replace(proposal, manifest=manifest)),
+        )
+
+
 def test_authored_panel_candidate_rejects_field_dimension_schema_mismatch() -> None:
     catalog = _world()
     proposal = _proposal(catalog)
@@ -1125,6 +1277,13 @@ def _manifest_json(manifest: AuthoredCandidateManifest) -> dict[str, object]:
         "question_id": manifest.question_id,
         "environment_id": manifest.environment_id,
         "predictor_fields": [_field_json(item) for item in manifest.predictor_fields],
+        "context_history_dependencies": [
+            {
+                "field": _field_json(item.field),
+                "match_dimension_names": list(item.match_dimension_names),
+            }
+            for item in manifest.context_history_dependencies
+        ],
         "outcome_field": _field_json(manifest.outcome_field),
         "horizon": {
             "kind": "elapsed",

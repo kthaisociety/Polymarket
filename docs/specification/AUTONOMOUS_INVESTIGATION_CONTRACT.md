@@ -38,10 +38,12 @@ flowchart TD
 The authored source defines four fixed entrypoints.  Their implementations are not
 restricted to a predefined feature vocabulary.
 
-- `make_features()` reads only through `history(field_id)` and returns a finite JSON
-  object of named feature values.
-- `make_label()` reads only through `outcome_path()` and returns one finite JSON label
-  or `None` under the declared insufficiency policy.
+- `make_features()` reads only through exact-sample `history(field_id)` and optional
+  manifest-declared `context_history(field_id)` grants, then returns a finite JSON object of named
+  feature values. Each contextual grant fixes the field and the sample dimension names that must
+  match; the harness performs the match and decision-time cutoff.
+- `make_label()` reads only through those same decision-time histories and `outcome_path()`, then
+  returns one finite JSON label or `None` under the declared insufficiency policy.
 - `fit()` reads only through `training_rows()` and returns finite JSON model state.
 - `predict()` reads only through `model_state()` and `feature_values()` and returns one
   finite prediction.
@@ -53,6 +55,8 @@ substrate.  It is not the definition of what the researcher is allowed to invent
 
 - exact catalog, environment, field, population, source, candidate, and parent-trial
   identity;
+- exact contextual field and match-dimension identity, with no authored row selection before the
+  harness applies the declared scope;
 - information-set construction at every decision time using `available_at`, not
   `reference_time`;
 - outcome maturity and temporal fold construction outside authored code;

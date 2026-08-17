@@ -13,6 +13,7 @@ from typing import TYPE_CHECKING, cast
 from research_agent.data_foundation._identity import stable_identity
 from research_agent.data_foundation.information import InformationSetBuilder
 from research_agent.development.records import TrialLedger, TrialStatus
+from research_agent.investigation.context import matching_context_observations
 from research_agent.investigation.program import (
     ProgramInvocation,
     ScientificProgramError,
@@ -102,6 +103,11 @@ class CandidatePublisher:
                 tuple(sorted(definition.dimensions)) != manifest.population_dimension_names
             ):
                 raise ValueError("candidate field differs from the declared panel dimension schema")
+        for dependency in manifest.context_history_dependencies:
+            schema = request.catalog.resolve_schema(dependency.field)
+            definition = schema.resolve_ref(dependency.field)
+            if not set(dependency.match_dimension_names) <= set(definition.dimensions):
+                raise ValueError("context history matching dimensions differ from the field schema")
         digest = hashlib.sha256(proposal.source.encode()).hexdigest()
         payload = {
             "source_sha256": digest,
@@ -304,7 +310,7 @@ class AuthoredDevelopmentEvaluator:
             information = InformationSetBuilder().build(
                 request.catalog,
                 decision_time=key.decision_time,
-                requested_fields=manifest.predictor_fields,
+                requested_fields=manifest.information_fields,
             )
             histories = {
                 field.field_id: [
@@ -315,7 +321,18 @@ class AuthoredDevelopmentEvaluator:
                 ]
                 for field in manifest.predictor_fields
             }
-            if any(not values for values in histories.values()):
+            context_histories = {
+                field_id: [_observation_json(item) for item in values]
+                for field_id, values in matching_context_observations(
+                    information,
+                    manifest.context_history_dependencies,
+                    dimensions,
+                    key.decision_time,
+                ).items()
+            }
+            if any(not values for values in histories.values()) or any(
+                not values for values in context_histories.values()
+            ):
                 if manifest.missing_value_policy == "fail_trial":
                     raise ValueError("candidate history is insufficient at a decision boundary")
                 continue
@@ -337,13 +354,18 @@ class AuthoredDevelopmentEvaluator:
                 continue
             feature_result = self._programs.invoke(
                 candidate.source,
-                ProgramInvocation("make_features", histories=histories),
+                ProgramInvocation(
+                    "make_features",
+                    histories=histories,
+                    context_histories=context_histories,
+                ),
             )
             label_result = self._programs.invoke(
                 candidate.source,
                 ProgramInvocation(
                     "make_label",
                     histories=histories,
+                    context_histories=context_histories,
                     outcome=[_observation_json(item) for item in outcome],
                 ),
             )

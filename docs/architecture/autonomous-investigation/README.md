@@ -69,8 +69,8 @@ flowchart TD
 
 - accept a question, an exact authorized development catalog, sample population, and fixed budget;
 - publish exact authored source, manifest, rationale, evidence refs, and trial ancestry;
-- expose the universal `history`, `outcome_path`, `training_rows`, `model_state`, and
-  `feature_values` interfaces inside phase-separated workers;
+- expose the universal exact-sample `history`, explicitly scoped `context_history`, `outcome_path`,
+  `training_rows`, `model_state`, and `feature_values` interfaces inside phase-separated workers;
 - construct temporal information and outcome boundaries outside authored code;
 - return selection-exposed evidence for model interpretation and revision;
 - preserve negative and failed trials rather than only the winner.

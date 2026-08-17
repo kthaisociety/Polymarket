@@ -17,7 +17,11 @@ from research_agent.data_foundation import (
     TemporalOffset,
     TimezonePolicy,
 )
-from research_agent.investigation import AuthoredCandidateManifest, AuthoredProgramProposal
+from research_agent.investigation import (
+    AuthoredCandidateManifest,
+    AuthoredProgramProposal,
+    ContextHistoryDependency,
+)
 from research_agent.runtime.models import EpisodeStatus
 
 if TYPE_CHECKING:
@@ -322,13 +326,18 @@ def _decode_candidate_manifest(value: Mapping[str, object]) -> AuthoredCandidate
             "evidence_refs",
             "provenance_refs",
         },
-        optional={"population_dimension_names"},
+        optional={"context_history_dependencies", "population_dimension_names"},
     )
     predictor_values = value.get("predictor_fields")
     if not isinstance(predictor_values, (list, tuple)):
         raise ActionDecodeError("predictor_fields must be a sequence")
     predictor_items = cast("list[object] | tuple[object, ...]", predictor_values)
     predictors = tuple(_decode_field_ref(item) for item in predictor_items)
+    context_values = value.get("context_history_dependencies", ())
+    if not isinstance(context_values, (list, tuple)):
+        raise ActionDecodeError("context_history_dependencies must be a sequence")
+    context_items = cast("list[object] | tuple[object, ...]", context_values)
+    context_dependencies = tuple(_decode_context_history_dependency(item) for item in context_items)
     outcome = _decode_field_ref(value.get("outcome_field"))
     horizon_value = value.get("horizon")
     if not isinstance(horizon_value, Mapping):
@@ -353,6 +362,24 @@ def _decode_candidate_manifest(value: Mapping[str, object]) -> AuthoredCandidate
         population_dimension_names=_string_tuple(
             value.get("population_dimension_names", ()),
             "population_dimension_names",
+        ),
+        context_history_dependencies=context_dependencies,
+    )
+
+
+def _decode_context_history_dependency(value: object) -> ContextHistoryDependency:
+    if not isinstance(value, Mapping):
+        raise ActionDecodeError("context history dependency must be an exact object")
+    dependency = cast("Mapping[str, object]", value)
+    _require_exact_keys(
+        dependency,
+        required={"field", "match_dimension_names"},
+    )
+    return ContextHistoryDependency(
+        field=_decode_field_ref(dependency.get("field")),
+        match_dimension_names=_string_tuple(
+            dependency.get("match_dimension_names"),
+            "match_dimension_names",
         ),
     )
 
