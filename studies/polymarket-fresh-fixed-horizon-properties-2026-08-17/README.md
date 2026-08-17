@@ -12,3 +12,7 @@ sampled-price caveats were frozen in the
 [work packet](../../docs/work-packets/polymarket-fresh-fixed-horizon-properties.md) before authored
 code could read the data.
 
+Frozen authored source:
+[`source/01_fixed_horizon_properties.py`](source/01_fixed_horizon_properties.py), SHA-256
+`aa1c19e9ad0293b6f6719617aef39cafdf8cb8f474c2f88421f2f6278c8c0b13`. The Chronos sandbox
+source validator accepted these exact bytes before execution.
