@@ -91,3 +91,13 @@ improve multiple legal six-hour labels across chronological event groups.
    the same core without expiry, and the existing full-interaction recipe. Horizon, labels,
    sampling, folds, penalty, and gates remain fixed. No additional subset search is permitted before
    a retain/reject/formalize decision.
+3. Compression receipt 03, SHA-256
+   `829ff86c0bca350e2b4a004b7aa1286c8b8c6fd5d4725bd1ebb526c98cbeb2e9`, selected the seven-feature
+   activity core. It beat the retained full model for magnitude (`0.002489/0.001125` versus
+   `0.002578/0.001192`) and large moves (`0.131986/0.114559` versus `0.132994/0.117383`). Removing
+   expiry materially weakened observation-weighted evidence. The subset-search budget is closed.
+4. Attempting to preserve the selected cross-contract claim exposes adjacent formal-harness gaps:
+   `AuthoredCandidateManifest` binds one exact dimension-value slice; authored programs receive no
+   decision-time interface; and the registered formal catalog has no lifecycle close-time field.
+   The research packet therefore adds a separate implementation dependency before formal replay.
+   Protected data remains outside both packets.

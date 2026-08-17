@@ -104,3 +104,38 @@ The fixed ridge penalty remains 0.1. Both magnitude and large-move labels are re
 candidate must match or improve the full model under event-macro and observation weighting, retain
 at least 10 event wins versus baseline, and avoid material early/late degradation. Trying additional
 subsets after seeing trial 03 is outside this packet's budget.
+
+## Candidate-compression trial 03 result
+
+The seven-feature `activity_core` improved on the original 15-feature full model for both surviving
+labels:
+
+| Label | Full model MSE (event / observation) | Activity core | No-expiry core |
+|---|---:|---:|---:|
+| absolute six-hour change | 0.002578 / 0.001192 | **0.002489 / 0.001125** | 0.002587 / 0.001642 |
+| two-cent large move | 0.132994 / 0.117383 | **0.131986 / 0.114559** | 0.133448 / 0.127088 |
+
+The core won against the baseline in 13/16 magnitude events and 14/16 large-move events. Removing
+expiry preserved event-level stability but materially harmed observation-weighted performance,
+especially for magnitude. The compact core is selected in development; the full model and
+no-expiry rival are retained rejections. The packet's feature-subset budget is exhausted.
+
+## Selected development candidate
+
+The primary formalization target is continuous absolute probability movement over the next elapsed
+six hours. The two-cent large-move label remains corroborating development evidence rather than a
+second selected target. The candidate uses:
+
+- boundary distance and current `[0,.02] ∪ [.98,1]` state;
+- `log(1 + hours-to-close)`;
+- trailing six-hour realized variance;
+- 24-hour maximum-step concentration relative to realized variance;
+- trailing 24-hour zero-change fraction;
+- trailing 24-hour mean absolute change;
+- fold-standardized ridge with fixed penalty 0.1 and expanding legal training history.
+
+Formalization must preserve the cross-contract population claim. The current authored candidate
+manifest accepts one exact dimension-value slice, and its program invocation exposes neither the
+decision clock nor registered lifecycle close time. Reducing the candidate to one contract would
+change the question. These are now explicit run-exposed harness seams to resolve before formal
+development replay; they are not reasons to substitute a weaker candidate or expose protected data.
