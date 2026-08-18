@@ -94,3 +94,23 @@ stability/concentration criterion failure, or independent validation rejection f
 of this exact candidate. After disclosure, no threshold, feature, model, decision, claim, or report
 may be repaired or reinterpreted into success. The exposed period cannot be reused as fresh
 development data.
+
+## Resolution
+
+**COMPLETE — PROTECTED NEGATIVE; EXACT SYSTEM REJECTED.** Independent governance authorized one
+exposure and the ledger records, in order, authorization, one protected disclosure, one sealed run,
+measurement, validation rejection, and negative-result retention. The exact protected receipt is
+`studies/polymarket-stochastic-process-paper-2026-08-18/protected-receipts/19_continuous_arrival_hazard_protected_resolution.json`;
+its SHA-256 is `4e9fa014c774fda83eaa8f4d7f75ec838b913197d7a14778a3333518e430b60d`.
+
+The run retained all 100 declared decisions. Sixty-five produced predictions; 34 failed with
+`training_window_not_ready` and one with `outcome_unavailable`. MSE `0.189254`, MAE `0.394489`, and
+absolute-error standard deviation `0.183390` met their fixed standards. Coverage `0.65` failed the
+`0.95` floor, failure rate `0.35` failed the `0.05` ceiling, and maximum squared-error concentration
+`0.054852` failed the `0.05` ceiling. Validation therefore rejected the system and retained
+negative result
+`negative-result:f9b794e38b9b317f867605fd0cfcfafd46caa29189a72c034ac6798b25b9e9fe`.
+
+No result, threshold, schedule, or candidate is repaired after exposure. The 65 completed rows are
+reported as suggestive conditional performance only; their non-random missingness prevents a
+protected predictive claim. The exposed holdout is not reusable as fresh development data.

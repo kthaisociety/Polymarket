@@ -406,7 +406,8 @@ candidate source SHA-256 values are
 This rejection does not overturn the complete-law comparison: it shows that compressing that law
 to one binary component and one sparse anchor per event does not meet the stronger absolute formal
 standard. The broad density result remains replicated development evidence, while the narrower
-formal arrival claim is rejected and the 47-event protected block remains untouched.
+formal arrival claim is rejected and the 47-event protected block remained untouched at this
+source-14 stage.
 
 ## Representation, boundary, maturity, and clock robustness
 
@@ -498,5 +499,32 @@ receipt SHA-256 is `417e7c9de63538f558a1cdd97609d6d6c82a49b7195bebaee830f8aafec0
 
 This pass overturns neither the source-14 receipt nor its rejected candidate. It establishes that a
 new continuous hazard survives the same class of formal sparse evaluation. The result is still
-selection-exposed development evidence. The exact protected plan is sealed, but no protected value
-has been exposed.
+selection-exposed development evidence. The exact protected plan was then resolved once by source
+19.
+
+## Protected continuous-arrival result
+
+Source 19 reconstructed the exact candidate and development evidence, obtained independent freeze,
+resource, governance, exposure, evaluation, and validation authority, and executed all 100 declared
+protected decisions. The ledger records exactly one protected disclosure before the sealed run.
+
+| Protected check | Result | Fixed ceiling/floor | Status |
+|---|---:|---:|---|
+| MSE / Brier on completed rows | 0.18925 | at most 0.20 | Pass |
+| MAE on completed rows | 0.39449 | at most 0.40 | Pass |
+| Coverage | 0.65 | at least 0.95 | **Fail** |
+| Failure rate | 0.35 | at most 0.05 | **Fail** |
+| Absolute-error standard deviation | 0.18339 | at most 0.30 | Pass |
+| Maximum squared-error concentration | 0.05485 | at most 0.05 | **Fail** |
+
+Of 100 planned decisions, 65 produced predictions, 34 failed because the expanding training window
+had not reached the fixed 100-row minimum, and one lacked a legally available outcome. The
+independent validator rejected the exact system and retained negative result
+`negative-result:f9b794e38b9b317f867605fd0cfcfafd46caa29189a72c034ac6798b25b9e9fe`.
+The protected receipt SHA-256 is
+`4e9fa014c774fda83eaa8f4d7f75ec838b913197d7a14778a3333518e430b60d`.
+
+The completed rows suggest that the hazard's conditional probability quality may persist, but this
+is not a protected success: coverage failures can be non-random, and concentration also missed its
+fixed standard. No threshold, schedule, model, or claim is repaired after exposure. The final
+47-event holdout is exposed and cannot be reused as fresh development data.

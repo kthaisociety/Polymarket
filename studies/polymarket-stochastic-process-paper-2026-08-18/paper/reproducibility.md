@@ -131,6 +131,22 @@ The retained path is conflict-detecting. The source SHA-256 is
 `6d1ea89c4f4bcfb764567e11d814a4d04ff302947820077ec606dc2de6b37359`; the receipt SHA-256 is
 `417e7c9de63538f558a1cdd97609d6d6c82a49b7195bebaee830f8aafec0f192`.
 
+## Verify the protected resolution
+
+Do not rerun source 19: the exact holdout has been exposed once and the frozen system was rejected.
+Verify the retained artifact instead:
+
+```bash
+sha256sum \
+  studies/polymarket-stochastic-process-paper-2026-08-18/protected-receipts/19_continuous_arrival_hazard_protected_resolution.json
+```
+
+The required SHA-256 is
+`4e9fa014c774fda83eaa8f4d7f75ec838b913197d7a14778a3333518e430b60d`. The receipt binds driver
+SHA-256 `d707661767f058c8233b3810db71e18c7c87c5ca0832598888848a7dc8a5d342`, candidate, evidence,
+frozen system, protected plan/scope, one exposure, all 100 decisions, the execution-valid report,
+validation rejection, and retained negative-result identity.
+
 ## Generate figures
 
 ```bash

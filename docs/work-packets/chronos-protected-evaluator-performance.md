@@ -5,8 +5,8 @@
   `studies/polymarket-stochastic-process-paper-2026-08-18/source/19_continuous_arrival_hazard_protected_resolution.py`.
 - Scope: generic Chronos protected authored evaluation only. No Polymarket science, candidate
   source, protected plan, Kthais, production engine, or sibling repository is changed.
-- Status: implementation verified locally; long-running pre-change reference execution and its
-  protected receipt remain pending.
+- Status: **COMPLETE**; implementation verified and committed locally as `ae15ae50`; the
+  pre-change reference execution reached a sealed protected negative.
 
 ## Concrete defect exposed by the real run
 
@@ -60,10 +60,17 @@ resolved information-set identity cannot hit the same cache entry.
   and reproduced receipt SHA-256
   `417e7c9de63538f558a1cdd97609d6d6c82a49b7195bebaee830f8aafec0f192` byte-for-byte.
 
-## Remaining acceptance evidence
+## Terminal reference and acceptance evidence
 
-1. Let the already-running pre-change source-19 process reach a terminal state without alteration.
-2. Audit and retain its protected receipt or a concrete execution failure.
-3. Rerun the exact frozen source and plan through the optimized engine only if governance permits an
-   idempotent same-system replay; compare all protected decision and report identities exactly.
-4. Update this packet with measured end-to-end runtime and commit the coherent Chronos-only change.
+The uninterrupted pre-change source-19 process sealed protected receipt SHA-256
+`4e9fa014c774fda83eaa8f4d7f75ec838b913197d7a14778a3333518e430b60d`. It retained one exposure,
+100 decisions, 35 typed failures, an execution-valid report, independent validation rejection, and
+one negative result. The receipt proves the reference path terminated; the exact wall time is
+unavailable because the missing telemetry was itself the defect. Observed wall time exceeded forty
+minutes.
+
+The optimized protected path is not rerun on the exposed holdout. Re-execution would add no
+scientific value after rejection and would weaken the one-exposure discipline. Semantic parity is
+instead established by exact cached/uncached decision and report equality in the integration suite,
+revision and isolation tests, observer-failure isolation, clean lint/type checks, and the complete
+474-test suite. The development-only source-18 receipt also reproduced byte-for-byte.

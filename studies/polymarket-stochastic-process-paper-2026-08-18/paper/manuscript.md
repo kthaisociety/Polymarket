@@ -1,7 +1,7 @@
 # Sticky probabilities: which financial time-series ideas transfer to Polymarket?
 
-Status: **paper-ready working draft based on development and fresh-replication evidence; no
-protected finding**.
+Status: **paper-ready working draft based on development, fresh-replication, and one retained
+protected negative; no protected finding**.
 
 ## Abstract
 
@@ -32,10 +32,10 @@ non-protected later replay.
 
 The result does not authorize a universal or protected claim. A coarse-cell sparse binary arrival
 forecast narrowly misses fixed formal Brier ceilings. An explicitly descended continuous logistic
-hazard subsequently passes the same absolute formal standard with 202 OOF predictions across 100
-events and is frozen, while protected evidence remains unexposed. The evidence supports a
-regime-dependent family for registered samples—not a proven latent belief SDE, executable-price
-model, or trading strategy.
+hazard passes the same absolute formal-development standard with 202 OOF predictions across 100
+events, but its single protected run is rejected: only 65 of 100 declared decisions are executable,
+despite completed-row Brier of 0.189. The evidence supports a regime-dependent family for
+registered samples—not a proven latent belief SDE, executable-price model, or trading strategy.
 
 ## 1. Research questions
 
@@ -282,7 +282,22 @@ formal evidence is:
 
 An independent freeze service seals the exact candidate and its predeclared protected plan. This
 is still selection-exposed development evidence: it does not erase the coarse-cell rejection, and
-no protected value is read in this stage.
+no protected value is read in this stage. Source 19 then resolves that plan exactly once:
+
+| Protected continuous-hazard check | Result | Fixed ceiling/floor | Status |
+|---|---:|---:|---|
+| MSE / Brier on completed rows | 0.189254 | at most 0.200000 | Pass |
+| MAE on completed rows | 0.394489 | at most 0.400000 | Pass |
+| Coverage | 0.650000 | at least 0.950000 | **Fail** |
+| Failure rate | 0.350000 | at most 0.050000 | **Fail** |
+| Absolute-error standard deviation | 0.183390 | at most 0.300000 | Pass |
+| Maximum squared-error concentration | 0.054852 | at most 0.050000 | **Fail** |
+
+Thirty-four decisions fail the fixed 100-row training-window requirement and one lacks a legally
+available outcome. The validator rejects the exact system and retains the negative. Completed-row
+quality is suggestive, but coverage is part of the predictive system: missing rows cannot be
+dropped after exposure, may be non-random, and prevent promotion. The holdout is now exposed and is
+not reusable for candidate development.
 
 ![Formal arrival Brier result](figures/formal-arrival-brier.svg)
 
@@ -322,7 +337,10 @@ sampling design and assuming the result survives.
 
 The frozen continuous arrival replay isolates one especially stable component: the age and recent
 inactivity of the observed price path materially improve next-update probabilities beyond state
-alone. That is predictive evidence about the observation/update process, not directional alpha.
+alone. The protected negative narrows this statement: quality remains plausible where the frozen
+system can execute, but the exact sparse schedule/training protocol is not reliable enough for a
+protected claim. This is predictive evidence about the observation/update process, not directional
+alpha.
 
 ## 9. Limitations
 
@@ -336,13 +354,14 @@ alone. That is predictive evidence about the observation/update process, not dir
   it is a fixed falsifier, not an independent replication cohort.
 - The diffusion comparator is deliberately simple. Rejection does not eliminate every bounded
   continuous-time latent process with microstructure noise or endogenous sampling.
-- No protected evaluation has yet been run; the continuous hazard is frozen development evidence.
+- One protected evaluation was run and rejected; 35% of declared decisions failed, so completed-row
+  scores cannot be generalized to the full protected schedule.
 - No result establishes objective-probability equality, causality, alpha, Sharpe ratio, or profit
   after spread, fees, latency, slippage, and market impact.
 - The current protected evaluator lacks a governed distribution-valued log-score plugin, so the
   full density law remains development plus fresh-replication evidence.
-- The continuous arrival hazard has later no-refit evidence and a frozen formal development
-  identity, but not yet a protected evaluation.
+- The continuous arrival hazard has later no-refit evidence and a frozen formal-development
+  identity, but its exact protected system is a retained negative rather than a finding.
 
 ## 10. Conclusion
 
@@ -353,8 +372,9 @@ Black–Scholes-style replication are poor defaults. Across broad development an
 cohort, the most useful sampled-process family is a state-, duration-, and path-conditioned
 zero-inflated marked jump. The paper's strongest claim is structural and observational. Its
 narrower coarse-cell formal arrival claim is rejected, while a distinct continuous staleness
-hazard passes fixed later no-refit and governed formal-development gates. The protected holdout
-remains fresh.
+hazard passes fixed later no-refit and governed formal-development gates. That distinct hazard then
+fails protected promotion because coverage, failure-rate, and concentration standards are not met.
+The protected holdout is exposed, the negative is immutable, and no tradable claim follows.
 
 ## References and evidence
 
