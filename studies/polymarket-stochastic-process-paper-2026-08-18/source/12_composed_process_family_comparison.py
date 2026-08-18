@@ -462,11 +462,12 @@ move_labels = move_labels[:sample_count]
 positive_labels = positive_labels[:sample_count]
 log_magnitudes = log_magnitudes[:sample_count]
 
-test_events = []
-diffusion_losses = []
-constant_losses = []
-state_losses = []
-full_losses = []
+test_events = [0 for unused in range(sample_count)]
+diffusion_losses = [0.0 for unused in range(sample_count)]
+constant_losses = [0.0 for unused in range(sample_count)]
+state_losses = [0.0 for unused in range(sample_count)]
+full_losses = [0.0 for unused in range(sample_count)]
+test_cursor = 0
 folds = []
 test_start = 40
 while test_start <= max(row_events):
@@ -476,13 +477,12 @@ while test_start <= max(row_events):
     for row in range(sample_count):
         event = row_events[row]
         if event >= test_start and event < test_end:
-            test_events = test_events + [event]
-            diffusion_losses = diffusion_losses + [-log(diffusion_probability(model, row))]
-            constant_losses = constant_losses + [
-                -log(hurdle_probability(model, "constant", row))
-            ]
-            state_losses = state_losses + [-log(hurdle_probability(model, "state", row))]
-            full_losses = full_losses + [-log(hurdle_probability(model, "full", row))]
+            test_events[test_cursor] = event
+            diffusion_losses[test_cursor] = -log(diffusion_probability(model, row))
+            constant_losses[test_cursor] = -log(hurdle_probability(model, "constant", row))
+            state_losses[test_cursor] = -log(hurdle_probability(model, "state", row))
+            full_losses[test_cursor] = -log(hurdle_probability(model, "full", row))
+            test_cursor = test_cursor + 1
             fold_count = fold_count + 1
     folds = folds + [
         {
@@ -494,6 +494,12 @@ while test_start <= max(row_events):
         }
     ]
     test_start = test_end
+
+test_events = test_events[:test_cursor]
+diffusion_losses = diffusion_losses[:test_cursor]
+constant_losses = constant_losses[:test_cursor]
+state_losses = state_losses[:test_cursor]
+full_losses = full_losses[:test_cursor]
 
 diffusion_metrics = summarize_scores(test_events, diffusion_losses, diffusion_losses)
 constant_metrics = summarize_scores(test_events, constant_losses, diffusion_losses)
