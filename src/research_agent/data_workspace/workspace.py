@@ -724,27 +724,35 @@ class DataWorkspace:
         )
         process.start()
         send.close()
-        process.join(wall_time_seconds)
-        if process.is_alive():
-            process.terminate()
+        # Drain a bounded worker message before joining. A successful derived dataset can
+        # exceed the OS pipe buffer; joining first would leave the child blocked in send()
+        # while the parent waits for that child to exit.
+        if not receive.poll(wall_time_seconds):
+            timed_out = process.is_alive()
+            if timed_out:
+                process.terminate()
             process.join()
             receive.close()
+            error_code = "TRANSFORMATION_TIMEOUT" if timed_out else "TRANSFORMATION_WORKER_FAILED"
             return self._failed_derive(
                 code_sha256,
-                "TRANSFORMATION_TIMEOUT",
+                error_code,
                 input_ref_ids=input_ref_ids,
                 parameters_sha256=parameters_sha256,
             )
-        if not receive.poll():
-            receive.close()
+        try:
+            worker_result: dict[str, object] | None = cast("dict[str, object]", receive.recv())
+        except EOFError:
+            worker_result = None
+        receive.close()
+        process.join()
+        if worker_result is None:
             return self._failed_derive(
                 code_sha256,
                 "TRANSFORMATION_WORKER_FAILED",
                 input_ref_ids=input_ref_ids,
                 parameters_sha256=parameters_sha256,
             )
-        worker_result = cast("dict[str, object]", receive.recv())
-        receive.close()
         if worker_result.get("kind") == "denied":
             return self._failed_derive(
                 code_sha256,

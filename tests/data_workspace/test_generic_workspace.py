@@ -334,6 +334,29 @@ def test_parser_change_creates_new_derived_identity_and_exact_lineage(
     assert view.fields["value"] == (1,)
 
 
+def test_derived_output_larger_than_process_pipe_is_drained_before_join(
+    tmp_path: Path, api_server: str
+) -> None:
+    """A bounded valid transform cannot deadlock because its message exceeds a pipe buffer."""
+    payload_bytes = 200_000
+    workspace = DataWorkspace(tmp_path / "data")
+    source_ref = _fetch(workspace, f"{api_server}/nested")
+
+    derived = workspace.derive(
+        inputs={"api": source_ref},
+        source=(
+            f'payload = input_text("api")\nresult = emit({{"payload": "z" * {payload_bytes}}})'
+        ),
+        parameters={},
+        wall_time_seconds=2.0,
+        max_output_bytes=300_000,
+    )
+
+    assert derived.status is DeriveStatus.SUCCEEDED
+    assert derived.dataset_ref is not None
+    assert derived.dataset_ref.size_bytes > payload_bytes
+
+
 @pytest.mark.parametrize(
     "source",
     [

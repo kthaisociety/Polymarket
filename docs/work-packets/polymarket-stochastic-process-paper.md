@@ -446,3 +446,12 @@ retained YES outcome at index zero, carries an exact decimal CLOB token, uses fi
 and spans no more than the final seven days before close. Seven identity/lifecycle fields were read;
 probability, payout, ancestor, and protected fields were not accessed. The manifest is authority
 for generating exact need/scout documents only, not evidence about the five-minute process.
+
+The first exact acquisition retained all ten official JSON responses but registered none: every
+offline strict transform reached the generic workspace's 10-second limit. Value-free attempt
+receipts identify `TRANSFORMATION_TIMEOUT`. Inspection exposed the same receive-order defect fixed
+earlier in exploratory analysis: `DataWorkspace.derive` joined its child before draining a bounded
+result larger than the process-pipe buffer. The failed aggregate receipt is retained. A narrow
+receive-before-join repair and large-derived-result regression are allowed without changing any
+need, source, transform, or scientific rule; the retry must use the identical retained source
+requests and exact candidate identities.

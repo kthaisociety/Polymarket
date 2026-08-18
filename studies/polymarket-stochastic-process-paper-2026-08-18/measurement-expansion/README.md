@@ -24,3 +24,20 @@ slice and retains the failure without substituting another market or window.
 Acquisition success is registered data, not a process finding. A later authored analysis must fix
 its five-minute estimands and comparison rules before reading registered sample values. Ancestor
 and protected markets remain outside this expansion.
+
+## First acquisition attempt
+
+Status: **FAILED AT OFFLINE DERIVATION — NO SCIENTIFIC RESULT**.
+
+All ten exact public HTTPS fetches succeeded and retained immutable JSON source objects of
+approximately 36–56 KB. All ten subsequent transforms reached the generic workspace's 10-second
+limit with `TRANSFORMATION_TIMEOUT`, so zero slices registered. The aggregate failed receipt is
+retained as `acquisition-receipt.failed-transform-timeout.json` with SHA-256
+`fe212f46b977a3332fd7dad8cd5c9131738abae8cbb9833d390951d814cfad2c`.
+
+The failure matches the process-pipe defect already exposed in the analysis harness: the workspace
+parent joined the transform worker before receiving its bounded derived envelope, allowing outputs
+larger than the OS pipe buffer to deadlock. Chronos may make the same narrow receive-before-join
+repair in `DataWorkspace.derive`. The source bytes, strict transform, needs, markets, windows, and
+scientific design cannot change. A regression must pass with a derived message materially larger
+than a typical pipe buffer before the identical acquisition is retried.
