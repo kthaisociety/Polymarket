@@ -5,8 +5,8 @@ the epistemic status of any result.
 
 - [`manuscript.md`](manuscript.md): paper-ready working draft with equations, tables, results,
   negative evidence, limitations, and bounded conclusions.
-- [`chronos-polymarket-whitepaper.tex`](chronos-polymarket-whitepaper.tex): polished seven-page
-  LaTeX white paper with a four-page technical appendix.
+- [`chronos-polymarket-whitepaper.tex`](chronos-polymarket-whitepaper.tex): conventional
+  12-page academic LaTeX paper with abstract, numbered sections, references, and appendices.
 - [`chronos-polymarket-whitepaper.pdf`](../../../output/pdf/chronos-polymarket-whitepaper.pdf):
   compiled and visually verified A4 distribution copy.
 - [`evidence-index.md`](evidence-index.md): exact claim-to-receipt and corpus identity map.
