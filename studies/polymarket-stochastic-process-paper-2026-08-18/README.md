@@ -51,6 +51,10 @@ evidence or inherits authority across different field types.
 - [`source/11_event_cluster_process_uncertainty.py`](source/11_event_cluster_process_uncertainty.py):
   fixed whole-event prevalence, chronological-half, and deterministic event-resampling uncertainty
   for zero mass, 24-hour variance scaling, elapsed-duration dependence, and nonzero reversal.
+- [`source/12_composed_process_family_comparison.py`](source/12_composed_process_family_comparison.py):
+  third and final declared process-model branch, comparing bounded state-dependent diffusion with
+  memoryless, state-conditioned, and state-duration/path zero-inflated marked-jump families under
+  expanding whole-event interval log score.
 
 The paper-working literature and claim map is retained in
 [`literature/theory-transfer-map.md`](literature/theory-transfer-map.md). It distinguishes direct,

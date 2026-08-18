@@ -505,3 +505,22 @@ intervals stayed entirely on the predicted side in both cohorts. Exact original/
 hashes are `7262b65b8456577c097f64525ef83e57c6ffe37066e0a84559c78c858e2aeda1` and
 `aebb42800f7a63678993f8608a4bd39f7c6fbeb8fd2f74b0d90c8cc5698e11bb`. The successor long-quiet
 estimate has only seven eligible events and must remain labeled sparse.
+
+### Fixed source 12 composed process-family comparison
+
+Source 12 consumes the third and final declared process-model branch. It compares four complete
+one-hour observation laws over the same rows after 24 regular warm-up increments: (1) a bounded
+zero-drift Gaussian diffusion with variance proportional to `p(1-p)` and fixed probability/
+time-to-close cells; (2) a memoryless zero-inflated jump with Bernoulli sign and lognormal nonzero
+magnitude; (3) a state-conditioned hurdle using probability/time-to-close cells; and (4) a full
+hurdle whose arrival cells add quiet duration, sign cells add previous nonzero sign, and magnitude
+cells add previous nonzero magnitude. Every cell shrinks toward the event-equal global law with
+exactly one event of prior weight.
+
+All four models assign probability to the same fixed interval of half-width `0.0005` around the
+observed probability change. Exact zero is a point mass only under hurdle families. Expanding folds
+train through event 39 and test fixed 15-event blocks through event 156. The full family passes only
+if it beats both the state hurdle and diffusion under observation and event-macro negative log
+score, improves event-macro score at least 2% over state, wins at least 60% of events against both,
+and beats both in each chronological half. Its all-development fitted law may be retained only for
+a separately authored, unchanged successor replay; it grants no protected access or trading claim.
