@@ -5,6 +5,10 @@ the epistemic status of any result.
 
 - [`manuscript.md`](manuscript.md): paper-ready working draft with equations, tables, results,
   negative evidence, limitations, and bounded conclusions.
+- [`chronos-polymarket-whitepaper.tex`](chronos-polymarket-whitepaper.tex): polished seven-page
+  LaTeX white paper with a three-page appendix.
+- [`chronos-polymarket-whitepaper.pdf`](../../../output/pdf/chronos-polymarket-whitepaper.pdf):
+  compiled and visually verified A4 distribution copy.
 - [`evidence-index.md`](evidence-index.md): exact claim-to-receipt and corpus identity map.
 - [`reproducibility.md`](reproducibility.md): replay and verification commands.
 - [`build_figures.py`](build_figures.py): deterministic receipt-only SVG chart builder.

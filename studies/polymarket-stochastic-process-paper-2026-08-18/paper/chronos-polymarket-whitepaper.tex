@@ -1,0 +1,719 @@
+\documentclass[10pt]{article}
+
+\usepackage[a4paper,top=15mm,bottom=16mm,left=17mm,right=17mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,tabularx,array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+
+\definecolor{ChronosNavy}{HTML}{14283D}
+\definecolor{ChronosBlue}{HTML}{176B87}
+\definecolor{ChronosTeal}{HTML}{1B998B}
+\definecolor{ChronosPale}{HTML}{EDF5F7}
+\definecolor{ChronosGold}{HTML}{D49A25}
+\definecolor{ChronosGray}{HTML}{59636E}
+\definecolor{ChronosRed}{HTML}{A33E3E}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=ChronosBlue,
+  urlcolor=ChronosBlue,
+  citecolor=ChronosBlue,
+  pdftitle={Sticky Probabilities: A Mathematical Study of Polymarket Price Dynamics},
+  pdfauthor={Chronos Research Project}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO,LE]{\footnotesize\color{ChronosGray}CHRONOS RESEARCH WHITE PAPER}
+\fancyhead[RO,RE]{\footnotesize\color{ChronosGray}18 AUGUST 2026}
+\fancyfoot[LO,LE]{\footnotesize\color{ChronosGray}Development, replication, and one retained protected negative}
+\fancyfoot[RO,RE]{\footnotesize\color{ChronosGray}\thepage}
+\renewcommand{\headrulewidth}{0.35pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\titleformat{\section}{\large\bfseries\color{ChronosNavy}}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{ChronosBlue}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{7pt}{4pt}
+\titlespacing*{\subsection}{0pt}{5pt}{2pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3.2pt}
+\setlength{\tabcolsep}{4.2pt}
+\renewcommand{\arraystretch}{1.08}
+\setlist[itemize]{leftmargin=4.5mm,itemsep=1.5pt,topsep=2pt}
+\captionsetup{font=small,labelfont=bf,skip=3pt}
+
+\newcommand{\pp}{percentage points}
+\newcommand{\NLL}{\mathrm{NLL}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\statusbox}[2]{%
+  \vspace{2pt}\noindent\fcolorbox{#1}{ChronosPale}{%
+    \begin{minipage}{0.955\linewidth}\small\textbf{#2}\end{minipage}}\vspace{2pt}}
+\newcommand{\resultbox}[1]{%
+  \vspace{3pt}\noindent\fcolorbox{ChronosTeal}{ChronosPale}{%
+    \begin{minipage}{0.955\linewidth}\small #1\end{minipage}}\vspace{3pt}}
+
+\begin{document}
+
+% -----------------------------------------------------------------------------
+% PAGE 1
+% -----------------------------------------------------------------------------
+\thispagestyle{fancy}
+\begin{center}
+  {\small\bfseries\color{ChronosBlue}CHRONOS RESEARCH PROJECT \;|\; WORKING PAPER 01}\par
+  \vspace{5pt}
+  {\fontsize{24}{27}\selectfont\bfseries\color{ChronosNavy}
+  Sticky Probabilities}\par
+  \vspace{2pt}
+  {\Large\color{ChronosBlue}A Mathematical Study of Polymarket Price Dynamics}\par
+  \vspace{5pt}
+  {\small Chronos Research Project \quad $\cdot$ \quad 18 August 2026}
+\end{center}
+
+\statusbox{ChronosGold}{Epistemic status. Paper-ready working draft based on chronological development, a no-refit later-cohort replication, an official five-minute measurement falsifier, and one retained protected negative. No protected finding and no claim of executable alpha.}
+
+\section*{Abstract}
+
+We study registered Polymarket YES-probability samples as bounded, event-linked time series. The
+main development corpus contains 803,862 hourly observations from 562 markets in 157 events. We
+also use a separately registered later cohort and an independently acquired official five-minute
+Central Limit Order Book panel. A smooth constant-intensity diffusion is a poor description of
+the registered process: interior hourly increments are exactly zero 62.40\% of the time, raw
+kurtosis is 157.10, adjacent nonzero signs reverse 62.21\% of the time, and 24-hour variance scales
+far below the diffusion benchmark. Update intensity depends strongly on elapsed quiet time.
+
+We compare bounded Gaussian diffusion with memoryless, state-conditioned, and state-duration/path
+zero-inflated marked-jump laws in chronological whole-event evaluation. The full marked-jump law
+improves development event-macro negative log score by 7.74\% over the state-only hurdle and wins
+112 of 113 event comparisons. Frozen without refitting, it improves 7.88\% on a later cohort and
+wins all 27 eligible events against both state-only and diffusion comparators. A continuous
+logistic arrival hazard separately improves later-cohort event Brier by 33.38\% and wins 27 of 27
+events. Its formally frozen implementation nevertheless fails protected promotion because only 65
+of 100 declared decisions execute. We conclude that the registered process is best described as a
+bounded, sticky, zero-inflated marked-jump process with state-, duration-, and path-dependent
+components. This is a result about registered observations, not a latent belief SDE, executable
+price process, or profitable strategy.
+
+\section*{Executive findings}
+
+\begin{tabularx}{\linewidth}{>{\bfseries\color{ChronosNavy}}p{0.24\linewidth}X}
+Process family & Bounded zero-inflated marked jumps dominate a simple bounded Gaussian diffusion.\\
+Strongest component & Quiet duration and recent inactivity materially predict whether the next registered sample changes.\\
+Robustness & The structure recurs in later events, at five-minute frequency, away from boundaries, in log-odds, and across maturity and contract-structure strata.\\
+Trading implication & None yet. Update timing is not direction; sampled probabilities are not executable quotes; spread, fees, latency, and depth remain separate hurdles.\\
+\end{tabularx}
+
+\vfill
+{\footnotesize\color{ChronosGray}\textbf{Scope.} ``Polymarket'' identifies the venue studied. This research is independent and is not affiliated with or endorsed by Polymarket.}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 2
+% -----------------------------------------------------------------------------
+\section*{1. Research question and empirical design}
+
+A binary YES share pays $X\in\{0,1\}$ at resolution. Under sufficient no-arbitrage and market-
+completeness assumptions, a price can be written as a discounted conditional expectation under a
+pricing measure. Those assumptions do not make a recorded Polymarket field the objective event
+probability, average trader belief, executable midpoint, or physical-measure expectation. The
+paper therefore asks a narrower and testable question:
+
+\resultbox{Which stochastic-process family best describes and predicts the \emph{registered sampled YES-probability process}, and which restrictions from conventional financial time-series theory survive after respecting bounded payoffs, event dependence, finite maturity, and temporal legality?}
+
+\subsection*{1.1 Retained evidence surfaces}
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\linewidth}{XrrrrX}
+\toprule
+Evidence surface & Events & Markets & Observations & Resolution & Role \\
+\midrule
+Fresh development cohort & 157 & 562 & 803,862 & Hourly & Description and chronological model development \\
+Later successor cohort & 29 & 147 & 42,549$^{a}$ & Hourly & Unchanged no-refit replication \\
+Official CLOB panel & 10 & 10 & 19,258 & Five minute & Source and sampling-clock falsifier \\
+Formal arrival schedule & 111 & -- & 231 decisions & Sparse & Governed development evaluation \\
+Original final block & 47 & 221 & Unavailable & Hourly & Protected and unexposed in the opening design \\
+\bottomrule
+\end{tabularx}
+\caption*{$^{a}$Count for the later process-signature replay. Corpus identities and exact receipts appear in Appendix A.}
+\end{table}
+
+The production snapshot was acquired through the read-only \texttt{human\_ro} database role and
+retained by content identity. An experiment may use only registered fields exposed through its
+capability. The data foundation records the exact source digest, cursor vintage, selection,
+partition, feature accesses, source code, resource envelope, and output receipt.
+
+\subsection*{1.2 Time legality and dependence}
+
+At a decision time $t$, a feature is legal only if its \texttt{available\_at}\,$\leq t$. Labels use
+the first later registered sample after the declared horizon. Parameters are fitted using earlier
+event groups and evaluated on later whole events. Training gives each represented event equal
+total weight; reporting includes observation-weighted and event-macro scores. This prevents a
+single event with many related contracts or a long path from silently defining the result.
+
+The design distinguishes three clocks:
+
+\begin{itemize}
+  \item observation ordinal;
+  \item elapsed UTC time between retained observations; and
+  \item remaining time to recorded market close.
+\end{itemize}
+
+Headline one-step diagnostics require elapsed gaps between 0.75 and 1.25 hours. Multi-step
+variance diagnostics require the elapsed clock to fall within 25\% of the stated horizon.
+
+\subsection*{1.3 What is deliberately not assumed}
+
+Registered probability samples are not silently reclassified as bids, asks, trades, midpoints, or
+latent beliefs. Related markets are not IID rows. Realized payout may diagnose terminal
+composition but cannot enter a predictor. A development success cannot access protected values,
+and a failed protected system cannot be repaired on the same exposed holdout.
+
+\statusbox{ChronosRed}{Interpretation boundary. The estimand is the registered observation process. Claims about execution, profit, objective probability, or a latent continuous-time efficient price require additional data and tests.}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 3
+% -----------------------------------------------------------------------------
+\section*{2. Candidate stochastic-process laws}
+
+Let $P_t\in[0,1]$ be the registered YES probability and
+$\Delta P_{t+1}=P_{t+1}-P_t$ a regular one-hour increment. Let $\F_t$ contain the legal state:
+probability band, time to close, quiet duration, recent zero fraction, previous nonzero sign, and
+previous nonzero magnitude.
+
+\subsection*{2.1 Bounded diffusion comparator}
+
+The baseline is a zero-drift Gaussian interval law with state-dependent scale:
+\begin{equation}
+\Delta P_{t+1}\mid\F_t
+\sim \mathcal N\!\left(0,\;\sigma^2(c_t)P_t(1-P_t)\right),
+\label{eq:diffusion}
+\end{equation}
+where $c_t$ is a fixed probability/time-to-close cell. The bounded-state factor allows local
+variance to shrink near zero and one. It is intentionally a simple test of smooth, conditionally
+Gaussian accumulation rather than a claim that every continuous latent-price model has this form.
+
+\subsection*{2.2 Zero-inflated marked-jump family}
+
+The hurdle family separates whether a registered change occurs, its sign, and its magnitude:
+\begin{align}
+\Pr(\Delta P_{t+1}=0\mid\F_t) &= 1-q(\F_t), \\
+\Pr(\Delta P_{t+1}>0\mid\Delta P_{t+1}\neq0,\F_t) &= s(\F_t), \\
+\log|\Delta P_{t+1}|\mid\Delta P_{t+1}\neq0,\F_t
+&\sim \mathcal N\!\left(\mu(\F_t),\tau^2(\F_t)\right).
+\end{align}
+
+The full law uses probability and quiet-duration cells for $q$, probability and previous nonzero
+sign for $s$, and probability plus previous nonzero magnitude for $(\mu,\tau)$. Every cell shrinks
+toward the event-equal global law with one event of prior weight. Nested alternatives remove path
+variables (state-only), remove state and duration (memoryless), or remove the point mass entirely
+(diffusion).
+
+For a nonzero movement $x$, every model is scored on the same 0.001-wide observed-price interval:
+\begin{align}
+\Pr(x\mid\F_t) = q(\F_t)\Pr(\operatorname{sign}x\mid\F_t)
+\left[\Phi\!\left(\frac{\log(|x|+\epsilon)-\mu}{\tau}\right)
+-\Phi\!\left(\frac{\log(\max(10^{-6},|x|-\epsilon))-\mu}{\tau}\right)\right],
+\end{align}
+with $\epsilon=0.0005$. A zero receives point mass $1-q(\F_t)$. The primary score is negative log
+interval probability, averaged both by observation and by event.
+
+\subsection*{2.3 Continuous update-arrival hazard}
+
+The strongest component model predicts $Y_{t+1}=1[\Delta P_{t+1}\neq0]$ using regularized logistic
+regression:
+\begin{equation}
+\operatorname{logit}\Pr(Y_{t+1}=1\mid\F_t)
+=\beta_0+\beta_p f(P_t)+\beta_T f(T_t)
++\beta_q\log(1+Q_t)+\beta_z Z_{t,24},
+\label{eq:hazard}
+\end{equation}
+where $Q_t$ is the current quiet run and $Z_{t,24}$ is the fraction of unchanged regular samples
+in the prior 24 hours. Its Brier score is
+\begin{equation}
+\operatorname{BS}=n^{-1}\sum_{i=1}^{n}(\widehat q_i-Y_i)^2.
+\end{equation}
+
+\subsection*{2.4 Falsifiable restrictions}
+
+A smooth diffusion is contradicted if regular interior increments exhibit at least 25\% exact
+zeros, kurtosis at least 20, or a 24-hour variance ratio outside $[0.75,1.25]$. A memoryless clock
+is questioned when next-move rates differ by more than a factor of two between freshly active and
+24-hour-quiet states. Directional predictability requires separate out-of-time gates and cannot be
+inferred from volatility or arrival prediction.
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 4
+% -----------------------------------------------------------------------------
+\section*{3. Descriptive evidence: sticky, discontinuous, and path dependent}
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\linewidth}{XrrX}
+\toprule
+Signature & Earlier cohort & Later cohort & Interpretation \\
+\midrule
+Interior regular-hour zero mass & 62.40\% & 44.85\% & Strong but regime-dependent stickiness \\
+Raw regular-increment kurtosis & 157.10 & 55.01 & One Gaussian increment law is inadequate \\
+24-hour variance ratio & $<0.75$ in 142/151 events & 0.230 pooled; $<0.75$ in 24/26 & Variance does not scale linearly in clock time \\
+Nonzero sign reversal & 62.21\%; $>50\%$ in 134/152 & $>50\%$ in 21/26 & Registered marks are negatively dependent \\
+Long-quiet/active move-rate ratio & 0.025; $<0.5$ in 83/83 & 0.074 event mean; $<0.5$ in 7/7 & Arrival depends on elapsed quiet time \\
+Boundary persistence, low/high & 98.99\% / 97.07\% & 98.16\% / 99.12\% & Terminal boundaries materially shape paths \\
+\bottomrule
+\end{tabularx}
+\caption{Fixed process signatures. Exact levels vary; the structural directions recur.}
+\end{table}
+
+Among all consecutive probability samples, 69.62\% are unchanged. For regular interior hourly
+increments, the median absolute change is zero; the 90th, 99th, and 99.9th percentiles are 1, 9,
+and 32 cents. Variance ratios decline from 0.723 at two hours to 0.536, 0.393, and 0.235 at 4, 8,
+and 24 hours, rather than remaining near one as independent diffusion increments would imply.
+
+\subsection*{3.1 The update clock remembers inactivity}
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lrrr}
+\toprule
+Prior unchanged samples & Rows & Next-hour move rate & Mean absolute change \\
+\midrule
+0 & 236,973 & 68.24\% & 1.173 cents \\
+1--5 & 199,150 & 28.90\% & 0.340 cents \\
+6--23 & 145,703 & 9.50\% & 0.116 cents \\
+24+ & 199,562 & 1.72\% & 0.025 cents \\
+\bottomrule
+\end{tabular}
+\caption{Observed next-sample activity conditional on the preceding quiet run.}
+\end{table}
+
+The 24+-quiet move rate is only 2.53\% of the freshly active rate. This rejects a constant-
+intensity update clock for registered observations. It does not by itself distinguish economic
+inactivity from a sampling, rounding, or microstructure mechanism.
+
+\subsection*{3.2 Boundaries and sampling frequency do not explain the result away}
+
+Strict-interior probability and log-odds representations retain high zero mass, raw kurtosis above
+100, long-quiet hazard collapse, and sub-diffusive aggregation. Separate early and late maturity
+regimes agree in direction. Aggregating to six hours weakens but does not remove stickiness or
+sub-diffusion.
+
+On 19,012 regular official five-minute increments, interior zero mass is 78.00\%, kurtosis is
+203.64, nonzero reversal is 67.87\%, and the 24-hour variance ratio is 0.067. Next-sample movement
+falls from 55.95\% with no prior quiet sample to 0.20\% after 24 quiet hours. The official path
+matches 1,580 eligible hourly samples within ten minutes; 99.49\% match exactly and mean absolute
+difference is 0.0000487. Coarse hourly sampling alone therefore cannot account for the main
+signatures on this preselected panel.
+
+\resultbox{The evidence rejects the joint descriptive restrictions of a smooth Gaussian diffusion and a memoryless update clock. The most stable empirical facts are point mass at zero, duration-dependent arrival, bounded-state persistence, sign reversal, and sub-diffusive aggregation.}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 5
+% -----------------------------------------------------------------------------
+\section*{4. Chronological predictive comparisons}
+
+All comparisons fit earlier whole events and score fixed later-event blocks. The complete-law
+experiment makes 566,501 out-of-time predictions over 113 events.
+
+\subsection*{4.1 Complete one-hour observation law}
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\linewidth}{Xrrr}
+\toprule
+Model & Development observation NLL & Development event NLL & Later event NLL \\
+\midrule
+Bounded state-dependent Gaussian diffusion & 3.511 & 3.578 & 4.582 \\
+Memoryless zero-inflated marked jump & 1.865 & 2.214 & 3.240 \\
+State-conditioned zero-inflated marked jump & 1.782 & 2.104 & 3.116 \\
+State + duration/path marked jump & \textbf{1.585} & \textbf{1.941} & \textbf{2.870} \\
+\bottomrule
+\end{tabularx}
+\caption{Lower negative log interval score is better. The later law is replayed without refitting.}
+\end{table}
+
+The full law improves development event-macro NLL by 7.74\% over state-only, wins 112 of 113 event
+comparisons against state-only, and wins 113 of 113 against diffusion. Its advantage appears in
+both chronological halves. The exact fitted law is then frozen and replayed without fitting on a
+later cohort: it improves 7.88\% over state-only and wins all 27 eligible events against both
+state-only and diffusion. Absolute scores deteriorate across cohorts, indicating a stable
+structural family with regime-dependent parameters rather than one universal calibration.
+
+\subsection*{4.2 Which components contribute?}
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\linewidth}{XrrX}
+\toprule
+Target and added information & Development gain & Later replay & Interpretation \\
+\midrule
+Move arrival: continuous quiet duration and recent zero fraction & 27.63\% event-Brier & 33.38\%; 27/27 wins & Strongest component \\
+Nonzero sign: prior-path information & 3.96\% event-Brier & Not separately replayed & Modest reversal information \\
+Nonzero log magnitude: prior magnitude path & 20.61\% event-MSE & Not separately replayed & Strong magnitude clustering \\
+Heavy-tailed residual after hurdle decomposition & Rejected & Not replayed & Raw tails need not imply heavy residuals \\
+\bottomrule
+\end{tabularx}
+\caption{Component evidence relative to fixed state-only comparators.}
+\end{table}
+
+The frozen continuous arrival hazard in Equation~\ref{eq:hazard} is reconstructed from retained
+development coefficients and replayed on 17,671 later predictions:
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lrrr}
+\toprule
+Later-cohort hazard & Observation Brier & Event Brier & Event log loss \\
+\midrule
+State-only logistic & 0.24319 & 0.26106 & 0.71628 \\
+State + continuous inactivity & \textbf{0.16477} & \textbf{0.17392} & \textbf{0.52634} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The full hazard wins all 27 eligible events and both chronological halves. Its mean predicted move
+rate is 0.4129 versus an observed 0.4534, an absolute calibration gap of 0.0405. This is strong
+no-refit evidence that inactivity is predictive of the registered update process.
+
+\statusbox{ChronosGold}{Economic boundary. Forecasting whether a sampled price changes is not the same as forecasting its direction or earning a return. A useful arrival model may eventually improve trade eligibility, execution scheduling, or simulation without being alpha by itself.}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 6
+% -----------------------------------------------------------------------------
+\section*{5. Formalization and the protected negative}
+
+Chronos separates exploratory or chronological development evidence from a frozen scientific
+claim. A candidate must pass fixed development gates before an independent freeze seals its source,
+features, fitting recipe, decision schedule, metrics, coverage requirements, and protected plan.
+
+\subsection*{5.1 Coarse compression is rejected}
+
+The first formal candidate compresses the complete law into a sparse binary arrival forecast using
+fixed probability and quiet-duration cells. It narrowly misses its absolute gates:
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lrrl}
+\toprule
+Formal check & Result & Required & Decision \\
+\midrule
+Observation Brier & 0.202002 & $\leq0.200000$ & \textcolor{ChronosRed}{Fail} \\
+Event-macro Brier & 0.207234 & $\leq0.200000$ & \textcolor{ChronosRed}{Fail} \\
+Early event Brier & 0.194038 & $\leq0.220000$ & Pass \\
+Late event Brier & 0.220194 & $\leq0.220000$ & \textcolor{ChronosRed}{Fail} \\
+Calibration gap & 0.048827 & $\leq0.050000$ & Pass \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The result is retained as a rejection rather than rounded into success. A descended candidate keeps
+the target, temporal machinery, event-aware weighting, and sparse schedule but substitutes the
+already replicated continuous inactivity features. It passes governed development with 202
+out-of-fold predictions across 100 events: observation Brier 0.18256, event Brier 0.19018, early
+and late event Brier 0.18741/0.19296, and calibration gap 0.00463.
+
+\subsection*{5.2 One protected resolution}
+
+The descended system is frozen independently and resolved exactly once:
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lrrl}
+\toprule
+Protected check & Result & Required & Decision \\
+\midrule
+Brier on completed rows & 0.189254 & $\leq0.200000$ & Pass \\
+MAE on completed rows & 0.394489 & $\leq0.400000$ & Pass \\
+Coverage & 0.650000 & $\geq0.950000$ & \textcolor{ChronosRed}{Fail} \\
+Failure rate & 0.350000 & $\leq0.050000$ & \textcolor{ChronosRed}{Fail} \\
+Maximum error concentration & 0.054852 & $\leq0.050000$ & \textcolor{ChronosRed}{Fail} \\
+\bottomrule
+\end{tabular}
+\caption{The exact frozen system is rejected despite promising completed-row accuracy.}
+\end{table}
+
+Thirty-four decisions lack the fixed 100-row legal training window and one lacks a legally
+available outcome. These are system failures, not removable missing data. Because coverage may be
+non-random, reporting only the 65 completed predictions would overstate generalization. The
+validator therefore rejects the candidate and retains the protected negative. That holdout is now
+exposed and cannot be reused to develop a replacement.
+
+\resultbox{The protected failure is part of the result. It distinguishes a scientifically useful process component from an operationally complete predictive system. Accuracy conditional on execution does not compensate for failed decisions.}
+
+\subsection*{5.3 What the result does and does not establish}
+
+The complete density law has strong chronological and no-refit later-cohort evidence. The
+continuous hazard has strong later replay and formal-development evidence. Neither is a protected
+finding. The exact protected arrival system is terminally rejected. No test on these sampled
+probabilities evaluates spread, fees, latency, slippage, market impact, or directional P\&L.
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 7
+% -----------------------------------------------------------------------------
+\section*{6. Financial interpretation and conclusion}
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\linewidth}{p{0.25\linewidth}p{0.19\linewidth}X}
+\toprule
+Financial idea & Assessment & Prediction-market modification \\
+\midrule
+Proper scoring and chronological validation & Transfers directly & Cluster and weight by event; retain the complete trial history \\
+Local/state-dependent volatility & Transfers & Respect bounded state, semantic resolution, and terminal persistence \\
+Duration and point-process models & Transfers strongly & Intensity depends on inactivity, state, semantics, and observation mechanism \\
+Volatility/mark clustering & Transfers & Separate arrival clustering from sign and conditional magnitude \\
+Heavy-tailed returns & Transfers conditionally & Decompose point mass and conditional scale before choosing a residual law \\
+Martingale benchmark & Useful but conditional & Pricing measure, physical probability, belief, sample, and executable price differ \\
+Constant Brownian diffusion & Fails descriptively & Requires point mass, bounded state, jumps, and irregular information time \\
+Independent signs & Fails for registered marks & Reversal may reflect bounce, rounding, aggregation, or belief correction \\
+Black--Scholes replication & Does not transfer directly & No continuously traded underlying and no standard completeness argument \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The best-supported law for registered Polymarket samples is a bounded, zero-inflated marked-jump
+process with state-, duration-, and path-dependent intensity and marks. ``Jump'' means a nonzero
+registered change; it is not proof that the latent efficient probability is discontinuous. The
+observation may combine information arrival, trading and quote sampling, rounding, stale values,
+bid/ask mechanics, and participation.
+
+Representation tests make the conclusion narrower but stronger. Boundary absorption matters but
+does not create the entire effect. Strict-interior log-odds preserves the qualitative law. Six-hour
+aggregation moves the series toward diffusion-like scaling but does not eliminate zero inflation
+or sub-diffusion. Event breadth, contract lifetime, and retained path depth alter parameter levels
+without reversing the structural signatures. The defensible object is therefore a scale- and
+regime-dependent sampled process, not one coordinate-invariant latent SDE with universal
+parameters.
+
+\subsection*{6.1 Research implications}
+
+\begin{itemize}
+  \item Simulators and risk models should represent an update clock separately from direction and magnitude.
+  \item Time since the last change is a first-class state variable, not merely a missing-data counter.
+  \item Evaluation should split by whole events and chronology; row-level random cross-validation is inappropriate.
+  \item A directional model should use the arrival hazard as an eligibility component, then prove incremental sign or return information separately.
+  \item Tradability requires side-specific executable prices, spread, fees, latency, liquidity, and abstention. Sampled-price accuracy is insufficient.
+\end{itemize}
+
+\subsection*{6.2 Conclusion}
+
+Conventional finance remains useful when rewritten around a binary, finite-maturity, event-linked
+payoff. Proper scoring, state-dependent volatility, duration models, and marked point processes
+transfer. Constant diffusion, independent signs, and direct Black--Scholes-style replication are
+poor defaults. Across broad chronological development and an unchanged later replay, the leading
+sampled-process family is a state-, duration-, and path-conditioned zero-inflated marked jump.
+
+The paper's strongest contribution is structural: Polymarket observations are sticky because the
+arrival of registered changes is itself stateful, and subsequent nonzero signs and sizes retain
+path information. The exact protected arrival system nevertheless fails its predeclared coverage
+and concentration standards. The correct conclusion is neither ``markets are random'' nor ``we
+found alpha.'' It is that a useful stochastic-process foundation has been identified, replicated,
+bounded by a protected failure, and made reproducible enough to support the next generation of
+execution-aware and alternative-data research.
+
+\vfill
+\statusbox{ChronosNavy}{Bottom line. Chronos found a reproducible mathematical description of how registered Polymarket probabilities move. It has not yet found a protected or executable trading edge.}
+
+\newpage
+\appendix
+\renewcommand{\thesection}{\Alph{section}}
+\titleformat{\section}{\large\bfseries\color{ChronosNavy}}{Appendix \thesection}{0.65em}{}
+
+% -----------------------------------------------------------------------------
+% APPENDIX
+% -----------------------------------------------------------------------------
+\section{Data authority, partitions, and reproducibility}
+
+\subsection{Corpus identities}
+
+The opening 1,000-contract corpus contains 235 events and 1,180,437 sampled probabilities. The
+successor acquisition contains 1,509 contracts, 321 events, and 1,585,740 observations. Its
+content identity is:
+\begin{quote}\small\ttfamily
+polymarket-corpus:184b83f7f8012da4ca9116c8b6bad2076570ad5f0bada95b22615ee2f5cceae8
+\end{quote}
+
+The successor partition contains 29 wholly fresh development events (147 markets), 227 embargoed
+ancestor events (1,005 markets), and 65 protected events (357 markets). Expansion adds later data
+without changing an earlier experiment's bytes, selection, identity, or partitions.
+
+\subsection{Scientific transition record}
+
+For each public run, Chronos retains:
+\begin{itemize}
+  \item research question and exact authored source digest;
+  \item dataset and partition identities;
+  \item actual field accesses and temporal-availability checks;
+  \item resource envelope, worker outcome, and deterministic receipt;
+  \item development, freeze, protected, reporting, and negative-result transitions;
+  \item failed trials and superseded artifacts rather than only favorable outputs.
+\end{itemize}
+
+Core evidence is indexed in \texttt{paper/evidence-index.md}. Deterministic figure construction and
+replay commands are recorded in \texttt{paper/reproducibility.md}. The protected source is not to
+be rerun: its holdout was exposed once and the exact frozen system was rejected.
+
+\section{Robustness and heterogeneity details}
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lrrrr}
+\toprule
+Fixed view & Increments & Zero rate & Kurtosis & Event-equal 24h ratio \\
+\midrule
+All probability rows & 781,388 & 69.73\% & 157.10 & 0.358 \\
+Strict interior probability & 519,495 & 62.76\% & 103.19 & 0.376 \\
+Strict interior log-odds & 519,495 & 62.76\% & 104.99 & 0.403 \\
+More than 168 hours to close & 701,428 & 69.40\% & 151.06 & 0.338 \\
+Zero to 168 hours to close & 79,960 & 72.54\% & 138.44 & 0.512 \\
+\bottomrule
+\end{tabular}
+\caption{Fixed representation and maturity falsifiers.}
+\end{table}
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lrrrr}
+\toprule
+Whole-event stratum & Zero mass & Variance ratio & Reversal & Quiet ratio \\
+\midrule
+One-market events & 0.577 & 0.403 & 0.588 & 0.084 \\
+At least five markets & 0.527 & 0.267 & 0.598 & 0.032 \\
+Lifetime $\leq30$ days & 0.477 & 0.293 & 0.581 & 0.038 \\
+Lifetime 31--180 days & 0.605 & 0.425 & 0.594 & 0.078 \\
+Lifetime $>180$ days & 0.623 & 0.228 & 0.643 & 0.035 \\
+Fewer than 500 points & 0.458 & 0.315 & 0.556 & 0.014 \\
+500--1,999 points & 0.586 & 0.394 & 0.601 & 0.070 \\
+At least 2,000 points & 0.631 & 0.248 & 0.635 & 0.053 \\
+\bottomrule
+\end{tabular}
+\caption{Event-equal structural heterogeneity. Every headline-eligible stratum remains on the predeclared side of all four thresholds.}
+\end{table}
+
+Exact parameter levels vary materially. The evidence supports recurrence of a process family, not
+parameter invariance across political, economic, sports, or other semantic regimes.
+
+\newpage
+\section{Calibration and alternative-data null results}
+
+The research campaign also tested whether descriptive or predictive structure immediately yields
+directional edge. These studies use separate data authority and do not strengthen the process-law
+claim.
+
+\subsection{Calibration lead}
+
+At 24, 72, 168, and 336 hours before close, sampled mean probabilities exceeded eventual YES
+rates by approximately 4.1--9.2 \pp\ under market weighting and by 4.1--7.4 \pp\ under event-macro
+weighting. The sign replicated in a later cohort at 72, 168, and 336 hours, although long-horizon
+coverage was thin. This resembles a favorite--longshot calibration pattern but does not establish
+mispricing: semantic mix, related outcomes, selection, and sampled versus executable price remain
+live alternatives.
+
+\subsection{Signed flow and fill semantics}
+
+An apparent raw 15-minute flow association of roughly $-0.46$ collapsed to approximately
+$+0.04$--$+0.05$ after transaction direction was handled correctly. A separate audit found that
+Polymarket's retained fill table is a per-party ledger: maker and taker legs must not be counted as
+independent market trades. Canonical external studies now retain only the transaction-side record
+and convert YES/NO fills into a consistent YES-equivalent price and taker direction. The invalid
+interpretation is preserved as a negative data lesson.
+
+\subsection{Brazil polling experiment}
+
+Thirty-one exact national Lula/Fl\'avio runoff poll releases were reconstructed from immutable
+publication history, producing 25 decision events and 17,570 canonical Polymarket fills. Features
+included latest poll change, rolling-three median change, surprise against the previous five
+releases, and same-pollster change. Follow and fade rules were tested at 0, 2, and 4 percentage-
+point thresholds over 24, 72, and 168 hours.
+
+Every rule with at least five executable pairs was negative after conservative fees. The broad
+72-hour fade earned \$10.69 gross but lost \$18.97 net over seven trades. The least-negative
+thresholded rule lost \$14.70 over five trades. The hypothesis was rejected before protected
+formalization.
+
+\subsection{Current alternative-data direction}
+
+The next independent question uses another prediction venue only as a time-legal external
+predictor: do earlier Kalshi price, activity, disagreement, or shock features improve later
+Polymarket direction, magnitude, or move-arrival forecasts? This is not treated as an arbitrage
+study. Any candidate must be evaluated chronologically and then translated to side-specific
+Polymarket execution with spread, fees, liquidity, latency, abstention, and directional P\&L.
+
+\section{Claim ledger}
+
+\begin{tabularx}{\linewidth}{p{0.33\linewidth}p{0.22\linewidth}X}
+\toprule
+Claim & Status & Evidence boundary \\
+\midrule
+Smooth constant-intensity diffusion describes registered hourly samples & Rejected & Zero mass, tails, time scaling, duration dependence \\
+State-duration/path marked-jump family improves predictive density & Strong development + later replay & Not protected; targets registered samples \\
+Continuous inactivity improves next-update probability & Strong development + later replay & Exact protected implementation rejected \\
+Boundaries alone explain stickiness & Rejected as sole explanation & Strict-interior and log-odds robustness \\
+Hourly sampling alone creates the process signatures & Rejected on selected panel & Official five-minute source \\
+Observed sign reversal is executable mean reversion & Not established & Quotes, latency, spread, and depth absent \\
+Sampled probabilities are universally miscalibrated & Not established & Development lead with semantic and selection rivals \\
+Chronos has found tradable alpha & No & All cost-aware directional ideas currently rejected \\
+\bottomrule
+\end{tabularx}
+
+\newpage
+\section{Limitations}
+
+\begin{itemize}
+  \item Registered samples are not identified as trades, quotes, midpoints, latent beliefs, or executable prices.
+  \item The five-minute panel contains ten preselected markets and is a measurement falsifier, not a venue-wide quote study.
+  \item Related contracts and semantic groups create dependence that event grouping mitigates but cannot eliminate.
+  \item The diffusion comparator is deliberately simple; rejecting Equation~\ref{eq:diffusion} does not reject every latent continuous-time model with endogenous sampling and microstructure noise.
+  \item Representation and contract-structure robustness are fixed development falsifiers, not independent protected replications.
+  \item The complete density law cannot currently enter the scalar protected evaluator as a governed distribution-valued log score.
+  \item One protected candidate was evaluated and rejected. Its 35\% failed decisions prevent inference from completed-row accuracy to the full declared schedule.
+  \item No result establishes causal information arrival, objective-probability equality, Sharpe ratio, or net profit after all execution costs.
+\end{itemize}
+
+\section{References}
+
+\begin{enumerate}[leftmargin=5mm,label={[\arabic*]},itemsep=3pt]
+  \item Bacry, E., Delattre, S., Hoffmann, M., and Muzy, J.-F. (2013). Modelling microstructure noise with mutually exciting point processes. \emph{Quantitative Finance}, 13(1), 65--77.
+  \item Brier, G. W. (1950). Verification of forecasts expressed in terms of probability. \emph{Monthly Weather Review}, 78(1), 1--3.
+  \item Engle, R. F. and Russell, J. R. (1998). Autoregressive conditional duration: A new model for irregularly spaced transaction data. \emph{Econometrica}, 66(5), 1127--1162.
+  \item Hawkes, A. G. (1971). Spectra of some self-exciting and mutually exciting point processes. \emph{Biometrika}, 58(1), 83--90.
+  \item Majumder, S. R., Diermeier, D., Rietz, T. A., and Amaral, L. A. N. (2009). Price dynamics in political prediction markets. \emph{Proceedings of the National Academy of Sciences}, 106(3), 679--684.
+  \item Manski, C. F. (2006). Interpreting the predictions of prediction markets. \emph{Economics Letters}, 91(3), 425--429.
+  \item L\'opez de Prado, M. (2018). \emph{Advances in Financial Machine Learning}. Wiley.
+  \item Wolfers, J. and Zitzewitz, E. (2004). Prediction markets. \emph{Journal of Economic Perspectives}, 18(2), 107--126.
+  \item Wolfers, J. and Zitzewitz, E. (2006). Interpreting prediction market prices as probabilities. NBER Working Paper 12200.
+\end{enumerate}
+
+\section*{Reproducibility statement}
+
+The manuscript is a presentation layer over retained Chronos receipts. Numerical claims map to
+content-addressed evidence in \texttt{paper/evidence-index.md}; replay commands and non-rerunnable
+protected boundaries are documented in \texttt{paper/reproducibility.md}. Where a result is
+development-only, later-replayed, formally rejected, or protected-negative, the status is stated
+explicitly rather than collapsed into a single significance label.
+
+\vfill
+{\footnotesize\color{ChronosGray}Chronos Research Project. Internal working paper for scientific review. Not investment advice.}
+
+\end{document}
