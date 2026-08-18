@@ -166,3 +166,22 @@ receipt SHA-256: `dc48119c03b492217c3ab26ae781aaf1e6a5a87342d772cbcb78057095940e
 This result discriminates complete probability laws for registered sampled probabilities. It is
 not evidence that samples are trades, midquotes, latent beliefs, or executable prices, and it does
 not authorize access to the successor corpus's final 65-event protected block.
+
+## Frozen continuous arrival-hazard replay
+
+Source 17 embeds the complete source-16 all-development logistic hazards, including fitted feature
+means and scales. It performs no fitting on the successor cohort. The state-plus-staleness hazard
+uses continuous log quiet duration and prior-24 zero fraction in addition to the frozen state
+features.
+
+Across 17,671 predictions and 27 events, event-macro Brier fell from `0.26106` for state-only to
+`0.17392` for state plus staleness, a `33.38%` improvement. Observation Brier was `0.16477`; event
+log loss fell from `0.71628` to `0.52634`; all 27 events favored the full hazard; both chronological
+halves improved; and the absolute calibration gap was `0.04050`. Every predeclared relative,
+absolute, calibration, breadth, and chronology gate passed.
+
+Exact receipt SHA-256:
+`0ffda46feea1e16ea9398ac9054ad70bc5b7cc1992874926b6b4e6abdbb8843f`. The cohort had already
+supported distinct process analyses, so this is a no-refit later replay rather than a pristine
+protected evaluation. It justifies formalizing this exact continuous hazard; it does not authorize
+protected access by itself.

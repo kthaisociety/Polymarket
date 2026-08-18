@@ -1,7 +1,7 @@
 # Polymarket stochastic-process paper study
 
-Epistemic status: **FRESH COMPLETE-LAW REPLICATION; REPRESENTATION ROBUSTNESS; FORMAL ARRIVAL
-REJECTION; PROTECTED DATA UNEXPOSED**.
+Epistemic status: **FRESH COMPLETE-LAW AND ARRIVAL-HAZARD REPLICATION; REPRESENTATION ROBUSTNESS;
+FORMAL SPARSE ARRIVAL REJECTION; PROTECTED DATA UNEXPOSED**.
 
 This study operationalizes the two research questions in the KTH AI Society project plan
 *Financial Mathematics and Machine Learning on Prediction Markets*. The empirical core asks which
@@ -66,6 +66,12 @@ evidence or inherits authority across different field types.
 - [`source/15_representation_robustness.py`](source/15_representation_robustness.py): fixed
   boundary, log-odds, maturity-regime, and six-hour-clock falsifiers for the descriptive process
   conclusion.
+- [`source/16_freeze_arrival_hazard.py`](source/16_freeze_arrival_hazard.py): exact source-03
+  reproduction plus fully reconstructible all-development state and state-plus-staleness logistic
+  hazards.
+- [`source/17_frozen_arrival_hazard_successor_replay.py`](source/17_frozen_arrival_hazard_successor_replay.py):
+  literal no-refit replay of the source-16 hazards and fixed absolute/relative gates on the later
+  successor cohort.
 
 The paper-working literature and claim map is retained in
 [`literature/theory-transfer-map.md`](literature/theory-transfer-map.md). It distinguishes direct,
@@ -427,3 +433,36 @@ events below the fixed `0.75` threshold. Strict-interior log-odds gives a ratio 
 129 events. Thus coarser aggregation moves the series toward diffusion-like scaling but does not
 reach it at six hours. This supports a scale-dependent observed jump process, not a universal
 continuous-time law.
+
+## Frozen continuous arrival-hazard replay
+
+Source 16 repaired a provenance omission in source 03 without changing its science. The original
+receipt retained coefficients but not the fitted feature means and scales needed to reconstruct
+predictions. Source 16 reproduced every source-03 chronological metric, fold, and gate exactly,
+then emitted complete all-development state and state-plus-staleness logistic hazards. Its source
+SHA-256 is `dabe18ab627c9a95c4d066e90a03dfd2a4350d3c465464bad785381e0d627e5c`; receipt
+SHA-256 is `21c3d08cc236953d1ad7e2b6ddc3986db0528d90e9b7813bd31614d97f0f9314`.
+
+Source 17 embedded those literal arrays and fixed lineage hashes before requesting the later
+successor view. It performed no fitting, scaling, calibration, or threshold selection on the
+17,671 predictions across 27 eligible events.
+
+| Frozen later-cohort arrival law | Observation Brier | Event-macro Brier | Event-macro log loss |
+|---|---:|---:|---:|
+| State-only logistic | 0.24319 | 0.26106 | 0.71628 |
+| State + continuous staleness logistic | **0.16477** | **0.17392** | **0.52634** |
+
+The full hazard improved event-macro Brier by `33.38%`, won all `27/27` event comparisons, and
+improved early and late event halves (`0.17285` and `0.17492`). Its mean prediction was `0.41289`
+against an observed move rate of `0.45340`, for an absolute calibration gap of `0.04050`. It passed
+every predeclared relative, absolute, calibration, breadth, and chronology gate. Source-17
+SHA-256 is `aaf439a67f61d42f50e5b4f711a8f6255a2fefce9733f9b3b43f6a91d7dc2f95`; receipt
+SHA-256 is `0ffda46feea1e16ea9398ac9054ad70bc5b7cc1992874926b6b4e6abdbb8843f`.
+
+This materially strengthens the arrival component: continuous quiet-run and recent-zero features
+generalize without refitting and clear the earlier absolute `0.20` Brier standard on this later
+cohort. It does not reverse source 14's formal rejection. Source 14 tested a different coarse-cell,
+sparse-anchor candidate through the formal harness; source 17 uses the full registered hourly
+schedule, and its successor cohort has prior exposure to distinct process analyses. The next
+scientifically justified step is a new exact formal candidate for this continuous hazard, not a
+reinterpretation of the rejected candidate or direct protected access.

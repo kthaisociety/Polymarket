@@ -24,6 +24,12 @@ the state-only hurdle and wins 112 of 113 event comparisons. The exact fitted la
 without refitting on a later cohort, where it improves 7.88% and wins all 27 eligible events against
 state-only and diffusion comparators.
 
+Separately, a fully reconstructible continuous logistic arrival hazard is frozen from development
+and replayed without fitting on 17,671 later predictions. Adding quiet duration and recent
+inactivity lowers event-macro Brier from 0.261 to 0.174, wins all 27 events, and passes fixed
+absolute Brier and calibration gates. This strengthens the arrival component while remaining a
+non-protected later replay.
+
 The result does not authorize a universal or protected claim. When the law is compressed to a
 sparse binary arrival forecast inside the formal Chronos harness, it narrowly misses fixed
 observation, event-macro, and late-period Brier ceilings. No freeze or protected evaluation is
@@ -158,12 +164,12 @@ parameter values are not universal.
 
 ### 5.1 Component tests
 
-| Component | Incremental event-macro improvement over state | Fixed gate |
-|---|---:|---|
-| Next-hour move arrival: add quiet-duration features | 27.63% Brier | Pass |
-| Nonzero sign: add prior-path features | 3.96% Brier | Pass |
-| Nonzero log magnitude: add prior-path features | 20.61% MSE | Pass |
-| Heavy-tailed residual alternative after hurdle decomposition | — | Reject |
+| Component | Development improvement over state | Later no-refit evidence | Fixed gate |
+|---|---:|---:|---|
+| Next-hour move arrival: add continuous quiet-duration features | 27.63% event Brier | 33.38%; 27/27 event wins | Pass both |
+| Nonzero sign: add prior-path features | 3.96% event Brier | Not separately replayed | Pass development |
+| Nonzero log magnitude: add prior-path features | 20.61% event MSE | Not separately replayed | Pass development |
+| Heavy-tailed residual alternative after hurdle decomposition | — | Not replayed | Reject development |
 
 The raw series is heavy-tailed, but the residual-law test rejects the claim that an additional
 heavy-tailed residual is required after zeros, state, and conditional magnitude are separated.
@@ -184,7 +190,27 @@ state-only and diffusion.
 
 ![Complete process-law event-macro NLL](figures/process-family-event-nll.svg)
 
-### 5.3 Representation and maturity robustness
+### 5.3 Frozen continuous arrival hazard
+
+The original arrival comparison used a regularized logistic hazard with state features plus
+continuous `log(1 + quiet run)` and the fraction of unchanged samples in the prior 24 regular
+increments. A provenance repair reproduced every original fold and score exactly, then retained
+the all-development feature means, scales, and coefficients needed for exact reconstruction.
+Those literal arrays were replayed without fitting on the 29-event successor development view:
+
+| Frozen later-cohort hazard | Observation Brier | Event-macro Brier | Event-macro log loss |
+|---|---:|---:|---:|
+| State-only logistic | 0.24319 | 0.26106 | 0.71628 |
+| State + continuous staleness logistic | **0.16477** | **0.17392** | **0.52634** |
+
+The full hazard improved event-macro Brier by 33.38%, won all 27 eligible events, and improved both
+chronological halves. Its mean prediction was 0.41289 against an observed move rate of 0.45340, an
+absolute calibration gap of 0.04050. It passed predeclared `0.20` observation/event Brier,
+`0.05` calibration-gap, relative-improvement, event-win, breadth, and chronology gates. Because
+the successor cohort supported earlier distinct process analyses, this is strong no-refit replay
+evidence rather than pristine protected validation.
+
+### 5.4 Representation and maturity robustness
 
 The fixed representation experiment asks whether boundaries, probability coordinates, terminal
 convergence, or the one-hour clock manufacture the main signatures:
@@ -205,7 +231,7 @@ event-equal 24-hour variance ratio relative to four six-hour periods is 0.569 ac
 moves toward diffusion-like scaling under aggregation, but neither boundaries, coordinates,
 terminal convergence, nor the one-hour clock explains it away.
 
-### 5.4 Five-minute measurement falsifier
+### 5.5 Five-minute measurement falsifier
 
 On 19,012 regular five-minute increments, interior zero mass is 78.00%, raw kurtosis is 203.64,
 nonzero reversal is 67.87%, and the 24-hour variance ratio is 0.067. Next-sample move probability
@@ -231,7 +257,11 @@ gate is not met:
 This is a close rejection, not permission to round the result into success. The candidate is not
 frozen and the final 47-event block remains unexposed. The negative result shows that a broad
 complete-law advantage does not guarantee that one component remains strong under a sparse scalar
-compression.
+compression. It also does not conflict with the later continuous-hazard replay: the rejected formal
+candidate used coarse probability/quiet cells and one sparse common anchor per event, whereas the
+replayed logistic hazard uses continuous staleness features on the full eligible hourly schedule.
+The correct next step is a new formal candidate with its own identity and development gate, not a
+reinterpretation of the rejected receipt.
 
 ![Formal arrival Brier result](figures/formal-arrival-brier.svg)
 
@@ -269,6 +299,10 @@ That favors a stable structural family with regime-dependent parameters rather t
 calibration. The formal negative further warns against compressing the family or changing the
 sampling design and assuming the result survives.
 
+The frozen continuous arrival replay isolates one especially stable component: the age and recent
+inactivity of the observed price path materially improve next-update probabilities beyond state
+alone. That is predictive evidence about the observation/update process, not directional alpha.
+
 ## 9. Limitations
 
 - Registered samples are not identified as trades, quotes, midpoints, latent beliefs, or
@@ -286,6 +320,8 @@ sampling design and assuming the result survives.
   after spread, fees, latency, slippage, and market impact.
 - The current protected evaluator lacks a governed distribution-valued log-score plugin, so the
   full density law remains development plus fresh-replication evidence.
+- The continuous arrival hazard has later no-refit evidence but has not yet passed a newly authored
+  formal development identity or protected evaluation.
 
 ## 10. Conclusion
 
@@ -295,7 +331,8 @@ models, and marked point processes are useful. Constant diffusion, independent s
 Black–Scholes-style replication are poor defaults. Across broad development and a no-refit later
 cohort, the most useful sampled-process family is a state-, duration-, and path-conditioned
 zero-inflated marked jump. The paper's strongest claim is structural and observational. Its
-narrower formal arrival claim is rejected, and the protected holdout remains fresh.
+narrower coarse-cell formal arrival claim is rejected, while a distinct continuous staleness
+hazard passes fixed later no-refit gates. The protected holdout remains fresh.
 
 ## References and evidence
 
