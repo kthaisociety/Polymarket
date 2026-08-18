@@ -365,3 +365,28 @@ SHA-256 is `dc48119c03b492217c3ab26ae781aaf1e6a5a87342d772cbcb78057095940e13`.
 This is a no-refit chronological replication of the observed-sample law, not a protected result.
 It strengthens model-family discrimination but does not identify a latent belief process,
 executable return, causal mechanism, or universal parameterization.
+
+## Formal hurdle-arrival compression
+
+Source 14 tested whether the selected law's arrival component could survive the current scalar
+formal harness on a sparse, metadata-fixed schedule of up to five markets at one common anchor per
+event. Its exact authored candidate used the same five probability bands, four quiet-duration
+bands, event-equal fitting, and one-event cell shrinkage. It produced 231 out-of-fold binary
+predictions across 111 events after a 100-row training boundary.
+
+The fixed gate failed. Observation Brier/MSE was `0.20200` against a `0.20` ceiling; event-macro
+Brier was `0.20723` against `0.20`; and the late-half event-macro value was `0.22019` against
+`0.22`. Early-half Brier (`0.19404`), absolute mean calibration gap (`0.04883`), breadth, and
+largest-event squared-error share (`0.05413`) passed. No threshold was changed after this result.
+No freeze, protected request, or protected exposure occurred.
+
+The receipt SHA-256 is
+`2e59fc3be4a6b9157b184cadfcc06eccf946c2131d3f1b12f8fdf44b97f0f7e8`; the driver and authored
+candidate source SHA-256 values are
+`8aa7685919c420bfd52210002aadec95199e0300b20bd25c5483583c66353715` and
+`3b7c0278d603ace539bffc815f5e07709f4ccf8eaeb324066a29b35eaca0a59b`.
+
+This rejection does not overturn the complete-law comparison: it shows that compressing that law
+to one binary component and one sparse anchor per event does not meet the stronger absolute formal
+standard. The broad density result remains replicated development evidence, while the narrower
+formal arrival claim is rejected and the 47-event protected block remains untouched.

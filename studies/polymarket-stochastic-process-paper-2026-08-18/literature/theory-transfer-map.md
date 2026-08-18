@@ -100,6 +100,12 @@ comparison against state and diffusion. The same structural restrictions therefo
 later cohort even though absolute score levels change, supporting a stable family with
 regime-dependent parameters rather than a universal fitted law.
 
+Source 14 provides a counterexample to overgeneralizing that transfer. When the selected law is
+compressed to its binary arrival component and evaluated at one sparse common anchor per event,
+formal observation/event-macro Brier is 0.202/0.207 and misses the fixed 0.20 ceilings. The broad
+complete-law advantage therefore does not imply that every component, sampling design, or scalar
+compression is independently strong enough for formal promotion.
+
 ## Calibration and financial-theory layer
 
 Proper scoring rules, reliability diagrams, chronological validation, and cluster-aware inference

@@ -626,3 +626,16 @@ therefore corrected to 200 while retaining the 100-row training boundary, 80-eve
 quality/calibration/concentration threshold, the exact model and label, and all protected rules.
 The protected schedule contains 169 decisions across 46 of the final 47 events; the remaining event
 has no timestamp-eligible anchor under the predeclared rule and is not silently replaced.
+
+The corrected formal replay completed in about 100 seconds and rejected the candidate. It issued
+231 out-of-fold predictions across 111 events. Observation Brier was `0.202002`, event-macro Brier
+was `0.207234`, early/late event-macro Brier was `0.194038`/`0.220194`, mean prediction/outcome was
+`0.473069`/`0.424242`, and the largest-event squared-error share was `0.054132`. Thus breadth,
+early-half, calibration, and concentration checks passed, but observation, event-macro, and
+late-half ceilings failed. Exact receipt SHA-256 is
+`2e59fc3be4a6b9157b184cadfcc06eccf946c2131d3f1b12f8fdf44b97f0f7e8`.
+
+Status: **FORMAL DEVELOPMENT REJECTION**. No independent freeze was issued, the protected plan was
+not requested, and `protected_values_exposed=false`. The complete density comparison and unchanged
+successor replay remain positive development evidence; this narrower scalar arrival compression
+is retained as a negative result and cannot be repaired by moving its thresholds.
