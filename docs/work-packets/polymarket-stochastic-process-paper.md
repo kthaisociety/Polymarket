@@ -153,7 +153,7 @@ The research package must ultimately retain:
 
 ## Completion status
 
-**OPEN — SOURCE 01 COMPLETE.** The verified project plan has been translated into an exact Chronos
+**OPEN — SOURCE 05 COMPLETE.** The verified project plan has been translated into an exact Chronos
 mandate. Source 01 executed successfully over 562 markets/157 fresh development events while the
 31-event ancestor and final 47-event protected block remained unavailable. Its exact receipt is
 retained under `studies/polymarket-stochastic-process-paper-2026-08-18/`.
@@ -278,3 +278,16 @@ The first source 05 execution failed with `NameError` because the constrained ru
 inject `pi`; it exposed no protected values and produced no analytical details. The failed receipt
 is retained. Declaring the identical numerical constant locally repairs execution without changing
 the predeclared target, models, distributions, folds, or gates.
+
+The repaired source 05 completed. Across 174,956 out-of-time nonzero marks in 113 later events,
+path history reduced event-macro log-magnitude MSE from `1.36764` to `1.08572`, a `20.61%`
+improvement, won 101/113 events, and improved both chronological halves. The prior nonzero
+log-magnitude coefficient was positive and stable (`0.449` to `0.515`), showing magnitude
+clustering beyond bounded price state and time-to-close.
+
+The fixed heavy-tail residual gate failed: on the common conditional log-magnitude scale, Gaussian
+residual NLL (`1.46518` event macro) beat Laplace (`1.48312`) and Student-t df3 (`1.54454`). Raw
+increments remain extremely heavy-tailed because of the zero mass, changing intensity, and
+multiplicative size variation; conditional nonzero log size is instead provisionally compatible
+with a Gaussian-residual/lognormal-style component. This is not an exact distributional claim
+because price-grid rounding and bounded support remain unmodeled.

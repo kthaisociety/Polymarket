@@ -205,11 +205,36 @@ not yet evidence that latent beliefs mean-revert or that the reversal survives e
 fees, spread, and latency. The state-only model did not improve event-macro scores over the constant
 baseline, so the main result is path dependence rather than directional information in price level.
 
-Source 05 is predeclared but has not yet executed.
-
 Its first execution failed before producing analytical details because the constrained runtime does
 not inject a `pi` name. The failed receipt is retained as
 [`development-receipts/05_nonzero_magnitude_model_comparison.failed-nameerror.json`](development-receipts/05_nonzero_magnitude_model_comparison.failed-nameerror.json),
 SHA-256 `1aaf83367ba4aa70ee7e091b77a3d61400c9c7726d08ab890ecf138729817820`.
 No protected values were exposed. The implementation now declares the same fixed numerical
 constant locally; the target, features, folds, models, distributions, and gates are unchanged.
+
+The repaired source 05 succeeded with source SHA-256
+`38ce508aceb10c066b5f51ce62dac48f1a90dc2e699eedf253d1012829ef516f`. Its exact receipt is
+[`development-receipts/05_nonzero_magnitude_model_comparison.json`](development-receipts/05_nonzero_magnitude_model_comparison.json),
+SHA-256 `f5a0aff4ba388852752aaadfa8f3b98badee0a6d55e5c1bc0d78f58ba5f80fe7`.
+
+| Model for log absolute nonzero change | Observation MSE | Event-macro MSE | Event-macro MAE |
+|---|---:|---:|---:|
+| Earlier-event constant | 2.33120 | 2.40022 | 1.27650 |
+| Price state + time to close | 1.55492 | 1.36764 | 0.91782 |
+| State + prior path | **1.11168** | **1.08572** | **0.80846** |
+
+The path model improved event-macro MSE by 20.61%, won 101/113 events, and improved both halves.
+The previous nonzero log-magnitude coefficient was the dominant path term and remained positive in
+all folds (`0.449` to `0.515` standardized), establishing conditional magnitude clustering. The
+predeclared magnitude gate passed.
+
+| Full-model residual law on log magnitude | Observation mean NLL | Event-macro mean NLL |
+|---|---:|---:|
+| Gaussian | **1.47738** | **1.46518** |
+| Laplace | 1.50360 | 1.48312 |
+| Student-t, 3 df | 1.56381 | 1.54454 |
+
+The heavy-tail residual gate failed. The raw increment distribution is heavy-tailed, but after
+separating zero arrivals and modeling conditional log size, Gaussian residuals won this fixed
+comparison. A conditional lognormal-style size component is therefore the leading simple account,
+subject to unmodeled grid rounding and bounded support.
