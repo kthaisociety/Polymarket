@@ -382,3 +382,20 @@ is retained. Chronos may repair this transport deadlock by receiving the already
 before joining the worker; the source, data grant, selection, and scientific design remain
 unchanged. A regression test must cover a result materially larger than a typical pipe buffer
 before source 06 is retried.
+
+The transport repair passed its dedicated large-result regression, strict quality checks, and the
+complete 470-test Chronos suite. The identical source 06 then completed in 14 seconds. Its exact
+receipt catalogues 562 development contracts and selects the first market from all 10 fixed event
+ordinals. Seven identity, question, lifecycle, and point-count fields were accessed; no probability,
+payout, ancestor, or protected value was read. The receipt SHA-256 is
+`e04036b2c07821de014b8ce2e59f5aa9ebe4fe7be9449083c7dbd668959a566e`.
+
+The visible catalog predeclares a semantic-composition falsifier before any category-conditioned
+price or outcome statistic is computed. Market questions receive exactly one category under this
+fixed precedence: (1) speech/social-post language; (2) election, nomination, or candidate-selection
+language; (3) armed-conflict or geopolitical-action language; (4) office-exit, legal, or
+institutional-action language; or (5) other. Exact keyword rules must be committed in authored
+source before execution. Results will report market and whole-event counts, regular interior zero
+mass, quiet-run move rates, 24-hour variance ratios, event-equal drift, and fixed-horizon
+probability-minus-outcome gaps by category when coverage exists. No category may be redefined or
+merged after its values are observed; sparse rows remain sparse.
