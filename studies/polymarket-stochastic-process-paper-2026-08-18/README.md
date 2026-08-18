@@ -41,6 +41,9 @@ evidence or inherits authority across different field types.
 - [`source/06_development_semantic_inventory.py`](source/06_development_semantic_inventory.py):
   development-only question/lifecycle inventory plus fixed time-spread selection for an official
   five-minute measurement expansion; it reads no payouts or probability values.
+- [`source/07_successor_partition_identity.py`](source/07_successor_partition_identity.py):
+  zero-field audit of the broader successor corpus against the exact 1,000-contract ancestor before
+  any newly acquired value is exposed.
 
 The paper-working literature and claim map is retained in
 [`literature/theory-transfer-map.md`](literature/theory-transfer-map.md). It distinguishes direct,

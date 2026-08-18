@@ -79,6 +79,12 @@ Relative to the 1,000-contract ancestor it adds 509 contracts and 86 event group
 receipt proves `human_ro`, both read-only settings, repeatable-read isolation, and no durable state
 effect. These counts establish material expansion only; they authorize no scientific conclusion.
 
+Source 07 will establish the successor replication partition by composing the 1,509-contract
+snapshot against the exact 1,000-contract ancestor through the existing whole-event boundary. Its
+authored body reads zero data fields. Only receipt-level snapshot/ancestor/partition identities and
+development, embargoed, and protected counts may be retained. No new scientific source may execute
+until this identity-only audit succeeds.
+
 - Expanded immutable corpus:
   `polymarket-corpus:8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6`,
   1,000 contracts, 235 events, and 1,180,437 sampled probabilities.
