@@ -547,3 +547,52 @@ chronological half. Source and receipt SHA-256 are
 `0934e2f9283a772a65e9f1080a0b9ad5c53f310acfe29e95df205e291fd303d4` and
 `dc48119c03b492217c3ab26ae781aaf1e6a5a87342d772cbcb78057095940e13`. This is a no-refit fresh
 replication, not a protected result or permission to change the model, gates, or claim.
+
+### Backtest gate memo: hurdle-arrival component
+
+Recommendation: **REQUEST_INDEPENDENT_ASSESSMENT only if the formal replay below passes exactly**.
+
+The complete source-12/source-13 density law cannot enter the current protected evaluator without
+new distribution-valued prediction and task-specific log-score machinery. The canonical backtest
+specification permits such metrics, but the implementation map records distributional metric
+plugins as an open capability. Encoding negative log likelihood as scalar regression error would
+let the prediction depend on its unknown outcome and is forbidden. Protected evaluation is
+therefore narrowed to the already selected law's arrival component: the probability that the next
+regular registered hourly probability changes. This does not upgrade the complete density result
+to protected status.
+
+The exact candidate is an event-equal 20-cell Bernoulli hurdle arrival law over five fixed
+probability bands and four fixed quiet-duration bands. Each cell shrinks to the event-equal global
+move rate with exactly one event of prior weight. It uses only legal probability history; its label
+is one when the first registered next sample arrives 0.75--1.25 elapsed hours after the current
+sample and changes, and zero when it is unchanged. Fitting remains inside every expanding temporal
+boundary and prediction receives no outcome. The formal development schedule uses at most five
+markets at one common metadata-selected decision anchor per whole event, preventing a same-event
+label from maturing between rows at that anchor. The exact source, sample keys, evidence, and
+predeclaration must be frozen before any protected value is disclosed.
+
+Formal development must contain at least 300 out-of-fold predictions over at least 80 events, have
+observation and event-macro Brier/MSE no greater than `0.20`, early- and late-event macro Brier no
+greater than `0.22`, absolute mean prediction-minus-outcome no greater than `0.05`, no individual
+event contributing more than 10% of total squared error, and no chronology, identity, capability,
+or protected-access break. The complete-law state and diffusion comparisons remain the fixed
+selection ancestry rather than being smuggled into this narrower scalar evaluator. Failure means
+`REJECT` or `REVISE`, not threshold repair.
+
+If that replay passes, the predeclared protected plan is the original snapshot's final 47 whole
+events under a literal historical walk-forward, using the same metadata-only anchor rule and exact
+frozen authored source. It refits the frozen recipe at each declared decision using only mature
+earlier rows. The evaluator reports MSE (the Brier score for this binary label), MAE, coverage,
+failure rate, temporal absolute-error stability, and squared-error concentration, with no per-time
+or per-market value disclosure. Promotion requires MSE at most `0.20`, MAE at most `0.40`, coverage
+at least `0.95`, failure rate at most `0.05`, absolute-error standard deviation at most `0.30`, and
+maximum squared-error concentration at most `0.05`. Any execution insufficiency or non-finite
+evidence rejects. The bounded claim is only that this exact sampled-process arrival recipe met that
+absolute standard on this retained holdout; it does not assert superiority to every comparator,
+latent-belief dynamics, causality, tradeability, or profit.
+
+Satisfied before exposure: source/receipt ancestry is exact; the later no-refit cohort replicated
+the complete law; labels and predictors have distinct clocks; every search branch and failure is
+retained; both protected blocks remain recorded as unexposed. Remaining blockers are the exact
+formal replay, independent freeze decision, exact plan issuance, protected-resource authority,
+governance permit, and independent validation. Only those authorities may expose or promote.
