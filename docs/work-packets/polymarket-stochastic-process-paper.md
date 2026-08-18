@@ -66,6 +66,12 @@ permanent data ceiling. Measurement rivals that the snapshot cannot identify sho
 bounded expansion when an available source can actually distinguish them. Otherwise they remain
 explicit limitations rather than being approximated from the wrong field.
 
+The first successor acquisition is fixed at as-of `2026-08-18T11:40:00+00:00`, `min_points=24`,
+`max_markets=2000`, YES `outcome_index=0`, and hourly `fidelity=60`. It uses the existing
+chronological production selection, so any additional capacity extends later resolutions after the
+first 1,000 rather than re-ranking them by a researched result. Acquisition is registered data,
+not evidence; values remain unread until exact ancestry and partitions are established.
+
 - Expanded immutable corpus:
   `polymarket-corpus:8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6`,
   1,000 contracts, 235 events, and 1,180,437 sampled probabilities.
@@ -312,3 +318,19 @@ increments remain extremely heavy-tailed because of the zero mass, changing inte
 multiplicative size variation; conditional nonzero log size is instead provisionally compatible
 with a Gaussian-residual/lognormal-style component. This is not an exact distributional claim
 because price-grid rounding and bounded support remain unmodeled.
+
+### Fixed source 06 discovery and measurement-expansion inventory
+
+Before semantic categories or a higher-frequency measurement comparison are chosen, source 06
+will expose only development contract identity, server event identity/ordinal, question, lifecycle,
+and registered point count. It reads no payout or probability value. For a five-minute official
+CLOB measurement falsifier, it deterministically selects the first registered market from event
+ordinals `10, 25, 40, 55, 70, 85, 100, 115, 130, 145`. Missing target ordinals remain missing; no
+replacement event may be chosen after inspecting questions.
+
+Each selected market may open one exact public expansion for its YES outcome token over at most the
+last seven days before close at five-minute fidelity. Tokens come from retained source identity,
+not question inference. The resulting source bytes and registered observations must remain separate
+from the hourly corpus and retain the official-endpoint caveats. The planned falsifier asks whether
+zero inflation, update-duration dependence, sign reversal, and magnitude clustering survive on a
+finer official sampling clock; it does not turn either clock into a quote or trade tape.

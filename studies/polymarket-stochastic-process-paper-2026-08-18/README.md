@@ -38,6 +38,9 @@ evidence or inherits authority across different field types.
 - [`source/05_nonzero_magnitude_model_comparison.py`](source/05_nonzero_magnitude_model_comparison.py):
   predeclared chronological prediction of nonzero log magnitude plus Gaussian, Laplace, and
   Student-t residual-law comparison.
+- [`source/06_development_semantic_inventory.py`](source/06_development_semantic_inventory.py):
+  development-only question/lifecycle inventory plus fixed time-spread selection for an official
+  five-minute measurement expansion; it reads no payouts or probability values.
 
 The paper-working literature and claim map is retained in
 [`literature/theory-transfer-map.md`](literature/theory-transfer-map.md). It distinguishes direct,
