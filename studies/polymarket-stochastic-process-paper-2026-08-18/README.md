@@ -1,6 +1,7 @@
 # Polymarket stochastic-process paper study
 
-Epistemic status: **EXPLORATORY PROCESS REPLICATION — PROTECTED DATA UNEXPOSED**.
+Epistemic status: **FRESH COMPLETE-LAW REPLICATION; FORMAL ARRIVAL REJECTION; PROTECTED DATA
+UNEXPOSED**.
 
 This study operationalizes the two research questions in the KTH AI Society project plan
 *Financial Mathematics and Machine Learning on Prediction Markets*. The empirical core asks which
@@ -11,6 +12,10 @@ diffusion, jump, finite-maturity, and microstructure theory survive the evidence
 The exact scope, process families, observation clocks, opening diagnostics, interpretation rules,
 later trial budget, and paper deliverables are fixed in the
 [work packet](../../docs/work-packets/polymarket-stochastic-process-paper.md).
+
+The paper-ready working draft, figures, exact evidence index, and replay guide are under
+[`paper/`](paper/). They are presentation artifacts over the retained receipts and cannot promote
+the study.
 
 The first source uses the expanded corpus only through its ancestor-bound fresh-development
 capability. All 31 ancestor events and the final 47 protected events are absent from its views.
