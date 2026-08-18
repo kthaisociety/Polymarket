@@ -29,6 +29,9 @@ Historical sampled probabilities are not represented as quotes or executable pri
 - [`source/04_nonzero_sign_model_comparison.py`](source/04_nonzero_sign_model_comparison.py):
   predeclared chronological comparison of constant, state, and state-plus-path models for the sign
   of a nonzero next-hour registered change.
+- [`source/05_nonzero_magnitude_model_comparison.py`](source/05_nonzero_magnitude_model_comparison.py):
+  predeclared chronological prediction of nonzero log magnitude plus Gaussian, Laplace, and
+  Student-t residual-law comparison.
 
 ## Opening result
 
@@ -201,3 +204,5 @@ This is out-of-time evidence of short-horizon sign reversal in the registered no
 not yet evidence that latent beliefs mean-revert or that the reversal survives executable quotes,
 fees, spread, and latency. The state-only model did not improve event-macro scores over the constant
 baseline, so the main result is path dependence rather than directional information in price level.
+
+Source 05 is predeclared but has not yet executed.

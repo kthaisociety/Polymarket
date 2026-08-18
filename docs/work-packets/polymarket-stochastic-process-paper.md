@@ -257,3 +257,19 @@ effect is modest beside the arrival result, and price state alone did not improv
 over the earlier-event constant. Sampling, bid/ask bounce, contract rounding, and aggregation
 remain rivals to belief mean reversion. The third process-model branch must test the nonzero mark
 magnitude/distribution before any combined hurdle process is frozen.
+
+### Fixed source 05 nonzero-magnitude comparison
+
+Source 05 consumes the third process-model branch. Conditional on a nonzero regular-hour change
+after 24 legal prior increments, its target is `log(max(1e-6, abs(change)))`. It compares an
+earlier-event constant, a ridge state model (price, boundary distance, logit, and time-to-close),
+and the same model plus prior nonzero size, last absolute change, prior-24 absolute variation,
+prior-24 maximum absolute change, and prior-24 zero fraction. Folds and event-equal weighting match
+sources 03–04.
+
+The path model passes only with lower observation/event-macro MSE and event-macro MAE, at least 2%
+event-macro MSE improvement, wins in 60% of events, and improvement in both chronological halves.
+Using its earlier-event residual scales, Gaussian, Laplace, and Student-t with three degrees of
+freedom are compared by out-of-time negative log likelihood on the common log-magnitude scale. A
+heavy-tail law passes only if Laplace or Student-t improves both observation and event-macro mean
+NLL by at least 2% relative to Gaussian.
