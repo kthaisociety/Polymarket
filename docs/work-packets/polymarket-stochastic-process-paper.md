@@ -72,6 +72,13 @@ chronological production selection, so any additional capacity extends later res
 first 1,000 rather than re-ranking them by a researched result. Acquisition is registered data,
 not evidence; values remain unread until exact ancestry and partitions are established.
 
+The acquisition succeeded with 1,509 contracts, 321 events, and 1,585,740 hourly probability
+observations. Its content identity is
+`polymarket-corpus:184b83f7f8012da4ca9116c8b6bad2076570ad5f0bada95b22615ee2f5cceae8`.
+Relative to the 1,000-contract ancestor it adds 509 contracts and 86 event groups. The sanitized
+receipt proves `human_ro`, both read-only settings, repeatable-read isolation, and no durable state
+effect. These counts establish material expansion only; they authorize no scientific conclusion.
+
 - Expanded immutable corpus:
   `polymarket-corpus:8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6`,
   1,000 contracts, 235 events, and 1,180,437 sampled probabilities.
