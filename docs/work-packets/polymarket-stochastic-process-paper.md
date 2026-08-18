@@ -273,3 +273,8 @@ Using its earlier-event residual scales, Gaussian, Laplace, and Student-t with t
 freedom are compared by out-of-time negative log likelihood on the common log-magnitude scale. A
 heavy-tail law passes only if Laplace or Student-t improves both observation and event-macro mean
 NLL by at least 2% relative to Gaussian.
+
+The first source 05 execution failed with `NameError` because the constrained runtime does not
+inject `pi`; it exposed no protected values and produced no analytical details. The failed receipt
+is retained. Declaring the identical numerical constant locally repairs execution without changing
+the predeclared target, models, distributions, folds, or gates.

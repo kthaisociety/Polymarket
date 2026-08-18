@@ -206,3 +206,10 @@ fees, spread, and latency. The state-only model did not improve event-macro scor
 baseline, so the main result is path dependence rather than directional information in price level.
 
 Source 05 is predeclared but has not yet executed.
+
+Its first execution failed before producing analytical details because the constrained runtime does
+not inject a `pi` name. The failed receipt is retained as
+[`development-receipts/05_nonzero_magnitude_model_comparison.failed-nameerror.json`](development-receipts/05_nonzero_magnitude_model_comparison.failed-nameerror.json),
+SHA-256 `1aaf83367ba4aa70ee7e091b77a3d61400c9c7726d08ab890ecf138729817820`.
+No protected values were exposed. The implementation now declares the same fixed numerical
+constant locally; the target, features, folds, models, distributions, and gates are unchanged.

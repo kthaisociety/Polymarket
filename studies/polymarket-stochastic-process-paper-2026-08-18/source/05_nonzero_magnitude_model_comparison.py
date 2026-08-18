@@ -6,6 +6,8 @@ probabilities = read("polymarket-development-prices", "market_probability")
 outcome_markets = read("polymarket-development-outcomes", "market_id")
 close_times = read("polymarket-development-outcomes", "close_time_epoch_seconds")
 
+PI = 3.141592653589793
+
 
 def solve_linear(matrix, vector):
     size = len(vector)
@@ -159,9 +161,9 @@ def metric_summary(test_events, targets, predictions, comparator):
 
 
 def distribution_nll(residual, scales):
-    gaussian = 0.5 * log(2.0 * pi) + log(scales[0]) + 0.5 * (residual / scales[0]) ** 2
+    gaussian = 0.5 * log(2.0 * PI) + log(scales[0]) + 0.5 * (residual / scales[0]) ** 2
     laplace = log(2.0 * scales[1]) + abs(residual) / scales[1]
-    student_t3 = log(scales[2] * (3.0**0.5) * pi / 2.0) + 2.0 * log(
+    student_t3 = log(scales[2] * (3.0**0.5) * PI / 2.0) + 2.0 * log(
         1.0 + (residual / scales[2]) ** 2 / 3.0
     )
     return [gaussian, laplace, student_t3]
