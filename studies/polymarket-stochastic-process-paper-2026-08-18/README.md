@@ -26,6 +26,9 @@ Historical sampled probabilities are not represented as quotes or executable pri
 - [`source/03_arrival_model_comparison.py`](source/03_arrival_model_comparison.py): predeclared
   chronological comparison of constant, price-state, and price-state-plus-staleness next-hour
   update probabilities.
+- [`source/04_nonzero_sign_model_comparison.py`](source/04_nonzero_sign_model_comparison.py):
+  predeclared chronological comparison of constant, state, and state-plus-path models for the sign
+  of a nonzero next-hour registered change.
 
 ## Opening result
 
@@ -172,3 +175,5 @@ next hourly sample less likely to change, beyond the effect of current price sta
 clustered/state-dependent arrival component. It does not identify latent belief updates, quote
 changes, trade arrivals, direction, or profitability, and the two correlated inactivity features
 must not be read as separately causal.
+
+Source 04 is predeclared but has not yet executed.

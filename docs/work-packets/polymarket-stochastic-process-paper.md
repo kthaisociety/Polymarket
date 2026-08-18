@@ -228,3 +228,19 @@ with recent inactivity even after controlling for the probability state. The two
 staleness variables are not separately causal, and the result may partly describe the public
 sampling mechanism. The next declared process branch must model the mark conditional on a nonzero
 update; it cannot reinterpret arrival prediction as direction or profit.
+
+### Fixed source 04 nonzero-sign comparison
+
+Source 04 consumes the second process-model branch. Conditional on a nonzero registered change
+after 24 consecutive regular increments, it predicts whether that change is positive. The decision
+time is the preceding sample and the label matures at the next sample. Current price, boundary
+distance, winsorized logit, and log time-to-close form the state model. The path model adds the
+previous nonzero sign, previous regular change, prior-24 net change, prior-24 absolute variation,
+and prior-24 zero fraction.
+
+The expanding whole-event folds, event-equal training weights, ridge penalty `0.1`, and four Newton
+updates match source 03. The path model passes only if it improves observation and event-macro
+Brier and event-macro log loss, improves event-macro Brier by at least 2%, wins at least 60% of
+represented events, and improves both chronological halves. A pass would show path dependence in
+the registered nonzero mark sign; it would not by itself distinguish belief dynamics from sampled
+price microstructure or establish an executable strategy.
