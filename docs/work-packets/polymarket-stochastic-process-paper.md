@@ -79,11 +79,21 @@ Relative to the 1,000-contract ancestor it adds 509 contracts and 86 event group
 receipt proves `human_ro`, both read-only settings, repeatable-read isolation, and no durable state
 effect. These counts establish material expansion only; they authorize no scientific conclusion.
 
-Source 07 will establish the successor replication partition by composing the 1,509-contract
-snapshot against the exact 1,000-contract ancestor through the existing whole-event boundary. Its
-authored body reads zero data fields. Only receipt-level snapshot/ancestor/partition identities and
-development, embargoed, and protected counts may be retained. No new scientific source may execute
-until this identity-only audit succeeds.
+Source 07 established the successor replication partition by composing the 1,509-contract snapshot
+against the exact 1,000-contract ancestor through the existing whole-event boundary. Its authored
+body read zero data fields and recorded zero actual accesses. Partition
+`f7b47ea95c3630f083552bce84126711fb1a23b20ec7caa33e7527ba977586d7` contains 29 wholly fresh
+development events (147 markets), 227 embargoed ancestor events (1,005 markets), and 65 protected
+events (357 markets). Eight additional ancestor events lie within the successor's final protected
+chronological block; their values remain unavailable. The receipt reports
+`protected_values_exposed=false`.
+
+The first successor experiment is fixed as an unchanged replay of source 01 on only those 29 fresh
+development events. Source bytes, diagnostics, thresholds, and interpretation rules all predate
+the successor acquisition. No threshold search, source modification, ancestor access, or protected
+access is permitted. Agreement will count as independent chronological replication of descriptive
+process signatures; disagreement will be retained as regime or sampling evidence rather than
+repaired by tuning.
 
 - Expanded immutable corpus:
   `polymarket-corpus:8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6`,

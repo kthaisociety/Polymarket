@@ -38,5 +38,23 @@ Status: **SUCCEEDED — REGISTERED DATA, NOT SCIENTIFIC EVIDENCE**.
 - Authority: `human_ro`, default/transaction read-only true, repeatable-read isolation; no
   credentials or values emitted and no production writes.
 
-The exact ancestor/fresh/protected composition must be established through the existing replication
-boundary before any new value is read.
+## Identity-only partition result
+
+Status: **SUCCEEDED — AUTHORITY PROOF, NOT SCIENTIFIC EVIDENCE**.
+
+- Partition: `f7b47ea95c3630f083552bce84126711fb1a23b20ec7caa33e7527ba977586d7`,
+  using `whole-event-chronological-fresh-replication/v1`.
+- Fresh development: 29 event groups and 147 markets.
+- Ancestor embargo: 227 event groups and 1,005 markets. The remaining 8 of the 235 ancestor
+  event groups fall inside the successor snapshot's final protected chronological block.
+- Protected and unavailable: 65 event groups and 357 markets.
+- The authored audit requested no partition values, read zero value fields, and recorded zero
+  actual accesses. `protected_values_exposed` is false.
+- Sanitized [`07_successor_partition_identity.json`](partition-receipts/07_successor_partition_identity.json)
+  SHA-256: `82628a646a9c94ec49e0620d5d07e8b6bdd750b7c11fd08d4e93d04fb664538e`.
+
+The next experiment is an unchanged replay of source 01 on only the 29 fresh development event
+groups. Its source and interpretation gates were fixed before this successor corpus was acquired.
+It may read the registered development fields already authorized for source 01; ancestor and
+protected values remain unavailable. The replay is a fresh replication of descriptive process
+signatures, not permission to tune thresholds or expose the protected block.
