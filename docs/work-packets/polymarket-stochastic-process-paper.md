@@ -496,3 +496,12 @@ least 50 sign pairs. Missing event metrics remain missing. It reports event-equa
 2,000-resample event-bootstrap interval for the eligible-event mean. Fixed thresholds are zero
 mass above 20%, 24-hour variance ratio below 0.75, quiet-rate ratio below 0.50, and reversal above
 50%. This is a cluster-robust prevalence diagnostic, not a trade or significance claim.
+
+Source 11 succeeded unchanged on the 157-event original fresh cohort and 29-event successor
+cohort. Original/successor eligible-event prevalence was 136/138 and 25/26 for interior zero mass,
+142/151 and 24/26 for sub-0.75 24-hour variance ratios, 83/83 and 7/7 for sub-0.50 long-quiet
+move-rate ratios, and 134/152 and 21/26 for above-half nonzero reversal. Fixed event-bootstrap mean
+intervals stayed entirely on the predicted side in both cohorts. Exact original/successor receipt
+hashes are `7262b65b8456577c097f64525ef83e57c6ffe37066e0a84559c78c858e2aeda1` and
+`aebb42800f7a63678993f8608a4bd39f7c6fbeb8fd2f74b0d90c8cc5698e11bb`. The successor long-quiet
+estimate has only seven eligible events and must remain labeled sparse.

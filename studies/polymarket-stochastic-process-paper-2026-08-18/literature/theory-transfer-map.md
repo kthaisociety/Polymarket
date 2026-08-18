@@ -77,6 +77,14 @@ agreement. The hurdle/marked description therefore survives a finer clock and a 
 registered source on this panel. A continuous latent efficient price may still exist underneath
 both sampled series.
 
+Source 11 moves the robustness unit to whole events and repeats unchanged on a later cohort. In the
+original/later cohorts, the fixed signature thresholds pass in 136/138 and 25/26 eligible events
+for interior zero mass, 142/151 and 24/26 for sub-diffusive 24-hour scaling, 83/83 and 7/7 for
+long-quiet hazard collapse, and 134/152 and 21/26 for nonzero reversal. Deterministic event-bootstrap
+mean intervals remain on the predicted side in both cohorts. The mechanics are therefore broad
+across events and chronology, while exact levels and sparse long-quiet coverage remain
+regime-dependent.
+
 ## Calibration and financial-theory layer
 
 Proper scoring rules, reliability diagrams, chronological validation, and cluster-aware inference

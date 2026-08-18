@@ -134,3 +134,13 @@ Status: **SUCCEEDED — PROCESS REPLICATED WHERE COVERED; CALIBRATION REGIME-DEP
   168 hours, with no 336-hour coverage.
 - Protected values remained unavailable. The retained conclusion is that calibration depends on
   both semantic composition and chronological regime; no universal topic premium is supported.
+
+## Event-cluster process replication
+
+The unchanged source 11 adds a whole-event replication. Among eligible later events, 25/26 exceed
+20% interior zero mass, 24/26 have a 24-hour variance ratio below 0.75, 21/26 reverse nonzero
+direction more than half the time, and all 7 events with enough long-quiet coverage have a
+24-hour-quiet/active move-rate ratio below 0.50. Event-equal means and fixed 95% event-bootstrap
+intervals are respectively 43.81% (38.71–49.52%), 0.324 (0.250–0.404), 58.45%
+(55.53–61.41%), and 0.074 (0.052–0.096). The long-quiet cell remains sparse. The receipt SHA-256 is
+`aebb42800f7a63678993f8608a4bd39f7c6fbeb8fd2f74b0d90c8cc5698e11bb`.

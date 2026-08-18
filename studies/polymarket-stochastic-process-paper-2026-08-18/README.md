@@ -303,3 +303,23 @@ The process conclusion is strengthened to a **bounded, sticky, grid-affected, ze
 jump process with duration-dependent arrival intensity, short-run sign reversal, clustered mark
 size, and strong sub-diffusive calendar-time scaling**. It remains a model of observed Polymarket
 probability samples, not an identified latent-belief process or a trading strategy.
+
+## Whole-event uncertainty and chronological replication
+
+Source 11 ran unchanged on both fresh cohorts. The original-cohort receipt SHA-256 is
+`7262b65b8456577c097f64525ef83e57c6ffe37066e0a84559c78c858e2aeda1`; the successor receipt
+SHA-256 is `aebb42800f7a63678993f8608a4bd39f7c6fbeb8fd2f74b0d90c8cc5698e11bb`. The event, rather than
+the market or sample, is the uncertainty unit.
+
+| Fixed event diagnostic | Original eligible/pass | Original event mean (95% event bootstrap) | Successor eligible/pass | Successor event mean (95% event bootstrap) |
+|---|---:|---:|---:|---:|
+| Interior zero rate >20% | 138 / 136 | 56.05% (53.46–58.63%) | 26 / 25 | 43.81% (38.71–49.52%) |
+| 24h variance ratio <0.75 | 151 / 142 | 0.358 (0.325–0.391) | 26 / 24 | 0.324 (0.250–0.404) |
+| 24h-quiet/active move-rate ratio <0.50 | 83 / 83 | 0.063 (0.053–0.074) | 7 / 7 | 0.074 (0.052–0.096) |
+| Nonzero reversal >50% | 152 / 134 | 59.42% (58.35–60.50%) | 26 / 21 | 58.45% (55.53–61.41%) |
+
+All four effects retain the same direction in the successor cohort. The long-quiet ratio has only
+seven eligible successor events and is therefore a breadth limitation, not a precise population
+estimate. Early/late means within each cohort also preserve the qualitative conclusions. The
+process description is consequently broad across events and chronology, rather than a pooled-row
+artifact, while its exact parameter values are regime-dependent.
