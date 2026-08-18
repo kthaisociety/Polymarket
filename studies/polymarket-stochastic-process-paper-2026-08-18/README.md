@@ -20,6 +20,9 @@ Historical sampled probabilities are not represented as quotes or executable pri
 
 - [`source/01_fresh_process_signatures.py`](source/01_fresh_process_signatures.py): deterministic
   coverage and process-signature diagnostics. It fits no model and cannot access protected data.
+- [`source/02_drift_composition_falsifier.py`](source/02_drift_composition_falsifier.py): fixed
+  weighting, terminal-convergence, payout-conditional, and fixed-horizon calibration diagnostic.
+  Realized payout is diagnostic-only and cannot enter a predictor.
 
 ## Opening result
 
@@ -91,3 +94,5 @@ latent belief and executable quote processes remain unidentified.
 
 No trade rule, formal candidate, protected request, finding, or durable-memory update has been
 created.
+
+Source 02 is predeclared but has not yet executed.

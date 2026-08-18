@@ -163,3 +163,23 @@ clock. Before the declared arrival-model branch is fitted, one fixed composition
 test whether the strong negative mean increment is explained by unequal market/event weighting,
 terminal convergence, current state, and realized payout. That diagnostic may close a false drift
 interpretation but cannot create a predictive candidate.
+
+### Fixed source 02 composition diagnostic
+
+Source 02 is fixed before execution to report:
+
+- regular one-hour drift under observation, market-equal, and event-equal weighting;
+- event-equal drift in the first and second chronological halves;
+- non-overlapping approximately 24-hour drift under the same market/event hierarchy;
+- drift and endpoint movement conditional on eventual payout, for diagnosis only;
+- drift by current probability and time-to-close bands;
+- one closest sample per market at 24/72/168/336 hours before close, admitted only within fixed
+  tolerances of 12/12/24/24 hours;
+- market-weighted and event-macro calibration at each horizon, plus fixed probability-bin
+  reliability rows.
+
+The negative-drift lead survives this falsifier only if regular event-equal drift is negative in
+both chronological halves and non-overlapping daily event-equal drift is also negative. A broad
+overpricing interpretation requires mean probability to exceed outcome frequency by at least two
+percentage points at three of four fixed horizons under both market weighting and event-macro
+weighting. Payout-conditional results cannot be used as features or trading evidence.
