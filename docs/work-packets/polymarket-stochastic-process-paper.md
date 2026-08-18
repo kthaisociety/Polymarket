@@ -244,3 +244,16 @@ Brier and event-macro log loss, improves event-macro Brier by at least 2%, wins 
 represented events, and improves both chronological halves. A pass would show path dependence in
 the registered nonzero mark sign; it would not by itself distinguish belief dynamics from sampled
 price microstructure or establish an executable strategy.
+
+Source 04 completed and passed every fixed gate. Across 174,956 out-of-time nonzero updates in 113
+later events, adding path history reduced event-macro Brier from `0.24796` to `0.23815`, a `3.96%`
+relative improvement, and event-macro log loss from `0.68907` to `0.66912`. It beat state alone in
+96/113 events and in both chronological halves. The prior-nonzero-sign coefficient dominated the
+other path terms and was negative in all eight folds (`-0.221` to `-0.286` on the standardized
+scale), consistent with short-horizon sign reversal.
+
+This rejects a conditionally independent mark-sign description for the registered samples. The
+effect is modest beside the arrival result, and price state alone did not improve event-macro error
+over the earlier-event constant. Sampling, bid/ask bounce, contract rounding, and aggregation
+remain rivals to belief mean reversion. The third process-model branch must test the nonzero mark
+magnitude/distribution before any combined hurdle process is frozen.

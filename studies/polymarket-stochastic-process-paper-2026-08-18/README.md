@@ -176,4 +176,28 @@ clustered/state-dependent arrival component. It does not identify latent belief 
 changes, trade arrivals, direction, or profitability, and the two correlated inactivity features
 must not be read as separately causal.
 
-Source 04 is predeclared but has not yet executed.
+## Nonzero-update sign result
+
+Source 04 succeeded with source SHA-256
+`30c4204795356e940577931da34402b797453c75e40ab1af46ca5cdc1b7f314d`. Its exact receipt is
+[`development-receipts/04_nonzero_sign_model_comparison.json`](development-receipts/04_nonzero_sign_model_comparison.json),
+SHA-256 `793650747f5d415a2a61ddde30d6b1d1ff5e4782b4c5fb51b7d15ae3cf86fd29`.
+
+The chronological comparison made 174,956 predictions conditional on a nonzero registered hourly
+change across 113 later events:
+
+| Model | Observation Brier | Event-macro Brier | Event-macro log loss |
+|---|---:|---:|---:|
+| Earlier-event constant positive rate | 0.25023 | 0.24795 | 0.68905 |
+| Price state + time to close | 0.24983 | 0.24796 | 0.68907 |
+| State + prior path | **0.23576** | **0.23815** | **0.66912** |
+
+The full model improved event-macro Brier by 3.96% relative to state alone, won 96/113 event
+comparisons, and improved both chronological halves. Its previous-nonzero-sign coefficient was
+negative in all eight folds and was much larger than the other path coefficients (`-0.221` to
+`-0.286` on the standardized feature scale). The predeclared sign gate passed.
+
+This is out-of-time evidence of short-horizon sign reversal in the registered nonzero marks. It is
+not yet evidence that latent beliefs mean-revert or that the reversal survives executable quotes,
+fees, spread, and latency. The state-only model did not improve event-macro scores over the constant
+baseline, so the main result is path dependence rather than directional information in price level.
