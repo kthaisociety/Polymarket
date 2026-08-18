@@ -1,16 +1,15 @@
 """Formalize and independently freeze the selected hurdle-arrival component."""
 
-# ruff: noqa: C901, D103, E501, EM101, INP001, PLR0912, PLR0915, PLR2004, T201, TRY003
+# ruff: noqa: C901, D103, E501, EM101, INP001, PLR2004, T201, TRY003
 
 from __future__ import annotations
 
 import hashlib
 import json
-from datetime import timedelta
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from research_agent.data_adapters.polymarket import (
-    PolymarketCorpusSnapshot,
     PolymarketCorpusSnapshotRef,
     PolymarketCorpusStore,
     build_polymarket_development_analysis,
@@ -65,7 +64,7 @@ PARENT_SOURCE_SHA256 = "13ea0c25a8e65da52cad44f4fa70a863790760cb9f2d67774769744c
 PARENT_RECEIPT_SHA256 = "2c107a29710e3dd9d13cbf24be00e655b4b0a5c3a628fd8026670a1ad88cd9c5"
 SUCCESSOR_SOURCE_SHA256 = "0934e2f9283a772a65e9f1080a0b9ad5c53f310acfe29e95df205e291fd303d4"
 SUCCESSOR_RECEIPT_SHA256 = "dc48119c03b492217c3ab26ae781aaf1e6a5a87342d772cbcb78057095940e13"
-DATA_PROTOCOL = "protocol:data:polymarket-corpus-8c732-final-47-events-arrival-v1"
+DATA_PROTOCOL = "protocol:data:polymarket-corpus-8c732-bounded-anchor-arrival-v2"
 TRAINING_PROTOCOL = "protocol:training:authored-expanding-event-equal-arrival-v1"
 VALIDATION_POLICY = "policy:validation:polymarket-arrival-holdout-v1"
 RESOURCE_POLICY = "policy:protected-resource:polymarket-arrival-holdout-v1"
@@ -171,14 +170,31 @@ def predict():
 """
 
 
-def _development_catalog(
-    snapshot: PolymarketCorpusSnapshot,
-    development_markets: frozenset[str],
+def _catalog_for_keys(
+    source: DataCatalogSnapshot,
+    keys: tuple[SampleKey, ...],
 ) -> DataCatalogSnapshot:
-    registration = register_polymarket_resolution_corpus(snapshot)
-    datasets = []
-    for dataset in registration.catalog.datasets:
-        rows = tuple(
+    price_dataset = next(
+        item for item in source.datasets if item.schema.dataset_id == "polymarket-outcome-price-series"
+    )
+    by_dimensions: dict[tuple[tuple[str, str], ...], list[RegisteredObservation]] = {}
+    for item in price_dataset.observations:
+        by_dimensions.setdefault(item.dimensions, []).append(item)
+    selected_ids: set[str] = set()
+    for key in keys:
+        observations = sorted(
+            by_dimensions.get(key.dimensions, ()), key=lambda item: item.reference_time
+        )
+        history = [item for item in observations if item.reference_time <= key.decision_time]
+        outcome_end = key.decision_time + timedelta(minutes=75)
+        outcome = [
+            item
+            for item in observations
+            if key.decision_time < item.reference_time <= outcome_end
+        ]
+        selected_ids.update(item.observation_id for item in history[-25:])
+        selected_ids.update(item.observation_id for item in outcome)
+    rows = tuple(
             ObservationInput(
                 item.field_ref,
                 item.value,
@@ -192,14 +208,14 @@ def _development_catalog(
                 item.dimensions,
                 item.caveats,
             )
-            for item in dataset.observations
-            if dict(item.dimensions)["market_id"] in development_markets
+            for item in price_dataset.observations
+            if item.observation_id in selected_ids
         )
-        datasets.append(ObservationRegistrar().register(dataset.schema, rows))
-    return DataCatalogSnapshot(registration.catalog.environment_id, tuple(datasets))
+    registered = ObservationRegistrar().register(price_dataset.schema, rows)
+    return DataCatalogSnapshot(source.environment_id, (registered,))
 
 
-def _latest_index_at(prices: list[RegisteredObservation], anchor) -> int:
+def _latest_index_at(prices: list[RegisteredObservation], anchor: datetime) -> int:
     result = -1
     for index, item in enumerate(prices):
         if item.reference_time <= anchor:
@@ -273,7 +289,7 @@ def _plan(
     content_manifest = _manifest_for(full_catalog)
     scope = ProtectedResourceScope(
         resource_id="polymarket-retained-arrival-holdout",
-        resource_version="v1",
+        resource_version="v2",
         slice_id="final-47-events",
         environment_ref=full_catalog.environment_id,
         policy_ref=RESOURCE_POLICY,
@@ -299,6 +315,7 @@ def _plan(
             f"polymarket-corpus:{SNAPSHOT_SHA256}",
             "partition:whole-event-chronological-final-47-v1",
             "sampling:metadata-only-common-event-anchor-up-to-five-markets-v1",
+            "projection:last-25-history-plus-next-75-minutes-per-declared-anchor-v2",
         ),
     )
     specification = EvaluationSpec(
@@ -432,17 +449,18 @@ def main() -> None:
     protected_markets = frozenset(
         contract.market_id for contract in snapshot.corpus.contracts if contract.event_id not in development_events
     )
-    development_catalog = _development_catalog(snapshot, development_markets)
-    full_catalog = register_polymarket_resolution_corpus(snapshot).catalog
+    source_catalog = register_polymarket_resolution_corpus(snapshot).catalog
+    source_prices = next(
+        item for item in source_catalog.datasets if item.schema.dataset_id == "polymarket-outcome-price-series"
+    )
+    development_keys = _event_anchor_keys(source_prices, development_markets)
+    protected_keys = _event_anchor_keys(source_prices, protected_markets)
+    all_keys = tuple(sorted((*development_keys, *protected_keys), key=lambda item: (item.decision_time, item.dimensions)))
+    development_catalog = _catalog_for_keys(source_catalog, development_keys)
+    full_catalog = _catalog_for_keys(source_catalog, all_keys)
     development_prices = next(
         item for item in development_catalog.datasets if item.schema.dataset_id == "polymarket-outcome-price-series"
     )
-    full_prices = next(
-        item for item in full_catalog.datasets if item.schema.dataset_id == "polymarket-outcome-price-series"
-    )
-    development_keys = _event_anchor_keys(development_prices, development_markets)
-    protected_keys = _event_anchor_keys(full_prices, protected_markets)
-    all_keys = tuple(sorted((*development_keys, *protected_keys), key=lambda item: (item.decision_time, item.dimensions)))
     if not development_keys or not protected_keys:
         raise ValueError("arrival decision schedule is empty")
     if any(dict(key.dimensions)["market_id"] in protected_markets for key in development_keys):
@@ -563,6 +581,8 @@ def main() -> None:
         "protected_market_count": len(protected_markets),
         "development_decision_count": len(development_keys),
         "protected_decision_count": len(protected_keys),
+        "development_catalog_observation_count": len(development_catalog.observations),
+        "evaluation_catalog_observation_count": len(full_catalog.observations),
         "protected_values_exposed": False,
         "parent_source_sha256": PARENT_SOURCE_SHA256,
         "parent_receipt_sha256": PARENT_RECEIPT_SHA256,
@@ -603,6 +623,7 @@ def main() -> None:
             "The full distributional law remains development-plus-successor evidence because the current protected evaluator has no distributional log-score plugin.",
             "The candidate forecasts registered sampled moves, not trades, quotes, latent beliefs, direction, resolution, or executable returns.",
             "The final 47 event groups remain unavailable to authored code.",
+            "The authority registered only the last 25 history samples and next 75 minutes required by each fixed decision; this projection changes no feature, label, threshold, or decision key.",
         ],
     }
     _persist(payload)

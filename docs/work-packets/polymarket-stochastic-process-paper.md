@@ -571,6 +571,15 @@ markets at one common metadata-selected decision anchor per whole event, prevent
 label from maturing between rows at that anchor. The exact source, sample keys, evidence, and
 predeclaration must be frozen before any protected value is disclosed.
 
+The first committed formal driver was stopped operationally after fifteen minutes without a result
+or protected exposure. Profiling by construction identified repeated catalog-wide information-set
+filtering, not worker startup or model fitting, as the avoidable cost. The v2 data protocol retains
+the same decision keys and scientific program but registers only the observations the declared
+program can consume: the last 25 samples at each anchor and samples in its next 75 minutes. Quiet
+duration saturates at 24, so this projection preserves every feature and label exactly. Thresholds,
+gates, model code, event anchors, and protected period are unchanged. The aborted attempt has no
+scientific result; Git preserves its exact source history.
+
 Formal development must contain at least 300 out-of-fold predictions over at least 80 events, have
 observation and event-macro Brier/MSE no greater than `0.20`, early- and late-event macro Brier no
 greater than `0.22`, absolute mean prediction-minus-outcome no greater than `0.05`, no individual
