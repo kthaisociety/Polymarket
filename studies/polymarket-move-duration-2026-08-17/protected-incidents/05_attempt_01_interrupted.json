@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "candidate_id": "authored-candidate:bb76fb6846cd5bb935934e16d53c520865f5649d230c53b0cc1ca5c3e1be770d",
+  "development_evidence_id": "authored-development-evidence:7729af09c56fed64323cc805df708ab2643ec547aa90877dda30e53a6e9c5372",
+  "driver_sha256": "be6215c4fe5f3ae0d4d8e46e5a490499995bf7cc7febe13c7bcfcfa5abf885d5",
+  "epistemic_disposition": "POSSIBLE_EXPOSURE_IN_DOUBT",
+  "exact_retry_only": true,
+  "first_attempt_started_after_commit": "7b128986",
+  "idempotency_key": "polymarket-duration-protected-resolution-v1",
+  "interruption_observed_at": "2026-08-18T11:16:38+02:00",
+  "process_active_after_interruption": false,
+  "protected_receipt_created": false,
+  "protected_values_returned_to_researcher": false,
+  "reason": "The unified execution was interrupted before source 05 emitted a receipt. The process and its in-memory privileged-operation state were lost. The source replays all development trials before protected resolution, so disclosure was not observed, but no durable checkpoint proves that the loader had not been invoked.",
+  "recovery_constraint": "No feature, label, model, sample, threshold, plan, claim, authority scope, source byte, or idempotency key may change. One exact retry may recover the same frozen experiment; the possible first exposure remains part of scientific history.",
+  "result_or_metric_observed": false,
+  "scientific_change_after_attempt": false,
+  "status": "INTERRUPTED_IN_DOUBT"
+}

@@ -89,3 +89,11 @@ metric, threshold, or outcome from the requester. It resolves opaque capabilitie
 configured outside the candidate program, and the program sandbox cannot import or access the host
 composition. Existing substitution, forgery, retry, and full-runtime tests exercise that distinction.
 The packet therefore contracts from implementation repair to exact governed execution and audit.
+
+The first execution attempt was externally interrupted before it emitted a protected receipt. Its
+in-memory privileged-operation state did not survive, and no protected value or metric was returned.
+Because there is no durable checkpoint proving whether loader invocation occurred, the attempt is
+conservatively classified `POSSIBLE_EXPOSURE_IN_DOUBT` in
+[`05_attempt_01_interrupted.json`](../../studies/polymarket-move-duration-2026-08-17/protected-incidents/05_attempt_01_interrupted.json).
+The boundary now permits only one exact recovery retry with unchanged source bytes and the same
+idempotency key. This is not a fresh experiment; the possible first exposure remains history.
