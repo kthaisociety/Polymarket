@@ -191,3 +191,27 @@ all four horizons. This opens a separate calibration/financial-theory branch, bu
 one of the three declared process-model branches. Its next allowed analyses are fixed event-cluster
 uncertainty, predeclared semantic/regime stability, and chronological calibration models that must
 compare against the raw market probability.
+
+### Fixed source 03 arrival-model comparison
+
+Source 03 consumes the first declared process-model branch. Its prediction question is whether the
+next retained sample changes, conditional on the next sample arriving 0.75–1.25 elapsed hours
+later. The label matures at that next sample. Decisions require 24 consecutive regular prior
+increments; an irregular gap resets the warm-up.
+
+The fixed models are:
+
+1. earlier-event equal-weight move rate;
+2. ridge-logistic state model using probability, boundary distance, and winsorized `.005` logit;
+3. the same model plus `log(1 + prior quiet-run observations)` and the fraction of the previous 24
+   regular increments that were exactly zero.
+
+Every mean, scale, class prior, and coefficient is fitted on earlier whole events with equal total
+weight per represented event. Expanding folds train through event 39 and test events in fixed
+15-event blocks beginning at event 40; the final block ends at event 156. Ridge penalty `0.1`, four
+Newton updates, feature definitions, and block boundaries are fixed.
+
+The state-plus-staleness model passes only if it improves both observation and event-macro Brier
+and event-macro log loss versus state alone, reduces event-macro Brier by at least 5%, wins at least
+60% of represented events, and improves event-macro Brier in both chronological halves. This is a
+process-arrival result, not a price-direction or trading claim.

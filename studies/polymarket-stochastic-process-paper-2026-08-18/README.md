@@ -23,6 +23,9 @@ Historical sampled probabilities are not represented as quotes or executable pri
 - [`source/02_drift_composition_falsifier.py`](source/02_drift_composition_falsifier.py): fixed
   weighting, terminal-convergence, payout-conditional, and fixed-horizon calibration diagnostic.
   Realized payout is diagnostic-only and cannot enter a predictor.
+- [`source/03_arrival_model_comparison.py`](source/03_arrival_model_comparison.py): predeclared
+  chronological comparison of constant, price-state, and price-state-plus-staleness next-hour
+  update probabilities.
 
 ## Opening result
 
@@ -143,3 +146,5 @@ This is selection-exposed development evidence for a favorite–longshot-like ca
 not proof of mispricing. Remaining rivals include semantic event mix, incomplete related-contract
 surfaces, cohort selection, and sampled-price versus executable-quote differences. Clustered
 uncertainty and fixed semantic/regime tests must run before the paper states a general effect.
+
+Source 03 is predeclared but has not yet executed.
