@@ -1,6 +1,6 @@
 """Formalize and independently freeze the selected hurdle-arrival component."""
 
-# ruff: noqa: C901, D103, E501, EM101, INP001, PLR2004, T201, TRY003
+# ruff: noqa: C901, D103, E501, EM101, INP001, PLR0915, PLR2004, T201, TRY003
 
 from __future__ import annotations
 
@@ -13,6 +13,7 @@ from research_agent.data_adapters.polymarket import (
     PolymarketCorpusSnapshotRef,
     PolymarketCorpusStore,
     build_polymarket_development_analysis,
+    build_polymarket_replication_analysis,
     register_polymarket_resolution_corpus,
 )
 from research_agent.data_foundation import (
@@ -58,6 +59,8 @@ from research_agent.protected_evaluation import (
 
 SNAPSHOT_SHA256 = "8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6"
 SNAPSHOT_SIZE = 318_684_407
+ANCESTOR_SHA256 = "610b8b9d423d94332923f1e2033410007a890b9da0f9dc67936f17e92263fb2f"
+ANCESTOR_SIZE = 19_434_443
 WORKSPACE = Path(__file__).resolve().parents[5] / "data/chronos/polymarket-corpora"
 RECEIPT = Path(__file__).parents[1] / "development-receipts/14_formal_hurdle_arrival_freeze.json"
 PARENT_SOURCE_SHA256 = "13ea0c25a8e65da52cad44f4fa70a863790760cb9f2d67774769744cefbb477b"
@@ -179,7 +182,7 @@ def _catalog_for_keys(
     )
     by_dimensions: dict[tuple[tuple[str, str], ...], list[RegisteredObservation]] = {}
     for item in price_dataset.observations:
-        by_dimensions.setdefault(item.dimensions, []).append(item)
+        by_dimensions.setdefault(tuple(sorted(item.dimensions)), []).append(item)
     selected_ids: set[str] = set()
     for key in keys:
         observations = sorted(
@@ -439,15 +442,26 @@ def _persist(payload: dict[str, object]) -> None:
 def main() -> None:
     ref = PolymarketCorpusSnapshotRef(SNAPSHOT_SHA256, SNAPSHOT_SIZE)
     snapshot = PolymarketCorpusStore(WORKSPACE).load(ref)
-    analysis = build_polymarket_development_analysis(
-        snapshot, session_id="formal-stochastic-process-arrival-2026-08-18"
+    ancestor = PolymarketCorpusStore(WORKSPACE).load(
+        PolymarketCorpusSnapshotRef(ANCESTOR_SHA256, ANCESTOR_SIZE)
+    )
+    standard_analysis = build_polymarket_development_analysis(
+        snapshot, session_id="formal-stochastic-process-arrival-standard-partition-2026-08-18"
+    )
+    analysis = build_polymarket_replication_analysis(
+        snapshot,
+        ancestor,
+        session_id="formal-stochastic-process-arrival-2026-08-18",
     )
     development_events = frozenset(analysis.partition.development_event_ids)
+    standard_development_events = frozenset(standard_analysis.partition.development_event_ids)
     development_markets = frozenset(
         contract.market_id for contract in snapshot.corpus.contracts if contract.event_id in development_events
     )
     protected_markets = frozenset(
-        contract.market_id for contract in snapshot.corpus.contracts if contract.event_id not in development_events
+        contract.market_id
+        for contract in snapshot.corpus.contracts
+        if contract.event_id not in standard_development_events
     )
     source_catalog = register_polymarket_resolution_corpus(snapshot).catalog
     source_prices = next(

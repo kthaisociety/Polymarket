@@ -580,6 +580,18 @@ duration saturates at 24, so this projection preserves every feature and label e
 gates, model code, event anchors, and protected period are unchanged. The aborted attempt has no
 scientific result; Git preserves its exact source history.
 
+The first v2 execution failed before authored development because the projection joined canonical
+sorted `SampleKey` dimensions to source-order observation dimensions without canonicalizing the
+latter. It registered zero observations and stopped at plan construction; no authored value or
+protected capability was reached. Canonicalizing the join key is an identity-only repair. It
+changes no selected row or scientific rule and is fixed before the next replay.
+
+The same pre-execution audit also caught that a standalone standard partition would combine the
+31-event ancestor with the 157-event fresh development cohort. The formal driver now composes the
+same exact ancestor-aware replication partition used by sources 01--12 and derives the protected
+47 events from the standard chronological partition. Ancestor events remain embargoed rather than
+silently entering development or protected evidence.
+
 Formal development must contain at least 300 out-of-fold predictions over at least 80 events, have
 observation and event-macro Brier/MSE no greater than `0.20`, early- and late-event macro Brier no
 greater than `0.22`, absolute mean prediction-minus-outcome no greater than `0.05`, no individual
