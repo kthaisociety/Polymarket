@@ -215,3 +215,16 @@ The state-plus-staleness model passes only if it improves both observation and e
 and event-macro log loss versus state alone, reduces event-macro Brier by at least 5%, wins at least
 60% of represented events, and improves event-macro Brier in both chronological halves. This is a
 process-arrival result, not a price-direction or trading claim.
+
+Source 03 completed and passed every fixed gate. Across 566,501 out-of-time predictions in 113
+later events, adding staleness to price state reduced event-macro Brier from `0.22950` to `0.16610`,
+a `27.63%` relative improvement, and reduced event-macro log loss from `0.65030` to `0.50256`.
+The full model beat the state-only model in 112/113 events and in both chronological halves. Its
+two standardized staleness coefficients remained negative in all eight expanding folds, ending at
+`-0.541` for log quiet run and `-0.520` for the prior-24 zero fraction.
+
+This is evidence that the observed update clock is not memoryless: conditional update hazard falls
+with recent inactivity even after controlling for the probability state. The two correlated
+staleness variables are not separately causal, and the result may partly describe the public
+sampling mechanism. The next declared process branch must model the mark conditional on a nonzero
+update; it cannot reinterpret arrival prediction as direction or profit.

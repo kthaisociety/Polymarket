@@ -147,4 +147,28 @@ not proof of mispricing. Remaining rivals include semantic event mix, incomplete
 surfaces, cohort selection, and sampled-price versus executable-quote differences. Clustered
 uncertainty and fixed semantic/regime tests must run before the paper states a general effect.
 
-Source 03 is predeclared but has not yet executed.
+## Update-arrival model result
+
+Source 03 succeeded with source SHA-256
+`8b8a36423c351a56d6cfafcee6d633a92b2d7d4c5c51339c1f19dbd90c425d78`. Its exact receipt is
+[`development-receipts/03_arrival_model_comparison.json`](development-receipts/03_arrival_model_comparison.json),
+SHA-256 `810dc73970961bc69386041973c349847b151208d8488f959aaa8e69321353b8`.
+
+The chronological comparison made 566,501 out-of-time predictions over 113 later events:
+
+| Model | Observation Brier | Event-macro Brier | Event-macro log loss |
+|---|---:|---:|---:|
+| Earlier-event constant rate | 0.21225 | 0.23596 | 0.66533 |
+| Price state | 0.21569 | 0.22950 | 0.65030 |
+| Price state + staleness | **0.13475** | **0.16610** | **0.50256** |
+
+The full model improved event-macro Brier by 27.63% relative to state alone, won 112/113 event
+comparisons, and improved both chronological halves. Its fitted standardized coefficients for log
+quiet run and the prior-24 zero fraction were negative in every expanding fold (approximately
+`-0.51` to `-0.54` and `-0.44` to `-0.52`, respectively). The predeclared arrival gate passed.
+
+The registered-sample update clock is therefore empirically non-memoryless: recent quiet makes the
+next hourly sample less likely to change, beyond the effect of current price state. This supports a
+clustered/state-dependent arrival component. It does not identify latent belief updates, quote
+changes, trade arrivals, direction, or profitability, and the two correlated inactivity features
+must not be read as separately causal.
