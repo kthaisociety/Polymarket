@@ -103,3 +103,13 @@ Status: **SUCCEEDED — EXPLORATORY REPLICATION WITH COVERAGE LIMITS**.
   cluster-uncertainty, and executable-price rivals mandatory before any market-inefficiency claim.
 - Protected values remained unexposed. These sampled probabilities do not establish executable
   returns after spreads, fees, latency, or market impact.
+
+## Predeclared semantic-composition replication
+
+Source 08 was authored and executed on the earlier development cohort before successor questions
+were inspected. It is fixed for an unchanged replay on the 29 fresh successor events. The five
+question-text categories, their precedence, all process/calibration calculations, and the rule that
+sparse cells remain sparse cannot change. This replay asks whether category-stable sticky dynamics,
+broad negative drift, and category-heterogeneous calibration extend to the later cohort. It does
+not authorize ancestor or protected access and cannot convert a coarse text category into a causal
+topic claim.

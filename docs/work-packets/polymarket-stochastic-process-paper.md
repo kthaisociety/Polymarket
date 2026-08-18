@@ -399,3 +399,17 @@ source before execution. Results will report market and whole-event counts, regu
 mass, quiet-run move rates, 24-hour variance ratios, event-equal drift, and fixed-horizon
 probability-minus-outcome gaps by category when coverage exists. No category may be redefined or
 merged after its values are observed; sparse rows remain sparse.
+
+Source 08 completed under those fixed rules. The process conclusion was category-stable: interior
+zero mass ranged from `57.27%` to `77.36%`, 24-hour variance ratios ranged from `0.1679` to
+`0.4935`, and every category's move rate collapsed after 24 unchanged samples. Event-equal regular
+drift was negative in all five categories. The calibration conclusion was not homogeneous.
+Election/candidate event-macro probability-minus-outcome gaps were only `2.15%`, `0.99%`, `0.77%`,
+and `1.58%` at 24/72/168/336 hours, while speech/social-post gaps were `7.06%`, `11.43%`, `20.30%`,
+and `29.89%`. Conflict, institutional, and other categories were intermediate or horizon-dependent.
+
+Thus sticky, duration-dependent, sub-diffusive sampled dynamics survive semantic composition, while
+aggregate overpricing is partly a semantic-mix result. The question-text taxonomy is deliberately
+coarse and cannot establish causal topic effects. Source 08 is now fixed for an unchanged replay on
+the 29-event successor development cohort; no successor question has been used to alter its
+keywords, precedence, calculations, or sparse-cell policy.
