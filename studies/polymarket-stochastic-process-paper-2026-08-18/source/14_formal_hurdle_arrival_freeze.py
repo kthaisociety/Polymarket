@@ -542,7 +542,9 @@ def main() -> None:
         idempotency_key="formal-hurdle-arrival:selected-law",
     )
     if runtime.candidate_id is None or runtime.evidence_id is None:
-        raise ValueError("formal arrival replay did not issue candidate evidence")
+        raise ValueError(
+            f"formal arrival replay did not issue candidate evidence: {runtime.failure_detail}"
+        )
     candidate = coordinator.resolve_candidate(runtime.candidate_id)
     evidence = coordinator.resolve_evidence(runtime.evidence_id)
     summary = _summary(evidence)
