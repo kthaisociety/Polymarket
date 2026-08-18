@@ -592,7 +592,7 @@ same exact ancestor-aware replication partition used by sources 01--12 and deriv
 47 events from the standard chronological partition. Ancestor events remain embargoed rather than
 silently entering development or protected evidence.
 
-Formal development must contain at least 300 out-of-fold predictions over at least 80 events, have
+Formal development must contain at least 200 out-of-fold predictions over at least 80 events, have
 observation and event-macro Brier/MSE no greater than `0.20`, early- and late-event macro Brier no
 greater than `0.22`, absolute mean prediction-minus-outcome no greater than `0.05`, no individual
 event contributing more than 10% of total squared error, and no chronology, identity, capability,
@@ -617,3 +617,12 @@ the complete law; labels and predictors have distinct clocks; every search branc
 retained; both protected blocks remain recorded as unexposed. Remaining blockers are the exact
 formal replay, independent freeze decision, exact plan issuance, protected-resource authority,
 governance permit, and independent validation. Only those authorities may expose or promote.
+
+The first coordinator execution then failed closed because the declared 300-prediction minimum was
+impossible for the metadata-fixed population: 337 development decisions minus the mandatory first
+100 training rows allow at most 237 out-of-fold predictions. This count was established from keys
+and event identities only, before any metric or outcome was returned. The feasibility minimum is
+therefore corrected to 200 while retaining the 100-row training boundary, 80-event breadth, every
+quality/calibration/concentration threshold, the exact model and label, and all protected rules.
+The protected schedule contains 169 decisions across 46 of the final 47 events; the remaining event
+has no timestamp-eligible anchor under the predeclared rule and is not silently replaced.

@@ -506,7 +506,7 @@ def main() -> None:
         catalog=development_catalog,
         sample_keys=development_keys,
         current_time=max(item.available_at for item in development_catalog.observations),
-        budget=DevelopmentBudget(1, 100, 300, "mse", 0.20),
+        budget=DevelopmentBudget(1, 100, 200, "mse", 0.20),
         random_seed=47,
         protected_predeclaration=declaration,
     )
@@ -542,14 +542,13 @@ def main() -> None:
         idempotency_key="formal-hurdle-arrival:selected-law",
     )
     if runtime.candidate_id is None or runtime.evidence_id is None:
-        raise ValueError(
-            f"formal arrival replay did not issue candidate evidence: {runtime.failure_detail}"
-        )
+        message = f"formal arrival replay did not issue candidate evidence: {runtime.failure_detail}"
+        raise ValueError(message)
     candidate = coordinator.resolve_candidate(runtime.candidate_id)
     evidence = coordinator.resolve_evidence(runtime.evidence_id)
     summary = _summary(evidence)
     gate = (
-        summary["prediction_count"] >= 300
+        summary["prediction_count"] >= 200
         and summary["event_count"] >= 80
         and summary["observation_mse"] <= 0.20
         and summary["event_macro_mse"] <= 0.20
