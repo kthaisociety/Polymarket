@@ -189,3 +189,21 @@ formal failure.
 - This is the final feature revision in this branch. Failure retains the mechanism as a useful
   exploratory ranking tendency but rejects formalization. Pass permits freeze/gate review only; it
   does not authorize protected exposure.
+
+### Final revision transition
+
+Status: **COMPLETE — FULL-PATH FORMAL GATE FAILED; PROTECTED DATA UNEXPOSED**.
+
+The final driver produced receipt SHA-256
+`185d727251db73a5199ea399790691c319713ca696b00cc24a6dc28a8e88ce0a`, candidate
+`authored-candidate:dc533e7d46b3c412139359ea7f83a70496b097b0e5965334dca896534df26436`,
+and evidence
+`authored-development-evidence:d8df309e4dd98a1273282e3408ba162ec10683df0f6375931b388cf8f583dec8`.
+It reproduced 319 OOF markets/117 events and improved overall, event-macro, and late-half Brier over
+the six-feature parent. It also passed the 60% direct event-win rule with 71/117 wins.
+
+The model failed two mandatory incremental clauses: early-half event Brier `.22818` exceeded the
+parent's `.22524`, and event-macro AP `.89858` was below `.90180`. Under the predeclared conjunctive
+decision, the branch stops without another feature, threshold, penalty, label, or aggregation
+search. The 47 protected events remain unavailable and no freeze request is scientifically
+eligible.

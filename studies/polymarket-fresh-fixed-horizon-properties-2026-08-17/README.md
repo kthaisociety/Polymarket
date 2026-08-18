@@ -122,3 +122,29 @@ and six-feature evidence, including the late half, or formalization stops withou
 Frozen revision driver:
 [`source/04_formal_full_path_revision.py`](source/04_formal_full_path_revision.py), SHA-256
 `2fa36c181157ae8c1e09540f81b39350b289ca676cd1d5d232c392bcae6a47f3`.
+
+### Final revision result
+
+The exact driver completed and retained
+[`formal-receipts/04_formal_full_path_revision.json`](formal-receipts/04_formal_full_path_revision.json),
+SHA-256 `185d727251db73a5199ea399790691c319713ca696b00cc24a6dc28a8e88ce0a`.
+Its formal candidate is
+`authored-candidate:dc533e7d46b3c412139359ea7f83a70496b097b0e5965334dca896534df26436`,
+with evidence
+`authored-development-evidence:d8df309e4dd98a1273282e3408ba162ec10683df0f6375931b388cf8f583dec8`.
+
+The full model improved observation/event Brier from the six-feature model's `.24402/.24153` to
+`.23828/.23539`, improved late-half event Brier from `.25755` to `.24247`, and won 71/117 events.
+Pooled AP increased from `.60157` to `.60925`, top-quintile precision remained 65.1% at `+18.37`
+percentage-point lift, and every sample, calibration, concentration, absolute-loss, baseline, and
+event-win clause passed.
+
+It nevertheless **failed the final conjunctive gate** because early-half event Brier regressed from
+`.22524` to `.22818` and event-macro AP regressed from `.90180` to `.89858`. Formalization therefore
+stops without another subset or threshold search. The exact audit is retained in
+[`04-full-path-development-gate-review.md`](04-full-path-development-gate-review.md).
+
+This closes the branch as a reproducible time-legal predictive mechanism with unresolved temporal
+and event-ranking instability, not a freeze-eligible candidate or executable trading strategy.
+No protected backtest ran, all 47 protected events remain unexposed, and no terminal runtime memory
+or validated finding is claimed.
