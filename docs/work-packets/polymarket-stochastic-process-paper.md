@@ -455,3 +455,9 @@ result larger than the process-pipe buffer. The failed aggregate receipt is reta
 receive-before-join repair and large-derived-result regression are allowed without changing any
 need, source, transform, or scientific rule; the retry must use the identical retained source
 requests and exact candidate identities.
+
+The repaired exact retry registered all ten fixed slices in 4.4 seconds: 19,258 sampled
+probabilities total, with 1,378–2,001 observations per market. The value-free acquisition receipt
+has SHA-256 `eced7839e2db660e8ab2d94310df578bc4329124d3b12d2904f0ad4e82ebf54a`.
+This is an acquisition checkpoint rather than a scientific finding. No five-minute value may be
+read until its authored measurement estimands and comparison rules are committed.

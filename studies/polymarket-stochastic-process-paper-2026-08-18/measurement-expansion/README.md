@@ -41,3 +41,17 @@ larger than the OS pipe buffer to deadlock. Chronos may make the same narrow rec
 repair in `DataWorkspace.derive`. The source bytes, strict transform, needs, markets, windows, and
 scientific design cannot change. A regression must pass with a derived message materially larger
 than a typical pipe buffer before the identical acquisition is retried.
+
+## Exact retry
+
+Status: **ACQUISITION AND REGISTRATION SUCCEEDED — VALUES NOT YET ANALYZED**.
+
+After the receive-before-join repair passed the complete 471-test suite, the identical ten needs
+and exact candidates were replayed. All ten slices registered in 4.4 seconds, containing 19,258
+five-minute sampled probabilities in total (1,378–2,001 per market). No production database write,
+protected-data exposure, source substitution, or sample-value emission occurred. The value-free
+receipt is `acquisition-receipt.json`, SHA-256
+`eced7839e2db660e8ab2d94310df578bc4329124d3b12d2904f0ad4e82ebf54a`.
+
+Registration success only establishes a governed measurement panel. The process estimands and
+comparison rules must be frozen in authored source before the harness may read these values.
