@@ -1,0 +1,660 @@
+{
+  "authority": {
+    "database_role": "human_ro",
+    "default_read_only": true,
+    "insert_update_privileges": false,
+    "repeatable_read": true,
+    "transaction_read_only": true
+  },
+  "current_tops": [
+    {
+      "ask": "0.37",
+      "bid": "0.36",
+      "market_id": "0x5c79dfde05559b79a9cb9f7c4187e4d49632dd042572ae676952f812732591cc",
+      "outcome_index": 0,
+      "seq": 1786901230301942,
+      "ts": "2026-08-18T19:48:19.033998+00:00"
+    },
+    {
+      "ask": "0.64",
+      "bid": "0.63",
+      "market_id": "0x5c79dfde05559b79a9cb9f7c4187e4d49632dd042572ae676952f812732591cc",
+      "outcome_index": 1,
+      "seq": 1786901230301942,
+      "ts": "2026-08-18T19:48:19.033998+00:00"
+    },
+    {
+      "ask": "0.008",
+      "bid": "0.007",
+      "market_id": "0x60c2c085ee8c16bc8f2419739a94971d4c9d00f637ead10fc0f540afa1be64e8",
+      "outcome_index": 0,
+      "seq": 1786901230301942,
+      "ts": "2026-08-18T19:48:19.033998+00:00"
+    },
+    {
+      "ask": "0.993",
+      "bid": "0.992",
+      "market_id": "0x60c2c085ee8c16bc8f2419739a94971d4c9d00f637ead10fc0f540afa1be64e8",
+      "outcome_index": 1,
+      "seq": 1786901230301942,
+      "ts": "2026-08-18T19:48:19.033998+00:00"
+    },
+    {
+      "ask": "0.09",
+      "bid": "0.08",
+      "market_id": "0xa08a5ce99e14ce0b22767af6f16c08a2ab012249444c20887193a9a3e98e11fc",
+      "outcome_index": 0,
+      "seq": 1786901230301942,
+      "ts": "2026-08-18T19:48:19.033998+00:00"
+    },
+    {
+      "ask": "0.92",
+      "bid": "0.91",
+      "market_id": "0xa08a5ce99e14ce0b22767af6f16c08a2ab012249444c20887193a9a3e98e11fc",
+      "outcome_index": 1,
+      "seq": 1786901230301942,
+      "ts": "2026-08-18T19:48:19.033998+00:00"
+    }
+  ],
+  "environment_id": "bdl-polymarket-production-readonly",
+  "market_ids": [
+    "0x60c2c085ee8c16bc8f2419739a94971d4c9d00f637ead10fc0f540afa1be64e8",
+    "0xa08a5ce99e14ce0b22767af6f16c08a2ab012249444c20887193a9a3e98e11fc",
+    "0x5c79dfde05559b79a9cb9f7c4187e4d49632dd042572ae676952f812732591cc",
+    "0xaad2727a01e09fd1b0d84e286a63a94998efe35fce83a65a3c58dfa9b54dff33"
+  ],
+  "markets": [
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "event_id": "455875",
+      "market_id": "0x5c79dfde05559b79a9cb9f7c4187e4d49632dd042572ae676952f812732591cc",
+      "open_time": "2026-05-11T13:03:57.905316+00:00",
+      "question": "Strait of Hormuz traffic returns to normal by December 31?",
+      "raw": {
+        "category": null,
+        "condition_id": "0x5c79dfde05559b79a9cb9f7c4187e4d49632dd042572ae676952f812732591cc",
+        "description": "This market will resolve to \u201cYes\u201d if IMF Portwatch publishes a 7-day moving average of transit calls (\u201cArrivals of Ships\u201d) for the Strait of Hormuz equal to or above 60 for any date between market creation and December 31, 2026. Otherwise, this market will resolve to \u201cNo\u201d.\n\nDaily transit calls include container, dry bulk, roll-on/roll-off, general cargo, and tanker ships. Ships not reported by IMF Portwatch will not be considered.\n\nThis market will resolve as soon as IMF Portwatch publishes a 7-day moving average of transit calls equal to or above the specified level, or once data has been published for the final date in the specified period and no such value has been published. If no data has been published for the final date of the specified period within 14 calendar days (ET) after the end of that period, this market will resolve based on data published up to that point.\n\nRevisions to previously published data points made within this market\u2019s timeframe will be considered. However, they will not disqualify a previously published data point from qualifying. Revisions to previously published data points after data is published for December 31, 2026, however, will not be considered.\n\nIn case of obvious data integrity issues (i.e., erroneous data), the market may remain open until the end of the third calendar day (ET) after the date on which such data is first released to allow for corrections. Data integrity issues refer only to clerical or other similar errors in the underlying data, and do not include cases where IMF Portwatch differs from alternative sources.\n\nThe resolution source for this market will be IMF Portwatch, specifically the transit calls data published for the Strait of Hormuz at https://portwatch.imf.org/pages/cb5856222a5b4105adc6ee7e880a1730, both in the chart and through downloadable files.",
+        "events": [
+          {
+            "id": "455875",
+            "slug": "strait-of-hormuz-traffic-returns-to-normal-by-december-31",
+            "title": "Strait of Hormuz traffic returns to normal by December 31?"
+          }
+        ],
+        "group_item_title": "",
+        "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/will-ships-transit-the-strait-of-hormuz-on-any-day-in-march-ERARnetK0FJm.jpg",
+        "id": "2176270",
+        "image": "https://polymarket-upload.s3.us-east-2.amazonaws.com/will-ships-transit-the-strait-of-hormuz-on-any-day-in-march-ERARnetK0FJm.jpg",
+        "metrics": {
+          "liquidity": "283399.2417",
+          "liquidity_clob": "283399.2417",
+          "liquidity_num": "283399.2417",
+          "volume": "8541015.599989997",
+          "volume_1mo": "3223421.8097720006",
+          "volume_1wk": "724264.9466269996",
+          "volume_1yr": "8541015.599990003",
+          "volume_24hr": "102493.42964400003",
+          "volume_amm": null,
+          "volume_clob": "8541015.599989997",
+          "volume_num": "8541015.599989997"
+        },
+        "outcomes": {
+          "no": {
+            "label": "No",
+            "price": "0.635",
+            "token_id": "48727431314333088243693016929623363710488980152833544156961659445129455301311"
+          },
+          "yes": {
+            "label": "Yes",
+            "price": "0.365",
+            "token_id": "83783489454659420807679723574840032660002326710045123865554753994450797728825"
+          }
+        },
+        "position_ids": [
+          "717690954202231375809423225094567101741044165784371314322306265572251271168",
+          "717690954202231375809423225094567101741044165784371314322306265572251271169"
+        ],
+        "prices": {
+          "best_ask": "0.37",
+          "best_bid": "0.36",
+          "last_trade_price": "0.36",
+          "one_day_price_change": "-0.01",
+          "one_hour_price_change": null,
+          "one_month_price_change": "-0.14",
+          "one_week_price_change": "-0.11",
+          "one_year_price_change": null,
+          "spread": "0.01"
+        },
+        "question": "Strait of Hormuz traffic returns to normal by December 31?",
+        "resolution": {
+          "neg_risk_request_id": null,
+          "question_id": "0xb57240ffdf34ace49a6e298b559b8c2f447e69e024c08a74c9205f2625bae68b",
+          "resolved_by": "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7",
+          "source": "",
+          "uma_resolution_status": null
+        },
+        "rewards": {
+          "clob_rewards": [
+            {
+              "asset_address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+              "condition_id": "0x5c79dfde05559b79a9cb9f7c4187e4d49632dd042572ae676952f812732591cc",
+              "end_date": "2500-12-31",
+              "id": "335942",
+              "rewards_amount": "0",
+              "rewards_daily_rate": "200",
+              "start_date": "2026-05-11"
+            }
+          ],
+          "holding_rewards_enabled": false,
+          "rewards_max_spread": 4.5,
+          "rewards_min_size": "200"
+        },
+        "slug": "strait-of-hormuz-traffic-returns-to-normal-by-december-31",
+        "sports": {
+          "game_id": null,
+          "game_start_time": null,
+          "line": null,
+          "sports_market_type": null
+        },
+        "state": {
+          "accepting_orders": true,
+          "active": true,
+          "archived": false,
+          "closed": false,
+          "closed_time": null,
+          "enable_order_book": true,
+          "end_date": "2026-12-31T00:00:00Z",
+          "neg_risk": false,
+          "start_date": "2026-05-11T13:03:57.905316Z"
+        },
+        "tags": [],
+        "trading": {
+          "fee_schedule": null,
+          "fee_type": null,
+          "fees_enabled": false,
+          "minimum_order_size": "5",
+          "minimum_tick_size": "0.01",
+          "seconds_delay": null
+        }
+      },
+      "slug": "strait-of-hormuz-traffic-returns-to-normal-by-december-31",
+      "status": "open"
+    },
+    {
+      "close_time": "2026-08-31T00:00:00+00:00",
+      "event_id": "660108",
+      "market_id": "0x60c2c085ee8c16bc8f2419739a94971d4c9d00f637ead10fc0f540afa1be64e8",
+      "open_time": "2026-07-02T21:49:34.448693+00:00",
+      "question": "Strait of Hormuz traffic returns to normal by August 31?",
+      "raw": {
+        "category": null,
+        "condition_id": "0x60c2c085ee8c16bc8f2419739a94971d4c9d00f637ead10fc0f540afa1be64e8",
+        "description": "This market will resolve to \u201cYes\u201d if IMF Portwatch publishes a 7-day moving average of transit calls (\u201cArrivals of Ships\u201d) for the Strait of Hormuz equal to or above 60 for any date between market creation and August 31, 2026. Otherwise, this market will resolve to \u201cNo\u201d.\n\nDaily transit calls include container, dry bulk, roll-on/roll-off, general cargo, and tanker ships. Ships not reported by IMF Portwatch will not be considered.\n\nThis market will resolve as soon as IMF Portwatch publishes a 7-day moving average of transit calls equal to or above the specified level, or once data has been published for the final date in the specified period and no such value has been published. If no data has been published for the final date of the specified period within 14 calendar days (ET) after the end of that period, this market will resolve based on data published up to that point.\n\nRevisions to previously published data points made within this market\u2019s timeframe will be considered. However, they will not disqualify a previously published data point from qualifying. Revisions to previously published data points after data is published for August 31, 2026, however, will not be considered.\n\nIn case of obvious data integrity issues (i.e., erroneous data), the market may remain open until the end of the third calendar day (ET) after the date on which such data is first released to allow for corrections. Data integrity issues refer only to clerical or other similar errors in the underlying data, and do not include cases where IMF Portwatch differs from alternative sources.\n\nThe resolution source for this market will be IMF Portwatch, specifically the transit calls data published for the Strait of Hormuz at https://portwatch.imf.org/pages/cb5856222a5b4105adc6ee7e880a1730, both in the chart and through downloadable files.",
+        "events": [
+          {
+            "id": "660108",
+            "slug": "strait-of-hormuz-traffic-returns-to-normal-by-august-31-20260702154212320",
+            "title": "Strait of Hormuz traffic returns to normal by...?"
+          }
+        ],
+        "group_item_title": "August 31",
+        "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/will-ships-transit-the-strait-of-hormuz-on-any-day-in-march-ERARnetK0FJm.jpg",
+        "id": "2774056",
+        "image": "https://polymarket-upload.s3.us-east-2.amazonaws.com/will-ships-transit-the-strait-of-hormuz-on-any-day-in-march-ERARnetK0FJm.jpg",
+        "metrics": {
+          "liquidity": "538504.83545",
+          "liquidity_clob": "538504.83545",
+          "liquidity_num": "538504.83545",
+          "volume": "14835712.259709027",
+          "volume_1mo": "13844922.759595951",
+          "volume_1wk": "2696209.940218998",
+          "volume_1yr": "14835709.33970895",
+          "volume_24hr": "508678.16282300005",
+          "volume_amm": null,
+          "volume_clob": "14835712.259709027",
+          "volume_num": "14835712.259709027"
+        },
+        "outcomes": {
+          "no": {
+            "label": "No",
+            "price": "0.9925",
+            "token_id": "90869494087977018607792751230236923002303032923064138180950209430688758061828"
+          },
+          "yes": {
+            "label": "Yes",
+            "price": "0.0075",
+            "token_id": "105426373826369935595603860663411604941599130211176020843036778867927711117332"
+          }
+        },
+        "position_ids": [
+          "587676825612696489867416473444931103760646599834125782399530714217601564672",
+          "587676825612696489867416473444931103760646599834125782399530714217601564673"
+        ],
+        "prices": {
+          "best_ask": "0.008",
+          "best_bid": "0.007",
+          "last_trade_price": "0.008",
+          "one_day_price_change": "-0.004",
+          "one_hour_price_change": null,
+          "one_month_price_change": "-0.1175",
+          "one_week_price_change": "-0.03",
+          "one_year_price_change": null,
+          "spread": "0.001"
+        },
+        "question": "Strait of Hormuz traffic returns to normal by August 31?",
+        "resolution": {
+          "neg_risk_request_id": null,
+          "question_id": "0xdd850af7646a3fee315f2dd27e94bbc4680dbf4c231d12be3c35c522a10c44fa",
+          "resolved_by": "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7",
+          "source": "",
+          "uma_resolution_status": null
+        },
+        "rewards": {
+          "clob_rewards": null,
+          "holding_rewards_enabled": false,
+          "rewards_max_spread": 3.5,
+          "rewards_min_size": "200"
+        },
+        "slug": "strait-of-hormuz-traffic-returns-to-normal-by-august-31-20260702154212320",
+        "sports": {
+          "game_id": null,
+          "game_start_time": null,
+          "line": null,
+          "sports_market_type": null
+        },
+        "state": {
+          "accepting_orders": true,
+          "active": true,
+          "archived": false,
+          "closed": false,
+          "closed_time": null,
+          "enable_order_book": true,
+          "end_date": "2026-08-31T00:00:00Z",
+          "neg_risk": false,
+          "start_date": "2026-07-02T21:49:34.448693Z"
+        },
+        "tags": [],
+        "trading": {
+          "fee_schedule": null,
+          "fee_type": null,
+          "fees_enabled": false,
+          "minimum_order_size": "5",
+          "minimum_tick_size": "0.001",
+          "seconds_delay": null
+        }
+      },
+      "slug": "strait-of-hormuz-traffic-returns-to-normal-by-august-31-20260702154212320",
+      "status": "open"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "event_id": "660109",
+      "market_id": "0xa08a5ce99e14ce0b22767af6f16c08a2ab012249444c20887193a9a3e98e11fc",
+      "open_time": "2026-07-02T21:49:47.480763+00:00",
+      "question": "Strait of Hormuz traffic returns to normal by September 30?",
+      "raw": {
+        "category": null,
+        "condition_id": "0xa08a5ce99e14ce0b22767af6f16c08a2ab012249444c20887193a9a3e98e11fc",
+        "description": "This market will resolve to \u201cYes\u201d if IMF Portwatch publishes a 7-day moving average of transit calls (\u201cArrivals of Ships\u201d) for the Strait of Hormuz equal to or above 60 for any date between market creation and September 30, 2026. Otherwise, this market will resolve to \u201cNo\u201d.\n\nDaily transit calls include container, dry bulk, roll-on/roll-off, general cargo, and tanker ships. Ships not reported by IMF Portwatch will not be considered.\n\nThis market will resolve as soon as IMF Portwatch publishes a 7-day moving average of transit calls equal to or above the specified level, or once data has been published for the final date in the specified period and no such value has been published. If no data has been published for the final date of the specified period within 14 calendar days (ET) after the end of that period, this market will resolve based on data published up to that point.\n\nRevisions to previously published data points made within this market\u2019s timeframe will be considered. However, they will not disqualify a previously published data point from qualifying. Revisions to previously published data points after data is published for September 30, 2026, however, will not be considered.\n\nIn case of obvious data integrity issues (i.e., erroneous data), the market may remain open until the end of the third calendar day (ET) after the date on which such data is first released to allow for corrections. Data integrity issues refer only to clerical or other similar errors in the underlying data, and do not include cases where IMF Portwatch differs from alternative sources.\n\nThe resolution source for this market will be IMF Portwatch, specifically the transit calls data published for the Strait of Hormuz at https://portwatch.imf.org/pages/cb5856222a5b4105adc6ee7e880a1730, both in the chart and through downloadable files.",
+        "events": [
+          {
+            "id": "660109",
+            "slug": "strait-of-hormuz-traffic-returns-to-normal-by-september-30-20260702154339440",
+            "title": "Strait of Hormuz traffic returns to normal by September 30?"
+          }
+        ],
+        "group_item_title": null,
+        "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/will-ships-transit-the-strait-of-hormuz-on-any-day-in-march-ERARnetK0FJm.jpg",
+        "id": "2774057",
+        "image": "https://polymarket-upload.s3.us-east-2.amazonaws.com/will-ships-transit-the-strait-of-hormuz-on-any-day-in-march-ERARnetK0FJm.jpg",
+        "metrics": {
+          "liquidity": "637351.3065",
+          "liquidity_clob": "637351.3065",
+          "liquidity_num": "637351.3065",
+          "volume": "4155708.6916329996",
+          "volume_1mo": "3830198.5816569985",
+          "volume_1wk": "1246899.9207899994",
+          "volume_1yr": "4155708.6916329986",
+          "volume_24hr": "345086.4031550001",
+          "volume_amm": null,
+          "volume_clob": "4155708.6916329996",
+          "volume_num": "4155708.6916329996"
+        },
+        "outcomes": {
+          "no": {
+            "label": "No",
+            "price": "0.915",
+            "token_id": "111344475342969784116702975577723982549674037196345086059563486202499238579830"
+          },
+          "yes": {
+            "label": "Yes",
+            "price": "0.085",
+            "token_id": "23545193122217391289335133742859160842475987880562465754342378273033942179195"
+          }
+        },
+        "position_ids": [
+          "754451522760796783200951627391683757477968422244377432802267713494306521088",
+          "754451522760796783200951627391683757477968422244377432802267713494306521089"
+        ],
+        "prices": {
+          "best_ask": "0.09",
+          "best_bid": "0.08",
+          "last_trade_price": "0.08",
+          "one_day_price_change": "-0.03",
+          "one_hour_price_change": null,
+          "one_month_price_change": "-0.12",
+          "one_week_price_change": "-0.07",
+          "one_year_price_change": null,
+          "spread": "0.01"
+        },
+        "question": "Strait of Hormuz traffic returns to normal by September 30?",
+        "resolution": {
+          "neg_risk_request_id": null,
+          "question_id": "0xcd7e5984ab420bbfab2128af947491f62f82d7bb6b63a825e6e5a82c588343dd",
+          "resolved_by": "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7",
+          "source": "",
+          "uma_resolution_status": null
+        },
+        "rewards": {
+          "clob_rewards": [
+            {
+              "asset_address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+              "condition_id": "0xa08a5ce99e14ce0b22767af6f16c08a2ab012249444c20887193a9a3e98e11fc",
+              "end_date": "2500-12-31",
+              "id": "778331",
+              "rewards_amount": "0",
+              "rewards_daily_rate": "400",
+              "start_date": "2026-07-04"
+            }
+          ],
+          "holding_rewards_enabled": false,
+          "rewards_max_spread": 4.5,
+          "rewards_min_size": "200"
+        },
+        "slug": "strait-of-hormuz-traffic-returns-to-normal-by-september-30-20260702154339440",
+        "sports": {
+          "game_id": null,
+          "game_start_time": null,
+          "line": null,
+          "sports_market_type": null
+        },
+        "state": {
+          "accepting_orders": true,
+          "active": true,
+          "archived": false,
+          "closed": false,
+          "closed_time": null,
+          "enable_order_book": true,
+          "end_date": "2026-09-30T00:00:00Z",
+          "neg_risk": false,
+          "start_date": "2026-07-02T21:49:47.480763Z"
+        },
+        "tags": [],
+        "trading": {
+          "fee_schedule": null,
+          "fee_type": null,
+          "fees_enabled": false,
+          "minimum_order_size": "5",
+          "minimum_tick_size": "0.01",
+          "seconds_delay": null
+        }
+      },
+      "slug": "strait-of-hormuz-traffic-returns-to-normal-by-september-30-20260702154339440",
+      "status": "open"
+    },
+    {
+      "close_time": "2026-09-15T00:00:00+00:00",
+      "event_id": "830255",
+      "market_id": "0xaad2727a01e09fd1b0d84e286a63a94998efe35fce83a65a3c58dfa9b54dff33",
+      "open_time": "2026-08-11T09:20:21.932904+00:00",
+      "question": "Strait of Hormuz traffic returns to normal by September 15?",
+      "raw": {
+        "category": null,
+        "condition_id": "0xaad2727a01e09fd1b0d84e286a63a94998efe35fce83a65a3c58dfa9b54dff33",
+        "description": "This market will resolve to \u201cYes\u201d if IMF Portwatch publishes a 7-day moving average of transit calls (\u201cArrivals of Ships\u201d) for the Strait of Hormuz equal to or above 60 for any date between market creation and September 15, 2026. Otherwise, this market will resolve to \u201cNo\u201d.\n\nDaily transit calls include container, dry bulk, roll-on/roll-off, general cargo, and tanker ships. Ships not reported by IMF Portwatch will not be considered.\n\nThis market will resolve as soon as IMF Portwatch publishes a 7-day moving average of transit calls equal to or above the specified level, or once data has been published for the final date in the specified period and no such value has been published. If no data has been published for the final date of the specified period within 14 calendar days (ET) after the end of that period, this market will resolve based on data published up to that point.\n\nRevisions to previously published data points made within this market\u2019s timeframe will be considered. However, they will not disqualify a previously published data point from qualifying. Revisions to previously published data points after data is published for September 15, 2026, however, will not be considered.\n\nIn case of obvious data integrity issues (i.e., erroneous data), the market may remain open until the end of the third calendar day (ET) after the date on which such data is first released to allow for corrections. Data integrity issues refer only to clerical or other similar errors in the underlying data, and do not include cases where IMF Portwatch differs from alternative sources.\n\nThe resolution source for this market will be IMF Portwatch, specifically the transit calls data published for the Strait of Hormuz at https://portwatch.imf.org/pages/cb5856222a5b4105adc6ee7e880a1730, both in the chart and through downloadable files.",
+        "events": [
+          {
+            "id": "830255",
+            "slug": "strait-of-hormuz-traffic-returns-to-normal-by-september-15-20260810150912478",
+            "title": "Strait of Hormuz traffic returns to normal by September 15?"
+          }
+        ],
+        "group_item_title": null,
+        "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/will-ships-transit-the-strait-of-hormuz-on-any-day-in-march-ERARnetK0FJm.jpg",
+        "id": "3501952",
+        "image": "https://polymarket-upload.s3.us-east-2.amazonaws.com/will-ships-transit-the-strait-of-hormuz-on-any-day-in-march-ERARnetK0FJm.jpg",
+        "metrics": {
+          "liquidity": "146835.40809",
+          "liquidity_clob": "146835.40809",
+          "liquidity_num": "146835.40809",
+          "volume": "291449.2956700001",
+          "volume_1mo": "291449.29567",
+          "volume_1wk": "250656.508579",
+          "volume_1yr": "291449.29567",
+          "volume_24hr": "37957.886306",
+          "volume_amm": null,
+          "volume_clob": "291449.2956700001",
+          "volume_num": "291449.2956700001"
+        },
+        "outcomes": {
+          "no": {
+            "label": "No",
+            "price": "0.9695",
+            "token_id": "12575482562400058575569240787286833787405115816233407902290732716716915814118"
+          },
+          "yes": {
+            "label": "Yes",
+            "price": "0.0305",
+            "token_id": "792896940617101609095080343806493099086366718518381398857436002509498065050"
+          }
+        },
+        "position_ids": [],
+        "prices": {
+          "best_ask": "0.031",
+          "best_bid": "0.03",
+          "last_trade_price": "0.031",
+          "one_day_price_change": "-0.0065",
+          "one_hour_price_change": "-0.003",
+          "one_month_price_change": null,
+          "one_week_price_change": "-0.0945",
+          "one_year_price_change": null,
+          "spread": "0.001"
+        },
+        "question": "Strait of Hormuz traffic returns to normal by September 15?",
+        "resolution": {
+          "neg_risk_request_id": null,
+          "question_id": "0x197dbdd172db888f74910e9875e1b4f2fc404d29a42ffb865607370386229351",
+          "resolved_by": "0x65070BE91477460D8A7AeEb94ef92fe056C2f2A7",
+          "source": "",
+          "uma_resolution_status": null
+        },
+        "rewards": {
+          "clob_rewards": [
+            {
+              "asset_address": "0xc011a7e12a19f7b1f670d46f03b03f3342e82dfb",
+              "condition_id": "0xaad2727a01e09fd1b0d84e286a63a94998efe35fce83a65a3c58dfa9b54dff33",
+              "end_date": "2500-12-31",
+              "id": "1425919",
+              "rewards_amount": "0",
+              "rewards_daily_rate": "0.001",
+              "start_date": "2026-08-17"
+            }
+          ],
+          "holding_rewards_enabled": false,
+          "rewards_max_spread": 4.5,
+          "rewards_min_size": "20"
+        },
+        "slug": "strait-of-hormuz-traffic-returns-to-normal-by-september-15-20260810150912478",
+        "sports": {
+          "game_id": null,
+          "game_start_time": null,
+          "line": null,
+          "sports_market_type": null
+        },
+        "state": {
+          "accepting_orders": true,
+          "active": true,
+          "archived": false,
+          "closed": false,
+          "closed_time": null,
+          "enable_order_book": true,
+          "end_date": "2026-09-15T00:00:00Z",
+          "neg_risk": false,
+          "start_date": "2026-08-11T09:20:21.932904Z"
+        },
+        "tags": [],
+        "trading": {
+          "fee_schedule": null,
+          "fee_type": null,
+          "fees_enabled": false,
+          "minimum_order_size": "5",
+          "minimum_tick_size": "0.001",
+          "seconds_delay": null
+        }
+      },
+      "slug": "strait-of-hormuz-traffic-returns-to-normal-by-september-15-20260810150912478",
+      "status": "open"
+    }
+  ],
+  "outcomes": [
+    {
+      "label": "Yes",
+      "market_id": "0x5c79dfde05559b79a9cb9f7c4187e4d49632dd042572ae676952f812732591cc",
+      "outcome_index": 0,
+      "outcome_token": "83783489454659420807679723574840032660002326710045123865554753994450797728825",
+      "raw": {
+        "label": "Yes",
+        "price": "0.365",
+        "token_id": "83783489454659420807679723574840032660002326710045123865554753994450797728825"
+      }
+    },
+    {
+      "label": "No",
+      "market_id": "0x5c79dfde05559b79a9cb9f7c4187e4d49632dd042572ae676952f812732591cc",
+      "outcome_index": 1,
+      "outcome_token": "48727431314333088243693016929623363710488980152833544156961659445129455301311",
+      "raw": {
+        "label": "No",
+        "price": "0.635",
+        "token_id": "48727431314333088243693016929623363710488980152833544156961659445129455301311"
+      }
+    },
+    {
+      "label": "Yes",
+      "market_id": "0x60c2c085ee8c16bc8f2419739a94971d4c9d00f637ead10fc0f540afa1be64e8",
+      "outcome_index": 0,
+      "outcome_token": "105426373826369935595603860663411604941599130211176020843036778867927711117332",
+      "raw": {
+        "label": "Yes",
+        "price": "0.0075",
+        "token_id": "105426373826369935595603860663411604941599130211176020843036778867927711117332"
+      }
+    },
+    {
+      "label": "No",
+      "market_id": "0x60c2c085ee8c16bc8f2419739a94971d4c9d00f637ead10fc0f540afa1be64e8",
+      "outcome_index": 1,
+      "outcome_token": "90869494087977018607792751230236923002303032923064138180950209430688758061828",
+      "raw": {
+        "label": "No",
+        "price": "0.9925",
+        "token_id": "90869494087977018607792751230236923002303032923064138180950209430688758061828"
+      }
+    },
+    {
+      "label": "Yes",
+      "market_id": "0xa08a5ce99e14ce0b22767af6f16c08a2ab012249444c20887193a9a3e98e11fc",
+      "outcome_index": 0,
+      "outcome_token": "23545193122217391289335133742859160842475987880562465754342378273033942179195",
+      "raw": {
+        "label": "Yes",
+        "price": "0.085",
+        "token_id": "23545193122217391289335133742859160842475987880562465754342378273033942179195"
+      }
+    },
+    {
+      "label": "No",
+      "market_id": "0xa08a5ce99e14ce0b22767af6f16c08a2ab012249444c20887193a9a3e98e11fc",
+      "outcome_index": 1,
+      "outcome_token": "111344475342969784116702975577723982549674037196345086059563486202499238579830",
+      "raw": {
+        "label": "No",
+        "price": "0.915",
+        "token_id": "111344475342969784116702975577723982549674037196345086059563486202499238579830"
+      }
+    },
+    {
+      "label": "Yes",
+      "market_id": "0xaad2727a01e09fd1b0d84e286a63a94998efe35fce83a65a3c58dfa9b54dff33",
+      "outcome_index": 0,
+      "outcome_token": "792896940617101609095080343806493099086366718518381398857436002509498065050",
+      "raw": {
+        "label": "Yes",
+        "price": "0.0305",
+        "token_id": "792896940617101609095080343806493099086366718518381398857436002509498065050"
+      }
+    },
+    {
+      "label": "No",
+      "market_id": "0xaad2727a01e09fd1b0d84e286a63a94998efe35fce83a65a3c58dfa9b54dff33",
+      "outcome_index": 1,
+      "outcome_token": "12575482562400058575569240787286833787405115816233407902290732716716915814118",
+      "raw": {
+        "label": "No",
+        "price": "0.9695",
+        "token_id": "12575482562400058575569240787286833787405115816233407902290732716716915814118"
+      }
+    }
+  ],
+  "query_sha256": {
+    "coverage": "c79da853d2bbcb79bca46a61861bba52aee296f662fcc67529023e4b64cce8c2",
+    "markets": "abd75129bb6fa33f7079484ae6c14b1feb8ae4a1dd61ad8d62c3580b12cffb05",
+    "outcomes": "208df9a2fd98ec194118ddf9b64cd4081c364f691d83e1ca58388574a6ce3ce6",
+    "tops": "140b59fb9eb4cbc1a264ce2f17c27d2c60ef00689c3ca3e4ae2ac07eb649dbb4"
+  },
+  "schema": "chronos-active-candidate-audit/v1",
+  "snapshot_coverage": [
+    {
+      "first_ts": "2026-08-06T23:25:24.529000+00:00",
+      "last_ts": "2026-08-18T19:44:31.785000+00:00",
+      "market_id": "0x5c79dfde05559b79a9cb9f7c4187e4d49632dd042572ae676952f812732591cc",
+      "outcome_index": 0,
+      "snapshot_count": 4541
+    },
+    {
+      "first_ts": "2026-08-06T23:25:24.529000+00:00",
+      "last_ts": "2026-08-18T19:44:31.785000+00:00",
+      "market_id": "0x5c79dfde05559b79a9cb9f7c4187e4d49632dd042572ae676952f812732591cc",
+      "outcome_index": 1,
+      "snapshot_count": 4541
+    },
+    {
+      "first_ts": "2026-08-06T22:16:46.297000+00:00",
+      "last_ts": "2026-08-18T19:44:30+00:00",
+      "market_id": "0x60c2c085ee8c16bc8f2419739a94971d4c9d00f637ead10fc0f540afa1be64e8",
+      "outcome_index": 0,
+      "snapshot_count": 9056
+    },
+    {
+      "first_ts": "2026-08-06T22:16:46.297000+00:00",
+      "last_ts": "2026-08-18T19:44:30+00:00",
+      "market_id": "0x60c2c085ee8c16bc8f2419739a94971d4c9d00f637ead10fc0f540afa1be64e8",
+      "outcome_index": 1,
+      "snapshot_count": 9056
+    },
+    {
+      "first_ts": "2026-08-06T23:25:24.087000+00:00",
+      "last_ts": "2026-08-18T19:44:24.037000+00:00",
+      "market_id": "0xa08a5ce99e14ce0b22767af6f16c08a2ab012249444c20887193a9a3e98e11fc",
+      "outcome_index": 0,
+      "snapshot_count": 3763
+    },
+    {
+      "first_ts": "2026-08-06T23:25:24.087000+00:00",
+      "last_ts": "2026-08-18T19:44:24.037000+00:00",
+      "market_id": "0xa08a5ce99e14ce0b22767af6f16c08a2ab012249444c20887193a9a3e98e11fc",
+      "outcome_index": 1,
+      "snapshot_count": 3763
+    }
+  ]
+}

@@ -79,3 +79,13 @@ idea failed strongly: following the dated CME probability lost after fees at eve
 12-, 24-, and 48-hour decision. A post-hoc 48-hour fade was positive (+$19.165 over seven
 overlapping 100-share trades, four winners), but it is a fragile hypothesis that requires a new,
 predeclared event cohort. See [`fomc-fedwatch-result.md`](fomc-fedwatch-result.md).
+
+## Second completed candidate
+
+The IMF/OCHA PortWatch versus active Hormuz deadline study is complete in development. Exact Git
+publication vintages were joined to 71,271 direction-specific production fills across three
+deadline contracts. Following weekly traffic changes lost after fees at both 24 hours and seven
+days. Buying NO merely because traffic remained far below the resolution threshold also lost at
+every tested state threshold and horizon. The result rejects a mechanical traffic rule and shows
+that these contracts chiefly price a future geopolitical regime switch, not the current ship
+count. See [`hormuz-portwatch-result.md`](hormuz-portwatch-result.md).

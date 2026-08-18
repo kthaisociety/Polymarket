@@ -78,6 +78,72 @@
       "owner": "chronos-active-external-2026-08-18",
       "removable_if_needed": true,
       "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/hdx-portwatch-viz.bundle",
+      "kind": "external_source_history",
+      "source": "OCHA-DAP hdx-portwatch-viz complete Git bundle with exact publication commits",
+      "sha256": "d6ec548f33b55ac3c2e7f900cc7beb5000050b0e9d7a96c7946e898773b2b6a6",
+      "bytes": 4610592,
+      "created_at": "2026-08-18T20:03:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/hormuz-candidate-audit.json",
+      "kind": "sanitized_production_candidate_audit",
+      "source": "bounded repeatable-read human_ro contract, book, and authority audit",
+      "sha256": "be4ea7d593cf265840cc7254e67d171d81cbe5767500f2ed577f96a218db1ddd",
+      "bytes": 32613,
+      "created_at": "2026-08-18T20:03:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/hormuz-fills.jsonl.gz",
+      "kind": "sanitized_production_fill_slice",
+      "source": "71,271 exact Hormuz outcome-0 fills under human_ro",
+      "sha256": "06b44e46a75b88d2b94dd7501a3537b605709e3ba12ceb2ff1ea13afccd5f61c",
+      "bytes": 2495253,
+      "created_at": "2026-08-18T20:03:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/hormuz-git-vintages.json",
+      "kind": "external_source_vintage_index",
+      "source": "13 exact Hormuz observations extracted from committed OCHA PortWatch blobs",
+      "sha256": "05e9b1066d84f4fe7c7c109182cf9afcee1d2a33599b77e7e8252896186c3986",
+      "bytes": 6547,
+      "created_at": "2026-08-18T20:03:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/hormuz-portwatch-workspace.tar.gz",
+      "kind": "chronos_data_workspace_archive",
+      "source": "official current IMF PortWatch Hormuz series and strict derived dataset",
+      "sha256": "2c3fb89939a2e64bccdc965f8549a6f3993675982dcb7152c7fc4a269003489c",
+      "bytes": 24001,
+      "created_at": "2026-08-18T20:03:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/portwatch-panel-workspace.tar.gz",
+      "kind": "chronos_data_workspace_archive",
+      "source": "official current IMF PortWatch 28-chokepoint comparison panel and strict derived pages",
+      "sha256": "6a9952d1fa439e67f5a79ad37e99b3ce7bc3ffc82906c94a3d5590a749155eb8",
+      "bytes": 717437,
+      "created_at": "2026-08-18T20:03:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
     }
   ]
 }

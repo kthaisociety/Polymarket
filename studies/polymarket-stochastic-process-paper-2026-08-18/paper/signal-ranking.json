@@ -1,6 +1,6 @@
 {
   "schema": "chronos-signal-ranking/v1",
-  "as_of": "2026-08-18T21:40:00+02:00",
+  "as_of": "2026-08-18T22:05:00+02:00",
   "ranking_direction": "least_to_most_promising",
   "ranking_basis": [
     "survival of temporal and mechanism controls",
@@ -69,6 +69,20 @@
     },
     {
       "rank": 5,
+      "idea": "Follow PortWatch ship-count changes or buy NO in persistently low-traffic Hormuz deadline contracts",
+      "claim_type": "external-data directional trading signal",
+      "evidence_level": "historical-vintage executable development",
+      "status": "rejected_regime_mismatch",
+      "best_evidence": "Exact weekly Git publication vintages and 71,271 production fills supported 100-share tests across three deadlines. Following traffic changes lost $24.3214 over 16 24-hour trades and $20.7159 over 13 seven-day trades after fees; every low-state NO rule was negative.",
+      "why_not_tradable": "Current traffic measures the state that resolves the contract, but contract prices forecast a future geopolitical regime switch. All three deadlines share one dependent episode, and a two-trade positive threshold cell was selection noise.",
+      "next_research_value": "Model a time-varying recovery hazard from genuinely timestamped geopolitical or shipping information and map it to the deadline curve; require independent disruptions or prospective confirmation.",
+      "evidence": [
+        "../../polymarket-active-external-data-2026-08-18/hormuz-portwatch-result.md",
+        "../../polymarket-active-external-data-2026-08-18/hormuz-weekly-development.json"
+      ]
+    },
+    {
+      "rank": 6,
       "idea": "Same-event sibling probability surface",
       "claim_type": "cross-contract movement forecast",
       "evidence_level": "formal development",
@@ -81,7 +95,7 @@
       ]
     },
     {
-      "rank": 6,
+      "rank": 7,
       "idea": "Boundary, volatility, and jump-magnitude regressions",
       "claim_type": "future movement magnitude forecast",
       "evidence_level": "formal development",
@@ -95,7 +109,7 @@
       ]
     },
     {
-      "rank": 7,
+      "rank": 8,
       "idea": "First-move direction and delayed post-jump continuation",
       "claim_type": "directional trading signal",
       "evidence_level": "chronological development",
@@ -109,7 +123,7 @@
       ]
     },
     {
-      "rank": 8,
+      "rank": 9,
       "idea": "Post-jump reversal-before-continuation",
       "claim_type": "directional event hazard",
       "evidence_level": "fresh development replication",
@@ -124,7 +138,7 @@
       ]
     },
     {
-      "rank": 9,
+      "rank": 10,
       "idea": "Forty-eight-hour meaningful-move incidence ranking",
       "claim_type": "cross-sectional movement ranking",
       "evidence_level": "chronological development",
@@ -137,7 +151,7 @@
       ]
     },
     {
-      "rank": 10,
+      "rank": 11,
       "idea": "Time to the next meaningful probability move",
       "claim_type": "movement timing forecast",
       "evidence_level": "frozen development candidate",
@@ -150,7 +164,7 @@
       ]
     },
     {
-      "rank": 11,
+      "rank": 12,
       "idea": "State-, duration-, and path-dependent zero-inflated marked-jump law",
       "claim_type": "complete observed-sample process law",
       "evidence_level": "fresh no-refit replication",
@@ -164,7 +178,7 @@
       ]
     },
     {
-      "rank": 12,
+      "rank": 13,
       "idea": "Continuous quiet-duration arrival hazard",
       "claim_type": "next-update probability forecast",
       "evidence_level": "protected rejection with promising completed rows",
@@ -178,7 +192,7 @@
       ]
     },
     {
-      "rank": 13,
+      "rank": 14,
       "idea": "Fade stale CME FedWatch level gaps in the September +25 bp FOMC contract",
       "claim_type": "external-data directional trading hypothesis",
       "evidence_level": "post-hoc single-contract development",
