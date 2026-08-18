@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import urllib.parse
 from dataclasses import dataclass
@@ -21,12 +22,14 @@ from research_agent.data_foundation import (
 from research_agent.data_foundation._identity import require_aware, stable_identity
 from research_agent.data_workspace import (
     DataWorkspace,
+    DerivedDatasetRef,
     DeriveStatus,
     ScoutedFetchReceipt,
     ScoutedFetchStatus,
     SourceScoutingReportRef,
     SourceScoutingService,
     SourceSearchRequest,
+    SourceSnapshotRef,
 )
 
 if TYPE_CHECKING:
@@ -365,6 +368,66 @@ def expand_scouted_price_history(
     return PolymarketSourceExpansion(need.need_id, fetched, registered, catalog)
 
 
+def register_retained_price_history(
+    workspace: DataWorkspace,
+    *,
+    need: PolymarketPriceHistoryNeed,
+    source_ref_uri: str,
+    derived_ref_uri: str,
+) -> RegisteredTemporalDataset:
+    """Re-register one exact retained expansion without network or semantic inference."""
+    try:
+        source_ref = workspace.resolve(source_ref_uri)
+        derived_ref = workspace.resolve(derived_ref_uri)
+    except (KeyError, OSError, ValueError) as error:
+        raise PolymarketSourceExpansionError(
+            "retained price-history lineage could not be resolved"
+        ) from error
+    if not isinstance(source_ref, SourceSnapshotRef) or not isinstance(
+        derived_ref, DerivedDatasetRef
+    ):
+        raise PolymarketSourceExpansionError("retained price-history reference kinds are invalid")
+
+    profile = _profile(need)
+    expected_parameters = {
+        "profile_id": profile.identity,
+        "start_ts": need.start_ts,
+        "end_ts": need.end_ts,
+        "market_id": need.market_id,
+        "event_id": need.event_id,
+        "outcome_index": need.outcome_index,
+        "outcome_token": need.outcome_token,
+        "fidelity_minutes": need.fidelity_minutes,
+        "vintage_id": source_ref.snapshot_id,
+    }
+    expected_code_sha256 = hashlib.sha256(_PRICE_HISTORY_TRANSFORM.encode()).hexdigest()
+    expected_parameters_sha256 = hashlib.sha256(
+        json.dumps(
+            expected_parameters,
+            allow_nan=False,
+            ensure_ascii=False,
+            separators=(",", ":"),
+            sort_keys=True,
+        ).encode()
+    ).hexdigest()
+    if (
+        derived_ref.code_sha256 != expected_code_sha256
+        or derived_ref.input_ref_ids != (source_ref.uri,)
+        or derived_ref.parameters_sha256 != expected_parameters_sha256
+    ):
+        raise PolymarketSourceExpansionError(
+            "retained price-history derivation does not match the exact need and source"
+        )
+
+    approval = ApprovedTemporalDataset(
+        derived_ref=derived_ref,
+        profile=profile,
+        approval_ref=f"polymarket-price-history-adapter:{need.need_id}",
+    )
+    authority = TemporalRegistrationAuthority((approval,))
+    return authority.register(workspace, approval)
+
+
 def _profile(need: PolymarketPriceHistoryNeed) -> TemporalDatasetProfile:
     need_digest = need.need_id.rsplit(":", 1)[-1]
     return TemporalDatasetProfile(
@@ -408,4 +471,5 @@ __all__ = [
     "expand_scouted_price_history",
     "expansion_receipt_json",
     "price_history_search_request",
+    "register_retained_price_history",
 ]

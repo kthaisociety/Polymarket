@@ -55,3 +55,29 @@ receipt is `acquisition-receipt.json`, SHA-256
 
 Registration success only establishes a governed measurement panel. The process estimands and
 comparison rules must be frozen in authored source before the harness may read these values.
+
+## Frozen measurement analysis
+
+`../source/10_five_minute_measurement_falsifier.py` and
+`run_fixed_clob_measurement.py` are committed before any registered sample value is read. The runner
+reopens each exact retained derivation through the Polymarket temporal-registration profile,
+verifies the original registration attestation, and grants ten explicit development-only views to
+the normal analysis harness. It also grants the existing hourly development view for only the
+authored same-market/window comparison; ancestor and final protected events remain unavailable.
+
+The fixed diagnostics are:
+
+- regular five-minute gaps must fall within 80–120% of five minutes;
+- regular interior zero mass and raw regular-increment kurtosis;
+- elapsed quiet-age bands of zero, up to two hours, two-to-24 hours, and 24 hours or longer;
+- overlapping variance ratios at one, four, and 24 hours;
+- nonzero and adjacent-nonzero sign reversal;
+- the share of nonzero changes on a 0.001 probability grid;
+- nearest cross-source matching within ten minutes, reporting coverage, exact agreement,
+  within-one-cent agreement, and mean absolute discrepancy.
+
+The fixed descriptive gates are: at least 50% five-minute interior zeros; the 24-hour-or-longer
+move rate no more than half the zero-quiet move rate; five-minute 24-hour variance ratio below
+0.75; nonzero sign reversal above 55%; and cross-source coverage at least 80%, mean absolute
+discrepancy at most one cent, and at least 90% of matches within one cent. These gates organize the
+measurement falsifier; they do not establish tradability or latent-belief dynamics.

@@ -44,6 +44,10 @@ evidence or inherits authority across different field types.
 - [`source/07_successor_partition_identity.py`](source/07_successor_partition_identity.py):
   zero-field audit of the broader successor corpus against the exact 1,000-contract ancestor before
   any newly acquired value is exposed.
+- [`source/10_five_minute_measurement_falsifier.py`](source/10_five_minute_measurement_falsifier.py):
+  fixed comparison of ten preselected official five-minute paths with the same-market retained
+  hourly paths. It tests sampling alignment, zero mass, elapsed-duration dependence, variance
+  scaling, sign reversal, and probability-grid concentration without fitting a trade model.
 
 The paper-working literature and claim map is retained in
 [`literature/theory-transfer-map.md`](literature/theory-transfer-map.md). It distinguishes direct,

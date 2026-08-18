@@ -18,6 +18,7 @@ from research_agent.data_adapters.polymarket.source_expansion import (
     PolymarketSourceExpansionError,
     expand_scouted_price_history,
     price_history_search_request,
+    register_retained_price_history,
 )
 from research_agent.data_foundation import BoundaryStatus, InformationSetBuilder
 from research_agent.data_workspace import (
@@ -205,6 +206,57 @@ def test_exact_selected_source_becomes_a_time_legal_registered_dataset(
         need=need,
     )
     assert replay.as_dict() == public
+
+    fetch_receipt = expansion.scouted_fetch.fetch_receipt
+    assert fetch_receipt is not None
+    assert fetch_receipt.snapshot_ref is not None
+    reopened = register_retained_price_history(
+        workspace,
+        need=need,
+        source_ref_uri=fetch_receipt.snapshot_ref.uri,
+        derived_ref_uri=expansion.registered.derived_ref_uri,
+    )
+    assert reopened == expansion.registered
+
+
+def test_retained_registration_rejects_a_different_exact_need(
+    tmp_path: Path,
+    monkeypatch: MonkeyPatch,
+) -> None:
+    need = _need()
+    _install_response(
+        monkeypatch,
+        {"history": [{"t": need.start_ts, "p": 0.41}]},
+    )
+    workspace = DataWorkspace(tmp_path / "data")
+    report_ref, candidate_id = _report(workspace, need)
+    expansion = expand_scouted_price_history(
+        workspace,
+        report_ref=report_ref,
+        candidate_id=candidate_id,
+        need=need,
+    )
+    fetch_receipt = expansion.scouted_fetch.fetch_receipt
+    assert fetch_receipt is not None
+    assert fetch_receipt.snapshot_ref is not None
+    changed_need = PolymarketPriceHistoryNeed(
+        environment_id=need.environment_id,
+        market_id="changed-market",
+        event_id=need.event_id,
+        outcome_index=need.outcome_index,
+        outcome_token=need.outcome_token,
+        start_time=need.start_time,
+        end_time=need.end_time,
+        fidelity_minutes=need.fidelity_minutes,
+    )
+
+    with pytest.raises(PolymarketSourceExpansionError, match="does not match"):
+        register_retained_price_history(
+            workspace,
+            need=changed_need,
+            source_ref_uri=fetch_receipt.snapshot_ref.uri,
+            derived_ref_uri=expansion.registered.derived_ref_uri,
+        )
 
 
 def test_changed_token_url_is_denied_before_any_network_contact(

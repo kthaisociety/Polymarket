@@ -49,6 +49,7 @@ from research_agent.data_adapters.polymarket.source_expansion import (
     expand_scouted_price_history,
     expansion_receipt_json,
     price_history_search_request,
+    register_retained_price_history,
 )
 
 __all__ = [
@@ -88,4 +89,5 @@ __all__ = [
     "ingest_polymarket_contract_tape",
     "price_history_search_request",
     "register_polymarket_resolution_corpus",
+    "register_retained_price_history",
 ]

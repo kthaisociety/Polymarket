@@ -461,3 +461,15 @@ probabilities total, with 1,378–2,001 observations per market. The value-free 
 has SHA-256 `eced7839e2db660e8ab2d94310df578bc4329124d3b12d2904f0ad4e82ebf54a`.
 This is an acquisition checkpoint rather than a scientific finding. No five-minute value may be
 read until its authored measurement estimands and comparison rules are committed.
+
+The fixed measurement source uses the ten already selected markets and compares their official
+five-minute paths with their retained hourly paths over the five-minute panel's observed coverage.
+Regular gaps use an 80–120% tolerance. Fixed outputs are zero mass, raw increment kurtosis,
+elapsed-duration move rates (zero, up to two hours, two-to-24 hours, and at least 24 hours),
+one/four/24-hour variance ratios, nonzero sign reversal, 0.001-grid concentration, and nearest
+cross-source agreement within ten minutes. The descriptive gates are frozen at: interior zero mass
+at least 50%; 24-hour-or-longer quiet move rate no more than half the zero-quiet rate; five-minute
+24-hour variance ratio below 0.75; nonzero reversal above 55%; and at least 80% cross-source
+coverage with at most one-cent mean absolute discrepancy and at least 90% within one cent. These
+rules test whether hourly process signatures are robust to measurement clock and source; they are
+not a trading claim.
