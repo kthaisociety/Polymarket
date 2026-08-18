@@ -88,12 +88,19 @@ events (357 markets). Eight additional ancestor events lie within the successor'
 chronological block; their values remain unavailable. The receipt reports
 `protected_values_exposed=false`.
 
-The first successor experiment is fixed as an unchanged replay of source 01 on only those 29 fresh
-development events. Source bytes, diagnostics, thresholds, and interpretation rules all predate
-the successor acquisition. No threshold search, source modification, ancestor access, or protected
-access is permitted. Agreement will count as independent chronological replication of descriptive
-process signatures; disagreement will be retained as regime or sampling evidence rather than
-repaired by tuning.
+The first successor experiment replayed source 01 unchanged on only those 29 fresh development
+events. Across 147 markets and 42,549 observations, regular interior zero mass was `44.85%`,
+regular increment kurtosis was `55.01`, and the 24-hour variance ratio was `0.23029`. Move
+probability fell from `73.68%` immediately after a move to `2.08%` after at least 24 unchanged
+observations; low/high boundary persistence was `98.16%`/`99.12%`. Both frozen signature checks
+passed again, while the lower zero mass versus the earlier cohort (`62.40%`) demonstrates material
+cross-cohort heterogeneity. Protected values remained unavailable.
+
+The second successor experiment is fixed as an unchanged replay of source 02 on the same 29 fresh
+events. Its source bytes and all observation/market/event weighting, chronological-half,
+non-overlapping daily, fixed-horizon, and calibration gates predate acquisition. It will test the
+negative-drift and broad-overpricing diagnostics without semantic filtering or threshold changes.
+Failure will be retained as a non-replication and cannot be repaired after seeing this cohort.
 
 - Expanded immutable corpus:
   `polymarket-corpus:8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6`,
@@ -203,7 +210,7 @@ The research package must ultimately retain:
 
 ## Completion status
 
-**OPEN — SOURCE 05 COMPLETE.** The verified project plan has been translated into an exact Chronos
+**OPEN — SOURCE 05 COMPLETE; SUCCESSOR SOURCE 01 REPLICATED.** The verified project plan has been translated into an exact Chronos
 mandate. Source 01 executed successfully over 562 markets/157 fresh development events while the
 31-event ancestor and final 47-event protected block remained unavailable. Its exact receipt is
 retained under `studies/polymarket-stochastic-process-paper-2026-08-18/`.

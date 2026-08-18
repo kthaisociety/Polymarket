@@ -58,3 +58,28 @@ groups. Its source and interpretation gates were fixed before this successor cor
 It may read the registered development fields already authorized for source 01; ancestor and
 protected values remain unavailable. The replay is a fresh replication of descriptive process
 signatures, not permission to tune thresholds or expose the protected block.
+
+## Source 01 fresh replication result
+
+Status: **SUCCEEDED — EXPLORATORY CHRONOLOGICAL REPLICATION**.
+
+- Exact [`01_fresh_process_signatures.json`](development-receipts/01_fresh_process_signatures.json)
+  SHA-256: `d6d652b20d9458e6472e0d8dddf48aaa6e27946e268bd802580961d9e9972f57`.
+- Coverage: 29 fresh events, 147 markets, and 42,549 observations; zero chronology or lifecycle
+  violations were recorded.
+- Regular interior zero rate was `0.44850`, regular increment kurtosis was `55.01`, and the
+  24-hour variance ratio was `0.23029`. Both frozen signature checks again rejected a smooth
+  continuous diffusion description.
+- Next-sample move probability fell from `0.73680` immediately after a move to `0.02080` after
+  at least 24 unchanged observations, again questioning a memoryless constant-intensity clock.
+- Next-sample persistence was `0.98159` at the low boundary and `0.99121` at the high boundary.
+- The later cohort was less stale than the first development cohort: regular interior zero mass
+  was `0.44850` versus `0.62398`. This is retained as cross-cohort heterogeneity, while the
+  qualitative process discrimination replicated.
+- Protected values remained unexposed.
+
+The next successor experiment is fixed as an unchanged replay of source 02 on the same 29 fresh
+events. It will apply the existing weighting, chronological-half, daily-drift, fixed-horizon, and
+calibration diagnostics without changing a threshold or source byte. This tests whether the
+earlier negative-drift and broad-overpricing diagnostics replicate; failure is retained and does
+not permit post-result semantic filtering.
