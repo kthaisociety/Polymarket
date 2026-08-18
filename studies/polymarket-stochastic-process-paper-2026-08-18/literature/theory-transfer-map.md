@@ -106,6 +106,21 @@ formal observation/event-macro Brier is 0.202/0.207 and misses the fixed 0.20 ce
 complete-law advantage therefore does not imply that every component, sampling design, or scalar
 compression is independently strong enough for formal promotion.
 
+Sources 15 and 20 test whether the descriptive transfer is an artifact of representation or
+contract structure. Strict-interior probability and log-odds coordinates, early/late maturity,
+and a six-hour clock retain the sticky/sub-diffusive law. Fixed whole-event partitions by market
+count, contract lifetime, and retained sampling depth also keep zero mass above 0.20, 24-hour
+variance ratios below 0.75, sign reversal above 0.50, and long-quiet hazard ratios below 0.50 in
+every headline-eligible stratum. Exact levels vary, so the support is for a structural family—not
+parameter invariance.
+
+Sources 16–19 isolate the continuous arrival hazard. A fully reconstructible state-plus-staleness
+logistic law reproduces development, improves later no-refit event Brier from 0.261 to 0.174, and
+passes governed formal development. Its single protected run is nevertheless rejected: completed-
+row Brier is 0.189, but only 65/100 decisions execute, failure rate is 0.35, and error concentration
+also misses its fixed ceiling. Duration modeling transfers as a useful scientific restriction, but
+this exact sparse schedule/training protocol is not a protected predictive finding.
+
 ## Calibration and financial-theory layer
 
 Proper scoring rules, reliability diagrams, chronological validation, and cluster-aware inference
@@ -139,9 +154,9 @@ an executable-quote boundary.
 | No-arbitrage/martingale pricing | Conditional benchmark | Incomplete market, no replicating underlying, physical versus pricing measure | Raw negative drift and sign reversal challenge the observed-sample martingale |
 | Constant Brownian diffusion | Fails descriptively | Bounded state, zero inflation, jumps, irregular information time | Rejected hourly by source 01 and at five minutes by source 10 |
 | Local/state-dependent volatility | Transfers | Must degenerate/absorb at boundaries and change with time-to-close | State strongly predicts log magnitude in source 05 |
-| Event-time point process | Transfers | Duration, price state, semantics, and sampling mechanism enter intensity | Supported chronologically by source 03 and across elapsed five-minute durations by source 10 |
+| Event-time point process | Transfers with execution caveat | Duration, price state, semantics, and sampling mechanism enter intensity | Sources 03/10/17 support the restriction; source 19 rejects the exact protected sparse system |
 | Volatility clustering | Transfers | Separate arrival clustering from conditional mark-size clustering | Both components supported by sources 03 and 05 |
-| Return-sign independence | Fails for registered marks | Allow bid/ask bounce, rounding, aggregation, or belief reversal | Source 04 passes chronologically; source 10 replicates reversal at five minutes |
+| Return-sign independence | Fails for registered marks | Allow bid/ask bounce, rounding, aggregation, or belief reversal | Sources 04/10 and structural source 20 support reversal |
 | Heavy-tailed raw returns | Transfers descriptively | Decompose zero mass and conditional size before selecting a residual law | Raw tails supported; heavy-tailed log-size residuals rejected in source 05 |
 | Probability calibration | Transfers empirically | Prices are forecasts only under explicit interpretation; cluster by event | Source 02 opens but does not settle the claim |
 | Black–Scholes replication | Does not transfer directly | No traded underlying or dynamic completeness; resolution is semantic/discontinuous | Structural non-transfer |

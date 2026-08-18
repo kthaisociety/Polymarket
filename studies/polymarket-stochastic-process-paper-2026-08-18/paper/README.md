@@ -12,8 +12,9 @@ the epistemic status of any result.
 
 Current status: the complete marked-hurdle law passed chronological development and an unchanged
 later no-refit replay. Fixed boundary, log-odds, maturity-regime, and six-hour-clock falsifiers also
-passed in development. A frozen continuous staleness hazard then passed fixed relative and absolute
-arrival gates on the later cohort without refitting. A distinct sparse coarse-cell formal binary
+passed in development, as did fixed event-breadth, lifecycle, and retained-depth heterogeneity
+checks. A frozen continuous staleness hazard then passed fixed relative and absolute arrival gates
+on the later cohort without refitting. A distinct sparse coarse-cell formal binary
 arrival compression failed its fixed development gate; its explicitly descended continuous
 replacement passed governed formal development and was frozen. Its single protected run was then
 rejected: 65/100 decisions completed, while coverage, failure-rate, and concentration standards

@@ -16,7 +16,8 @@ increments have 62.4% interior zero mass, raw kurtosis of 157, strong duration d
 arrival, negative dependence in adjacent nonzero signs, and sub-diffusive 24-hour variance
 scaling. These signatures are broad across events and persist at five-minute resolution. In a
 fixed robustness experiment, they also survive strict boundary removal, log-odds coordinates,
-separate early/late maturity regimes, and aggregation to a six-hour clock. In a
+separate early/late maturity regimes, aggregation to a six-hour clock, and partitions by event
+breadth, contract lifetime, and retained sampling depth. In a
 chronological comparison over 566,501 predictions and 113 events, a bounded zero-inflated marked
 jump law with state-, duration-, and path-dependent arrival, sign, and magnitude beats a bounded
 Gaussian diffusion and simpler hurdle laws. Its event-macro negative log score improves 7.74% over
@@ -232,7 +233,29 @@ event-equal 24-hour variance ratio relative to four six-hour periods is 0.569 ac
 moves toward diffusion-like scaling under aggregation, but neither boundaries, coordinates,
 terminal convergence, nor the one-hour clock explains it away.
 
-### 5.5 Five-minute measurement falsifier
+### 5.5 Contract-structure heterogeneity
+
+A separate fixed development trial partitions whole events by market count, median contract
+lifetime, and median retained point count. The table reports event-equal means for zero mass,
+24-hour variance ratio, nonzero-sign reversal, and the long-quiet/active next-move ratio:
+
+| Structural stratum | Zero mass | Variance ratio | Reversal | Quiet ratio |
+|---|---:|---:|---:|---:|
+| One-market events | 0.577 | 0.403 | 0.588 | 0.084 |
+| Events with at least five markets | 0.527 | 0.267 | 0.598 | 0.032 |
+| Contracts lasting at most 30 days | 0.477 | 0.293 | 0.581 | 0.038 |
+| Contracts lasting 31–180 days | 0.605 | 0.425 | 0.594 | 0.078 |
+| Contracts lasting more than 180 days | 0.623 | 0.228 | 0.643 | 0.035 |
+| Fewer than 500 retained points | 0.458 | 0.315 | 0.556 | 0.014 |
+| 500–1,999 retained points | 0.586 | 0.394 | 0.601 | 0.070 |
+| At least 2,000 retained points | 0.631 | 0.248 | 0.635 | 0.053 |
+
+Every headline-eligible stratum is on the predeclared side of all four thresholds. The two-to-four-
+market bin has only nine eligible events for zero, variance, and reversal and is therefore not a
+headline stratum, although its observed directions agree. The process family is structurally broad,
+but the level differences show why one universal parameter vector is not justified.
+
+### 5.6 Five-minute measurement falsifier
 
 On 19,012 regular five-minute increments, interior zero mass is 78.00%, raw kurtosis is 203.64,
 nonzero reversal is 67.87%, and the 24-hour variance ratio is 0.067. Next-sample move probability
@@ -352,6 +375,8 @@ alpha.
   does not eliminate.
 - Representation robustness is development evidence selected after the main process conclusion;
   it is a fixed falsifier, not an independent replication cohort.
+- Structural heterogeneity uses coarse predeclared lifecycle/breadth/depth bins; it does not prove
+  invariance across semantic topics or every contract design.
 - The diffusion comparator is deliberately simple. Rejection does not eliminate every bounded
   continuous-time latent process with microstructure noise or endogenous sampling.
 - One protected evaluation was run and rejected; 35% of declared decisions failed, so completed-row

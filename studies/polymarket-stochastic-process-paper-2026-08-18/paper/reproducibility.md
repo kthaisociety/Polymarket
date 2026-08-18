@@ -79,6 +79,26 @@ The source SHA-256 must be
 `30b19d7c611cb5217b465cffa758f6460c84bf1822de0435804b16fc8e1b7147`; the retained receipt
 SHA-256 is `757ee06535d3e7e06b8ccc5401aa027266122adaf18b253729ac021cc72bcfc9`.
 
+## Replay the contract-structure heterogeneity experiment
+
+```bash
+.venv/bin/python -m research_agent.data_adapters.polymarket.run_corpus_studies \
+  --snapshot-sha256 8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6 \
+  --snapshot-size 318684407 \
+  --ancestor-snapshot-sha256 610b8b9d423d94332923f1e2033410007a890b9da0f9dc67936f17e92263fb2f \
+  --ancestor-snapshot-size 19434443 \
+  --workspace ../../data/chronos/polymarket-corpora \
+  --source studies/polymarket-stochastic-process-paper-2026-08-18/source/20_contract_structure_heterogeneity.py \
+  --receipt-directory /tmp/chronos-contract-heterogeneity-replay \
+  --session-id paper-contract-heterogeneity-replay \
+  --wall-time-seconds 600 \
+  --max-memory-bytes 4294967296
+```
+
+The source SHA-256 must be
+`50a42d5282aef22550a76da0128fa2eb0fb67bbbd67a1312956aef302ca0dd28`; the retained receipt
+SHA-256 is `ef28bbb4cd5a263a8b594721ba275651c51c59e02318fe46ba753100577df680`.
+
 ## Replay the arrival-hazard freeze
 
 ```bash

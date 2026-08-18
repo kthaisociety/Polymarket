@@ -23,6 +23,7 @@ fresh replication. No listed artifact is a protected finding.
 | E16 | Exact source-03 reproduction and reconstructible all-development arrival hazards | [`../development-receipts/16_freeze_arrival_hazard.json`](../development-receipts/16_freeze_arrival_hazard.json) | `21c3d08cc236953d1ad7e2b6ddc3986db0528d90e9b7813bd31614d97f0f9314` |
 | E18 | Governed formal development and independent freeze of the continuous arrival hazard | [`../development-receipts/18_formal_continuous_arrival_hazard.json`](../development-receipts/18_formal_continuous_arrival_hazard.json) | `417e7c9de63538f558a1cdd97609d6d6c82a49b7195bebaee830f8aafec0f192` |
 | P19 | Single protected rejection of the frozen continuous arrival system | [`../protected-receipts/19_continuous_arrival_hazard_protected_resolution.json`](../protected-receipts/19_continuous_arrival_hazard_protected_resolution.json) | `4e9fa014c774fda83eaa8f4d7f75ec838b913197d7a14778a3333518e430b60d` |
+| E20 | Contract-structure heterogeneity across event breadth, lifecycle, and retained depth | [`../development-receipts/20_contract_structure_heterogeneity.json`](../development-receipts/20_contract_structure_heterogeneity.json) | `ef28bbb4cd5a263a8b594721ba275651c51c59e02318fe46ba753100577df680` |
 | R01 | Later process-signature replication | [`../successor-corpus/development-receipts/01_fresh_process_signatures.json`](../successor-corpus/development-receipts/01_fresh_process_signatures.json) | `d6d652b20d9458e6472e0d8dddf48aaa6e27946e268bd802580961d9e9972f57` |
 | R08 | Later semantic/regime replication | [`../successor-corpus/development-receipts/08_semantic_composition_falsifier.json`](../successor-corpus/development-receipts/08_semantic_composition_falsifier.json) | `8cdcaea25fcd4e0735ea1081cbb19fb000e270c81312cc31a9bba4316631a250` |
 | R11 | Later whole-event replication | [`../successor-corpus/development-receipts/11_event_cluster_process_uncertainty.json`](../successor-corpus/development-receipts/11_event_cluster_process_uncertainty.json) | `aebb42800f7a63678993f8608a4bd39f7c6fbeb8fd2f74b0d90c8cc5698e11bb` |
@@ -33,8 +34,9 @@ fresh replication. No listed artifact is a protected finding.
 
 | Manuscript claim | Evidence IDs | Status boundary |
 |---|---|---|
-| Registered samples are sticky, heavy-tailed, reversing, and sub-diffusive | E01, E10, E11, E15, R01, R11 | Descriptive development, fixed representation robustness, plus unchanged later replication |
+| Registered samples are sticky, heavy-tailed, reversing, and sub-diffusive | E01, E10, E11, E15, E20, R01, R11 | Descriptive development, fixed representation/structure robustness, plus unchanged later replication |
 | Boundaries, probability coordinates, maturity, and the one-hour clock do not individually explain the process signatures | E15 | Fixed development robustness; not independent replication |
+| Event breadth, lifecycle, and retained sampling depth do not individually explain the process signatures | E20 | Fixed structural development robustness; exact levels remain heterogeneous |
 | Quiet duration predicts update arrival | E03, E10, E11, E16, R11, R17 | Chronological development, exact freeze, measurement evidence, and frozen later replay |
 | A frozen continuous staleness hazard improves absolute and relative next-update prediction on the later cohort | E16, R17 | Development-selected model plus no-refit later replay; not protected |
 | The descended continuous hazard passes governed sparse formal development and is frozen | E14, E18 | New formal candidate passes; coarse-cell ancestor remains rejected |
@@ -42,7 +44,7 @@ fresh replication. No listed artifact is a protected finding.
 | State/path features improve sign and magnitude predictions | E04, E05 | Development only |
 | Full hurdle law beats diffusion and simpler hurdle laws | E12, R13 | Development plus frozen no-refit later replication |
 | Sparse formal arrival compression is not eligible for freeze | E14 | Formal development rejection |
-| No protected finding or tradability claim is authorized | E01–E18, P19, R01–R17 | One exposed protected negative; no finding or execution/profit evaluation |
+| No protected finding or tradability claim is authorized | E01–E20, P19, R01–R17 | One exposed protected negative; no finding or execution/profit evaluation |
 
 ## Corpus identities
 

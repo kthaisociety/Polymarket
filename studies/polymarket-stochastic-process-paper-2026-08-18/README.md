@@ -75,6 +75,12 @@ evidence or inherits authority across different field types.
 - [`source/18_formal_continuous_arrival_hazard.py`](source/18_formal_continuous_arrival_hazard.py):
   governed temporal development of the exact continuous hazard on the sparse formal schedule,
   including independent freeze after its fixed credibility gate passed.
+- [`source/19_continuous_arrival_hazard_protected_resolution.py`](source/19_continuous_arrival_hazard_protected_resolution.py):
+  single independently governed protected resolution of that exact frozen system; validation
+  rejected it and retained the protected negative.
+- [`source/20_contract_structure_heterogeneity.py`](source/20_contract_structure_heterogeneity.py):
+  fixed development-only whole-event heterogeneity across market count, contract lifetime, and
+  retained sampling depth.
 
 The paper-working literature and claim map is retained in
 [`literature/theory-transfer-map.md`](literature/theory-transfer-map.md). It distinguishes direct,
@@ -528,3 +534,28 @@ The completed rows suggest that the hazard's conditional probability quality may
 is not a protected success: coverage failures can be non-random, and concentration also missed its
 fixed standard. No threshold, schedule, model, or claim is repaired after exposure. The final
 47-event holdout is exposed and cannot be reused as fresh development data.
+
+## Contract-structure heterogeneity
+
+Source 20 returned to the development-only view and tested the fixed process signatures across
+event breadth, median contract lifetime, and median retained sampling depth. All bins and gates were
+declared before execution; settlement payout and question-text categories were excluded.
+
+| Structural partition | Stratum | Eligible events: zero / variance / reversal / quiet | Event means: zero / variance / reversal / quiet |
+|---|---|---:|---:|
+| Event breadth | One market | 88 / 102 / 102 / 49 | 0.577 / 0.403 / 0.588 / 0.084 |
+| Event breadth | At least five markets | 41 / 40 / 41 / 28 | 0.527 / 0.267 / 0.598 / 0.032 |
+| Lifecycle | At most 30 days | 50 / 54 / 56 / 15 | 0.477 / 0.293 / 0.581 / 0.038 |
+| Lifecycle | 31–180 days | 73 / 82 / 81 / 53 | 0.605 / 0.425 / 0.594 / 0.078 |
+| Lifecycle | More than 180 days | 15 / 15 / 15 / 15 | 0.623 / 0.228 / 0.643 / 0.035 |
+| Retained depth | Fewer than 500 points | 34 / 35 / 37 / 5 | 0.458 / 0.315 / 0.556 / 0.014 |
+| Retained depth | 500–1,999 points | 86 / 98 / 97 / 60 | 0.586 / 0.394 / 0.601 / 0.070 |
+| Retained depth | At least 2,000 points | 18 / 18 / 18 / 18 | 0.631 / 0.248 / 0.635 / 0.053 |
+
+Zero mass remains above `0.20`, 24-hour variance ratios below `0.75`, reversal above `0.50`, and
+quiet/active move-rate ratios below `0.50` in every headline-eligible stratum. The two-to-four-market
+bin has only nine eligible events for the first three metrics—below the fixed ten-event gate—but
+also agrees directionally. Thus no single event-breadth, lifetime, or sampling-depth regime explains
+the law, while exact levels remain heterogeneous. Source SHA-256 is
+`50a42d5282aef22550a76da0128fa2eb0fb67bbbd67a1312956aef302ca0dd28`; receipt SHA-256 is
+`ef28bbb4cd5a263a8b594721ba275651c51c59e02318fe46ba753100577df680`.
