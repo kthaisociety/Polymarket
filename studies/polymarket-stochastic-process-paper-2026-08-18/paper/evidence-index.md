@@ -19,6 +19,7 @@ fresh replication. No listed artifact is a protected finding.
 | E11 | Whole-event uncertainty and prevalence | [`../development-receipts/11_event_cluster_process_uncertainty.json`](../development-receipts/11_event_cluster_process_uncertainty.json) | `7262b65b8456577c097f64525ef83e57c6ffe37066e0a84559c78c858e2aeda1` |
 | E12 | Complete process-family comparison | [`../development-receipts/12_composed_process_family_comparison.json`](../development-receipts/12_composed_process_family_comparison.json) | `2c107a29710e3dd9d13cbf24be00e655b4b0a5c3a628fd8026670a1ad88cd9c5` |
 | E14 | Formal arrival rejection | [`../development-receipts/14_formal_hurdle_arrival_freeze.json`](../development-receipts/14_formal_hurdle_arrival_freeze.json) | `2e59fc3be4a6b9157b184cadfcc06eccf946c2131d3f1b12f8fdf44b97f0f7e8` |
+| E15 | Boundary, coordinate, maturity, and six-hour-clock robustness | [`../development-receipts/15_representation_robustness.json`](../development-receipts/15_representation_robustness.json) | `757ee06535d3e7e06b8ccc5401aa027266122adaf18b253729ac021cc72bcfc9` |
 | R01 | Later process-signature replication | [`../successor-corpus/development-receipts/01_fresh_process_signatures.json`](../successor-corpus/development-receipts/01_fresh_process_signatures.json) | `d6d652b20d9458e6472e0d8dddf48aaa6e27946e268bd802580961d9e9972f57` |
 | R08 | Later semantic/regime replication | [`../successor-corpus/development-receipts/08_semantic_composition_falsifier.json`](../successor-corpus/development-receipts/08_semantic_composition_falsifier.json) | `8cdcaea25fcd4e0735ea1081cbb19fb000e270c81312cc31a9bba4316631a250` |
 | R11 | Later whole-event replication | [`../successor-corpus/development-receipts/11_event_cluster_process_uncertainty.json`](../successor-corpus/development-receipts/11_event_cluster_process_uncertainty.json) | `aebb42800f7a63678993f8608a4bd39f7c6fbeb8fd2f74b0d90c8cc5698e11bb` |
@@ -28,12 +29,13 @@ fresh replication. No listed artifact is a protected finding.
 
 | Manuscript claim | Evidence IDs | Status boundary |
 |---|---|---|
-| Registered samples are sticky, heavy-tailed, reversing, and sub-diffusive | E01, E10, E11, R01, R11 | Descriptive development plus unchanged later replication |
+| Registered samples are sticky, heavy-tailed, reversing, and sub-diffusive | E01, E10, E11, E15, R01, R11 | Descriptive development, fixed representation robustness, plus unchanged later replication |
+| Boundaries, probability coordinates, maturity, and the one-hour clock do not individually explain the process signatures | E15 | Fixed development robustness; not independent replication |
 | Quiet duration predicts update arrival | E03, E10, E11, R11 | Chronological development and measurement replication |
 | State/path features improve sign and magnitude predictions | E04, E05 | Development only |
 | Full hurdle law beats diffusion and simpler hurdle laws | E12, R13 | Development plus frozen no-refit later replication |
 | Sparse formal arrival compression is not eligible for freeze | E14 | Formal development rejection |
-| No protected or tradability claim is authorized | E01–E14, R01–R13 | `protected_values_exposed=false`; no protected run |
+| No protected or tradability claim is authorized | E01–E15, R01–R13 | `protected_values_exposed=false`; no protected run |
 
 ## Corpus identities
 

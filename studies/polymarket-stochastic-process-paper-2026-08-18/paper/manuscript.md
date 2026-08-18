@@ -15,6 +15,8 @@ A smooth constant-intensity diffusion is a poor description of the registered pr
 increments have 62.4% interior zero mass, raw kurtosis of 157, strong duration dependence in update
 arrival, negative dependence in adjacent nonzero signs, and sub-diffusive 24-hour variance
 scaling. These signatures are broad across events and persist at five-minute resolution. In a
+fixed robustness experiment, they also survive strict boundary removal, log-odds coordinates,
+separate early/late maturity regimes, and aggregation to a six-hour clock. In a
 chronological comparison over 566,501 predictions and 113 events, a bounded zero-inflated marked
 jump law with state-, duration-, and path-dependent arrival, sign, and magnitude beats a bounded
 Gaussian diffusion and simpler hurdle laws. Its event-macro negative log score improves 7.74% over
@@ -182,7 +184,28 @@ state-only and diffusion.
 
 ![Complete process-law event-macro NLL](figures/process-family-event-nll.svg)
 
-### 5.3 Five-minute measurement falsifier
+### 5.3 Representation and maturity robustness
+
+The fixed representation experiment asks whether boundaries, probability coordinates, terminal
+convergence, or the one-hour clock manufacture the main signatures:
+
+| Fixed view | Increments | Exact-zero rate | Raw kurtosis | Event-equal 24h variance ratio |
+|---|---:|---:|---:|---:|
+| All probability rows | 781,388 | 69.73% | 157.10 | 0.358 (151 events) |
+| Strict interior probability | 519,495 | 62.76% | 103.19 | 0.376 (129 events) |
+| Strict interior log-odds | 519,495 | 62.76% | 104.99 | 0.403 (129 events) |
+| More than 168 hours to close | 701,428 | 69.40% | 151.06 | 0.338 (137 events) |
+| Zero to 168 hours to close | 79,960 | 72.54% | 138.44 | 0.512 (134 events) |
+
+All fixed falsifiers pass. In the strict interior, the event-equal long-quiet/active next-move
+ratio is 0.0577 across 52 eligible events, and all 52 fall below 0.50. Approximately six-hour
+increments attenuate but do not remove the result: pooled zero mass is 52.07%, while the
+event-equal 24-hour variance ratio relative to four six-hour periods is 0.569 across 151 events
+(124 below 0.75). Strict-interior log-odds gives 0.635 across 129 events. The process therefore
+moves toward diffusion-like scaling under aggregation, but neither boundaries, coordinates,
+terminal convergence, nor the one-hour clock explains it away.
+
+### 5.4 Five-minute measurement falsifier
 
 On 19,012 regular five-minute increments, interior zero mass is 78.00%, raw kurtosis is 203.64,
 nonzero reversal is 67.87%, and the 24-hour variance ratio is 0.067. Next-sample move probability
@@ -235,6 +258,12 @@ means a nonzero registered change, not proof of a discontinuous latent efficient
 observed series may combine information arrival, quote/trade sampling, rounding, stale
 observations, bid/ask effects, and market-specific participation.
 
+The representation checks narrow the interpretation. Boundary absorption and terminal convergence
+strengthen stickiness but are not its sole cause; strict-interior log-odds retains the same
+qualitative law. Six-hour aggregation weakens zero inflation and sub-diffusion, so the most
+defensible object is a scale-dependent sampled process rather than a coordinate-invariant latent
+continuous-time SDE.
+
 The model family transfers across chronology, but score levels and descriptive parameters change.
 That favors a stable structural family with regime-dependent parameters rather than one universal
 calibration. The formal negative further warns against compressing the family or changing the
@@ -248,6 +277,8 @@ sampling design and assuming the result survives.
   venue-wide quote study.
 - Related contracts and semantic categories create dependence that event grouping mitigates but
   does not eliminate.
+- Representation robustness is development evidence selected after the main process conclusion;
+  it is a fixed falsifier, not an independent replication cohort.
 - The diffusion comparator is deliberately simple. Rejection does not eliminate every bounded
   continuous-time latent process with microstructure noise or endogenous sampling.
 - No protected evaluation was run because the formal arrival candidate failed development.

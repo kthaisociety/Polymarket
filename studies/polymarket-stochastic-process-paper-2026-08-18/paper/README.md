@@ -11,6 +11,7 @@ the epistemic status of any result.
 - [`figures/`](figures/): generated charts used by the manuscript.
 
 Current status: the complete marked-hurdle law passed chronological development and an unchanged
-later no-refit replay. A sparse formal binary arrival compression failed its fixed development
+later no-refit replay. Fixed boundary, log-odds, maturity-regime, and six-hour-clock falsifiers also
+passed in development. A sparse formal binary arrival compression failed its fixed development
 gate. No candidate was frozen for this paper, no protected evaluation was run, and the final
 holdout remains unexposed.

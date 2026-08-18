@@ -1,7 +1,7 @@
 # Polymarket stochastic-process paper study
 
-Epistemic status: **FRESH COMPLETE-LAW REPLICATION; FORMAL ARRIVAL REJECTION; PROTECTED DATA
-UNEXPOSED**.
+Epistemic status: **FRESH COMPLETE-LAW REPLICATION; REPRESENTATION ROBUSTNESS; FORMAL ARRIVAL
+REJECTION; PROTECTED DATA UNEXPOSED**.
 
 This study operationalizes the two research questions in the KTH AI Society project plan
 *Financial Mathematics and Machine Learning on Prediction Markets*. The empirical core asks which
@@ -63,6 +63,9 @@ evidence or inherits authority across different field types.
 - [`source/13_frozen_process_successor_replay.py`](source/13_frozen_process_successor_replay.py):
   no-refit chronological replay of the exact all-development source-12 law and gates on the 29
   wholly later successor events.
+- [`source/15_representation_robustness.py`](source/15_representation_robustness.py): fixed
+  boundary, log-odds, maturity-regime, and six-hour-clock falsifiers for the descriptive process
+  conclusion.
 
 The paper-working literature and claim map is retained in
 [`literature/theory-transfer-map.md`](literature/theory-transfer-map.md). It distinguishes direct,
@@ -395,3 +398,32 @@ This rejection does not overturn the complete-law comparison: it shows that comp
 to one binary component and one sparse anchor per event does not meet the stronger absolute formal
 standard. The broad density result remains replicated development evidence, while the narrower
 formal arrival claim is rejected and the 47-event protected block remains untouched.
+
+## Representation, boundary, maturity, and clock robustness
+
+Source 15 executed the separately predeclared representation-robustness packet. Its source SHA-256
+is `30b19d7c611cb5217b465cffa758f6460c84bf1822de0435804b16fc8e1b7147`; the exact receipt
+SHA-256 is `757ee06535d3e7e06b8ccc5401aa027266122adaf18b253729ac021cc72bcfc9`.
+The fixed gate passed with zero ordering defects and no protected exposure.
+
+| Fixed view | Increments | Pooled zero mass | Raw kurtosis | Eligible events for 24h ratio | Event-equal 24h variance ratio |
+|---|---:|---:|---:|---:|---:|
+| All probability rows | 781,388 | 69.73% | 157.10 | 151 | 0.358 |
+| Strict interior probability | 519,495 | 62.76% | 103.19 | 129 | 0.376 |
+| Strict interior log-odds | 519,495 | 62.76% | 104.99 | 129 | 0.403 |
+| More than 168 hours to close | 701,428 | 69.40% | 151.06 | 137 | 0.338 |
+| Zero to 168 hours to close | 79,960 | 72.54% | 138.44 | 134 | 0.512 |
+
+Boundary removal therefore does not create the result: strict-interior log-odds increments remain
+sticky, extremely leptokurtic, and sub-diffusive. Terminal convergence is also insufficient as an
+explanation because the same structure is present both more than seven days from close and within
+the final seven days. In the strict interior, the event-equal long-quiet/active next-move ratio is
+`0.0577` across 52 eligible events and passes in all 52.
+
+The coarser clock is a meaningful attenuation rather than a disappearance. Across 772,720
+approximately six-hour probability increments, exact-zero mass remains 52.07%. The event-equal
+24-hour variance ratio relative to four six-hour periods is `0.569` across 151 events, with 124/151
+events below the fixed `0.75` threshold. Strict-interior log-odds gives a ratio of `0.635` across
+129 events. Thus coarser aggregation moves the series toward diffusion-like scaling but does not
+reach it at six hours. This supports a scale-dependent observed jump process, not a universal
+continuous-time law.
