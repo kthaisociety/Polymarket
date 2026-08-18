@@ -259,3 +259,44 @@ The heavy-tail residual gate failed. The raw increment distribution is heavy-tai
 separating zero arrivals and modeling conditional log size, Gaussian residuals won this fixed
 comparison. A conditional lognormal-style size component is therefore the leading simple account,
 subject to unmodeled grid rounding and bounded support.
+
+## Five-minute measurement falsifier
+
+Source 10 succeeded with source SHA-256
+`103fd2a7ee9a9e102d3ec6c18c91130eeb62e620b72bd6d9f241df3b83babe83`. Its exact receipt is
+[`development-receipts/10_five_minute_measurement_falsifier.json`](development-receipts/10_five_minute_measurement_falsifier.json),
+SHA-256 `37bc412943cba22665b26f6b2de6f5b9605376d79d510346536bf85834bcedd9`.
+All five predeclared checks passed, with zero identity/order breaks and no protected exposure.
+
+The official five-minute panel contains 19,258 observations and 19,012 regular increments across
+the ten development markets. The same-window hourly comparison contains 1,580 observations.
+
+| Diagnostic | Five-minute | Same-window hourly |
+|---|---:|---:|
+| Regular zero rate | 84.94% | 66.11% |
+| Interior zero rate | 78.00% | 49.70% |
+| Raw increment kurtosis | 203.64 | 200.68 |
+| Nonzero sign reversal | 67.87% | 60.55% |
+| Adjacent nonzero reversal | 68.23% | 62.11% |
+| 4-hour variance ratio | 0.119 | 0.328 |
+| 24-hour variance ratio | 0.067 | 0.121 |
+| Nonzero changes on 0.001 grid | 63.93% | 62.60% |
+
+Elapsed quiet time predicts five-minute sample movement even more sharply than the earlier
+observation-count diagnostic: the next-sample move rate falls from 55.95% with no prior quiet time
+to 12.56% within two hours, 1.51% after two-to-24 hours, and 0.20% after at least 24 hours. This is
+about a 278-fold decline from the first to last band. The small panel prevents a population claim,
+but it directly rejects the idea that the hourly duration effect was created only by using an
+hourly clock.
+
+The source comparison is unusually tight: all 1,580 eligible hourly samples found a five-minute
+match within ten minutes; 99.49% matched exactly, 99.81% were within one cent, and mean absolute
+discrepancy was `0.0000487` probability units (0.00487 cents). Thus the earlier hourly corpus and
+the independently acquired official endpoint are effectively measuring the same sampled series on
+these markets. This supports measurement robustness, not executability: neither series is a trade
+or historical bid/ask quote.
+
+The process conclusion is strengthened to a **bounded, sticky, grid-affected, zero-inflated marked
+jump process with duration-dependent arrival intensity, short-run sign reversal, clustered mark
+size, and strong sub-diffusive calendar-time scaling**. It remains a model of observed Polymarket
+probability samples, not an identified latent-belief process or a trading strategy.

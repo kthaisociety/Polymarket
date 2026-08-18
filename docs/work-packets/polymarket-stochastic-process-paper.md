@@ -473,3 +473,16 @@ at least 50%; 24-hour-or-longer quiet move rate no more than half the zero-quiet
 coverage with at most one-cent mean absolute discrepancy and at least 90% within one cent. These
 rules test whether hourly process signatures are robust to measurement clock and source; they are
 not a trading claim.
+
+Source 10 passed all five fixed checks with receipt SHA-256
+`37bc412943cba22665b26f6b2de6f5b9605376d79d510346536bf85834bcedd9`. Five-minute interior zero
+mass was `78.00%`, raw kurtosis `203.64`, nonzero reversal `67.87%`, and four/24-hour variance ratios
+`0.119/0.067`. The elapsed-duration move rate declined from `55.95%` with zero quiet time to `0.20%`
+after at least 24 hours. All 1,580 eligible hourly observations matched the official five-minute
+panel within ten minutes; `99.49%` were exact and mean absolute discrepancy was `0.0000487`.
+
+The measurement rival is therefore materially weakened: the registered hourly corpus agrees
+almost exactly with an independently acquired official endpoint, and sticky, heavy-tailed,
+duration-dependent, reversing, sub-diffusive signatures become stronger at five-minute fidelity.
+The result is limited to ten preselected development markets and identifies the observed sampled
+process only. It does not identify trades, executable quotes, latent beliefs, or profit.

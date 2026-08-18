@@ -81,3 +81,20 @@ move rate no more than half the zero-quiet move rate; five-minute 24-hour varian
 0.75; nonzero sign reversal above 55%; and cross-source coverage at least 80%, mean absolute
 discrepancy at most one cent, and at least 90% of matches within one cent. These gates organize the
 measurement falsifier; they do not establish tradability or latent-belief dynamics.
+
+## Measurement result
+
+Status: **ALL FIVE FIXED CHECKS PASSED — DEVELOPMENT MEASUREMENT EVIDENCE**.
+
+The source completed in 17.9 seconds. Its receipt is
+`../development-receipts/10_five_minute_measurement_falsifier.json`, SHA-256
+`37bc412943cba22665b26f6b2de6f5b9605376d79d510346536bf85834bcedd9`. Across 19,012 regular
+five-minute increments, 84.94% were unchanged (78.00% in the interior), raw kurtosis was 203.64,
+nonzero sign reversal was 67.87%, and the four/24-hour variance ratios were 0.119/0.067. The
+next-sample move rate fell from 55.95% after no quiet time to 0.20% after at least 24 hours.
+
+All 1,580 same-window hourly observations matched within ten minutes; 99.49% were exact and the
+mean absolute discrepancy was 0.0000487 probability units. The independently acquired official
+panel therefore reproduces the existing hourly measurement extremely closely on these ten markets.
+This rules against a source-specific hourly artifact but does not turn either series into trades or
+quotes. The ten-market selection and overlapping estimands remain explicit limitations.

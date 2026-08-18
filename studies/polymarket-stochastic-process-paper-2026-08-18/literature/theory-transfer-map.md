@@ -68,8 +68,14 @@ nonzero size. The current leading empirical decomposition is a bounded hurdle/ma
    comparison;
 4. terminal absorption at zero or one.
 
-This description applies to registered hourly samples. A continuous latent efficient price may
-still exist underneath them.
+Source 10 weakens the sampling-clock rival on ten preselected markets. In 19,012 regular
+five-minute increments, interior zero mass is 78.00%, raw kurtosis is 203.64, nonzero reversal is
+67.87%, and the 24-hour variance ratio is 0.067. The next-sample move rate declines from 55.95% with
+no prior quiet time to 0.20% after at least 24 hours. The independently acquired official paths
+also match all 1,580 eligible retained hourly samples within ten minutes, with 99.49% exact
+agreement. The hurdle/marked description therefore survives a finer clock and a separately
+registered source on this panel. A continuous latent efficient price may still exist underneath
+both sampled series.
 
 ## Calibration and financial-theory layer
 
@@ -102,11 +108,11 @@ an executable-quote boundary.
 |---|---|---|---|
 | Contingent claim payoff | Direct | Binary terminal payout and resolution rules are part of identity | Supported by corpus outcomes |
 | No-arbitrage/martingale pricing | Conditional benchmark | Incomplete market, no replicating underlying, physical versus pricing measure | Raw negative drift and sign reversal challenge the observed-sample martingale |
-| Constant Brownian diffusion | Fails descriptively | Bounded state, zero inflation, jumps, irregular information time | Rejected by source 01 |
+| Constant Brownian diffusion | Fails descriptively | Bounded state, zero inflation, jumps, irregular information time | Rejected hourly by source 01 and at five minutes by source 10 |
 | Local/state-dependent volatility | Transfers | Must degenerate/absorb at boundaries and change with time-to-close | State strongly predicts log magnitude in source 05 |
-| Event-time point process | Transfers | Duration, price state, semantics, and sampling mechanism enter intensity | Strongly supported by source 03 |
+| Event-time point process | Transfers | Duration, price state, semantics, and sampling mechanism enter intensity | Supported chronologically by source 03 and across elapsed five-minute durations by source 10 |
 | Volatility clustering | Transfers | Separate arrival clustering from conditional mark-size clustering | Both components supported by sources 03 and 05 |
-| Return-sign independence | Fails for registered marks | Allow bid/ask bounce, rounding, aggregation, or belief reversal | Source 04 passes modestly |
+| Return-sign independence | Fails for registered marks | Allow bid/ask bounce, rounding, aggregation, or belief reversal | Source 04 passes chronologically; source 10 replicates reversal at five minutes |
 | Heavy-tailed raw returns | Transfers descriptively | Decompose zero mass and conditional size before selecting a residual law | Raw tails supported; heavy-tailed log-size residuals rejected in source 05 |
 | Probability calibration | Transfers empirically | Prices are forecasts only under explicit interpretation; cluster by event | Source 02 opens but does not settle the claim |
 | Black–Scholes replication | Does not transfer directly | No traded underlying or dynamic completeness; resolution is semantic/discontinuous | Structural non-transfer |
