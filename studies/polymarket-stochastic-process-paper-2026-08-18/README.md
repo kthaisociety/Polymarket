@@ -55,6 +55,9 @@ evidence or inherits authority across different field types.
   third and final declared process-model branch, comparing bounded state-dependent diffusion with
   memoryless, state-conditioned, and state-duration/path zero-inflated marked-jump families under
   expanding whole-event interval log score.
+- [`source/13_frozen_process_successor_replay.py`](source/13_frozen_process_successor_replay.py):
+  no-refit chronological replay of the exact all-development source-12 law and gates on the 29
+  wholly later successor events.
 
 The paper-working literature and claim map is retained in
 [`literature/theory-transfer-map.md`](literature/theory-transfer-map.md). It distinguishes direct,
@@ -327,3 +330,27 @@ seven eligible successor events and is therefore a breadth limitation, not a pre
 estimate. Early/late means within each cohort also preserve the qualitative conclusions. The
 process description is consequently broad across events and chronology, rather than a pooled-row
 artifact, while its exact parameter values are regime-dependent.
+
+## Composed process-family comparison
+
+Source 12 completed the third and final declared process-model branch. Its source SHA-256 is
+`13ea0c25a8e65da52cad44f4fa70a863790760cb9f2d67774769744cefbb477b`; receipt SHA-256 is
+`2c107a29710e3dd9d13cbf24be00e655b4b0a5c3a628fd8026670a1ad88cd9c5`. It scored 566,501
+chronological predictions across 113 later events using the same fixed 0.001-wide probability
+interval under every family.
+
+| Complete one-hour observation law | Observation mean NLL | Event-macro mean NLL |
+|---|---:|---:|
+| Bounded state-dependent zero-drift Gaussian diffusion | 3.511 | 3.578 |
+| Memoryless zero-inflated lognormal marked jump | 1.865 | 2.214 |
+| State-conditioned zero-inflated lognormal marked jump | 1.782 | 2.104 |
+| State + duration/path zero-inflated lognormal marked jump | **1.585** | **1.941** |
+
+The full hurdle improves event-macro NLL by 7.74% versus the state hurdle, wins 112/113 event
+comparisons against it and 113/113 against diffusion, and improves both chronological halves. Its
+fixed composed-process gate passed. The result directly favors the hurdle/marked-jump family for
+the observed sampled process; it does not prove the same law for a latent efficient price.
+
+The final all-development law is retained solely for source 13's no-refit successor replay. Its
+arrays, source/receipt ancestry, interval width, warm-up, score, and gates are literal constants in
+that source and were verified to exactly equal the source-12 receipt before successor execution.

@@ -85,6 +85,14 @@ mean intervals remain on the predicted side in both cohorts. The mechanics are t
 across events and chronology, while exact levels and sparse long-quiet coverage remain
 regime-dependent.
 
+Source 12 compares complete predictive laws rather than isolated signatures. Across 566,501
+chronological observations/113 events, event-macro interval NLL is 3.578 for bounded Gaussian
+diffusion, 2.214 for a memoryless hurdle, 2.104 for a state hurdle, and 1.941 for the
+state-duration/path marked hurdle. The full law wins 112/113 events against state and every event
+against diffusion. Thus point mass, state, duration, reversal, and clustered magnitude are jointly
+useful restrictions, not merely separate descriptive curiosities. The law still targets sampled
+probabilities and does not identify latent beliefs or executable prices.
+
 ## Calibration and financial-theory layer
 
 Proper scoring rules, reliability diagrams, chronological validation, and cluster-aware inference

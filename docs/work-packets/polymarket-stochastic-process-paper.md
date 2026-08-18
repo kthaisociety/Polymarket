@@ -524,3 +524,17 @@ if it beats both the state hurdle and diffusion under observation and event-macr
 score, improves event-macro score at least 2% over state, wins at least 60% of events against both,
 and beats both in each chronological half. Its all-development fitted law may be retained only for
 a separately authored, unchanged successor replay; it grants no protected access or trading claim.
+
+Source 13 is frozen from source 12's exact all-development parameter arrays before any successor
+value is read. It preserves the four laws, 0.001-wide interval score, 24-increment warm-up, and
+two-percent/60%-event/both-half gates, performs no fitting, and may run only on the 29 fresh events
+of successor partition `f7b47ea95c3630f083552bce84126711fb1a23b20ec7caa33e7527ba977586d7`.
+Its parent source/receipt hashes are
+`13ea0c25a8e65da52cad44f4fa70a863790760cb9f2d67774769744cefbb477b` and
+`2c107a29710e3dd9d13cbf24be00e655b4b0a5c3a628fd8026670a1ad88cd9c5`.
+
+Source 12 passed its fixed gate. Event-macro NLL was `3.5779` for bounded diffusion, `2.2138` for
+the memoryless hurdle, `2.1038` for the state hurdle, and `1.9409` for the full hurdle across
+566,501 out-of-time rows/113 events. The full law improved 7.74% over state, won 112/113 events
+against state and 113/113 against diffusion, and improved both chronological halves. This
+authorizes the already frozen source-13 fresh successor replay, not protected access.
