@@ -558,7 +558,59 @@ def main() -> None:
         and summary["largest_event_squared_error_share"] <= 0.10
     )
     if not gate:
-        raise ValueError("formal hurdle-arrival replay failed its fixed development gate")
+        rejection = {
+            "status": "succeeded",
+            "epistemic_status": "FORMAL_DEVELOPMENT_REJECTION",
+            "driver_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            "snapshot_ref": ref.uri,
+            "partition_id": analysis.partition.partition_id,
+            "development_event_count": len(development_events),
+            "protected_event_count": analysis.partition.protected_event_count,
+            "development_market_count": len(development_markets),
+            "protected_market_count": len(protected_markets),
+            "development_decision_count": len(development_keys),
+            "protected_decision_count": len(protected_keys),
+            "development_catalog_observation_count": len(development_catalog.observations),
+            "evaluation_catalog_observation_count": len(full_catalog.observations),
+            "protected_values_exposed": False,
+            "parent_source_sha256": PARENT_SOURCE_SHA256,
+            "parent_receipt_sha256": PARENT_RECEIPT_SHA256,
+            "successor_source_sha256": SUCCESSOR_SOURCE_SHA256,
+            "successor_receipt_sha256": SUCCESSOR_RECEIPT_SHA256,
+            "candidate_id": candidate.candidate_id,
+            "candidate_source_sha256": candidate.source_sha256,
+            "trial_id": evidence.trial_id,
+            "evidence_id": evidence.evidence_id,
+            "kernel_metrics": dict(evidence.metrics),
+            "formal_summary": summary,
+            "formal_credibility_gate_pass": False,
+            "freeze": None,
+            "protected_backtest_run": False,
+            "warnings": [
+                "The fixed formal development gate failed; no independent freeze or protected request is permitted.",
+                "This rejection cannot be repaired by changing the threshold after seeing evidence.",
+                "The complete density-law result remains development-plus-successor evidence, not a protected finding.",
+                "The final 47-event protected block remains unexposed.",
+            ],
+        }
+        _persist(rejection)
+        print(
+            json.dumps(
+                {
+                    key: rejection[key]
+                    for key in (
+                        "status",
+                        "epistemic_status",
+                        "candidate_id",
+                        "evidence_id",
+                        "formal_credibility_gate_pass",
+                        "protected_values_exposed",
+                    )
+                },
+                sort_keys=True,
+            )
+        )
+        return
 
     ledger = ResearchLedger()
     eligibility = FreezeEligibilityRegistry()
