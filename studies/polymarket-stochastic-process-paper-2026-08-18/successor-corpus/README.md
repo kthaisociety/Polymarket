@@ -83,3 +83,23 @@ events. It will apply the existing weighting, chronological-half, daily-drift, f
 calibration diagnostics without changing a threshold or source byte. This tests whether the
 earlier negative-drift and broad-overpricing diagnostics replicate; failure is retained and does
 not permit post-result semantic filtering.
+
+## Source 02 fresh replication result
+
+Status: **SUCCEEDED — EXPLORATORY REPLICATION WITH COVERAGE LIMITS**.
+
+- Exact [`02_drift_composition_falsifier.json`](development-receipts/02_drift_composition_falsifier.json)
+  SHA-256: `401a4731e9cf523cf63f8fbf3158e037581e097f2f9cd21ddf298dff436f5a57`.
+- Regular-hour event-equal drift was `-0.0012374`, with `-0.0014008` in the first chronological
+  half and `-0.0010850` in the second. Non-overlapping daily event-equal drift was `-0.029996`.
+  The frozen negative-drift composition check passed.
+- Market/event-macro probability-minus-outcome gaps were `1.56%`/`0.56%` at 24 hours,
+  `2.82%`/`5.52%` at 72 hours, `15.67%`/`15.04%` at 168 hours, and `4.79%`/`8.86%` at 336 hours.
+  The frozen broad-overpricing gate passed at three of four horizons under both weightings.
+- The 24-hour horizon did not reach the two-point gate. The 336-hour result contains only 27
+  markets across 7 events, so it is weak coverage rather than a stable magnitude estimate.
+- The later cohort's negative drift is larger than in the earlier development cohort, while its
+  24-hour calibration gap is smaller. This heterogeneity makes semantic, chronological-regime,
+  cluster-uncertainty, and executable-price rivals mandatory before any market-inefficiency claim.
+- Protected values remained unexposed. These sampled probabilities do not establish executable
+  returns after spreads, fees, latency, or market impact.

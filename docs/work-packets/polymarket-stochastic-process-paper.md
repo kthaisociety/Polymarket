@@ -102,6 +102,14 @@ non-overlapping daily, fixed-horizon, and calibration gates predate acquisition.
 negative-drift and broad-overpricing diagnostics without semantic filtering or threshold changes.
 Failure will be retained as a non-replication and cannot be repaired after seeing this cohort.
 
+The source 02 replay passed both gates. Regular-hour event-equal drift was `-0.0012374`, negative
+in both chronological halves, and non-overlapping daily event-equal drift was `-0.029996`.
+Market/event-macro probability-minus-outcome gaps exceeded two points at 72, 168, and 336 hours,
+but not at 24 hours. The 336-hour result has only 27 markets in 7 events. Thus the sign-level drift
+and broad calibration lead replicated, but magnitudes are heterogeneous and long-horizon coverage
+is thin. No inefficiency or tradable-return claim is authorized without semantic/regime stability,
+event-cluster uncertainty, and executable quote/spread/fee evidence.
+
 - Expanded immutable corpus:
   `polymarket-corpus:8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6`,
   1,000 contracts, 235 events, and 1,180,437 sampled probabilities.
@@ -210,7 +218,8 @@ The research package must ultimately retain:
 
 ## Completion status
 
-**OPEN — SOURCE 05 COMPLETE; SUCCESSOR SOURCE 01 REPLICATED.** The verified project plan has been translated into an exact Chronos
+**OPEN — SOURCE 05 COMPLETE; SUCCESSOR SOURCES 01–02 REPLICATED.** The verified project plan has
+been translated into an exact Chronos
 mandate. Source 01 executed successfully over 562 markets/157 fresh development events while the
 31-event ancestor and final 47-event protected block remained unavailable. Its exact receipt is
 retained under `studies/polymarket-stochastic-process-paper-2026-08-18/`.
