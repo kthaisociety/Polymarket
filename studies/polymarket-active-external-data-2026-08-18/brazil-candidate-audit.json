@@ -1,0 +1,307 @@
+{
+  "authority": {
+    "database_role": "human_ro",
+    "default_read_only": true,
+    "insert_update_privileges": false,
+    "repeatable_read": true,
+    "transaction_read_only": true
+  },
+  "current_tops": [],
+  "environment_id": "bdl-polymarket-production-readonly",
+  "market_ids": [
+    "0xdf8e2dc5860027decbe6164555c3c1c9645c3bd33e16b9dc57ca87125047d4a8",
+    "0x1a01bf78f56a507fcb666d564d8c8b91b0750679163ed6e96746102c9b7d285d"
+  ],
+  "markets": [
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "event_id": "45915",
+      "market_id": "0x1a01bf78f56a507fcb666d564d8c8b91b0750679163ed6e96746102c9b7d285d",
+      "open_time": "2025-09-18T20:08:06.281000+00:00",
+      "question": "Will Fl\u00e1vio Bolsonaro win the 2026 Brazilian presidential election?",
+      "raw": {
+        "category": null,
+        "condition_id": "0x1a01bf78f56a507fcb666d564d8c8b91b0750679163ed6e96746102c9b7d285d",
+        "description": "A presidential election is scheduled to take place in Brazil on October 4, 2026.\n\nThis market will resolve according to the listed candidate that wins this election.\n\nThis market includes any potential second round. If the result of this election isn't known by June 30, 2027, 11:59 PM ET, the market will resolve to \"Other\".\n\nThis market will resolve based on the result of the election as indicated by a consensus of credible reporting. If there is ambiguity, this market will resolve based solely on the official results as reported by the Brazilian government, specifically the Superior Electoral Court (Tribunal Superior Eleitoral, TSE) (e.g., https://dadosabertos.tse.jus.br/).",
+        "events": [
+          {
+            "id": "45915",
+            "slug": "brazil-presidential-election",
+            "title": "Brazil Presidential Election"
+          }
+        ],
+        "group_item_title": "Fl\u00e1vio Bolsonaro",
+        "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/will-flvio-bolsonaro-win-the-2026-brazilian-presidential-election-LUNiqIvy01pf.jpg",
+        "id": "601826",
+        "image": "https://polymarket-upload.s3.us-east-2.amazonaws.com/will-flvio-bolsonaro-win-the-2026-brazilian-presidential-election-LUNiqIvy01pf.jpg",
+        "metrics": {
+          "liquidity": "259795.47735",
+          "liquidity_clob": "259795.47735",
+          "liquidity_num": "259795.47735",
+          "volume": "8604746.546719",
+          "volume_1mo": "1148177.061787",
+          "volume_1wk": "482075.068782",
+          "volume_1yr": "8604789.365532998",
+          "volume_24hr": "156685.93212600003",
+          "volume_amm": null,
+          "volume_clob": "8604746.546719",
+          "volume_num": "8604746.546719"
+        },
+        "outcomes": {
+          "no": {
+            "label": "No",
+            "price": "0.6725",
+            "token_id": "38310927461258927563020508025396887688249787380193911540547071417200646834355"
+          },
+          "yes": {
+            "label": "Yes",
+            "price": "0.3275",
+            "token_id": "109876868437950584369987384406356259939519193117253465815665152916226511121427"
+          }
+        },
+        "position_ids": [],
+        "prices": {
+          "best_ask": "0.328",
+          "best_bid": "0.327",
+          "last_trade_price": "0.328",
+          "one_day_price_change": "0.014",
+          "one_hour_price_change": null,
+          "one_month_price_change": "0.071",
+          "one_week_price_change": "0.055",
+          "one_year_price_change": null,
+          "spread": "0.001"
+        },
+        "question": "Will Fl\u00e1vio Bolsonaro win the 2026 Brazilian presidential election?",
+        "resolution": {
+          "neg_risk_request_id": "0x9672263b754b7c5bd5bd0dff3d5e1bb975e5835ac28f92dd1c734ae76181b54f",
+          "question_id": "0x966a3221e05d8d0579854c4952085331da2a42989dee0fa033d24cada9dfca08",
+          "resolved_by": "0x2F5e3684cb1F318ec51b00Edba38d79Ac2c0aA9d",
+          "source": "",
+          "uma_resolution_status": null
+        },
+        "rewards": {
+          "clob_rewards": [
+            {
+              "asset_address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+              "condition_id": "0x1a01bf78f56a507fcb666d564d8c8b91b0750679163ed6e96746102c9b7d285d",
+              "end_date": "2500-12-31",
+              "id": "287355",
+              "rewards_amount": "0",
+              "rewards_daily_rate": "95",
+              "start_date": "2026-08-18"
+            }
+          ],
+          "holding_rewards_enabled": false,
+          "rewards_max_spread": 5.5,
+          "rewards_min_size": "100"
+        },
+        "slug": "will-flvio-bolsonaro-win-the-2026-brazilian-presidential-election",
+        "sports": {
+          "game_id": null,
+          "game_start_time": null,
+          "line": null,
+          "sports_market_type": null
+        },
+        "state": {
+          "accepting_orders": true,
+          "active": true,
+          "archived": false,
+          "closed": false,
+          "closed_time": null,
+          "enable_order_book": true,
+          "end_date": "2026-10-04T00:00:00Z",
+          "neg_risk": true,
+          "start_date": "2025-09-18T20:08:06.281000Z"
+        },
+        "tags": [],
+        "trading": {
+          "fee_schedule": {
+            "exponent": 1,
+            "rate": "0.04",
+            "rebate_rate": "0.25",
+            "taker_only": true
+          },
+          "fee_type": "politics_fees",
+          "fees_enabled": true,
+          "minimum_order_size": "5",
+          "minimum_tick_size": "0.001",
+          "seconds_delay": null
+        }
+      },
+      "slug": "will-flvio-bolsonaro-win-the-2026-brazilian-presidential-election",
+      "status": "open"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "event_id": "45915",
+      "market_id": "0xdf8e2dc5860027decbe6164555c3c1c9645c3bd33e16b9dc57ca87125047d4a8",
+      "open_time": "2025-09-18T20:07:59.727557+00:00",
+      "question": "Will Luiz In\u00e1cio Lula da Silva win the 2026 Brazilian presidential election?",
+      "raw": {
+        "category": null,
+        "condition_id": "0xdf8e2dc5860027decbe6164555c3c1c9645c3bd33e16b9dc57ca87125047d4a8",
+        "description": "A presidential election is scheduled to take place in Brazil on October 4, 2026.\n\nThis market will resolve according to the listed candidate that wins this election.\n\nThis market includes any potential second round. If the result of this election isn't known by June 30, 2027, 11:59 PM ET, the market will resolve to \"Other\".\n\nThis market will resolve based on the result of the election as indicated by a consensus of credible reporting. If there is ambiguity, this market will resolve based solely on the official results as reported by the Brazilian government, specifically the Superior Electoral Court (Tribunal Superior Eleitoral, TSE) (e.g., https://dadosabertos.tse.jus.br/).",
+        "events": [
+          {
+            "id": "45915",
+            "slug": "brazil-presidential-election",
+            "title": "Brazil Presidential Election"
+          }
+        ],
+        "group_item_title": "Luiz In\u00e1cio Lula da Silva",
+        "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/will-luiz-incio-lula-da-silva-win-the-2026-brazilian-presidential-election-reTil6nEVB1J.jpg",
+        "id": "601819",
+        "image": "https://polymarket-upload.s3.us-east-2.amazonaws.com/will-luiz-incio-lula-da-silva-win-the-2026-brazilian-presidential-election-reTil6nEVB1J.jpg",
+        "metrics": {
+          "liquidity": "523512.0369",
+          "liquidity_clob": "523512.0369",
+          "liquidity_num": "523512.0369",
+          "volume": "8668098.380343996",
+          "volume_1mo": "1245992.3981899996",
+          "volume_1wk": "455566.002409",
+          "volume_1yr": "8668096.545117997",
+          "volume_24hr": "160293.51617399996",
+          "volume_amm": null,
+          "volume_clob": "8668098.380343996",
+          "volume_num": "8668098.380343996"
+        },
+        "outcomes": {
+          "no": {
+            "label": "No",
+            "price": "0.365",
+            "token_id": "79191939610100241429039499950443680906623179487184628479206155805558220344190"
+          },
+          "yes": {
+            "label": "Yes",
+            "price": "0.635",
+            "token_id": "30630994248667897740988010928640156931882346081873066002335460180076741328029"
+          }
+        },
+        "position_ids": [],
+        "prices": {
+          "best_ask": "0.64",
+          "best_bid": "0.63",
+          "last_trade_price": "0.64",
+          "one_day_price_change": "-0.01",
+          "one_hour_price_change": null,
+          "one_month_price_change": "0.03",
+          "one_week_price_change": null,
+          "one_year_price_change": null,
+          "spread": "0.01"
+        },
+        "question": "Will Luiz In\u00e1cio Lula da Silva win the 2026 Brazilian presidential election?",
+        "resolution": {
+          "neg_risk_request_id": "0xbe96d7320f4f6dbb380bd14c9229cfc3f3a25f11b656a81b57907dbcdbae7858",
+          "question_id": "0x966a3221e05d8d0579854c4952085331da2a42989dee0fa033d24cada9dfca01",
+          "resolved_by": "0x2F5e3684cb1F318ec51b00Edba38d79Ac2c0aA9d",
+          "source": "",
+          "uma_resolution_status": null
+        },
+        "rewards": {
+          "clob_rewards": [
+            {
+              "asset_address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+              "condition_id": "0xdf8e2dc5860027decbe6164555c3c1c9645c3bd33e16b9dc57ca87125047d4a8",
+              "end_date": "2500-12-31",
+              "id": "287353",
+              "rewards_amount": "0",
+              "rewards_daily_rate": "105",
+              "start_date": "2026-08-18"
+            }
+          ],
+          "holding_rewards_enabled": false,
+          "rewards_max_spread": 5.5,
+          "rewards_min_size": "100"
+        },
+        "slug": "will-luiz-incio-lula-da-silva-win-the-2026-brazilian-presidential-election",
+        "sports": {
+          "game_id": null,
+          "game_start_time": null,
+          "line": null,
+          "sports_market_type": null
+        },
+        "state": {
+          "accepting_orders": true,
+          "active": true,
+          "archived": false,
+          "closed": false,
+          "closed_time": null,
+          "enable_order_book": true,
+          "end_date": "2026-10-04T00:00:00Z",
+          "neg_risk": true,
+          "start_date": "2025-09-18T20:07:59.727557Z"
+        },
+        "tags": [],
+        "trading": {
+          "fee_schedule": {
+            "exponent": 1,
+            "rate": "0.04",
+            "rebate_rate": "0.25",
+            "taker_only": true
+          },
+          "fee_type": "politics_fees",
+          "fees_enabled": true,
+          "minimum_order_size": "5",
+          "minimum_tick_size": "0.01",
+          "seconds_delay": null
+        }
+      },
+      "slug": "will-luiz-incio-lula-da-silva-win-the-2026-brazilian-presidential-election",
+      "status": "open"
+    }
+  ],
+  "outcomes": [
+    {
+      "label": "Yes",
+      "market_id": "0x1a01bf78f56a507fcb666d564d8c8b91b0750679163ed6e96746102c9b7d285d",
+      "outcome_index": 0,
+      "outcome_token": "109876868437950584369987384406356259939519193117253465815665152916226511121427",
+      "raw": {
+        "label": "Yes",
+        "price": "0.3275",
+        "token_id": "109876868437950584369987384406356259939519193117253465815665152916226511121427"
+      }
+    },
+    {
+      "label": "No",
+      "market_id": "0x1a01bf78f56a507fcb666d564d8c8b91b0750679163ed6e96746102c9b7d285d",
+      "outcome_index": 1,
+      "outcome_token": "38310927461258927563020508025396887688249787380193911540547071417200646834355",
+      "raw": {
+        "label": "No",
+        "price": "0.6725",
+        "token_id": "38310927461258927563020508025396887688249787380193911540547071417200646834355"
+      }
+    },
+    {
+      "label": "Yes",
+      "market_id": "0xdf8e2dc5860027decbe6164555c3c1c9645c3bd33e16b9dc57ca87125047d4a8",
+      "outcome_index": 0,
+      "outcome_token": "30630994248667897740988010928640156931882346081873066002335460180076741328029",
+      "raw": {
+        "label": "Yes",
+        "price": "0.635",
+        "token_id": "30630994248667897740988010928640156931882346081873066002335460180076741328029"
+      }
+    },
+    {
+      "label": "No",
+      "market_id": "0xdf8e2dc5860027decbe6164555c3c1c9645c3bd33e16b9dc57ca87125047d4a8",
+      "outcome_index": 1,
+      "outcome_token": "79191939610100241429039499950443680906623179487184628479206155805558220344190",
+      "raw": {
+        "label": "No",
+        "price": "0.365",
+        "token_id": "79191939610100241429039499950443680906623179487184628479206155805558220344190"
+      }
+    }
+  ],
+  "query_sha256": {
+    "coverage": "c79da853d2bbcb79bca46a61861bba52aee296f662fcc67529023e4b64cce8c2",
+    "markets": "abd75129bb6fa33f7079484ae6c14b1feb8ae4a1dd61ad8d62c3580b12cffb05",
+    "outcomes": "208df9a2fd98ec194118ddf9b64cd4081c364f691d83e1ca58388574a6ce3ce6",
+    "tops": "140b59fb9eb4cbc1a264ce2f17c27d2c60ef00689c3ca3e4ae2ac07eb649dbb4"
+  },
+  "schema": "chronos-active-candidate-audit/v1",
+  "snapshot_coverage": []
+}

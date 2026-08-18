@@ -83,9 +83,19 @@ predeclared event cohort. See [`fomc-fedwatch-result.md`](fomc-fedwatch-result.m
 ## Second completed candidate
 
 The IMF/OCHA PortWatch versus active Hormuz deadline study is complete in development. Exact Git
-publication vintages were joined to 71,271 direction-specific production fills across three
+publication vintages were joined to 24,921 canonical taker fills across three
 deadline contracts. Following weekly traffic changes lost after fees at both 24 hours and seven
 days. Buying NO merely because traffic remained far below the resolution threshold also lost at
 every tested state threshold and horizon. The result rejects a mechanical traffic rule and shows
 that these contracts chiefly price a future geopolitical regime switch, not the current ship
 count. See [`hormuz-portwatch-result.md`](hormuz-portwatch-result.md).
+
+## Third completed candidate
+
+The Brazil runoff-poll study is complete in development. Thirty-one exact, national,
+TSE-matched releases formed 25 immutable decision events and were joined to 17,570 canonical
+production taker fills in the Lula and Flávio winner contracts. Four poll-change features were
+followed and faded over 24 hours, 72 hours, and seven days. Every rule with at least five
+executable relative pairs lost after conservative fees. A weak three-day gross fade response was
+too small to cover four crossed legs and came from one dependent election. See
+[`brazil-poll-result.md`](brazil-poll-result.md).

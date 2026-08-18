@@ -23,7 +23,7 @@ from research_agent.exploration import (
 )
 
 _VINTAGES_SHA256 = "05e9b1066d84f4fe7c7c109182cf9afcee1d2a33599b77e7e8252896186c3986"
-_FILLS_SHA256 = "06b44e46a75b88d2b94dd7501a3537b605709e3ba12ceb2ff1ea13afccd5f61c"
+_FILLS_SHA256 = "db7f689812794ce0aa3daaa29b74e9d0c2f183143fb7a8990fd1bf5ab4e4a824"
 _AUDIT_SHA256 = "be4ea7d593cf265840cc7254e67d171d81cbe5767500f2ed577f96a218db1ddd"
 _ENVIRONMENT = "chronos-hormuz-external-development-2026-08-18"
 _SELECTED_MARKETS = {
@@ -183,12 +183,13 @@ def main() -> None:
         },
     }
     content = (json.dumps(payload, separators=(",", ":"), sort_keys=True) + "\n").encode()
+    temporary = args.receipt.with_suffix(f"{args.receipt.suffix}.partial")
     try:
-        with args.receipt.open("xb") as output:
+        with temporary.open("xb") as output:
             output.write(content)
-    except FileExistsError:
-        if args.receipt.read_bytes() != content:
-            raise ValueError("Hormuz study receipt already contains different bytes") from None
+        temporary.replace(args.receipt)
+    finally:
+        temporary.unlink(missing_ok=True)
     print(json.dumps(payload, sort_keys=True))
 
 

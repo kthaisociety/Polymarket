@@ -19,7 +19,9 @@ the deadline. It is a forecast of a future regime change, not a measurement of t
 - Ten fresh vintages had source lag of seven days or less and were eligible before inspection of
   later market fills.
 - Three active deadline contracts had usable history: 31 August, 30 September, and 31 December.
-- The production slice contains 71,271 exact outcome-0 fills from 12 May through 18 August.
+- The production slice contains 24,921 canonical one-row-per-match taker fills from 12 May through
+  18 August. A prior 71,271-row per-party ledger extraction was superseded before paper use because
+  it contained both maker and taker legs.
 - Entries and exits required 100 shares of direction-specific observed transaction opportunity
   inside fixed six-hour windows after the publication and after 24 or 168 hours.
 - Entry and exit fees used `shares × 0.05 × price × (1-price)`.
@@ -32,16 +34,15 @@ The obvious rules failed after fees:
 
 | Rule | Horizon | Trades | Wins | Markets | Net P&L per sequence of 100-share trades |
 |---|---:|---:|---:|---:|---:|
-| Follow the sign of the weekly traffic change | 24 hours | 16 | 6 | 3 | -$24.3214 |
-| Follow the sign of the weekly traffic change | 7 days | 13 | 5 | 3 | -$20.7159 |
-| Buy NO when seven-day traffic was below 10 | 24 hours | 6 | 3 | 3 | -$6.9674 |
-| Buy NO when seven-day traffic was below 10 | 7 days | 5 | 2 | 1 | -$16.9009 |
-| Buy NO when seven-day traffic was below 40 | 24 hours | 15 | 7 | 3 | -$14.3520 |
-| Buy NO when seven-day traffic was below 40 | 7 days | 14 | 8 | 3 | -$3.4997 |
+| Follow the sign of the weekly traffic change | 24 hours | 12 | 4 | 3 | -$22.8502 |
+| Follow the sign of the weekly traffic change | 7 days | 12 | 4 | 2 | -$34.2559 |
+| Buy NO when seven-day traffic was below 10 | 24 hours | 5 | 2 | 2 | -$6.1975 |
+| Buy NO when seven-day traffic was below 10 | 7 days | 5 | 2 | 1 | -$20.6180 |
+| Buy NO when seven-day traffic was below 40 | 24 hours | 10 | 3 | 2 | -$18.3997 |
+| Buy NO when seven-day traffic was below 40 | 7 days | 11 | 5 | 2 | -$23.9571 |
 
-Scanning change thresholds produced one positive cell: a greater-than-10-ship weekly change at
-seven days made **+$1.0304 across two trades with one win**. It is a multiple-tested, dependent,
-two-trade result and is rejected as noise.
+No threshold cell was positive after the canonical taker-side replay. The least-negative
+greater-than-10-ship seven-day cell lost **$1.0136 across two trades with one win**.
 
 ## What the negative result teaches
 

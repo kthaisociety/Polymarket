@@ -110,7 +110,8 @@
       "created_at": "2026-08-18T20:03:00+00:00",
       "owner": "chronos-active-external-2026-08-18",
       "removable_if_needed": true,
-      "deleted_at": null
+      "deleted_at": "2026-08-18T20:28:00+00:00",
+      "deletion_reason": "Superseded after the engine row-semantics audit proved this per-party ledger slice duplicated maker and taker legs. The corrected corpus is retained under a versioned path."
     },
     {
       "path": "/home/tage/chronos-external-data/active-external-2026-08-18/hormuz-git-vintages.json",
@@ -144,6 +145,95 @@
       "owner": "chronos-active-external-2026-08-18",
       "removable_if_needed": true,
       "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/afos-brazil-polls-2026.bundle",
+      "kind": "external_source_history",
+      "source": "AFOS-Analytics Brazil 2026 electoral-divergence complete Git history at 2464d475165d9614b87ce4a0a6816f1df3ea59c8",
+      "sha256": "e80290a861869bc0ac027a035e77d6803a11782fea9c7278de4338d8c82240c1",
+      "bytes": 5430565,
+      "created_at": "2026-08-18T20:28:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/brazil-poll-vintages.json",
+      "kind": "external_source_vintage_index",
+      "source": "31 exact national TSE-matched Lula-Flavio runoff releases with earliest Git availability",
+      "sha256": "77b02785451523c9ee31d6f9b898b138d02da613c44bcc77276e690a8e86cd67",
+      "bytes": 21438,
+      "created_at": "2026-08-18T20:28:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/brazil-candidate-audit.json",
+      "kind": "sanitized_production_candidate_audit",
+      "source": "bounded repeatable-read human_ro Lula and Flavio contract audit",
+      "sha256": "614d9bcbaa3d2d0d280f323ad20f1b6232af8c91c1440214bc45dadfcf8786a3",
+      "bytes": 13085,
+      "created_at": "2026-08-18T20:28:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/brazil-fills.jsonl.gz",
+      "kind": "sanitized_production_taker_fill_slice",
+      "source": "17,570 canonical one-row-per-match Brazil outcome-0 fills under human_ro",
+      "sha256": "26f88953ce89400499b9096449b89458f1e12e5726e6b7f8b3222eb9fa24fd52",
+      "bytes": 940385,
+      "created_at": "2026-08-18T20:28:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/brazil-poll-development.json",
+      "kind": "chronos_analysis_receipt",
+      "source": "TSE-matched Brazil poll-change relative-pair development run",
+      "sha256": "3dba32faca7f742335c5ad56dc2c2fbbd5f7ede07238c75402c2b3eec489d18c",
+      "bytes": 43741,
+      "created_at": "2026-08-18T20:28:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/hormuz-taker-fills-v2.jsonl.gz",
+      "kind": "sanitized_production_taker_fill_slice",
+      "source": "24,921 canonical one-row-per-match Hormuz outcome-0 fills under human_ro",
+      "sha256": "db7f689812794ce0aa3daaa29b74e9d0c2f183143fb7a8990fd1bf5ab4e4a824",
+      "bytes": 1327537,
+      "created_at": "2026-08-18T20:28:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/hormuz-weekly-development-v2.json",
+      "kind": "chronos_analysis_receipt",
+      "source": "Corrected canonical-taker Hormuz PortWatch development replay",
+      "sha256": "9aa5184865ebb5de1321fc227c6c27a068c211011216965db40c6886962fd540",
+      "bytes": 4896,
+      "created_at": "2026-08-18T20:28:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/hormuz-ledger-reconstruction-v1.jsonl.gz",
+      "kind": "superseded_non_scientific_ledger_reconstruction",
+      "source": "Reconstructed original unfiltered query at the exact old bounds after 12 additional historical rows had arrived; retained only to preserve the row-semantics audit",
+      "sha256": "d278366513237ead313f93fbbd96a4f928c17baae27279e8d8da0c3f447e0172",
+      "bytes": 2495815,
+      "created_at": "2026-08-18T20:31:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null,
+      "scientific_authority": false
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schema": "chronos-signal-ranking/v1",
-  "as_of": "2026-08-18T22:05:00+02:00",
+  "as_of": "2026-08-18T22:26:33+02:00",
   "ranking_direction": "least_to_most_promising",
   "ranking_basis": [
     "survival of temporal and mechanism controls",
@@ -73,7 +73,7 @@
       "claim_type": "external-data directional trading signal",
       "evidence_level": "historical-vintage executable development",
       "status": "rejected_regime_mismatch",
-      "best_evidence": "Exact weekly Git publication vintages and 71,271 production fills supported 100-share tests across three deadlines. Following traffic changes lost $24.3214 over 16 24-hour trades and $20.7159 over 13 seven-day trades after fees; every low-state NO rule was negative.",
+      "best_evidence": "Exact weekly Git publication vintages and 24,921 canonical taker fills supported 100-share tests across three deadlines. Following traffic changes lost $22.8502 over 12 24-hour trades and $34.2559 over 12 seven-day trades after fees; every low-state NO rule was negative.",
       "why_not_tradable": "Current traffic measures the state that resolves the contract, but contract prices forecast a future geopolitical regime switch. All three deadlines share one dependent episode, and a two-trade positive threshold cell was selection noise.",
       "next_research_value": "Model a time-varying recovery hazard from genuinely timestamped geopolitical or shipping information and map it to the deadline curve; require independent disruptions or prospective confirmation.",
       "evidence": [
@@ -83,6 +83,20 @@
     },
     {
       "rank": 6,
+      "idea": "Follow or fade versioned Brazil runoff-poll changes in a Lula-versus-Flavio relative pair",
+      "claim_type": "external-data relative-value trading signal",
+      "evidence_level": "historical-vintage executable development",
+      "status": "rejected_cost_and_dependence",
+      "best_evidence": "Thirty-one exact national TSE-matched releases formed 25 immutable decision events. Across latest-release, rolling-median, prior-poll-surprise, and same-pollster features, every rule with at least five executable 100-share pairs lost after conservative fees. The least-negative rule lost $14.7044 over five trades; a broader three-day fade made $10.6868 gross but lost $18.9709 net over seven trades.",
+      "why_not_tradable": "Only one election is represented, paired execution was sparse, poll vote shares are not win probabilities, and no rule covered four crossed legs after costs.",
+      "next_research_value": "Estimate election win probability from a timestamped poll-of-polls plus uncertainty and calendar structure, or predeclare passive execution on future independent elections.",
+      "evidence": [
+        "../../polymarket-active-external-data-2026-08-18/brazil-poll-result.md",
+        "../../polymarket-active-external-data-2026-08-18/brazil-poll-development.json"
+      ]
+    },
+    {
+      "rank": 7,
       "idea": "Same-event sibling probability surface",
       "claim_type": "cross-contract movement forecast",
       "evidence_level": "formal development",
@@ -95,7 +109,7 @@
       ]
     },
     {
-      "rank": 7,
+      "rank": 8,
       "idea": "Boundary, volatility, and jump-magnitude regressions",
       "claim_type": "future movement magnitude forecast",
       "evidence_level": "formal development",
@@ -109,7 +123,7 @@
       ]
     },
     {
-      "rank": 8,
+      "rank": 9,
       "idea": "First-move direction and delayed post-jump continuation",
       "claim_type": "directional trading signal",
       "evidence_level": "chronological development",
@@ -123,7 +137,7 @@
       ]
     },
     {
-      "rank": 9,
+      "rank": 10,
       "idea": "Post-jump reversal-before-continuation",
       "claim_type": "directional event hazard",
       "evidence_level": "fresh development replication",
@@ -138,7 +152,7 @@
       ]
     },
     {
-      "rank": 10,
+      "rank": 11,
       "idea": "Forty-eight-hour meaningful-move incidence ranking",
       "claim_type": "cross-sectional movement ranking",
       "evidence_level": "chronological development",
@@ -151,7 +165,7 @@
       ]
     },
     {
-      "rank": 11,
+      "rank": 12,
       "idea": "Time to the next meaningful probability move",
       "claim_type": "movement timing forecast",
       "evidence_level": "frozen development candidate",
@@ -164,7 +178,7 @@
       ]
     },
     {
-      "rank": 12,
+      "rank": 13,
       "idea": "State-, duration-, and path-dependent zero-inflated marked-jump law",
       "claim_type": "complete observed-sample process law",
       "evidence_level": "fresh no-refit replication",
@@ -178,7 +192,7 @@
       ]
     },
     {
-      "rank": 13,
+      "rank": 14,
       "idea": "Continuous quiet-duration arrival hazard",
       "claim_type": "next-update probability forecast",
       "evidence_level": "protected rejection with promising completed rows",
@@ -192,7 +206,7 @@
       ]
     },
     {
-      "rank": 14,
+      "rank": 15,
       "idea": "Fade stale CME FedWatch level gaps in the September +25 bp FOMC contract",
       "claim_type": "external-data directional trading hypothesis",
       "evidence_level": "post-hoc single-contract development",

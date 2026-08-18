@@ -18,15 +18,15 @@ market_close = read("hormuz-markets", "close_epoch")
 
 
 def execute(market_id, direction, action, start, end, shares):
-    required_side = "SELL"
+    required_side = "BUY"
     invert = False
     if direction == "YES" and action == "SELL":
-        required_side = "BUY"
+        required_side = "SELL"
     if direction == "NO" and action == "BUY":
-        required_side = "BUY"
+        required_side = "SELL"
         invert = True
     if direction == "NO" and action == "SELL":
-        required_side = "SELL"
+        required_side = "BUY"
         invert = True
     remaining = shares
     notional = 0.0
@@ -152,7 +152,7 @@ result = structured_return(
     },
     warnings=[
         "All decisions belong to one geopolitical episode and are dependent across deadlines.",
-        "Direction-specific fills are real transaction opportunities, not guaranteed fills for Chronos.",
+        "Canonical taker-side fills are real transaction opportunities, not guaranteed fills for Chronos.",
         "Rules and thresholds are development-selected and have no protected event-family confirmation.",
     ],
 )

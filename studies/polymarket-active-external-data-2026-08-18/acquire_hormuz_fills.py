@@ -33,6 +33,8 @@ WHERE venue = 'polymarket'
   AND outcome_index = 0
   AND fill_time >= $2::timestamptz
   AND fill_time <= $3::timestamptz
+  AND (raw->'topics' IS NULL
+       OR lower('0x' || right(raw->'topics'->>3, 40)) = lower(raw->>'address'))
 ORDER BY fill_time, fill_uid
 """.strip()
 
@@ -75,7 +77,11 @@ async def _acquire(
                     header = _line(
                         {
                             "kind": "header",
-                            "schema": "chronos-polymarket-hormuz-fills-jsonl/v1",
+                            "schema": "chronos-polymarket-hormuz-taker-fills-jsonl/v2",
+                            "row_semantics": (
+                                "One taker aggregate row per match bundle; side is the "
+                                "aggressor's YES-outcome side."
+                            ),
                             "environment_id": "bdl-polymarket-production-readonly",
                             "market_ids": _MARKET_IDS,
                             "outcome_index": 0,
