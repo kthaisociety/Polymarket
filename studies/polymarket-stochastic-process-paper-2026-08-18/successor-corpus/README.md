@@ -113,3 +113,24 @@ sparse cells remain sparse cannot change. This replay asks whether category-stab
 broad negative drift, and category-heterogeneous calibration extend to the later cohort. It does
 not authorize ancestor or protected access and cannot convert a coarse text category into a causal
 topic claim.
+
+## Semantic-composition replication result
+
+Status: **SUCCEEDED — PROCESS REPLICATED WHERE COVERED; CALIBRATION REGIME-DEPENDENT**.
+
+- Exact [`08_semantic_composition_falsifier.json`](development-receipts/08_semantic_composition_falsifier.json)
+  SHA-256: `8cdcaea25fcd4e0735ea1081cbb19fb000e270c81312cc31a9bba4316631a250`.
+- The later cohort is concentrated in speech/social-post (12 events, 97 markets) and election/
+  candidate-selection (11 events, 39 markets). The other categories contain only 1–3 events.
+- In the two covered categories, interior zero mass was `50.85%`/`39.64%`, 24-hour variance ratios
+  were `0.3000`/`0.1360`, and next-move rates fell from `68.22%`/`77.37%` immediately after a move
+  to `1.36%`/`3.69%` after 24 unchanged samples. The sticky, duration-dependent, sub-diffusive
+  process conclusion replicated.
+- Event-equal regular drift was negative in all five rows, but three rows are too sparse for a
+  category-level stability claim.
+- Calibration magnitudes did not transfer by topic alone. Later election event-macro gaps were
+  `6.89%`, `7.12%`, `14.11%`, and `8.86%`, whereas earlier election gaps were near zero. Later
+  speech/social gaps were approximately zero at 24 hours, `3.92%` at 72 hours, and `14.47%` at
+  168 hours, with no 336-hour coverage.
+- Protected values remained unavailable. The retained conclusion is that calibration depends on
+  both semantic composition and chronological regime; no universal topic premium is supported.

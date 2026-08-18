@@ -413,3 +413,13 @@ aggregate overpricing is partly a semantic-mix result. The question-text taxonom
 coarse and cannot establish causal topic effects. Source 08 is now fixed for an unchanged replay on
 the 29-event successor development cohort; no successor question has been used to alter its
 keywords, precedence, calculations, or sparse-cell policy.
+
+The unchanged successor replay refined that interpretation. The two adequately covered later
+categories—speech/social (12 events) and election/candidate (11)—again showed substantial zero
+mass, 24-hour variance ratios of `0.3000` and `0.1360`, and sharply duration-dependent update
+hazards. Negative event-equal drift appeared in every category row, although the remaining three
+categories contain only 1–3 events. Calibration was chronologically unstable within topic: later
+election event-macro gaps rose to `6.89%`–`14.11%`, while later speech/social was approximately
+calibrated at 24 hours but reached `14.47%` at 168 hours. The paper should therefore describe
+calibration as a semantic-by-regime phenomenon, not a universal overpricing constant or a stable
+topic premium.
