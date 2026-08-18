@@ -33,6 +33,11 @@ Historical sampled probabilities are not represented as quotes or executable pri
   predeclared chronological prediction of nonzero log magnitude plus Gaussian, Laplace, and
   Student-t residual-law comparison.
 
+The paper-working literature and claim map is retained in
+[`literature/theory-transfer-map.md`](literature/theory-transfer-map.md). It distinguishes direct,
+conditional, and failed transfers from conventional finance and ties each provisional process
+claim to a primary source and a Chronos receipt.
+
 ## Opening result
 
 Source 01 succeeded through the public fresh-replication runner under a recorded 600-second/4 GB
