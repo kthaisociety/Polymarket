@@ -46,6 +46,26 @@ conclusion.
 
 ## Data authority and population
 
+### Corpus evolution and exploration rule
+
+Chronos is not confined to one permanent corpus. It may continue to inspect the read-only
+production database and approved public sources, choose additional contracts or data surfaces for
+a named hypothesis, and retain a successor content-addressed corpus. Immutability applies to the
+exact snapshot consumed by an experiment: source bytes, selection, identity, and partitions cannot
+move after that experiment begins. It does not freeze the future research universe.
+
+Every expansion must therefore follow `discover -> declare need -> acquire read-only -> retain
+exact bytes -> register temporal semantics -> partition -> analyze`. Successor corpora preserve
+their ancestry and do not overwrite or silently enlarge earlier evidence. New trades, quote/order
+book data, alternative sampling frequencies, related-event surfaces, or external signals receive
+their own field meanings and availability rules; authority from the hourly sampled-probability
+corpus does not transfer automatically.
+
+The 1,000-contract corpus below is the controlled starting snapshot for sources 01–05, not a
+permanent data ceiling. Measurement rivals that the snapshot cannot identify should trigger a
+bounded expansion when an available source can actually distinguish them. Otherwise they remain
+explicit limitations rather than being approximated from the wrong field.
+
 - Expanded immutable corpus:
   `polymarket-corpus:8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6`,
   1,000 contracts, 235 events, and 1,180,437 sampled probabilities.
@@ -150,6 +170,7 @@ The research package must ultimately retain:
 - No synthetic paths before the observed process and fitted parameters are legally specified.
 - No strategy/PnL claim from sampled probabilities.
 - No post-result replacement of the declared process families or gates.
+- No treating snapshot immutability as a ban on later, separately registered Polymarket discovery.
 
 ## Completion status
 

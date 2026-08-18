@@ -16,6 +16,12 @@ The first source uses the expanded corpus only through its ancestor-bound fresh-
 capability. All 31 ancestor events and the final 47 protected events are absent from its views.
 Historical sampled probabilities are not represented as quotes or executable prices.
 
+This snapshot is an experiment anchor, not Chronos's permanent research universe. The study may
+discover additional Polymarket contracts and public data, retain successor content-addressed
+corpora, and open new predeclared replications. Each experiment remains bound to its exact bytes,
+selection, temporal registration, and protected split; later expansion never mutates earlier
+evidence or inherits authority across different field types.
+
 ## Opening source
 
 - [`source/01_fresh_process_signatures.py`](source/01_fresh_process_signatures.py): deterministic
