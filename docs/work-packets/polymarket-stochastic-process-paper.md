@@ -486,3 +486,13 @@ almost exactly with an independently acquired official endpoint, and sticky, hea
 duration-dependent, reversing, sub-diffusive signatures become stronger at five-minute fidelity.
 The result is limited to ten preselected development markets and identifies the observed sampled
 process only. It does not identify trades, executable quotes, latent beliefs, or profit.
+
+The next fixed source moves uncertainty to the whole-event level. For every development event it
+computes an interior zero rate only with at least 100 eligible increments, a 24-hour variance ratio
+only with at least 100 base and horizon increments, an elapsed 24-hour-quiet/zero-quiet move-rate
+ratio only with at least 50 observations in both bands, and a nonzero reversal rate only with at
+least 50 sign pairs. Missing event metrics remain missing. It reports event-equal mean, median,
+10th/90th percentiles, chronological-half means, fixed threshold prevalence, and a deterministic
+2,000-resample event-bootstrap interval for the eligible-event mean. Fixed thresholds are zero
+mass above 20%, 24-hour variance ratio below 0.75, quiet-rate ratio below 0.50, and reversal above
+50%. This is a cluster-robust prevalence diagnostic, not a trade or significance claim.

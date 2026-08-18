@@ -48,6 +48,9 @@ evidence or inherits authority across different field types.
   fixed comparison of ten preselected official five-minute paths with the same-market retained
   hourly paths. It tests sampling alignment, zero mass, elapsed-duration dependence, variance
   scaling, sign reversal, and probability-grid concentration without fitting a trade model.
+- [`source/11_event_cluster_process_uncertainty.py`](source/11_event_cluster_process_uncertainty.py):
+  fixed whole-event prevalence, chronological-half, and deterministic event-resampling uncertainty
+  for zero mass, 24-hour variance scaling, elapsed-duration dependence, and nonzero reversal.
 
 The paper-working literature and claim map is retained in
 [`literature/theory-transfer-map.md`](literature/theory-transfer-map.md). It distinguishes direct,
