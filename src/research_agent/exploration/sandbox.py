@@ -625,20 +625,23 @@ class AnalysisHarness:
         )
         process.start()
         send_connection.close()
-        process.join(self._limits.wall_time_seconds)
-        if process.is_alive():
-            process.terminate()
+        # Drain the pipe while the child is alive. Joining first deadlocks when a valid
+        # structured result is larger than the OS pipe buffer: the child blocks in send()
+        # waiting for the parent to read, while the parent waits for the child to exit.
+        if not receive_connection.poll(self._limits.wall_time_seconds):
+            timed_out = process.is_alive()
+            if timed_out:
+                process.terminate()
             process.join()
             receive_connection.close()
-            return self._observation(
-                request=request,
-                code_sha256=code_sha256,
-                status=AnalysisStatus.FAILED,
-                summary="Analysis exceeded its wall-clock time limit.",
-                recoverable=True,
-            )
-        if not receive_connection.poll():
-            receive_connection.close()
+            if timed_out:
+                return self._observation(
+                    request=request,
+                    code_sha256=code_sha256,
+                    status=AnalysisStatus.FAILED,
+                    summary="Analysis exceeded its wall-clock time limit.",
+                    recoverable=True,
+                )
             return self._observation(
                 request=request,
                 code_sha256=code_sha256,
@@ -646,8 +649,20 @@ class AnalysisHarness:
                 summary="Analysis worker ended without a result.",
                 recoverable=True,
             )
-        worker_result = cast("dict[str, object]", receive_connection.recv())
+        try:
+            worker_result = cast("dict[str, object]", receive_connection.recv())
+        except EOFError:
+            worker_result = None
         receive_connection.close()
+        process.join()
+        if worker_result is None:
+            return self._observation(
+                request=request,
+                code_sha256=code_sha256,
+                status=AnalysisStatus.FAILED,
+                summary="Analysis worker ended without a result.",
+                recoverable=True,
+            )
         return self._assemble(request, code_sha256, grant, worker_result)
 
     def _authorize(self, request: AnalysisRequest) -> _Grant:

@@ -295,6 +295,29 @@ result = structured_return("large diagnostic", {"table": [1] * 2048})
     assert b'"table"' in harness.artifacts.read(details_ref, session_id="session-1")
 
 
+def test_result_larger_than_process_pipe_is_drained_before_join() -> None:
+    """A valid result cannot deadlock the parent merely because it exceeds a pipe buffer."""
+    payload_bytes = 200_000
+    limits = ResourceLimits(
+        wall_time_seconds=2.0,
+        max_inline_bytes=128,
+        max_result_bytes=300_000,
+    )
+    harness = _harness(limits=limits)
+
+    observation = harness.run(
+        _request(
+            f'result = structured_return("large pipe result", {{"payload": "z" * {payload_bytes}}})'
+        )
+    )
+
+    assert observation.status is AnalysisStatus.SUCCEEDED
+    assert observation.details is None
+    result_ref = next(ref for ref in observation.artifact_refs if ref.kind is ArtifactKind.RESULT)
+    assert result_ref.size_bytes > payload_bytes
+    assert b'"payload"' in harness.artifacts.read(result_ref, session_id="session-1")
+
+
 def test_exploration_cannot_create_formal_identity_or_durable_state_effect() -> None:
     """A successful analysis is still provisional and effect-free."""
     harness = _harness()

@@ -373,3 +373,12 @@ not question inference. The resulting source bytes and registered observations m
 from the hourly corpus and retain the official-endpoint caveats. The planned falsifier asks whether
 zero inflation, update-duration dependence, sign reversal, and magnitude clustering survive on a
 finer official sampling clock; it does not turn either clock into a quote or trade tape.
+
+The first source 06 execution reached its 120-second worker limit with zero recorded field
+accesses and no analytical details. The authored inventory was valid but its result exceeded the
+operating-system process-pipe buffer: the parent waited for worker exit before draining the pipe,
+while the worker waited for the parent to receive its bounded structured result. The failed receipt
+is retained. Chronos may repair this transport deadlock by receiving the already-bounded message
+before joining the worker; the source, data grant, selection, and scientific design remain
+unchanged. A regression test must cover a result materially larger than a typical pipe buffer
+before source 06 is retried.
