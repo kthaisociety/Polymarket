@@ -45,6 +45,8 @@ _OUTCOME_FIELDS = (
     "event_chronological_ordinal",
     "question",
     "outcome_label",
+    "outcome_index",
+    "outcome_token",
     "open_time_epoch_seconds",
     "close_time_epoch_seconds",
     "resolved_time_epoch_seconds",
@@ -495,11 +497,14 @@ def _development_outcome_columns(
     resolution_by_market = {item.market_id: item for item in corpus.resolutions}
     for contract in contracts:
         resolution = resolution_by_market[contract.market_id]
+        outcome = contract.outcomes[corpus.request.outcome_index]
         columns["market_id"].append(contract.market_id)
         columns["event_id"].append(contract.event_id)
         columns["event_chronological_ordinal"].append(event_ordinals[contract.event_id])
         columns["question"].append(contract.question)
-        columns["outcome_label"].append(contract.outcomes[corpus.request.outcome_index].label)
+        columns["outcome_label"].append(outcome.label)
+        columns["outcome_index"].append(outcome.outcome_index)
+        columns["outcome_token"].append(outcome.outcome_token)
         columns["open_time_epoch_seconds"].append(contract.open_time.timestamp())
         columns["close_time_epoch_seconds"].append(contract.close_time.timestamp())
         columns["resolved_time_epoch_seconds"].append(resolution.resolved_time.timestamp())

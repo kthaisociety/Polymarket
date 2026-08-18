@@ -423,3 +423,19 @@ election event-macro gaps rose to `6.89%`–`14.11%`, while later speech/social 
 calibrated at 24 hours but reached `14.47%` at 168 hours. The paper should therefore describe
 calibration as a semantic-by-regime phenomenon, not a universal overpricing constant or a stable
 topic premium.
+
+The fixed source-06 measurement sample cannot enter the official CLOB expansion path from question
+or market text alone: the public adapter requires the exact server-provided outcome index and token.
+Chronos therefore adds those two identity fields to the existing development-only outcome view.
+They are copied from the retained contract outcome selected by the corpus request, remain absent
+for ancestor/protected contracts, and are recorded only when authored code actually reads them.
+This is an identity/authority seam for the already-declared measurement falsifier, not a new price,
+label, feature, or protected capability. A causal test must prove the protected token cannot appear.
+
+Source 09 is fixed before reading either new identity field. It selects the first registered market
+from the same source-06 event ordinals in ordinal order and emits exact environment, market, event,
+outcome-index, outcome-token, and five-minute window identities. Each window ends at recorded close,
+starts at the later of market open or seven days before close, and uses integral Unix seconds.
+Missing targets remain missing. It reads no probability or payout. Only this manifest may be turned
+into strict `polymarket-price-history-need/v1` documents and passive scout requests; public fetching
+remains a later exact, content-addressed transition.

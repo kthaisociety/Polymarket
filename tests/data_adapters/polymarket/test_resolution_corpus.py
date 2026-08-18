@@ -529,9 +529,17 @@ def test_development_analysis_exposes_contract_questions_for_semantic_discovery(
 markets = read("polymarket-development-outcomes", "market_id")
 questions = read("polymarket-development-outcomes", "question")
 labels = read("polymarket-development-outcomes", "outcome_label")
+indices = read("polymarket-development-outcomes", "outcome_index")
+tokens = read("polymarket-development-outcomes", "outcome_token")
 result = structured_return(
     "Development contract catalog.",
-    {"markets": markets, "questions": questions, "labels": labels},
+    {
+        "markets": markets,
+        "questions": questions,
+        "labels": labels,
+        "indices": indices,
+        "tokens": tokens,
+    },
 )
 """
 
@@ -546,8 +554,11 @@ result = structured_return(
         "markets": ("market-0", "market-1", "market-2", "market-3"),
         "questions": ("Question 0?", "Question 1?", "Question 2?", "Question 3?"),
         "labels": ("Yes", "Yes", "Yes", "Yes"),
+        "indices": (0, 0, 0, 0),
+        "tokens": ("yes-0", "yes-1", "yes-2", "yes-3"),
     }
     assert "Question 4?" not in result.details["questions"]
+    assert "yes-4" not in result.details["tokens"]
 
 
 def _registered_event_field(
