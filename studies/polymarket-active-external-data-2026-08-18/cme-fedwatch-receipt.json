@@ -1,0 +1,22 @@
+{
+  "schema": "chronos-external-source-receipt/v1",
+  "campaign_id": "chronos-active-external-2026-08-18",
+  "source_name": "CME FedWatch historical meeting probabilities",
+  "public_locator": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
+  "downloaded_at": "2026-08-18T19:18:23.975134+00:00",
+  "download_mechanism": "official CME FedWatch CSV download in an interactive browser",
+  "original_filename": "FedMeeting_20260916.csv",
+  "sha256": "1222e3e7dc496e5d46128c0e8c21c088c3b105b0461aab955afd708147c7b8e0",
+  "bytes": 100368,
+  "row_count_including_header": 252,
+  "meeting_date": "2026-09-16",
+  "selected_field": "(375-400)",
+  "semantic_mapping": "Probability that the target range after the 2026-09-16 FOMC meeting is 375-400 bps; with the pre-meeting target at 350-375, this is the +25 bp Polymarket outcome.",
+  "availability_rule_for_research": "Date-only historical rows become usable at 12:00 UTC on the next calendar day.",
+  "caveats": [
+    "The CSV exposes a date but no historical intraday publication timestamp.",
+    "The next-day-noon availability rule is conservative and intentionally discards same-day use.",
+    "The file is a downloaded historical vintage and does not prove what an earlier download would have contained.",
+    "Current page probabilities can be many hours old and are not automatically actionable against a live book."
+  ]
+}

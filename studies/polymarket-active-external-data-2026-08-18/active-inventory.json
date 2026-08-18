@@ -1,0 +1,3731 @@
+{
+  "as_of": "2026-08-18T19:09:23+00:00",
+  "authority": {
+    "database_role": "human_ro",
+    "default_read_only": true,
+    "insert_update_privileges": false,
+    "repeatable_read": true,
+    "transaction_read_only": true
+  },
+  "caveats": [
+    "recent observed notional is a scouting rank, not liquidity or executable depth",
+    "current_price_metadata is a retained server metadata snapshot, not historical book state",
+    "active status is observed at acquisition and is not a reconstructible historical status",
+    "no protected corpus values or credentials are present"
+  ],
+  "content_sha256_without_this_field": "96ca75b49821cbaaa92eed86ba7fb526bb8435d8c60ebc36b7e2e03bff877cc4",
+  "contract_count": 100,
+  "contracts": [
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.74",
+        "best_bid": "0.73",
+        "last_trade_price": "0.74",
+        "one_day_price_change": "0.03",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.175",
+        "one_week_price_change": "0.06",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "149589",
+      "fills_72h": 2666,
+      "first_fill_72h": "2026-08-15T19:28:45+00:00",
+      "last_fill_72h": "2026-08-18T18:10:28+00:00",
+      "market_id": "0x502a94e5c525766d5ee7f16c6568131ba1b2cbadb69c703af05a6ef00336ed64",
+      "market_type": "binary",
+      "observed_notional_72h": "763306.5624500000000000000000086447354205",
+      "open_time": "2026-01-07T21:34:52.537984+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.265",
+          "token_id": "115351075585746600277716377744935410125916932950844626289798775482755919708780"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.735",
+          "token_id": "20915769520649892253891152116814645067070024223185517956799957803974344024878"
+        }
+      },
+      "question": "Will United Russia (ER) gain the most seats in the next Russian parliamentary election?",
+      "slug": "will-united-russia-er-gain-the-most-seats-in-the-next-russian-parliamentary-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.008",
+        "best_bid": "0.007",
+        "last_trade_price": "0.007",
+        "one_day_price_change": "-0.004",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.1075",
+        "one_week_price_change": "-0.0315",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "660108",
+      "fills_72h": 12439,
+      "first_fill_72h": "2026-08-15T19:09:24+00:00",
+      "last_fill_72h": "2026-08-18T18:00:49+00:00",
+      "market_id": "0x60c2c085ee8c16bc8f2419739a94971d4c9d00f637ead10fc0f540afa1be64e8",
+      "market_type": "binary",
+      "observed_notional_72h": "749132.993983999999999999999998780324701212",
+      "open_time": "2026-07-02T21:49:34.448693+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9925",
+          "token_id": "90869494087977018607792751230236923002303032923064138180950209430688758061828"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0075",
+          "token_id": "105426373826369935595603860663411604941599130211176020843036778867927711117332"
+        }
+      },
+      "question": "Strait of Hormuz traffic returns to normal by August 31?",
+      "slug": "strait-of-hormuz-traffic-returns-to-normal-by-august-31-20260702154212320",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-16T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.29",
+        "best_bid": "0.28",
+        "last_trade_price": "0.29",
+        "one_day_price_change": "-0.01",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.07",
+        "one_week_price_change": "-0.12",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "481717",
+      "fills_72h": 1797,
+      "first_fill_72h": "2026-08-15T19:30:15+00:00",
+      "last_fill_72h": "2026-08-18T18:07:57+00:00",
+      "market_id": "0x876506d8b2bd7a0d3fa4fe18c024eee6e1dd81ee24c26795dadd6cfe4a7b5d0d",
+      "market_type": "binary",
+      "observed_notional_72h": "691966.9559789999999999999999985501044566",
+      "open_time": "2026-05-13T21:23:15.981841+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.715",
+          "token_id": "2881957189963819690709899387312951271986076905757701114514025622922000576600"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.285",
+          "token_id": "63842529068710005716169325380315470359047749786610778647370693404952498013178"
+        }
+      },
+      "question": "Will the Fed increase interest rates by 25 bps after the September 2026 meeting?",
+      "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-september-2026-meeting-649",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-16T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.71",
+        "best_bid": "0.7",
+        "last_trade_price": "0.71",
+        "one_day_price_change": "0.01",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.11",
+        "one_week_price_change": "0.12",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "481717",
+      "fills_72h": 4197,
+      "first_fill_72h": "2026-08-15T19:33:36+00:00",
+      "last_fill_72h": "2026-08-18T18:19:52+00:00",
+      "market_id": "0xa3b36b2d6104d34af4e6c6215fc818e43352e78a748fbfb0b85e3a35f71dec9a",
+      "market_type": "binary",
+      "observed_notional_72h": "662938.6219050000000000000000015650809021",
+      "open_time": "2026-05-13T21:23:13.517067+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.295",
+          "token_id": "97050921740416192996389806693742575608111328819185493163189880975611314813724"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.705",
+          "token_id": "5615282760875985231868508008056959876238536896643315063916840237042205273721"
+        }
+      },
+      "question": "Will there be no change in Fed interest rates after the September 2026 meeting?",
+      "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-september-2026-meeting-615",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-20T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.024",
+        "best_bid": "0.022",
+        "last_trade_price": "0.023",
+        "one_day_price_change": "-0.0095",
+        "one_hour_price_change": "-0.001",
+        "one_month_price_change": "-0.302",
+        "one_week_price_change": "-0.202",
+        "one_year_price_change": null,
+        "spread": "0.002"
+      },
+      "event_id": "628311",
+      "fills_72h": 6568,
+      "first_fill_72h": "2026-08-15T19:10:31+00:00",
+      "last_fill_72h": "2026-08-18T18:18:45+00:00",
+      "market_id": "0x518df6d694ad4658fe6c284850c029c6f00c9b3609cf05f7757d1fecba1641f8",
+      "market_type": "binary",
+      "observed_notional_72h": "623174.51925799999999999999999864495212452",
+      "open_time": "2026-06-24T04:52:55.707554+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.977",
+          "token_id": "69816346859095495747189627053263753156196009953825285858477796399815602774300"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.023",
+          "token_id": "93838758485682196196905291300375162467135643283271312557929851459086376825083"
+        }
+      },
+      "question": "US-Iran 60 day negotiation period extended?",
+      "slug": "us-iran-60-day-negotiation-period-extended-20260624044855448",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.09",
+        "best_bid": "0.08",
+        "last_trade_price": "0.08",
+        "one_day_price_change": "-0.03",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.11",
+        "one_week_price_change": "-0.08",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "660109",
+      "fills_72h": 1699,
+      "first_fill_72h": "2026-08-15T19:10:25+00:00",
+      "last_fill_72h": "2026-08-18T18:23:13+00:00",
+      "market_id": "0xa08a5ce99e14ce0b22767af6f16c08a2ab012249444c20887193a9a3e98e11fc",
+      "market_type": "binary",
+      "observed_notional_72h": "619880.90965400000000000000000035470699325",
+      "open_time": "2026-07-02T21:49:47.480763+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.915",
+          "token_id": "111344475342969784116702975577723982549674037196345086059563486202499238579830"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.085",
+          "token_id": "23545193122217391289335133742859160842475987880562465754342378273033942179195"
+        }
+      },
+      "question": "Strait of Hormuz traffic returns to normal by September 30?",
+      "slug": "strait-of-hormuz-traffic-returns-to-normal-by-september-30-20260702154339440",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-31T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.12",
+        "best_bid": "0.11",
+        "last_trade_price": "0.11",
+        "one_day_price_change": "-0.02",
+        "one_hour_price_change": "0.02",
+        "one_month_price_change": "-0.27",
+        "one_week_price_change": "-0.25",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "699735",
+      "fills_72h": 2556,
+      "first_fill_72h": "2026-08-15T19:22:57+00:00",
+      "last_fill_72h": "2026-08-18T18:23:04+00:00",
+      "market_id": "0x47ec761ae98d7c28b20c0222f1507e3af0f198a904f86b4a264b2e987f0b80c7",
+      "market_type": "binary",
+      "observed_notional_72h": "512541.49840800000000000000000369974639806",
+      "open_time": "2026-07-13T18:04:26.363000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.885",
+          "token_id": "21515528084926948718188410049221867058078937518895951601155499933747657106361"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.115",
+          "token_id": "3995405418988860809616760430893135352799035734473152509556306061162112667429"
+        }
+      },
+      "question": "US announces end of Iranian blockade by August 31, 2026?",
+      "slug": "us-announces-end-of-iranian-blockade-by-august-31-2026-20260713152715084-642-513-584-641-939-632-729",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.041",
+        "best_bid": "0.039",
+        "last_trade_price": "0.041",
+        "one_day_price_change": "0.0005",
+        "one_hour_price_change": "-0.0005",
+        "one_month_price_change": "-0.042",
+        "one_week_price_change": "-0.044",
+        "one_year_price_change": null,
+        "spread": "0.002"
+      },
+      "event_id": "45915",
+      "fills_72h": 6167,
+      "first_fill_72h": "2026-08-15T19:25:49+00:00",
+      "last_fill_72h": "2026-08-18T18:23:55+00:00",
+      "market_id": "0x05297f854d3b757d5e51a1a29c7f225a80b14b2a161d6b7f9a61677da7a80ced",
+      "market_type": "binary",
+      "observed_notional_72h": "478916.65554899999999999999999971217050525",
+      "open_time": "2025-09-18T20:08:04.285000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.96",
+          "token_id": "7565921021555775006041943394390068423142281108752994121417017072842379450830"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.04",
+          "token_id": "93998891488819623915454849994768171534113749478841216025646247933473925258016"
+        }
+      },
+      "question": "Will Renan Santos win the 2026 Brazilian presidential election?",
+      "slug": "will-renan-santos-win-the-2026-brazilian-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-22T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.022",
+        "best_bid": "0.021",
+        "last_trade_price": "0.022",
+        "one_day_price_change": "-0.0335",
+        "one_hour_price_change": "0.002",
+        "one_month_price_change": null,
+        "one_week_price_change": "-0.1985",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "699735",
+      "fills_72h": 2344,
+      "first_fill_72h": "2026-08-15T19:57:34+00:00",
+      "last_fill_72h": "2026-08-18T18:18:13+00:00",
+      "market_id": "0xccf2b4f4ee94200fb3e05bfd45c1fb8a43bb0bf5cf69d78508c969d72b3a7f2b",
+      "market_type": "binary",
+      "observed_notional_72h": "474692.30940500000000000000000165503952918",
+      "open_time": "2026-08-07T14:21:57.018369+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9785",
+          "token_id": "25176162863226962641832258957764252933985326979806259075298957376891004062193"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0215",
+          "token_id": "65849559940142733523562869725809576677817195773111387273573371651686676252917"
+        }
+      },
+      "question": "US announces end of Iranian blockade by August 22, 2026?",
+      "slug": "us-announces-end-of-iranian-blockade-by-august-22-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T18:30:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.08",
+        "best_bid": "0.07",
+        "last_trade_price": "0.07",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.02",
+        "one_week_price_change": null,
+        "one_year_price_change": "-0.105",
+        "spread": "0.01"
+      },
+      "event_id": "31195",
+      "fills_72h": 413,
+      "first_fill_72h": "2026-08-15T20:47:03+00:00",
+      "last_fill_72h": "2026-08-18T18:10:27+00:00",
+      "market_id": "0x6bd56627aa21311850825edb27e53434a0e17a4f782be0086bc07f71eee00d0d",
+      "market_type": "binary",
+      "observed_notional_72h": "445599.26529299999999999999999994517701489",
+      "open_time": "2025-07-06T22:30:10.584000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.925",
+          "token_id": "87073899845581463485186346288398658568334162612963837182986759797304993556208"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.075",
+          "token_id": "350977769852917329387037893294763093471844346281449484439085576212613048126"
+        }
+      },
+      "question": "Putin out as President of Russia by December 31, 2026?",
+      "slug": "putin-out-before-2027-346",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-16T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.01",
+        "best_bid": "0.009",
+        "last_trade_price": "0.01",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.026",
+        "one_week_price_change": "-0.004",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "481717",
+      "fills_72h": 9903,
+      "first_fill_72h": "2026-08-15T19:34:25+00:00",
+      "last_fill_72h": "2026-08-18T18:13:04+00:00",
+      "market_id": "0xac02cbb049e46d6a3627c0fdf52fa554982a9025d45968207b362acb6ca4b830",
+      "market_type": "binary",
+      "observed_notional_72h": "442351.459547000000000000000000060327176145",
+      "open_time": "2026-05-13T21:23:11.486586+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9905",
+          "token_id": "28239418772633645184924651434956000849078365566842629564562475378531350731731"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0095",
+          "token_id": "57748138085022719760345772310040703848567377822400132842014290209986511882046"
+        }
+      },
+      "question": "Will the Fed decrease interest rates by 25 bps after the September 2026 meeting?",
+      "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-september-2026-meeting-586",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.37",
+        "best_bid": "0.36",
+        "last_trade_price": "0.36",
+        "one_day_price_change": "-0.01",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.14",
+        "one_week_price_change": "-0.12",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "455875",
+      "fills_72h": 1490,
+      "first_fill_72h": "2026-08-15T19:29:01+00:00",
+      "last_fill_72h": "2026-08-18T18:25:18+00:00",
+      "market_id": "0x5c79dfde05559b79a9cb9f7c4187e4d49632dd042572ae676952f812732591cc",
+      "market_type": "binary",
+      "observed_notional_72h": "390581.5750880000000000000000007032588675",
+      "open_time": "2026-05-11T13:03:57.905316+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.635",
+          "token_id": "48727431314333088243693016929623363710488980152833544156961659445129455301311"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.365",
+          "token_id": "83783489454659420807679723574840032660002326710045123865554753994450797728825"
+        }
+      },
+      "question": "Strait of Hormuz traffic returns to normal by December 31?",
+      "slug": "strait-of-hormuz-traffic-returns-to-normal-by-december-31",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.64",
+        "best_bid": "0.63",
+        "last_trade_price": "0.64",
+        "one_day_price_change": "-0.01",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.03",
+        "one_week_price_change": null,
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "45915",
+      "fills_72h": 4457,
+      "first_fill_72h": "2026-08-15T19:10:58+00:00",
+      "last_fill_72h": "2026-08-18T18:24:07+00:00",
+      "market_id": "0xdf8e2dc5860027decbe6164555c3c1c9645c3bd33e16b9dc57ca87125047d4a8",
+      "market_type": "binary",
+      "observed_notional_72h": "372173.8468649999999999999999997994137687",
+      "open_time": "2025-09-18T20:07:59.727557+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.365",
+          "token_id": "79191939610100241429039499950443680906623179487184628479206155805558220344190"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.635",
+          "token_id": "30630994248667897740988010928640156931882346081873066002335460180076741328029"
+        }
+      },
+      "question": "Will Luiz Inácio Lula da Silva win the 2026 Brazilian presidential election?",
+      "slug": "will-luiz-incio-lula-da-silva-win-the-2026-brazilian-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T12:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.997",
+        "best_bid": "0.992",
+        "last_trade_price": "0.995",
+        "one_day_price_change": "0.1305",
+        "one_hour_price_change": "0.1335",
+        "one_month_price_change": "0.1",
+        "one_week_price_change": "0.0805",
+        "one_year_price_change": null,
+        "spread": "0.005"
+      },
+      "event_id": "25036",
+      "fills_72h": 596,
+      "first_fill_72h": "2026-08-15T20:00:09+00:00",
+      "last_fill_72h": "2026-08-18T18:25:45+00:00",
+      "market_id": "0x7e50b661a2bedc670bcf32fc9ece12616f6fc4fba5dbe8526292bf3447374009",
+      "market_type": "binary",
+      "observed_notional_72h": "353474.367180000000000000000001379492041508",
+      "open_time": "2025-11-13T16:24:05.994000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.0055",
+          "token_id": "47029152085101973226255505664149277121974669906212969183902148537312535402801"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.9945",
+          "token_id": "83552904656813968939383082097054433404653657244784709614448703928529504455469"
+        }
+      },
+      "question": "Will Russia capture Kostyantynivka by December 31, 2026?",
+      "slug": "will-russia-capture-kostyantynivka-by-december-31-2026-936-942-271-276-578-687-312-238-912",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.18",
+        "best_bid": "0.17",
+        "last_trade_price": "0.18",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.13",
+        "one_week_price_change": null,
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "73130",
+      "fills_72h": 1285,
+      "first_fill_72h": "2026-08-15T19:41:04+00:00",
+      "last_fill_72h": "2026-08-18T18:18:37+00:00",
+      "market_id": "0x5db999fad322cea2914535aae5517060c3f80ad6d8c0231cde2124a434d16846",
+      "market_type": "binary",
+      "observed_notional_72h": "320448.4282379999999999999999997456354086",
+      "open_time": "2025-11-05T17:52:17.414000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.825",
+          "token_id": "1910830010387565971650098373488592514702818137344973088263643820608151819241"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.175",
+          "token_id": "55115078421062885512539156303747803058407616201213034911037320915726138659123"
+        }
+      },
+      "question": "Will the U.S. invade Iran before 2027?",
+      "slug": "will-the-us-invade-iran-before-2027",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.328",
+        "best_bid": "0.327",
+        "last_trade_price": "0.327",
+        "one_day_price_change": "0.016",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.071",
+        "one_week_price_change": "0.058",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "45915",
+      "fills_72h": 4220,
+      "first_fill_72h": "2026-08-15T19:39:09+00:00",
+      "last_fill_72h": "2026-08-18T18:20:27+00:00",
+      "market_id": "0x1a01bf78f56a507fcb666d564d8c8b91b0750679163ed6e96746102c9b7d285d",
+      "market_type": "binary",
+      "observed_notional_72h": "310085.7490349999999999999999993879185213",
+      "open_time": "2025-09-18T20:08:06.281000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.6725",
+          "token_id": "38310927461258927563020508025396887688249787380193911540547071417200646834355"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.3275",
+          "token_id": "109876868437950584369987384406356259939519193117253465815665152916226511121427"
+        }
+      },
+      "question": "Will Flávio Bolsonaro win the 2026 Brazilian presidential election?",
+      "slug": "will-flvio-bolsonaro-win-the-2026-brazilian-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.01",
+        "best_bid": "0.007",
+        "last_trade_price": "0.009",
+        "one_day_price_change": "-0.002",
+        "one_hour_price_change": "0.001",
+        "one_month_price_change": null,
+        "one_week_price_change": null,
+        "one_year_price_change": null,
+        "spread": "0.003"
+      },
+      "event_id": "45915",
+      "fills_72h": 5332,
+      "first_fill_72h": "2026-08-16T21:17:52+00:00",
+      "last_fill_72h": "2026-08-18T17:50:51+00:00",
+      "market_id": "0xe7567eb9c84e1f859a7e18f1042c724dbf57c3cc0459b312bee22156a57e60ea",
+      "market_type": "binary",
+      "observed_notional_72h": "287172.535802000000000000000000000103425062",
+      "open_time": "2025-09-18T20:08:16.022122+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9915",
+          "token_id": "9672782168124372602794464518660472014151020436078017456931499053959813127872"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0085",
+          "token_id": "72572221736897634802851345220625440437573759789073371714710674805950653460290"
+        }
+      },
+      "question": "Will Pablo Marçal win the 2026 Brazilian presidential election?",
+      "slug": "will-pablo-marcal-win-the-2026-brazilian-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.38",
+        "best_bid": "0.37",
+        "last_trade_price": "0.38",
+        "one_day_price_change": null,
+        "one_hour_price_change": "0.05",
+        "one_month_price_change": null,
+        "one_week_price_change": "-0.265",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "699735",
+      "fills_72h": 2245,
+      "first_fill_72h": "2026-08-15T19:23:07+00:00",
+      "last_fill_72h": "2026-08-18T18:26:22+00:00",
+      "market_id": "0x30174f3f46398e37c96a07b45916e01eab9a8a854ecb624ac73a91a8490fd074",
+      "market_type": "binary",
+      "observed_notional_72h": "204813.6623439999999999999999999210049159",
+      "open_time": "2026-07-27T17:53:14.040000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.625",
+          "token_id": "56465933220082022835700817063946174635909725507734416248556389304448520396318"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.375",
+          "token_id": "88752597571738831347942513760817776151125290177540731190810686943474863159303"
+        }
+      },
+      "question": "US announces end of Iranian blockade by September 30, 2026?",
+      "slug": "us-announces-end-of-iranian-blockade-by-september-30-2026-20260727171615364-722-649-646-561-213-644-414-831",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.047",
+        "best_bid": "0.046",
+        "last_trade_price": "0.048",
+        "one_day_price_change": "0.0015",
+        "one_hour_price_change": "0.0015",
+        "one_month_price_change": "-0.0085",
+        "one_week_price_change": "0.0015",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "90177",
+      "fills_72h": 320,
+      "first_fill_72h": "2026-08-16T00:06:00+00:00",
+      "last_fill_72h": "2026-08-18T18:23:45+00:00",
+      "market_id": "0x747dc809fb79e1b05be09c42d6179459a58de2ef3e40f02484a4e1260f741f75",
+      "market_type": "binary",
+      "observed_notional_72h": "184708.68280999999999999999999991384741147",
+      "open_time": "2025-11-25T18:05:19.721000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9535",
+          "token_id": "7305630249804085635496399869905769372294302716159034447326228509068694952392"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0465",
+          "token_id": "107505882767731489358349912513945399560393482969656700824895970500493757150417"
+        }
+      },
+      "question": "Will the US confirm that aliens exist before 2027?",
+      "slug": "will-the-us-confirm-that-aliens-exist-before-2027-789-924-249",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T20:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.28",
+        "best_bid": "0.26",
+        "last_trade_price": "0.28",
+        "one_day_price_change": "-0.075",
+        "one_hour_price_change": "-0.005",
+        "one_month_price_change": "0.155",
+        "one_week_price_change": "-0.145",
+        "one_year_price_change": null,
+        "spread": "0.02"
+      },
+      "event_id": "34889",
+      "fills_72h": 1712,
+      "first_fill_72h": "2026-08-15T19:11:04+00:00",
+      "last_fill_72h": "2026-08-18T18:19:58+00:00",
+      "market_id": "0x1e5204036bd51e6ca0e0da6221319c5839bd9940782adc6d0f6fa703aa8a3bf4",
+      "market_type": "binary",
+      "observed_notional_72h": "172896.2133680000000000000000000906992453",
+      "open_time": "2026-06-30T21:17:20.924276+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.73",
+          "token_id": "30676432546818066080538703205639237969080188796746196694446265523208566227883"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.27",
+          "token_id": "3833250547311424992805456252782158332407335422350263044535636678503072819141"
+        }
+      },
+      "question": "Will Hamas agree to disarm by December 31?",
+      "slug": "will-hamas-agree-to-disarm-by-december-31",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.684",
+        "best_bid": "0.681",
+        "last_trade_price": "0.681",
+        "one_day_price_change": "-0.089",
+        "one_hour_price_change": "0.0365",
+        "one_month_price_change": null,
+        "one_week_price_change": "-0.128",
+        "one_year_price_change": null,
+        "spread": "0.003"
+      },
+      "event_id": "699735",
+      "fills_72h": 1908,
+      "first_fill_72h": "2026-08-15T19:23:21+00:00",
+      "last_fill_72h": "2026-08-18T18:22:13+00:00",
+      "market_id": "0x46ca741da4abd7ffa993f59ac65bfe83de43ae027accac71d263a493e44064e7",
+      "market_type": "binary",
+      "observed_notional_72h": "155413.0570750000000000000000003189849038",
+      "open_time": "2026-07-27T17:52:56.467000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.3175",
+          "token_id": "39147524522707536456910747992621671433032838141439193264830818731544404472030"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.6825",
+          "token_id": "86011229287950365043519117852041614651767455889324682112682327985496937935368"
+        }
+      },
+      "question": "US announces end of Iranian blockade by December 31, 2026?",
+      "slug": "us-announces-end-of-iranian-blockade-by-december-31-2026-20260727171803489-375-949-645-919-269-157-255-857",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.003",
+        "best_bid": "0.002",
+        "last_trade_price": "0.002",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.011",
+        "one_week_price_change": "-0.008",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "45915",
+      "fills_72h": 3633,
+      "first_fill_72h": "2026-08-15T19:29:54+00:00",
+      "last_fill_72h": "2026-08-18T18:03:09+00:00",
+      "market_id": "0xbca3d70ec52a5a441ccc365a3b1b48b9cd0f08dfff4bc5871e2cd92d0d92caa1",
+      "market_type": "binary",
+      "observed_notional_72h": "153939.541114000000000000000000230814598508",
+      "open_time": "2025-09-18T20:08:05.843000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9975",
+          "token_id": "46647902352070183258066763519254338558701019805822306126128459427684955493048"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0025",
+          "token_id": "36262307788727352725358528951052957737657822670589615830114396216160368496388"
+        }
+      },
+      "question": "Will Ronaldo Caiado win the 2026 Brazilian presidential election?",
+      "slug": "will-ronaldo-caiado-win-the-2026-brazilian-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.07",
+        "best_bid": "0.06",
+        "last_trade_price": "0.07",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.04",
+        "one_week_price_change": null,
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "72347",
+      "fills_72h": 192,
+      "first_fill_72h": "2026-08-15T22:09:24+00:00",
+      "last_fill_72h": "2026-08-18T18:04:22+00:00",
+      "market_id": "0xbb4d51e6364066d92eb6f9b8413dd7193de70966736044463b205834805a1f3b",
+      "market_type": "binary",
+      "observed_notional_72h": "151508.03503700000000000000000000791820127",
+      "open_time": "2025-11-03T23:52:00.295000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.935",
+          "token_id": "106181075047366745139197108801635573283215248045056329679360376976893016488727"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.065",
+          "token_id": "10991849228756847439673778874175365458450913336396982752046655649803657501964"
+        }
+      },
+      "question": "Will the Iranian regime fall before 2027?",
+      "slug": "will-the-iranian-regime-fall-by-the-end-of-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2027-01-03T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.19",
+        "best_bid": "0.17",
+        "last_trade_price": "0.17",
+        "one_day_price_change": "-0.045",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.205",
+        "one_week_price_change": "-0.075",
+        "one_year_price_change": null,
+        "spread": "0.02"
+      },
+      "event_id": "60692",
+      "fills_72h": 515,
+      "first_fill_72h": "2026-08-15T19:14:40+00:00",
+      "last_fill_72h": "2026-08-18T17:57:37+00:00",
+      "market_id": "0x15d2e66dcf1d63c5695d6d0e9e2f8e06dd246d00fd5dfc254f2b22baa33bfa1b",
+      "market_type": "binary",
+      "observed_notional_72h": "144333.4310979999999999999999999831060030",
+      "open_time": "2025-10-17T21:26:50.709000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.82",
+          "token_id": "6176387069967725418539368518279260352303182827227966329832868478861860932409"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.18",
+          "token_id": "79397895660526576528066965797785113521241099187839967306891454236823723226031"
+        }
+      },
+      "question": "Mitch McConnell steps down from Senate before his term ends?",
+      "slug": "will-mitch-mcconnell-resign-from-the-senate-before-his-term-ends",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.004",
+        "best_bid": "0.003",
+        "last_trade_price": "0.003",
+        "one_day_price_change": "-0.0035",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.008",
+        "one_week_price_change": "-0.007",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "45915",
+      "fills_72h": 3403,
+      "first_fill_72h": "2026-08-15T19:18:07+00:00",
+      "last_fill_72h": "2026-08-18T17:20:00+00:00",
+      "market_id": "0x63d8f3a34c90bd5342dda8acf62b6a898dfa52f86475efaf180b66493ef6af80",
+      "market_type": "binary",
+      "observed_notional_72h": "142331.807035999999999999999999943714189713",
+      "open_time": "2025-09-18T20:07:59.985103+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9965",
+          "token_id": "106199154714545451005463800266480893448383896699905306895283360115694583822185"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0035",
+          "token_id": "66991175107696133528353695394151645462081911990365106169948013117379189357520"
+        }
+      },
+      "question": "Will Jair Bolsonaro win the 2026 Brazilian presidential election?",
+      "slug": "will-jair-bolsonaro-win-the-2026-brazilian-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.002",
+        "best_bid": "0.001",
+        "last_trade_price": "0.001",
+        "one_day_price_change": "-0.001",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.003",
+        "one_week_price_change": "-0.001",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "45915",
+      "fills_72h": 3390,
+      "first_fill_72h": "2026-08-15T19:15:12+00:00",
+      "last_fill_72h": "2026-08-18T18:02:15+00:00",
+      "market_id": "0xd0536d9612e041312235baceac52bde48821e8aad4607533513b3782904b7d49",
+      "market_type": "binary",
+      "observed_notional_72h": "127539.075415999999999999999999985782002124",
+      "open_time": "2025-09-18T20:08:10.216000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9985",
+          "token_id": "36365720386664227244786004973842669393494622748773462921946756661027332562108"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0015",
+          "token_id": "70059117674007036240163073645113489994895807359788046023215512784288966325609"
+        }
+      },
+      "question": "Will Geraldo Alckmin win the 2026 Brazilian presidential election?",
+      "slug": "will-geraldo-alckmin-win-the-2026-brazilian-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.002",
+        "best_bid": "0.001",
+        "last_trade_price": "0.001",
+        "one_day_price_change": "-0.001",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.006",
+        "one_week_price_change": "-0.002",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "45915",
+      "fills_72h": 3453,
+      "first_fill_72h": "2026-08-15T19:44:00+00:00",
+      "last_fill_72h": "2026-08-18T17:48:21+00:00",
+      "market_id": "0x054725b2a7971376f7924a7021221b12acc50fe78d97817824fe411704d5b5a2",
+      "market_type": "binary",
+      "observed_notional_72h": "124676.895978000000000000000000007220164920",
+      "open_time": "2025-09-18T20:08:08.109000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9985",
+          "token_id": "38633448065261608755072088507033278254893488240734399014852176650195563610767"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0015",
+          "token_id": "44340846524235712899508083510503343345123518718867913608211694999290628967401"
+        }
+      },
+      "question": "Will Romeu Zema win the 2026 Brazilian presidential election?",
+      "slug": "will-romeu-zema-win-the-2026-brazilian-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-31T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.05",
+        "best_bid": "0.04",
+        "last_trade_price": "0.04",
+        "one_day_price_change": "-0.05",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.41",
+        "one_week_price_change": "-0.16",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "624218",
+      "fills_72h": 1562,
+      "first_fill_72h": "2026-08-15T19:42:54+00:00",
+      "last_fill_72h": "2026-08-18T18:24:54+00:00",
+      "market_id": "0xbdc0827c873d1c3c538e549ab94c77829f7e40fd3376b25164c0279f744a87bc",
+      "market_type": "binary",
+      "observed_notional_72h": "116497.36578999999999999999999995779263446",
+      "open_time": "2026-07-13T19:15:02.255000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.955",
+          "token_id": "8380715925577845977184977030716387784969501288623224112825735013253473276536"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.045",
+          "token_id": "12185556481340489379773654389350032355704902537483278634717505718103733768215"
+        }
+      },
+      "question": "US x Iran diplomatic meeting by August 31, 2026?",
+      "slug": "us-x-iran-diplomatic-meeting-by-august-31-2026-2",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-15T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.032",
+        "best_bid": "0.03",
+        "last_trade_price": "0.031",
+        "one_day_price_change": "-0.0055",
+        "one_hour_price_change": "-0.002",
+        "one_month_price_change": null,
+        "one_week_price_change": "-0.039",
+        "one_year_price_change": null,
+        "spread": "0.002"
+      },
+      "event_id": "830255",
+      "fills_72h": 473,
+      "first_fill_72h": "2026-08-15T22:01:42+00:00",
+      "last_fill_72h": "2026-08-18T18:20:04+00:00",
+      "market_id": "0xaad2727a01e09fd1b0d84e286a63a94998efe35fce83a65a3c58dfa9b54dff33",
+      "market_type": "binary",
+      "observed_notional_72h": "115897.80122399999999999999999976153539976",
+      "open_time": "2026-08-11T09:20:21.932904+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.969",
+          "token_id": "12575482562400058575569240787286833787405115816233407902290732716716915814118"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.031",
+          "token_id": "792896940617101609095080343806493099086366718518381398857436002509498065050"
+        }
+      },
+      "question": "Strait of Hormuz traffic returns to normal by September 15?",
+      "slug": "strait-of-hormuz-traffic-returns-to-normal-by-september-15-20260810150912478",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-11-03T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.47",
+        "best_bid": "0.46",
+        "last_trade_price": "0.47",
+        "one_day_price_change": "-0.01",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.03",
+        "one_week_price_change": "-0.02",
+        "one_year_price_change": "0.24",
+        "spread": "0.01"
+      },
+      "event_id": "32228",
+      "fills_72h": 481,
+      "first_fill_72h": "2026-08-15T20:53:57+00:00",
+      "last_fill_72h": "2026-08-18T17:21:09+00:00",
+      "market_id": "0x16c63b7cc37f012b9f59ee164ec03877914c701d06d48291ae8d6fc08a088b0d",
+      "market_type": "binary",
+      "observed_notional_72h": "108893.9020119999999999999999994156347259",
+      "open_time": "2025-07-11T21:05:18.843000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.535",
+          "token_id": "24483563228660028121020430722896740519524131851526579619586176931221901842798"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.465",
+          "token_id": "34722410608062854697106861099776685947172185964394483545370684749662285977831"
+        }
+      },
+      "question": "2026 Balance of Power: D Senate, D House",
+      "slug": "2026-balance-of-power-d-senate-d-house-949",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.002",
+        "best_bid": "0.001",
+        "last_trade_price": "0.001",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.017",
+        "one_week_price_change": "-0.001",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "45915",
+      "fills_72h": 2822,
+      "first_fill_72h": "2026-08-15T19:18:39+00:00",
+      "last_fill_72h": "2026-08-18T17:20:00+00:00",
+      "market_id": "0x37ec4c6b57a18b16eed1241f6155ee7ff45bc1697d7848f15ac33d406e38ed00",
+      "market_type": "binary",
+      "observed_notional_72h": "101663.266300",
+      "open_time": "2025-09-18T20:08:01.863387+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9985",
+          "token_id": "16879668974983992641795221456967869661599530861479349066809692639705609051027"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0015",
+          "token_id": "91154058715822908897619103072380844452822017332608583147987152526225529443892"
+        }
+      },
+      "question": "Will Michelle Bolsonaro win the 2026 Brazilian presidential election?",
+      "slug": "will-michelle-bolsonaro-win-the-2026-brazilian-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.731",
+        "best_bid": "0.73",
+        "last_trade_price": "0.732",
+        "one_day_price_change": "0.0375",
+        "one_hour_price_change": "-0.0015",
+        "one_month_price_change": "0.5065",
+        "one_week_price_change": "0.1945",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "624242",
+      "fills_72h": 1589,
+      "first_fill_72h": "2026-08-15T19:50:22+00:00",
+      "last_fill_72h": "2026-08-18T17:57:22+00:00",
+      "market_id": "0xc4ebab9f2830f6df67ab1b98615d5a9be8eebd106fd0f37e9a25e4a4edcc427c",
+      "market_type": "binary",
+      "observed_notional_72h": "99176.2529539999999999999999997894660441",
+      "open_time": "2026-06-23T02:49:53.408743+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.2695",
+          "token_id": "101196087194368016189458797815389873667514776317865121691440084473605225222305"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.7305",
+          "token_id": "10618696958805388450273982806566275602086720395274264354492776873006123003601"
+        }
+      },
+      "question": "Will no qualifying diplomatic US-Iran meeting occur by September 30, 2026?",
+      "slug": "will-no-qualifying-diplomatic-us-iran-meeting-occur-by-september-30-2026-20260622185050763",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-31T18:30:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.006",
+        "best_bid": "0.005",
+        "last_trade_price": "0.006",
+        "one_day_price_change": "-0.001",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.0325",
+        "one_week_price_change": "-0.002",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "31195",
+      "fills_72h": 434,
+      "first_fill_72h": "2026-08-15T19:45:30+00:00",
+      "last_fill_72h": "2026-08-18T17:30:22+00:00",
+      "market_id": "0xd5dd1a5398c0b428035211c83348af8b97d2b31f72cf198bdbadcfb3538ca2d4",
+      "market_type": "binary",
+      "observed_notional_72h": "98426.779870000000000000000000050131455081",
+      "open_time": "2026-07-06T21:34:25.571703+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9945",
+          "token_id": "69255676899700790711525989127308958019475795404138315524495668898066870353801"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0055",
+          "token_id": "101595176881003480479856571396770457861292740071631717465173658785305718765060"
+        }
+      },
+      "question": "Putin out as President of Russia by August 31, 2026?",
+      "slug": "putin-out-as-president-of-russia-by-august-31-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T12:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.995",
+        "best_bid": "0.986",
+        "last_trade_price": "0.994",
+        "one_day_price_change": "0.3605",
+        "one_hour_price_change": "0.3705",
+        "one_month_price_change": "0.1955",
+        "one_week_price_change": "0.2355",
+        "one_year_price_change": null,
+        "spread": "0.009"
+      },
+      "event_id": "25036",
+      "fills_72h": 443,
+      "first_fill_72h": "2026-08-15T23:25:33+00:00",
+      "last_fill_72h": "2026-08-18T18:24:51+00:00",
+      "market_id": "0x271e1d96693db79b42a277dc5f64b61a72bc1a0fad85586fd28c7d89b9b96231",
+      "market_type": "binary",
+      "observed_notional_72h": "96878.06585200000000000000000037238325710",
+      "open_time": "2026-05-04T20:45:49.435000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.0095",
+          "token_id": "63712527751974257201038440220031691363508120012860375402898424160848105925111"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.9905",
+          "token_id": "55628874182306186050631811887515133881663823417535899038376461448048315313936"
+        }
+      },
+      "question": "Will Russia capture Kostyantynivka by September 30?",
+      "slug": "will-russia-capture-kostyantynivka-by-september-30-256-333-352",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-11-03T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.88",
+        "best_bid": "0.87",
+        "last_trade_price": "0.88",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.03",
+        "one_week_price_change": "0.01",
+        "one_year_price_change": "0.17",
+        "spread": "0.01"
+      },
+      "event_id": "32225",
+      "fills_72h": 336,
+      "first_fill_72h": "2026-08-15T21:33:24+00:00",
+      "last_fill_72h": "2026-08-18T17:47:21+00:00",
+      "market_id": "0xd5d9fc47718bd553592d126b1fa5e87183d27f3936975b0c04cc0f2dec1f1bb4",
+      "market_type": "binary",
+      "observed_notional_72h": "95030.8206650000000000000000006998832085",
+      "open_time": "2025-07-11T19:50:44.885000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.125",
+          "token_id": "33156410999665902694791064431724433042010245771106314074312009703157423879038"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.875",
+          "token_id": "83247781037352156539108067944461291821683755894607244160607042790356561625563"
+        }
+      },
+      "question": "Will the Democratic Party control the House after the 2026 Midterm elections?",
+      "slug": "will-the-democratic-party-control-the-house-after-the-2026-midterm-elections",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.07",
+        "best_bid": "0.05",
+        "last_trade_price": "0.06",
+        "one_day_price_change": "0.005",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.025",
+        "one_week_price_change": "-0.015",
+        "one_year_price_change": null,
+        "spread": "0.02"
+      },
+      "event_id": "48978",
+      "fills_72h": 118,
+      "first_fill_72h": "2026-08-16T00:37:06+00:00",
+      "last_fill_72h": "2026-08-18T14:12:22+00:00",
+      "market_id": "0xbe9d61d80c767264a0adc8a16453fbcaf0413e673e665cc7c14701691143fac0",
+      "market_type": "binary",
+      "observed_notional_72h": "93547.55998399999999999999999999975473630",
+      "open_time": "2026-05-27T22:15:04.059000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.94",
+          "token_id": "72433435487515814631344400459815549868044734165082020724691045649454520502781"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.06",
+          "token_id": "67011482977279466154940850972585572311207926803952896052113224614375102184687"
+        }
+      },
+      "question": "Will Ukraine recapture Crimean territory by December 31, 2026?",
+      "slug": "will-ukraine-recapture-crimean-territory-by-december-31-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.355",
+        "best_bid": "0.354",
+        "last_trade_price": "0.354",
+        "one_day_price_change": "0.0065",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.0085",
+        "one_week_price_change": "-0.0235",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "57111",
+      "fills_72h": 458,
+      "first_fill_72h": "2026-08-16T00:50:40+00:00",
+      "last_fill_72h": "2026-08-18T14:56:42+00:00",
+      "market_id": "0x694595d0a008f10e4701285d071e4b08407495f6f8a6bd8cbdd7de522fa9b463",
+      "market_type": "binary",
+      "observed_notional_72h": "93284.2542080000000000000000008913002946",
+      "open_time": "2025-10-09T20:38:10.292000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.6455",
+          "token_id": "58507084608782512565480280053882807505189448738098588563704773804344223603355"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.3545",
+          "token_id": "50292933818751585369672690878774599873941191925538325333138798248932182222864"
+        }
+      },
+      "question": "Will Nithya Raman win the 2026 Los Angeles mayoral election?",
+      "slug": "will-nithya-raman-win-the-2026-los-angeles-mayoral-election-876",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.002",
+        "best_bid": "0.001",
+        "last_trade_price": "0.001",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": null,
+        "one_week_price_change": null,
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "45915",
+      "fills_72h": 3069,
+      "first_fill_72h": "2026-08-15T19:23:19+00:00",
+      "last_fill_72h": "2026-08-18T17:20:00+00:00",
+      "market_id": "0xae7dd99bf126b033b77af2553a98b97e1190fd7bdddd5a792ca2791ae23e4d13",
+      "market_type": "binary",
+      "observed_notional_72h": "92414.746660",
+      "open_time": "2025-09-18T20:08:12.215000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9985",
+          "token_id": "64982418802960410634417234400461483693795282592809889685102027864089780598249"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0015",
+          "token_id": "111901744542692526827481385722975834672043376661227579870355575009066606657994"
+        }
+      },
+      "question": "Will Tereza Cristina win the 2026 Brazilian presidential election?",
+      "slug": "will-tereza-cristina-win-the-2026-brazilian-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-16T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.004",
+        "best_bid": "0.003",
+        "last_trade_price": "0.004",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.019",
+        "one_week_price_change": "-0.004",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "481717",
+      "fills_72h": 1521,
+      "first_fill_72h": "2026-08-15T21:18:15+00:00",
+      "last_fill_72h": "2026-08-18T18:07:57+00:00",
+      "market_id": "0x5e464d85eb49f22d876f3ed6168a7db5e2288e9ae1eb91effd2758e994676f86",
+      "market_type": "binary",
+      "observed_notional_72h": "83688.450089000000000000000000015303115455",
+      "open_time": "2026-05-13T21:23:09.737806+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9965",
+          "token_id": "81470465080656150088482886298356783621062802919110096763062861781139262816347"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0035",
+          "token_id": "97186030785608128217926542396950266594898339988989015155120280107165449433603"
+        }
+      },
+      "question": "Will the Fed decrease interest rates by 50+ bps after the September 2026 meeting?",
+      "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-september-2026-meeting-863",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-31T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.56",
+        "best_bid": "0.55",
+        "last_trade_price": "0.56",
+        "one_day_price_change": "-0.015",
+        "one_hour_price_change": "0.02",
+        "one_month_price_change": null,
+        "one_week_price_change": "-0.17",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "699735",
+      "fills_72h": 982,
+      "first_fill_72h": "2026-08-15T20:12:57+00:00",
+      "last_fill_72h": "2026-08-18T18:23:30+00:00",
+      "market_id": "0xcee04ba47d02f6c64642369b34193c355f64de1b9ae425c71ea4efef1989d271",
+      "market_type": "binary",
+      "observed_notional_72h": "83351.7371829999999999999999997758415320",
+      "open_time": "2026-07-27T17:53:09.219000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.445",
+          "token_id": "77737603049704371401985143030203551130624520784925815473217168646825527075459"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.555",
+          "token_id": "87712920673252297509200151045391015262449055764880659907762503287643101055970"
+        }
+      },
+      "question": "US announces end of Iranian blockade by October 31, 2026?",
+      "slug": "us-announces-end-of-iranian-blockade-by-october-31-2026-20260727171711632-895-372-622-413-171-454-592-696",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.06",
+        "best_bid": "0.05",
+        "last_trade_price": "0.06",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.01",
+        "one_week_price_change": "-0.01",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "73969",
+      "fills_72h": 354,
+      "first_fill_72h": "2026-08-16T00:15:45+00:00",
+      "last_fill_72h": "2026-08-18T17:24:52+00:00",
+      "market_id": "0x48b0b0bca515f68fccf95af4793dbd0edbfec1f8ec6e8df2c0f69ba74f8c4722",
+      "market_type": "binary",
+      "observed_notional_72h": "81828.54531600000000000000000002968832682",
+      "open_time": "2025-11-05T21:57:19.399255+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.945",
+          "token_id": "2849827372590072151380088930233312280478318575453624773762283369907909283027"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.055",
+          "token_id": "59252515735652674747158950210016502214756531287333895140318848923768750410355"
+        }
+      },
+      "question": "Trump out as President before 2027?",
+      "slug": "trump-out-as-president-before-2027",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.104",
+        "best_bid": "0.089",
+        "last_trade_price": "0.097",
+        "one_day_price_change": "0.011",
+        "one_hour_price_change": "-0.0005",
+        "one_month_price_change": "-0.0735",
+        "one_week_price_change": "0.001",
+        "one_year_price_change": null,
+        "spread": "0.015"
+      },
+      "event_id": "191960",
+      "fills_72h": 396,
+      "first_fill_72h": "2026-08-16T05:18:55+00:00",
+      "last_fill_72h": "2026-08-18T17:18:25+00:00",
+      "market_id": "0x7881be33e724d46ebc3dc1b46d0cc79a8c1be7699726f9d308876851955cc040",
+      "market_type": "binary",
+      "observed_notional_72h": "79862.50275199999999999999999999125709724",
+      "open_time": "2026-07-14T21:31:20.016024+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9035",
+          "token_id": "26276685498071945640381590740780838278369535801604595933048031733835689609148"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0965",
+          "token_id": "7798084841190454946980201951308463846300721503223956238714683739095631696042"
+        }
+      },
+      "question": "Will Russia capture Kupiansk-Vuzlovyi by September 30?",
+      "slug": "will-russia-capture-kupiansk-vuzlovyi-by-september-30",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-31T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.937",
+        "best_bid": "0.92",
+        "last_trade_price": "0.95",
+        "one_day_price_change": "0.01",
+        "one_hour_price_change": "0.008",
+        "one_month_price_change": null,
+        "one_week_price_change": "0.3535",
+        "one_year_price_change": null,
+        "spread": "0.017"
+      },
+      "event_id": "753548",
+      "fills_72h": 977,
+      "first_fill_72h": "2026-08-16T03:09:19+00:00",
+      "last_fill_72h": "2026-08-18T18:10:16+00:00",
+      "market_id": "0x032bea9bdb1cc6b3456b5f6b4589d600eda00fea105e9f028acd169fbd1aaf74",
+      "market_type": "binary",
+      "observed_notional_72h": "76924.25755400000000000000000006910977908",
+      "open_time": "2026-07-26T22:49:29.422763+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.0715",
+          "token_id": "32000787824422574139554883823896949129925736605885876586681458552574037099932"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.9285",
+          "token_id": "41048648785539586541944394584390493025778662263709403417581187578616777468679"
+        }
+      },
+      "question": "NATO downs another Russian drone by August 31?",
+      "slug": "nato-downs-another-russian-drone-by-august-31-20260726215001931",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-18T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.45",
+        "best_bid": "0.44",
+        "last_trade_price": "0.45",
+        "one_day_price_change": "-0.035",
+        "one_hour_price_change": "-0.02",
+        "one_month_price_change": "-0.005",
+        "one_week_price_change": "0.105",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "656451",
+      "fills_72h": 1056,
+      "first_fill_72h": "2026-08-15T21:20:30+00:00",
+      "last_fill_72h": "2026-08-18T18:06:21+00:00",
+      "market_id": "0xe9e713e3d02d67100e35716868238b3824a060ae6c716f310cacc8c39c6a30d0",
+      "market_type": "binary",
+      "observed_notional_72h": "74459.5178330000000000000000005039047726",
+      "open_time": "2026-07-01T21:48:45.893921+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.555",
+          "token_id": "136167671622079980529778861584614165098165641931369695898944942224667308859"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.445",
+          "token_id": "73262720942346872663664065117167500642873843610967982455010649784209638670323"
+        }
+      },
+      "question": "Will James Fishback win less than 10% of votes in the Florida Republican Governor primary?",
+      "slug": "will-james-fishback-win-less-than-10-of-votes-in-the-florida-republican-governor-primary-20260701154239340",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2028-11-07T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.186",
+        "best_bid": "0.185",
+        "last_trade_price": "0.185",
+        "one_day_price_change": "-0.022",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.041",
+        "one_week_price_change": "0.035",
+        "one_year_price_change": "0.0605",
+        "spread": "0.001"
+      },
+      "event_id": "30829",
+      "fills_72h": 678,
+      "first_fill_72h": "2026-08-15T20:48:55+00:00",
+      "last_fill_72h": "2026-08-18T17:31:15+00:00",
+      "market_id": "0xe6bcc2f1dd025ce5e1833190f7c60a71171c94f805df55b9ab0ded695ec93565",
+      "market_type": "binary",
+      "observed_notional_72h": "70314.2529190000000000000000019655706339",
+      "open_time": "2025-07-11T18:35:59.075000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.8145",
+          "token_id": "65176072261324737856085688071627118509549293922582857186996392180609764586527"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.1855",
+          "token_id": "107064985435494333113391038470401719113272800530429703182710416066774068907304"
+        }
+      },
+      "question": "Will Alexandria Ocasio-Cortez win the 2028 Democratic presidential nomination?",
+      "slug": "will-alexandria-ocasio-cortez-win-the-2028-democratic-presidential-nomination-653",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2028-11-07T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.016",
+        "best_bid": "0.015",
+        "last_trade_price": "0.016",
+        "one_day_price_change": "-0.055",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.004",
+        "one_week_price_change": "0.001",
+        "one_year_price_change": "-0.0435",
+        "spread": "0.001"
+      },
+      "event_id": "30829",
+      "fills_72h": 449,
+      "first_fill_72h": "2026-08-16T03:57:06+00:00",
+      "last_fill_72h": "2026-08-18T16:17:28+00:00",
+      "market_id": "0x61d9486c0f7e14ed98f3b177b6adcb3cd45646c92e8bbfbf209789b86472d4b6",
+      "market_type": "binary",
+      "observed_notional_72h": "69917.22547599999999999999999898171596531",
+      "open_time": "2025-07-11T18:36:00.839000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9845",
+          "token_id": "105134691322323565615831879054043168027913414000042547943201361115853277749482"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0155",
+          "token_id": "90227223115596293448966158151606153337847900483048338623540402385929720677904"
+        }
+      },
+      "question": "Will Wes Moore win the 2028 Democratic presidential nomination?",
+      "slug": "will-wes-moore-win-the-2028-democratic-presidential-nomination-714",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.11",
+        "best_bid": "0.1",
+        "last_trade_price": "0.11",
+        "one_day_price_change": "-0.03",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.05",
+        "one_week_price_change": "-0.06",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "326475",
+      "fills_72h": 311,
+      "first_fill_72h": "2026-08-16T01:38:58+00:00",
+      "last_fill_72h": "2026-08-18T14:11:49+00:00",
+      "market_id": "0xff68b32e6543ae8b44ccb520604b6ea224a1bac071a186fb65f6f40949a758df",
+      "market_type": "binary",
+      "observed_notional_72h": "69102.9864860000000000000000000022979389",
+      "open_time": "2026-03-31T20:12:29.148000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.895",
+          "token_id": "111094090837649765214249428313341768842963554572116350745061757857767411424456"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.105",
+          "token_id": "107729402733481801715276727183402507127741210361101226673865413196241742960596"
+        }
+      },
+      "question": " Iran agrees to end enrichment of uranium by December 31?",
+      "slug": "iran-agrees-to-end-enrichment-of-uranium-by-december-31",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.27",
+        "best_bid": "0.26",
+        "last_trade_price": "0.26",
+        "one_day_price_change": "-0.04",
+        "one_hour_price_change": "0.01",
+        "one_month_price_change": null,
+        "one_week_price_change": "-0.195",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "624218",
+      "fills_72h": 668,
+      "first_fill_72h": "2026-08-15T22:02:28+00:00",
+      "last_fill_72h": "2026-08-18T17:50:15+00:00",
+      "market_id": "0xed5a9e7831ee363d92cb102f2c21e2465b09196ef5beb7c8e23671851a1c3ca4",
+      "market_type": "binary",
+      "observed_notional_72h": "68243.7641729999999999999999995243326951",
+      "open_time": "2026-07-31T21:29:56.339079+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.735",
+          "token_id": "102402679475426110774044851720817690724908108674246723425637890637120301946959"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.265",
+          "token_id": "92467093729798172795860015164975956539777812580280382263501795773871198126752"
+        }
+      },
+      "question": "US x Iran diplomatic meeting by September 30, 2026?",
+      "slug": "us-x-iran-diplomatic-meeting-by-september-30-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.183",
+        "best_bid": "0.182",
+        "last_trade_price": "0.182",
+        "one_day_price_change": "-0.011",
+        "one_hour_price_change": "-0.01",
+        "one_month_price_change": "-0.185",
+        "one_week_price_change": "-0.05",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "149589",
+      "fills_72h": 1047,
+      "first_fill_72h": "2026-08-15T19:53:27+00:00",
+      "last_fill_72h": "2026-08-18T18:24:28+00:00",
+      "market_id": "0xc9615bb82d6535d630ff98e8094060bc767d8b9446516e98f84d2001a35e50e7",
+      "market_type": "binary",
+      "observed_notional_72h": "66559.2007780000000000000000011213043334",
+      "open_time": "2026-01-07T21:34:54.347508+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.8175",
+          "token_id": "94909497204791422218953326989433848804063787259853889845128791095089809741999"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.1825",
+          "token_id": "11579523374077486340625849389871632811698420338620172235121664865203221472748"
+        }
+      },
+      "question": "Will New People (NL) gain the most seats in the next Russian parliamentary election?",
+      "slug": "will-new-people-nl-gain-the-most-seats-in-the-next-russian-parliamentary-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2028-11-07T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.027",
+        "best_bid": "0.024",
+        "last_trade_price": "0.022",
+        "one_day_price_change": "0.004",
+        "one_hour_price_change": "-0.005",
+        "one_month_price_change": "0.011",
+        "one_week_price_change": "0.005",
+        "one_year_price_change": "-0.003",
+        "spread": "0.003"
+      },
+      "event_id": "31552",
+      "fills_72h": 474,
+      "first_fill_72h": "2026-08-15T19:38:55+00:00",
+      "last_fill_72h": "2026-08-18T18:22:19+00:00",
+      "market_id": "0xce9a5fa30fe74e323b4a8f15afbb0b7a41a537aa880779ddf7dee22223b2f34a",
+      "market_type": "binary",
+      "observed_notional_72h": "66517.31608800000000000000000062486612188",
+      "open_time": "2025-07-11T19:06:02.535000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9745",
+          "token_id": "72656506786460378316387284276713856836841708169262528054985577978493419440428"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0255",
+          "token_id": "11807691644868166983390207408868795383945915035851758101409310535538572683733"
+        }
+      },
+      "question": "Will Donald Trump win the 2028 US Presidential Election?",
+      "slug": "will-donald-trump-win-the-2028-us-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.027",
+        "best_bid": "0.023",
+        "last_trade_price": "0.027",
+        "one_day_price_change": "0.0075",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.17",
+        "one_week_price_change": "-0.018",
+        "one_year_price_change": null,
+        "spread": "0.004"
+      },
+      "event_id": "276527",
+      "fills_72h": 401,
+      "first_fill_72h": "2026-08-15T19:15:10+00:00",
+      "last_fill_72h": "2026-08-18T17:52:18+00:00",
+      "market_id": "0x31327c6fbdc70a44d97f8e8973f536b6a748e01b4c0ca5549ed0910c703b1d7b",
+      "market_type": "binary",
+      "observed_notional_72h": "64632.20060500000000000000000004872219954",
+      "open_time": "2026-07-13T19:32:31.490374+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.975",
+          "token_id": "8310650677069487821478025416478130051168635736368290554555541536659374960027"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.025",
+          "token_id": "30774565298935121666763850272423963284589055313497974568971929195252437852383"
+        }
+      },
+      "question": "Bab el-Mandeb Strait effectively closed by August 31?",
+      "slug": "bab-el-mandeb-strait-effectively-closed-by-august-31",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-16T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.004",
+        "best_bid": "0.003",
+        "last_trade_price": "0.004",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.002",
+        "one_week_price_change": "-0.002",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "481717",
+      "fills_72h": 688,
+      "first_fill_72h": "2026-08-15T22:14:01+00:00",
+      "last_fill_72h": "2026-08-18T18:08:09+00:00",
+      "market_id": "0x2e4b58fc18dbffd74d5275d89fb076943f21992763c45dcadd81391b83bde13c",
+      "market_type": "binary",
+      "observed_notional_72h": "64389.767369999999999999999999994346724960",
+      "open_time": "2026-05-13T21:23:16.501737+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9965",
+          "token_id": "74195220586129237349258803179082634542284503538320000637909015632982564961602"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0035",
+          "token_id": "88912926533493988427719291698947688154042720958310632316541141466409683822293"
+        }
+      },
+      "question": "Will the Fed increase interest rates by 50+ bps after the September 2026 meeting?",
+      "slug": "will-the-fed-increase-interest-rates-by-50-bps-after-the-september-2026-meeting-664",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.039",
+        "best_bid": "0.038",
+        "last_trade_price": "0.039",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": null,
+        "one_week_price_change": "0.002",
+        "one_year_price_change": "-0.1715",
+        "spread": "0.001"
+      },
+      "event_id": "34044",
+      "fills_72h": 1721,
+      "first_fill_72h": "2026-08-15T19:09:27+00:00",
+      "last_fill_72h": "2026-08-18T17:06:31+00:00",
+      "market_id": "0xd9fb1184af0064e5e34b129f5b79afa5a17b7e32f2953ab05efed82315fee6d4",
+      "market_type": "binary",
+      "observed_notional_72h": "64050.02540999999999999999999996936799055",
+      "open_time": "2025-07-24T23:37:56.300000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9615",
+          "token_id": "90772332434487149264114862115632028379978765245278600275169585501290867536237"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0385",
+          "token_id": "94559586571241563470235664821564670251180951772614764383113614156422396181162"
+        }
+      },
+      "question": "Will China invade Taiwan by end of 2026?",
+      "slug": "will-china-invade-taiwan-before-2027",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2027-01-01T05:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.21",
+        "best_bid": "0.2",
+        "last_trade_price": "0.2",
+        "one_day_price_change": "0.01",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.19",
+        "one_week_price_change": "-0.01",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "158505",
+      "fills_72h": 806,
+      "first_fill_72h": "2026-08-15T19:15:49+00:00",
+      "last_fill_72h": "2026-08-18T18:04:18+00:00",
+      "market_id": "0x9cb23d04b2ded06147482076688b69b487a8d982c63ebdda2ab3678cf27cf390",
+      "market_type": "binary",
+      "observed_notional_72h": "63276.6057800000000000000000001853452118",
+      "open_time": "2026-01-11T23:22:56.488713+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.795",
+          "token_id": "29633826701713552120011280893309822625942861174174976276686142480636225243753"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.205",
+          "token_id": "35198549486569600595408965368290795524428922595732253580266052028158040373233"
+        }
+      },
+      "question": "Clarity Act (H.R.3633) signed into law in 2026?",
+      "slug": "clarity-act-signed-into-law-in-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-31T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.004",
+        "best_bid": "0.003",
+        "last_trade_price": "0.004",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": null,
+        "one_week_price_change": "-0.003",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "774298",
+      "fills_72h": 3945,
+      "first_fill_72h": "2026-08-15T19:09:27+00:00",
+      "last_fill_72h": "2026-08-18T17:49:48+00:00",
+      "market_id": "0x225a5d5900068fcf5c0a9f4dc9cbaf84d492be94c71782fbcea0461cd935048c",
+      "market_type": "binary",
+      "observed_notional_72h": "62221.626734999999999999999999981096722602",
+      "open_time": "2026-07-30T21:26:04.178771+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9965",
+          "token_id": "23537842165977046370574778086600347274303604738338768967720021180647769610330"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0035",
+          "token_id": "19649764603316187422267270618611348075829303083356994074694706895868484069137"
+        }
+      },
+      "question": "Trump out as President by August 31?",
+      "slug": "trump-out-as-president-by-august-31-20260730185655928",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-21T16:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.08",
+        "best_bid": "0.078",
+        "last_trade_price": "0.08",
+        "one_day_price_change": "-0.0015",
+        "one_hour_price_change": "0.005",
+        "one_month_price_change": null,
+        "one_week_price_change": "0.0655",
+        "one_year_price_change": null,
+        "spread": "0.002"
+      },
+      "event_id": "831375",
+      "fills_72h": 2463,
+      "first_fill_72h": "2026-08-15T19:11:25+00:00",
+      "last_fill_72h": "2026-08-18T18:24:49+00:00",
+      "market_id": "0xf71449439461b7a6581442187c0e199998f05455a94cd0aafe2a8a2c1d8458e9",
+      "market_type": "binary",
+      "observed_notional_72h": "61193.96998100000000000000000022574747407",
+      "open_time": "2026-08-11T04:00:54+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.921",
+          "token_id": "101424545099640932503505999273327553019747319569424226842665477139576292467317"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.079",
+          "token_id": "20173760898987952701144061418962479245213012738322901003508549812179692182673"
+        }
+      },
+      "question": "Will Elon Musk post 100-119 tweets from August 14 to August 21, 2026?",
+      "slug": "elon-musk-of-tweets-august-14-august-21-100-119",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.823",
+        "best_bid": "0.821",
+        "last_trade_price": "0.821",
+        "one_day_price_change": "-0.004",
+        "one_hour_price_change": "0.0005",
+        "one_month_price_change": "0.0895",
+        "one_week_price_change": "0.011",
+        "one_year_price_change": null,
+        "spread": "0.002"
+      },
+      "event_id": "237598",
+      "fills_72h": 1039,
+      "first_fill_72h": "2026-08-15T20:26:58+00:00",
+      "last_fill_72h": "2026-08-18T18:20:55+00:00",
+      "market_id": "0x25fb28382075f418a944a781a9f8840e2f541152eea0d9798d1cabfa1466adbb",
+      "market_type": "binary",
+      "observed_notional_72h": "60202.3542179999999999999999999391496764",
+      "open_time": "2026-03-01T00:15:27.113703+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.178",
+          "token_id": "42006549920912635238720143234628794318400295281074422564226738635663399130499"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.822",
+          "token_id": "111988618077786263362718284278451225707405623288593888751575373086664059387290"
+        }
+      },
+      "question": "Will Mojtaba Khamenei be head of state in Iran end of 2026?",
+      "slug": "will-mojtaba-khamenei-be-head-of-state-in-iran-end-of-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.065",
+        "best_bid": "0.062",
+        "last_trade_price": "0.063",
+        "one_day_price_change": "-0.0105",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.0085",
+        "one_week_price_change": "-0.019",
+        "one_year_price_change": null,
+        "spread": "0.003"
+      },
+      "event_id": "131623",
+      "fills_72h": 259,
+      "first_fill_72h": "2026-08-16T01:57:33+00:00",
+      "last_fill_72h": "2026-08-18T16:29:18+00:00",
+      "market_id": "0x9051c339493374b28c5348337a3928890127228cac85dc270b928c805789052e",
+      "market_type": "binary",
+      "observed_notional_72h": "59278.08300",
+      "open_time": "2026-04-30T14:13:41.896281+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9365",
+          "token_id": "60723272638491203222333518330527122876237274459371689952180825288347810204632"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0635",
+          "token_id": "28973723560426996031408842976019851055790661167079359472177710649429036274394"
+        }
+      },
+      "question": "Will Russia capture all of Prymorske by December 31, 2026?",
+      "slug": "will-russia-capture-all-of-prymorske-by-december-31-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-11-03T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.52",
+        "best_bid": "0.51",
+        "last_trade_price": "0.51",
+        "one_day_price_change": "0.01",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.08",
+        "one_week_price_change": "0.03",
+        "one_year_price_change": "0.225",
+        "spread": "0.01"
+      },
+      "event_id": "32224",
+      "fills_72h": 278,
+      "first_fill_72h": "2026-08-15T20:16:12+00:00",
+      "last_fill_72h": "2026-08-18T16:31:37+00:00",
+      "market_id": "0x307a1ed89d60b61002dd5bbf00e1408c5ed2ab3fcdb056191ca7ef9bc34d38f3",
+      "market_type": "binary",
+      "observed_notional_72h": "57347.8988299999999999999999999969606249",
+      "open_time": "2025-07-11T19:48:59.128000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.485",
+          "token_id": "107118433685650702332040991454078902188473746599223732907923581436160160612542"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.515",
+          "token_id": "113287701564209339913693347405685749986285999146352375265161592243948562084773"
+        }
+      },
+      "question": "Will the Democratic Party control the Senate after the 2026 Midterm elections?",
+      "slug": "will-the-democratic-party-control-the-senate-after-the-2026-midterm-elections",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2028-11-07T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.002",
+        "best_bid": "0.001",
+        "last_trade_price": "0.001",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.001",
+        "one_week_price_change": "-0.001",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "31552",
+      "fills_72h": 589,
+      "first_fill_72h": "2026-08-15T19:46:19+00:00",
+      "last_fill_72h": "2026-08-18T17:56:51+00:00",
+      "market_id": "0x7f695758278e6d4d9e63df862afa88d664d3402a3d26e4d32ae05121cdbddba6",
+      "market_type": "binary",
+      "observed_notional_72h": "55406.584460",
+      "open_time": "2025-07-11T19:06:15.048000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9985",
+          "token_id": "44632793419668141561343859504077903947361590865219599333832862239708628173864"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0015",
+          "token_id": "24863363384036117015867671383779186335047493791693657275104567365292353535818"
+        }
+      },
+      "question": "Will Kim Kardashian win the 2028 US Presidential Election?",
+      "slug": "will-kim-kardashian-win-the-2028-us-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2027-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.13",
+        "best_bid": "0.12",
+        "last_trade_price": "0.13",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.03",
+        "one_week_price_change": null,
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "281145",
+      "fills_72h": 184,
+      "first_fill_72h": "2026-08-15T19:48:43+00:00",
+      "last_fill_72h": "2026-08-18T18:09:36+00:00",
+      "market_id": "0xe6d5e5da83874cd82c9b651a8a5d4fc541a800a295fb62e85124b4f5a04a4b7d",
+      "market_type": "binary",
+      "observed_notional_72h": "54784.6202750000000000000000005022578771",
+      "open_time": "2026-03-17T23:32:00.623000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.875",
+          "token_id": "32952048155093419718055060819712841482842350791391116195205201413217889733414"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.125",
+          "token_id": "99308764485765552888542373236405354280486342174935314281037215048612491168324"
+        }
+      },
+      "question": "Will China invade Taiwan by December 31, 2027?",
+      "slug": "will-china-invade-taiwan-by-december-31-2027",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.48",
+        "best_bid": "0.47",
+        "last_trade_price": "0.48",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.1",
+        "one_week_price_change": "0.05",
+        "one_year_price_change": "0.025",
+        "spread": "0.01"
+      },
+      "event_id": "34051",
+      "fills_72h": 543,
+      "first_fill_72h": "2026-08-15T20:15:12+00:00",
+      "last_fill_72h": "2026-08-18T18:17:13+00:00",
+      "market_id": "0xd1796c09d0d6f876f8580086ae9808ec991784e3a74b25a1830a25de71a78c96",
+      "market_type": "binary",
+      "observed_notional_72h": "54679.8825810000000000000000000414614737",
+      "open_time": "2025-07-24T23:38:14.261000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.525",
+          "token_id": "66255671088804707681511323064315150986307471908131081808279119719218775249892"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.475",
+          "token_id": "114694726451307654528948558967898493662917070661203465131156925998487819889437"
+        }
+      },
+      "question": "Netanyahu out by end of 2026?",
+      "slug": "netanyahu-out-before-2027-684-719-226-657",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-11-03T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.13",
+        "best_bid": "0.12",
+        "last_trade_price": "0.12",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.03",
+        "one_week_price_change": "0.01",
+        "one_year_price_change": "-0.1",
+        "spread": "0.01"
+      },
+      "event_id": "32228",
+      "fills_72h": 155,
+      "first_fill_72h": "2026-08-15T20:47:37+00:00",
+      "last_fill_72h": "2026-08-18T15:10:07+00:00",
+      "market_id": "0xc5eae79d1ffe716572353962eb926b1e3964c500a4880a7a94f58408218ee76b",
+      "market_type": "binary",
+      "observed_notional_72h": "54624.9737840000000000000000005068807861",
+      "open_time": "2025-07-11T21:05:25.044000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.875",
+          "token_id": "25869296386911654049715489068824757745174681288397238521780118949553760488529"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.125",
+          "token_id": "103704141773947678931823410030956181918562062788486034785782641603149828893320"
+        }
+      },
+      "question": "2026 Balance of Power: R Senate, R House",
+      "slug": "2026-balance-of-power-r-senate-r-house-537",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.037",
+        "best_bid": "0.036",
+        "last_trade_price": "0.034",
+        "one_day_price_change": "0.002",
+        "one_hour_price_change": "-0.001",
+        "one_month_price_change": "-0.008",
+        "one_week_price_change": null,
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "118172",
+      "fills_72h": 493,
+      "first_fill_72h": "2026-08-15T19:51:22+00:00",
+      "last_fill_72h": "2026-08-18T18:13:06+00:00",
+      "market_id": "0xd595eb9b81885ff018738300c79047e3ec89e87294424f57a29a7fa9162bf116",
+      "market_type": "binary",
+      "observed_notional_72h": "54332.55637699999999999999999934620988672",
+      "open_time": "2025-12-23T00:58:12.158000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9635",
+          "token_id": "57216272564529548464686463691236811991956032201293786790337952253964682584376"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0365",
+          "token_id": "5161623255678193352839985156330393796378434470119114669671615782853260939535"
+        }
+      },
+      "question": "Will Trump acquire Greenland before 2027?",
+      "slug": "will-trump-acquire-greenland-before-2027",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-31T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.07",
+        "best_bid": "0.05",
+        "last_trade_price": "0.05",
+        "one_day_price_change": "-0.085",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.105",
+        "one_week_price_change": "-0.08",
+        "one_year_price_change": null,
+        "spread": "0.02"
+      },
+      "event_id": "628275",
+      "fills_72h": 320,
+      "first_fill_72h": "2026-08-16T02:15:00+00:00",
+      "last_fill_72h": "2026-08-18T17:59:34+00:00",
+      "market_id": "0x73dd54214430d1d67ddf59ad22fdf62e00e71e273b229dc0040da504e5281b6f",
+      "market_type": "binary",
+      "observed_notional_72h": "50097.62195400000000000000000004014041136",
+      "open_time": "2026-07-09T00:35:58.289812+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.94",
+          "token_id": "112398855248126389642334724080634566219399886008841203075173521868162852635909"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.06",
+          "token_id": "100533112439619746354289028296398483950720842225128756964108690731124876463339"
+        }
+      },
+      "question": "IAEA visits Isfahan, Fordow, or Natanz nuclear site by October 31?",
+      "slug": "iaea-visits-isfahan-fordow-or-natanz-nuclear-site-by-october-31",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.012",
+        "best_bid": "0.011",
+        "last_trade_price": "0.011",
+        "one_day_price_change": "0.002",
+        "one_hour_price_change": null,
+        "one_month_price_change": null,
+        "one_week_price_change": "-0.016",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "255195",
+      "fills_72h": 333,
+      "first_fill_72h": "2026-08-15T20:47:39+00:00",
+      "last_fill_72h": "2026-08-18T17:08:42+00:00",
+      "market_id": "0x43e12647a58ee0b20d2539d23764b0d561ea7be322acb8823f7bb126e67c115e",
+      "market_type": "binary",
+      "observed_notional_72h": "49861.44025700000000000000000000794379145",
+      "open_time": "2026-07-21T15:07:32.533000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9885",
+          "token_id": "99261337501727268903007672637048014195860206198768162611304188794218182789513"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0115",
+          "token_id": "82120567451390337669429362072587795539141464517734711915662146975094351939358"
+        }
+      },
+      "question": "Iran leadership change by August 31?",
+      "slug": "iran-leadership-change-by-august-31-669-893",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-11-03T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.39",
+        "best_bid": "0.38",
+        "last_trade_price": "0.38",
+        "one_day_price_change": "0.01",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.02",
+        "one_week_price_change": null,
+        "one_year_price_change": "-0.125",
+        "spread": "0.01"
+      },
+      "event_id": "32228",
+      "fills_72h": 252,
+      "first_fill_72h": "2026-08-15T19:37:48+00:00",
+      "last_fill_72h": "2026-08-18T12:00:00+00:00",
+      "market_id": "0x998bc71817b2d76921d1999ce0f3431cfd5945583667a371280ca2b430b0c06e",
+      "market_type": "binary",
+      "observed_notional_72h": "49698.9386849999999999999999998262419104",
+      "open_time": "2025-07-11T21:05:20.815000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.615",
+          "token_id": "558600218792430158020964384658762756367786275998757133304987611939841005404"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.385",
+          "token_id": "6302359956133594764084277082169634158291609371270652093164054687145970756151"
+        }
+      },
+      "question": "2026 Balance of Power: R Senate, D House",
+      "slug": "2026-balance-of-power-r-senate-d-house-444",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2028-11-07T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.212",
+        "best_bid": "0.211",
+        "last_trade_price": "0.211",
+        "one_day_price_change": "-0.019",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.013",
+        "one_week_price_change": "-0.005",
+        "one_year_price_change": "-0.0635",
+        "spread": "0.001"
+      },
+      "event_id": "31552",
+      "fills_72h": 471,
+      "first_fill_72h": "2026-08-15T19:38:57+00:00",
+      "last_fill_72h": "2026-08-18T18:20:18+00:00",
+      "market_id": "0x7ad403c3508f8e3912940fd1a913f227591145ca0614074208e0b962d5fcc422",
+      "market_type": "binary",
+      "observed_notional_72h": "49196.4386699999999999999999999183418620",
+      "open_time": "2025-07-11T19:05:46.369000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.7885",
+          "token_id": "94476829201604408463453426454480212459887267917122244941405244686637914508323"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.2115",
+          "token_id": "16040015440196279900485035793550429453516625694844857319147506590755961451627"
+        }
+      },
+      "question": "Will JD Vance win the 2028 US Presidential Election?",
+      "slug": "will-jd-vance-win-the-2028-us-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2028-11-07T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.117",
+        "best_bid": "0.116",
+        "last_trade_price": "0.116",
+        "one_day_price_change": "-0.014",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.037",
+        "one_week_price_change": "0.023",
+        "one_year_price_change": "0.0315",
+        "spread": "0.001"
+      },
+      "event_id": "31552",
+      "fills_72h": 408,
+      "first_fill_72h": "2026-08-15T22:50:00+00:00",
+      "last_fill_72h": "2026-08-18T14:18:13+00:00",
+      "market_id": "0xf232b565995e4b3a3e7fa6cef775eeff1cecd20ad7c013cb9fc8dadabfe279a9",
+      "market_type": "binary",
+      "observed_notional_72h": "48929.6787299999999999999999998002285278",
+      "open_time": "2025-07-11T19:05:48.480000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.8835",
+          "token_id": "11493926619286817179231142642565394485790380952577225820901334479399429951651"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.1165",
+          "token_id": "8113830512143065501177519557124858581375945005490796772950589720955457782465"
+        }
+      },
+      "question": "Will Alexandria Ocasio-Cortez win the 2028 US Presidential Election?",
+      "slug": "will-alexandria-ocasio-cortez-win-the-2028-us-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-19T16:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.41",
+        "best_bid": "0.39",
+        "last_trade_price": "0.36",
+        "one_day_price_change": "0.08",
+        "one_hour_price_change": "0.07",
+        "one_month_price_change": null,
+        "one_week_price_change": null,
+        "one_year_price_change": null,
+        "spread": "0.02"
+      },
+      "event_id": "853896",
+      "fills_72h": 1876,
+      "first_fill_72h": "2026-08-15T19:13:18+00:00",
+      "last_fill_72h": "2026-08-18T18:23:18+00:00",
+      "market_id": "0x367c705becf7c27530ceaa65f3c96b2709f0e299aa98690f7e9f5386e1838745",
+      "market_type": "binary",
+      "observed_notional_72h": "47077.0430170000000000000000000338437655",
+      "open_time": "2026-08-15T16:07:17+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.6",
+          "token_id": "79351454247157848573224150414518619408414188794781226086525329232401482346127"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.4",
+          "token_id": "62357583066924938089306139524556289939722109442140645301987553155506676676405"
+        }
+      },
+      "question": "Will Elon Musk post <40 tweets from August 17 to August 19, 2026?",
+      "slug": "elon-musk-of-tweets-august-17-august-19-0-39",
+      "updated_at": "2026-08-18T19:07:51.002261+00:00"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.001",
+        "best_bid": null,
+        "last_trade_price": "0.001",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.007",
+        "one_week_price_change": "-0.001",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "45915",
+      "fills_72h": 1342,
+      "first_fill_72h": "2026-08-15T20:51:10+00:00",
+      "last_fill_72h": "2026-08-17T23:24:49+00:00",
+      "market_id": "0x101d084cd035070abde58d8a3113b78e11ba68028b0d9e7e38ea7d780797aecc",
+      "market_type": "binary",
+      "observed_notional_72h": "45145.267560",
+      "open_time": "2025-09-18T20:08:07.736000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9995",
+          "token_id": "19426561498944480100112574303715252854511498242084732425528134709477022078274"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0005",
+          "token_id": "40200361970099951836914907993971598083846841136374094155950298822866778978473"
+        }
+      },
+      "question": "Will Camilo Santana win the 2026 Brazilian presidential election?",
+      "slug": "will-camilo-santana-win-the-2026-brazilian-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-21T16:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.01",
+        "best_bid": "0.007",
+        "last_trade_price": "0.009",
+        "one_day_price_change": null,
+        "one_hour_price_change": "0.002",
+        "one_month_price_change": null,
+        "one_week_price_change": "0.002",
+        "one_year_price_change": null,
+        "spread": "0.003"
+      },
+      "event_id": "831375",
+      "fills_72h": 1741,
+      "first_fill_72h": "2026-08-15T21:02:39+00:00",
+      "last_fill_72h": "2026-08-18T18:26:28+00:00",
+      "market_id": "0x7fe72ba294ac5061de14d3b10000103f65144c76e7698084325acbf3b41a8385",
+      "market_type": "binary",
+      "observed_notional_72h": "44715.740176999999999999999999974220483931",
+      "open_time": "2026-08-11T04:00:54+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9915",
+          "token_id": "102475860166143335945951586843436441816865993030788291082658242206728406707660"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0085",
+          "token_id": "58500921597526568712288437474000641448043472694620788387138466904551229613881"
+        }
+      },
+      "question": "Will Elon Musk post 80-99 tweets from August 14 to August 21, 2026?",
+      "slug": "elon-musk-of-tweets-august-14-august-21-80-99",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-20T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.006",
+        "best_bid": "0.003",
+        "last_trade_price": "0.005",
+        "one_day_price_change": "0.002",
+        "one_hour_price_change": null,
+        "one_month_price_change": null,
+        "one_week_price_change": "-0.009",
+        "one_year_price_change": null,
+        "spread": "0.003"
+      },
+      "event_id": "810897",
+      "fills_72h": 166,
+      "first_fill_72h": "2026-08-16T01:15:18+00:00",
+      "last_fill_72h": "2026-08-18T17:05:49+00:00",
+      "market_id": "0xee2fb6d9f90bca0e1dfeb1fd7a210604cc58d4fa3bc69cd37af3da092535d86f",
+      "market_type": "binary",
+      "observed_notional_72h": "44712.61859599999999999999999961213600396",
+      "open_time": "2026-08-07T13:58:59.922923+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9955",
+          "token_id": "8818309141722695933343314417387731381403406839138259612040934521482014000418"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0045",
+          "token_id": "53938116805276830683919041437743773303353714680866385496289111834806866901451"
+        }
+      },
+      "question": "Russia Elections: Yabloko Clears Duma Threshold?",
+      "slug": "russia-elections-yabloko-clears-duma-threshold",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.06",
+        "best_bid": "0.05",
+        "last_trade_price": "0.06",
+        "one_day_price_change": "-0.01",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.05",
+        "one_week_price_change": "-0.01",
+        "one_year_price_change": "-0.505",
+        "spread": "0.01"
+      },
+      "event_id": "34052",
+      "fills_72h": 121,
+      "first_fill_72h": "2026-08-15T20:26:37+00:00",
+      "last_fill_72h": "2026-08-18T17:08:37+00:00",
+      "market_id": "0x51f624dbbf14f9edb575fef1be6f7a303751de70783fa144fce27b957452c803",
+      "market_type": "binary",
+      "observed_notional_72h": "42681.28370000000000000000000000920353376",
+      "open_time": "2025-07-24T23:37:37.149000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.945",
+          "token_id": "12238337804021350373072513606997115174826680613156170611182546081135779794915"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.055",
+          "token_id": "108187737663325442737199857734058032845728149267925579081973309839049299838520"
+        }
+      },
+      "question": "Zelenskyy out as Ukraine president by end of 2026?",
+      "slug": "zelenskyy-out-as-ukraine-president-before-2027",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.17",
+        "best_bid": "0.16",
+        "last_trade_price": "0.16",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.09",
+        "one_week_price_change": "-0.02",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "255195",
+      "fills_72h": 594,
+      "first_fill_72h": "2026-08-15T19:20:45+00:00",
+      "last_fill_72h": "2026-08-18T16:49:12+00:00",
+      "market_id": "0x377e7fe65cf198a7fc4fdae3f2136b74729279267858daaf96718b23bc2a5607",
+      "market_type": "binary",
+      "observed_notional_72h": "42645.9958680000000000000000002752248720",
+      "open_time": "2026-03-09T02:58:15.361000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.835",
+          "token_id": "60499458684380641857666641513383149627633695110197406276308452075860198022694"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.165",
+          "token_id": "18652479948917565296149340091675894865339012333173025944893512396354173886674"
+        }
+      },
+      "question": "Iran leadership change by December 31?",
+      "slug": "iran-leadership-change-by-december-31-974-976-658-482-568-685-996-469-827",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.02",
+        "best_bid": "0.019",
+        "last_trade_price": "0.02",
+        "one_day_price_change": "0.001",
+        "one_hour_price_change": "0.001",
+        "one_month_price_change": "-0.0105",
+        "one_week_price_change": "-0.001",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "90177",
+      "fills_72h": 208,
+      "first_fill_72h": "2026-08-15T21:02:49+00:00",
+      "last_fill_72h": "2026-08-18T18:23:25+00:00",
+      "market_id": "0xace3c72c24fccb6731433483ece41c780432d84850edccd5a6bf3147ccea62a9",
+      "market_type": "binary",
+      "observed_notional_72h": "42500.16533199999999999999999998212671853",
+      "open_time": "2026-04-20T16:14:03.578497+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9805",
+          "token_id": "36187795093008220558219256261729424135850137511571634448544248306719357578130"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0195",
+          "token_id": "105069795193894788513793544317232573603113601482800430284884125529472460504203"
+        }
+      },
+      "question": "Will the US confirm that aliens exist by September 30?",
+      "slug": "will-the-us-confirm-that-aliens-exist-by-september-30-396",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-31T12:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.996",
+        "best_bid": "0.971",
+        "last_trade_price": "0.997",
+        "one_day_price_change": "0.7285",
+        "one_hour_price_change": "0.7685",
+        "one_month_price_change": "0.3985",
+        "one_week_price_change": "0.5685",
+        "one_year_price_change": null,
+        "spread": "0.025"
+      },
+      "event_id": "25036",
+      "fills_72h": 690,
+      "first_fill_72h": "2026-08-15T22:01:18+00:00",
+      "last_fill_72h": "2026-08-18T18:21:25+00:00",
+      "market_id": "0x65dba70f1ce2e78bdc1c82ae6325d32b2ffbe2fe0eaec0e39e70c3dadfa44f94",
+      "market_type": "binary",
+      "observed_notional_72h": "41904.07948999999999999999999978551255545",
+      "open_time": "2026-07-09T02:01:01.587000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.0165",
+          "token_id": "102014344590877510111307026183396382993200803565841268936861018160343144455955"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.9835",
+          "token_id": "75450938030663819696107743188961274408991378337732826543927521255350461461621"
+        }
+      },
+      "question": "Will Russia capture Kostyantynivka by August 31?",
+      "slug": "will-russia-capture-kostyantynivka-by-august-31-1-893-748",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-10T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.026",
+        "best_bid": "0.024",
+        "last_trade_price": "0.023",
+        "one_day_price_change": "-0.001",
+        "one_hour_price_change": "0.0015",
+        "one_month_price_change": "-0.019",
+        "one_week_price_change": "-0.0045",
+        "one_year_price_change": null,
+        "spread": "0.002"
+      },
+      "event_id": "60182",
+      "fills_72h": 169,
+      "first_fill_72h": "2026-08-15T23:38:54+00:00",
+      "last_fill_72h": "2026-08-18T16:37:57+00:00",
+      "market_id": "0x962e5b226a77266ab429029ee04665e8fcfeb10b91af593786ceab871d2e945f",
+      "market_type": "binary",
+      "observed_notional_72h": "41634.20062399999999999999999984978339992",
+      "open_time": "2025-10-16T22:30:32.369842+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.975",
+          "token_id": "75648553599758807820760400986240186978327005811004242427218252697572451485336"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.025",
+          "token_id": "96308556109755835434254900303426519652053230974356832970824534225192181988516"
+        }
+      },
+      "question": "Will Donald Trump win the Nobel Peace Prize in 2026?",
+      "slug": "will-donald-trump-win-the-nobel-peace-prize-in-2026-382",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2028-11-07T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.157",
+        "best_bid": "0.156",
+        "last_trade_price": "0.157",
+        "one_day_price_change": "-0.0015",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.042",
+        "one_week_price_change": "-0.021",
+        "one_year_price_change": "-0.0385",
+        "spread": "0.001"
+      },
+      "event_id": "30829",
+      "fills_72h": 664,
+      "first_fill_72h": "2026-08-15T19:24:25+00:00",
+      "last_fill_72h": "2026-08-18T16:38:22+00:00",
+      "market_id": "0x0f49db97f71c68b1e42a6d16e3de93d85dbf7d4148e3f018eb79e88554be9f75",
+      "market_type": "binary",
+      "observed_notional_72h": "40655.4592090000000000000000000633143124",
+      "open_time": "2025-07-11T18:35:56.805000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.8435",
+          "token_id": "87854174148074652060467921081181402357467303721471806610111179101805869578687"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.1565",
+          "token_id": "54533043819946592547517511176940999955633860128497669742211153063842200957669"
+        }
+      },
+      "question": "Will Gavin Newsom win the 2028 Democratic presidential nomination?",
+      "slug": "will-gavin-newsom-win-the-2028-democratic-presidential-nomination-568",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.057",
+        "best_bid": "0.055",
+        "last_trade_price": "0.057",
+        "one_day_price_change": "-0.012",
+        "one_hour_price_change": "0.0005",
+        "one_month_price_change": "0.014",
+        "one_week_price_change": "0.0035",
+        "one_year_price_change": null,
+        "spread": "0.002"
+      },
+      "event_id": "149589",
+      "fills_72h": 550,
+      "first_fill_72h": "2026-08-15T19:50:31+00:00",
+      "last_fill_72h": "2026-08-18T18:09:04+00:00",
+      "market_id": "0x8c48f3acf4177b5ceb012a8a2dc7a9c219eeae4a032d6ddcbc3c2ffab907439a",
+      "market_type": "binary",
+      "observed_notional_72h": "40603.01050100000000000000000006847343128",
+      "open_time": "2026-01-07T21:34:52.030175+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.944",
+          "token_id": "44366458982156171422796551330299704518162863942866740121745454633979905778791"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.056",
+          "token_id": "15542559311360205718528742674119037507303557005670729042870301990328002599887"
+        }
+      },
+      "question": "Will the Liberal Democratic Party of Russia (LDPR) gain the most seats in the next Russian parliamentary election?",
+      "slug": "will-the-liberal-democratic-party-of-russia-ldpr-gain-the-most-seats-in-the-next-russian-parliamentary-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T18:30:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.017",
+        "best_bid": "0.016",
+        "last_trade_price": "0.016",
+        "one_day_price_change": "-0.003",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.024",
+        "one_week_price_change": "-0.009",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "31195",
+      "fills_72h": 219,
+      "first_fill_72h": "2026-08-15T19:45:43+00:00",
+      "last_fill_72h": "2026-08-18T18:15:10+00:00",
+      "market_id": "0xc788500313fb20ebab5b6577c3dcfc24e911e44e45c3aebabb8eee4bb70f4431",
+      "market_type": "binary",
+      "observed_notional_72h": "40464.84794700000000000000000000151570340",
+      "open_time": "2026-07-06T21:34:47.715770+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9835",
+          "token_id": "31506001409277523312192651470195524167090101943080063273985704767232411431594"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0165",
+          "token_id": "40976483682554536017504172547966843907849775688824741280797351049178911106148"
+        }
+      },
+      "question": "Putin out as President of Russia by September 30, 2026?",
+      "slug": "putin-out-as-president-of-russia-by-september-30-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-21T16:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.284",
+        "best_bid": "0.28",
+        "last_trade_price": "0.284",
+        "one_day_price_change": "0.0495",
+        "one_hour_price_change": "0.0075",
+        "one_month_price_change": null,
+        "one_week_price_change": "0.2355",
+        "one_year_price_change": null,
+        "spread": "0.004"
+      },
+      "event_id": "831375",
+      "fills_72h": 1797,
+      "first_fill_72h": "2026-08-15T19:13:12+00:00",
+      "last_fill_72h": "2026-08-18T18:25:30+00:00",
+      "market_id": "0xd57b60c55cfdc213a03e4513c1d5073091d9d0ddf0a1738d8f8b039dfeb581e5",
+      "market_type": "binary",
+      "observed_notional_72h": "39520.76161200000000000000000017607439424",
+      "open_time": "2026-08-11T04:00:54+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.718",
+          "token_id": "61487196933697307099610000260454702087221010062112431357484907035043450163545"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.282",
+          "token_id": "40214059757602272601633946869939841161221200752016646994647864888872134915319"
+        }
+      },
+      "question": "Will Elon Musk post 120-139 tweets from August 14 to August 21, 2026?",
+      "slug": "elon-musk-of-tweets-august-14-august-21-120-139",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-10-04T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.88",
+        "best_bid": "0.86",
+        "last_trade_price": "0.87",
+        "one_day_price_change": "0.02",
+        "one_hour_price_change": "0.005",
+        "one_month_price_change": "0.06",
+        "one_week_price_change": "0.065",
+        "one_year_price_change": null,
+        "spread": "0.02"
+      },
+      "event_id": "204972",
+      "fills_72h": 279,
+      "first_fill_72h": "2026-08-15T20:51:52+00:00",
+      "last_fill_72h": "2026-08-18T18:06:46+00:00",
+      "market_id": "0x6114306f724135bd1db2f5f3169386decf18f618653c196ef0a6c1afd27f4c73",
+      "market_type": "binary",
+      "observed_notional_72h": "39018.0039020000000000000000000153273113",
+      "open_time": "2026-02-11T22:51:11.028988+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.13",
+          "token_id": "40248862204095545824507770609491521282553259429991780219438297794719904718932"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.87",
+          "token_id": "49821065181473419798146957267480015506102711160660718636601116902870701340131"
+        }
+      },
+      "question": "Will Flávio Bolsonaro finish in second place in the first round of the 2026 Brazilian presidential election?",
+      "slug": "will-flvio-bolsonaro-finish-in-second-place-in-the-first-round-of-the-2026-brazilian-presidential-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.004",
+        "best_bid": "0.003",
+        "last_trade_price": "0.002",
+        "one_day_price_change": "-0.0005",
+        "one_hour_price_change": null,
+        "one_month_price_change": null,
+        "one_week_price_change": "-0.001",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "149589",
+      "fills_72h": 2217,
+      "first_fill_72h": "2026-08-15T19:11:55+00:00",
+      "last_fill_72h": "2026-08-18T18:21:16+00:00",
+      "market_id": "0xc65fb00eb998335039e5120dc390967576c4bfaee22a2342a17ced0fbc2c7e4e",
+      "market_type": "binary",
+      "observed_notional_72h": "38510.651895000000000000000000079401669585",
+      "open_time": "2026-01-07T21:34:54.093000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9965",
+          "token_id": "90762707983672765861835141479187060633323333373065143599577927094985125700922"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0035",
+          "token_id": "58721985681065679385223615049978282300963455822470759257650539113974997280205"
+        }
+      },
+      "question": "Will Yabloko gain the most seats in the next Russian parliamentary election?",
+      "slug": "will-yabloko-gain-the-most-seats-in-the-next-russian-parliamentary-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.28",
+        "best_bid": "0.27",
+        "last_trade_price": "0.27",
+        "one_day_price_change": "-0.01",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.08",
+        "one_week_price_change": "-0.03",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "81557",
+      "fills_72h": 507,
+      "first_fill_72h": "2026-08-15T19:29:42+00:00",
+      "last_fill_72h": "2026-08-18T18:25:28+00:00",
+      "market_id": "0x7586a96520578acaaaa4ea84a2582f197f84255da1f3392a7aa300386c187b37",
+      "market_type": "binary",
+      "observed_notional_72h": "38154.1510459999999999999999999606779573",
+      "open_time": "2025-11-15T00:27:02.243822+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.725",
+          "token_id": "54533569528927082430133047556849600511985191158927477533124630301934489498530"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.275",
+          "token_id": "20006732765674855733524007935991362439352594042415161039767275461950712817548"
+        }
+      },
+      "question": "Will Benjamin Netanyahu be the next Prime Minister of Israel?",
+      "slug": "will-benjamin-netanyahu-be-the-next-prime-minister-of-israel",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.104",
+        "best_bid": "0.093",
+        "last_trade_price": "0.098",
+        "one_day_price_change": "-0.0235",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.008",
+        "one_week_price_change": "-0.0165",
+        "one_year_price_change": null,
+        "spread": "0.011"
+      },
+      "event_id": "216808",
+      "fills_72h": 194,
+      "first_fill_72h": "2026-08-15T20:23:42+00:00",
+      "last_fill_72h": "2026-08-18T17:17:28+00:00",
+      "market_id": "0x60b4ee89a443d75781b3f01b1811779fa622612a2e2eaacbedaeb66671a50ab9",
+      "market_type": "binary",
+      "observed_notional_72h": "37651.777000000000000000000000002427200",
+      "open_time": "2026-06-25T01:21:19.746194+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9015",
+          "token_id": "26524589819673759196157065569507422824562535066966749571507249499498457756196"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0985",
+          "token_id": "55858197590584287605035617136822938534237079808085652364183111468537002659665"
+        }
+      },
+      "question": "Will Russia enter Krasnopillya by September 30?",
+      "slug": "will-russia-enter-krasnopillya-by-september-30",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.962",
+        "best_bid": "0.96",
+        "last_trade_price": "0.962",
+        "one_day_price_change": "0.004",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.046",
+        "one_week_price_change": "0.016",
+        "one_year_price_change": null,
+        "spread": "0.002"
+      },
+      "event_id": "208023",
+      "fills_72h": 176,
+      "first_fill_72h": "2026-08-16T04:07:04+00:00",
+      "last_fill_72h": "2026-08-18T18:13:24+00:00",
+      "market_id": "0xd7e906eaec2c7f66697447785aa1d4fdaa82f536ca533a2bc0d3535b04e832ec",
+      "market_type": "binary",
+      "observed_notional_72h": "37282.21241399999999999999999974676378415",
+      "open_time": "2026-02-13T21:43:49.306933+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.039",
+          "token_id": "76566287087295827435308764386786851889389087110738113471533385073095798268787"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.961",
+          "token_id": "4637338286775959835687096043697585583496047467301216102042792340146692639283"
+        }
+      },
+      "question": "Will Xi Jinping visit US before 2027?",
+      "slug": "will-xi-jinping-visit-us-before-2027",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-21T16:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.001",
+        "best_bid": null,
+        "last_trade_price": "0.001",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": null,
+        "one_week_price_change": "-0.001",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "831375",
+      "fills_72h": 488,
+      "first_fill_72h": "2026-08-15T19:16:40+00:00",
+      "last_fill_72h": "2026-08-18T17:16:06+00:00",
+      "market_id": "0xbdf91283c3773e4969e7499b87d16501b2ca7cb325f4b3e0f24fa42ffdba8bfb",
+      "market_type": "binary",
+      "observed_notional_72h": "37186.155615000000000000000000020571092603",
+      "open_time": "2026-08-11T04:00:54+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9995",
+          "token_id": "9601106814398184755594322655747330357753768787603960495465957336040706223747"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0005",
+          "token_id": "95727006925874759883902606660141543801485612000383779118114395563644339423210"
+        }
+      },
+      "question": "Will Elon Musk post 60-79 tweets from August 14 to August 21, 2026?",
+      "slug": "elon-musk-of-tweets-august-14-august-21-60-79",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.07",
+        "best_bid": "0.04",
+        "last_trade_price": "0.05",
+        "one_day_price_change": "-0.005",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.02",
+        "one_week_price_change": "-0.065",
+        "one_year_price_change": null,
+        "spread": "0.03"
+      },
+      "event_id": "191923",
+      "fills_72h": 146,
+      "first_fill_72h": "2026-08-16T08:43:42+00:00",
+      "last_fill_72h": "2026-08-18T16:15:19+00:00",
+      "market_id": "0x5e427d77f105bd4f1e471d2301b6dbc77307db8a13c07e6fa374a16a5a5ade0d",
+      "market_type": "binary",
+      "observed_notional_72h": "36571.7052600",
+      "open_time": "2026-06-25T01:24:45.296307+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.945",
+          "token_id": "51478303620975138249942269606952291215288154977724422872817185681173328192863"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.055",
+          "token_id": "31946233914402959421415892684929248965936294146700149807124006794630090237774"
+        }
+      },
+      "question": "Will Russia enter Havrylivka by September 30, 2026?",
+      "slug": "will-russia-enter-havrylivka-by-september-30-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-31T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.08",
+        "best_bid": "0.07",
+        "last_trade_price": "0.08",
+        "one_day_price_change": "-0.01",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.245",
+        "one_week_price_change": "0.01",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "623234",
+      "fills_72h": 935,
+      "first_fill_72h": "2026-08-15T19:32:16+00:00",
+      "last_fill_72h": "2026-08-18T17:26:18+00:00",
+      "market_id": "0x915dd9e35a242624df721871c609d23b74242a766b86bd70496afd23c99e7f98",
+      "market_type": "binary",
+      "observed_notional_72h": "36213.24380399999999999999999992539368252",
+      "open_time": "2026-07-08T17:48:51.683000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.925",
+          "token_id": "69041918862230770338367885738103882164723166524950967553005740340075212688169"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.075",
+          "token_id": "96851982316864441012765715893812831329802013339937303857390603808636751753379"
+        }
+      },
+      "question": "Will the US announce withdrawal from MOU negotiations by August 31?",
+      "slug": "will-the-us-announce-withdrawal-from-mou-negotiations-by-august-31-286",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.009",
+        "best_bid": "0.008",
+        "last_trade_price": "0.008",
+        "one_day_price_change": "-0.002",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.0065",
+        "one_week_price_change": "-0.004",
+        "one_year_price_change": null,
+        "spread": "0.001"
+      },
+      "event_id": "281143",
+      "fills_72h": 271,
+      "first_fill_72h": "2026-08-15T21:09:46+00:00",
+      "last_fill_72h": "2026-08-18T16:56:49+00:00",
+      "market_id": "0x5ca616aaa0e1e5df6c38439f8bee4b96bacfe32f8f39cb2f1604c0196548662f",
+      "market_type": "binary",
+      "observed_notional_72h": "35844.24450899999999999999999997972157466",
+      "open_time": "2026-03-17T23:27:41.000868+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9915",
+          "token_id": "50085164654457077021180441667207714705224469706773328882519583735294659477266"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0085",
+          "token_id": "11630502333603507010260051963632226548966933278788158525182753385940719742668"
+        }
+      },
+      "question": "Will China invade Taiwan by September 30, 2026?",
+      "slug": "will-china-invade-taiwan-by-september-30-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.06",
+        "best_bid": "0.049",
+        "last_trade_price": "0.052",
+        "one_day_price_change": "0.003",
+        "one_hour_price_change": "0.002",
+        "one_month_price_change": "-0.0555",
+        "one_week_price_change": "0.005",
+        "one_year_price_change": null,
+        "spread": "0.011"
+      },
+      "event_id": "191885",
+      "fills_72h": 171,
+      "first_fill_72h": "2026-08-15T22:56:10+00:00",
+      "last_fill_72h": "2026-08-18T17:17:00+00:00",
+      "market_id": "0x99a94710860ba0285f53275e563e13c36865d9d717c7b4b5e5e520dacad4ae0d",
+      "market_type": "binary",
+      "observed_notional_72h": "35743.1977980000000000000000000236729322",
+      "open_time": "2026-06-25T02:10:16.888675+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9455",
+          "token_id": "468082931927627118040869434682528336326648990902918861764478495610833228621"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0545",
+          "token_id": "63999830599455984228411703294221700132715753549378760621246066315783386372259"
+        }
+      },
+      "question": "Will Russia capture Havrylivka by September 30, 2026?",
+      "slug": "will-russia-capture-havrylivka-by-september-30-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.084",
+        "best_bid": "0.072",
+        "last_trade_price": "0.072",
+        "one_day_price_change": "0.005",
+        "one_hour_price_change": "0.0025",
+        "one_month_price_change": "-0.01",
+        "one_week_price_change": "0.023",
+        "one_year_price_change": null,
+        "spread": "0.012"
+      },
+      "event_id": "164062",
+      "fills_72h": 151,
+      "first_fill_72h": "2026-08-15T20:03:54+00:00",
+      "last_fill_72h": "2026-08-18T16:29:36+00:00",
+      "market_id": "0x2f3eaf103e9b1cfd09e31a4da7e547d0b8de41f01936ad5e256ada3b1a8caf6a",
+      "market_type": "binary",
+      "observed_notional_72h": "35473.369100000000000000000000000233",
+      "open_time": "2026-05-27T21:52:49.173367+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.922",
+          "token_id": "18516225413028576220774051356465925268530314548230683486992887902380359878928"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.078",
+          "token_id": "71183417964503084490801912575295207684671768914711833927647725826685362572469"
+        }
+      },
+      "question": "Will Russia enter Malokaterynivka by December 31, 2026?",
+      "slug": "will-russia-enter-malokaterynivka-by-december-31-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-18T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.74",
+        "best_bid": "0.73",
+        "last_trade_price": "0.75",
+        "one_day_price_change": "0.005",
+        "one_hour_price_change": "-0.01",
+        "one_month_price_change": null,
+        "one_week_price_change": "0.445",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "740326",
+      "fills_72h": 571,
+      "first_fill_72h": "2026-08-15T19:17:18+00:00",
+      "last_fill_72h": "2026-08-18T18:25:01+00:00",
+      "market_id": "0x303658c00317867d8206adeed79933fa70ed41854f6ec30de104c8c6babfcf2c",
+      "market_type": "binary",
+      "observed_notional_72h": "35206.9954739999999999999999998972583266",
+      "open_time": "2026-07-23T19:21:52.335819+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.265",
+          "token_id": "58875067469283285255558775951155336938766824069662325462860209054422934970605"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.735",
+          "token_id": "87319079280032160778473888797697087072056271941295738034096167426819704168403"
+        }
+      },
+      "question": "Will Chuck Gray be the WY-AL Republican nominee?",
+      "slug": "will-chuck-gray-be-the-wy-al-republican-nominee-20260723165335297",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.015",
+        "best_bid": "0.013",
+        "last_trade_price": "0.015",
+        "one_day_price_change": "-0.0015",
+        "one_hour_price_change": "0.0015",
+        "one_month_price_change": "-0.0135",
+        "one_week_price_change": "-0.011",
+        "one_year_price_change": null,
+        "spread": "0.002"
+      },
+      "event_id": "149589",
+      "fills_72h": 382,
+      "first_fill_72h": "2026-08-15T20:34:39+00:00",
+      "last_fill_72h": "2026-08-18T18:05:03+00:00",
+      "market_id": "0x7b91997c6c8ca00643ab322f63af50acf1a0e9b86be130b67e5a19005215e252",
+      "market_type": "binary",
+      "observed_notional_72h": "34027.72963399999999999999999998465129497",
+      "open_time": "2026-01-07T21:34:51.774902+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.986",
+          "token_id": "69640045736322875057195337970100248251669256946824478154307081538037396745882"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.014",
+          "token_id": "19112618633625535565556320701646114565922983454471380023487135794003446877114"
+        }
+      },
+      "question": "Will the Communist Party of the Russian Federation (KPRF) gain the most seats in the next Russian parliamentary election?",
+      "slug": "will-the-communist-party-of-the-russian-federation-kprf-gain-the-most-seats-in-the-next-russian-parliamentary-election",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-12-31T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.26",
+        "best_bid": "0.24",
+        "last_trade_price": "0.25",
+        "one_day_price_change": "-0.005",
+        "one_hour_price_change": null,
+        "one_month_price_change": "-0.015",
+        "one_week_price_change": "0.045",
+        "one_year_price_change": null,
+        "spread": "0.02"
+      },
+      "event_id": "629791",
+      "fills_72h": 409,
+      "first_fill_72h": "2026-08-15T22:49:46+00:00",
+      "last_fill_72h": "2026-08-18T16:34:03+00:00",
+      "market_id": "0x36fba860abdbb03c88c782df08d407434ee69be069b6cbac25cffddc2f1b437a",
+      "market_type": "binary",
+      "observed_notional_72h": "33529.7001960000000000000000001968174676",
+      "open_time": "2026-06-24T15:34:40.274000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.75",
+          "token_id": "111939275359890975032145018655554206790945794404155831247918168011182151346383"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.25",
+          "token_id": "17306927942046812963523554047158683729350184908440966752162806116949623483484"
+        }
+      },
+      "question": "Will Iran Reconstruction Funding be in a US-Iran deal in 2026?",
+      "slug": "will-iran-reconstruction-funding-be-in-a-us-iran-deal-in-2026-20260623023201638",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-18T23:59:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.81",
+        "best_bid": "0.79",
+        "last_trade_price": "0.79",
+        "one_day_price_change": "0.025",
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.415",
+        "one_week_price_change": "0.005",
+        "one_year_price_change": null,
+        "spread": "0.02"
+      },
+      "event_id": "689453",
+      "fills_72h": 758,
+      "first_fill_72h": "2026-08-15T21:07:15+00:00",
+      "last_fill_72h": "2026-08-18T18:11:51+00:00",
+      "market_id": "0x3e6273bbe7069f0216c6e19435a45798053d2cbbbec2085b8b4d1e8831b12a3a",
+      "market_type": "binary",
+      "observed_notional_72h": "33190.2210639999999999999999999673962726",
+      "open_time": "2026-07-10T22:29:02.720000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.2",
+          "token_id": "96675412423013391648029608520099181498480275032120161738450384855557708180680"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.8",
+          "token_id": "83164664255056557472720989332536450281661228693162119677223593576321247963513"
+        }
+      },
+      "question": "Will Jay Collins finish second in the Florida Republican Governor primary?",
+      "slug": "will-jay-collins-finish-second-in-the-florida-republican-governor-primary-20260710143927094",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-09-30T00:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.036",
+        "best_bid": "0.027",
+        "last_trade_price": "0.032",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.003",
+        "one_week_price_change": "-0.0015",
+        "one_year_price_change": null,
+        "spread": "0.009"
+      },
+      "event_id": "131623",
+      "fills_72h": 148,
+      "first_fill_72h": "2026-08-15T20:41:52+00:00",
+      "last_fill_72h": "2026-08-18T16:27:40+00:00",
+      "market_id": "0x27f3e18c14d722d384fdc20f7ed0f7038b19d56d191b36da72762ebbf17f3081",
+      "market_type": "binary",
+      "observed_notional_72h": "32975.08652399999999999999999999801540720",
+      "open_time": "2026-04-30T14:13:39.949237+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.9685",
+          "token_id": "98944918857405606137810340449921239097996041419914154134190979719169266881957"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.0315",
+          "token_id": "62144742210971208278696936141611556807905696657920695628150040740104692189206"
+        }
+      },
+      "question": "Will Russia capture all of Prymorske by September 30, 2026?",
+      "slug": "will-russia-capture-all-of-prymorske-by-september-30-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": "2026-08-21T16:00:00+00:00",
+      "current_price_metadata": {
+        "best_ask": "0.38",
+        "best_bid": "0.37",
+        "last_trade_price": "0.38",
+        "one_day_price_change": "0.1",
+        "one_hour_price_change": null,
+        "one_month_price_change": null,
+        "one_week_price_change": "0.29",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "831375",
+      "fills_72h": 1757,
+      "first_fill_72h": "2026-08-15T19:15:36+00:00",
+      "last_fill_72h": "2026-08-18T18:11:10+00:00",
+      "market_id": "0xd0f7d913794abd420ac95eac36e85d4d69e4c0161ebd7a6ac57ce0a22514bf75",
+      "market_type": "binary",
+      "observed_notional_72h": "32563.1375779999999999999999999650526824",
+      "open_time": "2026-08-11T04:00:54+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.625",
+          "token_id": "40908477750355026828179312415108904881127681062588512697998214533036637401211"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.375",
+          "token_id": "71893973254439256503160481901819485379492719106952567629691994207746938750667"
+        }
+      },
+      "question": "Will Elon Musk post 140-159 tweets from August 14 to August 21, 2026?",
+      "slug": "elon-musk-of-tweets-august-14-august-21-140-159",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    },
+    {
+      "close_time": null,
+      "current_price_metadata": {
+        "best_ask": "0.52",
+        "best_bid": "0.51",
+        "last_trade_price": "0.52",
+        "one_day_price_change": null,
+        "one_hour_price_change": null,
+        "one_month_price_change": "0.08",
+        "one_week_price_change": "0.01",
+        "one_year_price_change": null,
+        "spread": "0.01"
+      },
+      "event_id": "57672",
+      "fills_72h": 149,
+      "first_fill_72h": "2026-08-15T21:40:42+00:00",
+      "last_fill_72h": "2026-08-18T17:56:40+00:00",
+      "market_id": "0x34918035a590555ba1fb1d6a019d766ab6e557d63e7f3140b63b4550eee7f417",
+      "market_type": "binary",
+      "observed_notional_72h": "32238.9676130000000000000000003076556106",
+      "open_time": "2025-10-13T21:28:53.882000+00:00",
+      "outcomes": {
+        "no": {
+          "label": "No",
+          "price": "0.485",
+          "token_id": "25172545206000541692667496253531562288536270988826888609620735617040533835056"
+        },
+        "yes": {
+          "label": "Yes",
+          "price": "0.515",
+          "token_id": "15290572385458522370285732869432740297199321382471116558439914335588167718663"
+        }
+      },
+      "question": "Will the Democrats win the Texas Senate race in 2026?",
+      "slug": "will-the-democrats-win-the-texas-senate-race-in-2026",
+      "updated_at": "2026-08-18T19:07:47.734544+00:00"
+    }
+  ],
+  "environment_id": "bdl-polymarket-production-readonly",
+  "query_sha256": "0447de175cc1a181282c07c04e7c2579860153afaa1a86547b6fbfe7c3c50c8e",
+  "schema": "chronos-active-polymarket-inventory/v1",
+  "selection": {
+    "close_after_as_of": true,
+    "limit": 100,
+    "rank": "observed_notional_72h_desc",
+    "recent_fill_window_hours": 72,
+    "status": "open",
+    "venue": "polymarket"
+  }
+}

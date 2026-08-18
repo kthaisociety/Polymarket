@@ -1,0 +1,21 @@
+{
+  "authority": {
+    "database_role": "human_ro",
+    "default_read_only": true,
+    "insert_update_privileges": false,
+    "repeatable_read": true,
+    "transaction_read_only": true
+  },
+  "caveat": "Top of book is not a depth-qualified fill price.",
+  "environment_id": "bdl-polymarket-production-readonly",
+  "market_id": "0x876506d8b2bd7a0d3fa4fe18c024eee6e1dd81ee24c26795dadd6cfe4a7b5d0d",
+  "outcome_index": 0,
+  "query_sha256": "6d6d2cd189e15c22645233b4bb0e705abac49f86bfef0ba1d499933e1f2b313f",
+  "quote": {
+    "ask": "0.29",
+    "bid": "0.28",
+    "seq": 1786901230289486,
+    "ts": "2026-08-18T19:34:37.739619+00:00"
+  },
+  "schema": "chronos-current-executable-quote/v1"
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "chronos-server-storage-baseline/v1",
+  "campaign_id": "chronos-active-external-2026-08-18",
+  "measured_at": "2026-08-18T19:09:23+00:00",
+  "server": "eigenServer",
+  "account": "tage",
+  "filesystem": "/dev/sda1",
+  "mountpoint": "/",
+  "bytes_total": 322239832064,
+  "bytes_used": 147608072192,
+  "bytes_available": 161473957888,
+  "percent_used_reported": 48,
+  "campaign_bytes_before": 0,
+  "objects_deleted_before_measurement": 0,
+  "measurement_command": "date --iso-8601=seconds; hostname; id -un; df -B1 --output=source,size,used,avail,pcent,target /",
+  "credential_material_retained": false
+}

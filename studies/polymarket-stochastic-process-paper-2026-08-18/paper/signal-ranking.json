@@ -1,0 +1,195 @@
+{
+  "schema": "chronos-signal-ranking/v1",
+  "as_of": "2026-08-18T21:40:00+02:00",
+  "ranking_direction": "least_to_most_promising",
+  "ranking_basis": [
+    "survival of temporal and mechanism controls",
+    "breadth across independent event groups",
+    "fresh or protected replication",
+    "closeness of the tested target to an executable directional return",
+    "availability of legal quote, spread, depth, latency, and cost evidence"
+  ],
+  "comparability_warning": "Ranks summarize research readiness, not a common performance metric. Descriptive process laws, probability forecasts, and trading rules answer different questions.",
+  "trade_ready_count": 0,
+  "entries": [
+    {
+      "rank": 1,
+      "idea": "Raw fill flow, size, runs, rolling deviations, and fractional transforms",
+      "claim_type": "directional trading signal",
+      "evidence_level": "exploratory",
+      "status": "rejected_mechanical",
+      "best_evidence": "Raw 15-minute imbalance association near -0.46 became approximately +0.04 to +0.05 under direction-neutral controls; same-side paths also removed the headline effect.",
+      "why_not_tradable": "The apparent edge was transaction-direction switching and sampled-price bounce, not stable forward price information.",
+      "next_research_value": "Negative control: future transaction-price signals must survive quote-midpoint or same-direction tests.",
+      "evidence": [
+        "../../polymarket-method-probes-2026-08-17/README.md",
+        "../../polymarket-flow-2026-08-17/README.md"
+      ]
+    },
+    {
+      "rank": 2,
+      "idea": "Exhaustive-bucket underround and bracket-overround compression",
+      "claim_type": "portfolio trading signal",
+      "evidence_level": "exploratory development",
+      "status": "rejected_cost_and_breadth",
+      "best_evidence": "No tested exhaustive event had positive median net underround at one cent per leg; the bracket-compression gate failed signal count, positive share, and event breadth.",
+      "why_not_tradable": "Stale sampled legs and transaction costs absorbed the apparent cross-contract mispricing.",
+      "next_research_value": "Retry only with synchronized executable books and atomic portfolio-fill assumptions.",
+      "evidence": [
+        "../../polymarket-process-tradability-2026-08-17/README.md",
+        "../../polymarket-bracket-overround-2026-08-17/README.md"
+      ]
+    },
+    {
+      "rank": 3,
+      "idea": "Momentum, scalar calibration, and affine calibration of sampled probabilities",
+      "claim_type": "resolution probability forecast",
+      "evidence_level": "grouped development",
+      "status": "rejected_out_of_fold",
+      "best_evidence": "Raw probability beat prevalence, but every momentum adjustment worsened Brier and fold-local calibrators lost under the declared market-weighted estimand.",
+      "why_not_tradable": "No incremental forecast survived grouped walk-forward evaluation, and sampled probabilities were not executable quotes.",
+      "next_research_value": "Retain the raw market probability as the benchmark for all external probability models.",
+      "evidence": [
+        "../../polymarket-resolution-research-2026-08-17/README.md"
+      ]
+    },
+    {
+      "rank": 4,
+      "idea": "XTracker posting-rate forecasts and market-versus-count discrepancies",
+      "claim_type": "external-data directional signal",
+      "evidence_level": "locked development confirmation",
+      "status": "rejected_confirmation",
+      "best_evidence": "A +1.67-cent discovery lead reversed to -1.38 cents on three untouched events; all three confirmation event means were negative.",
+      "why_not_tradable": "The external-data discrepancy did not replicate and the probability models lost to current market probability.",
+      "next_research_value": "Shows that external data must be confirmed on untouched event families before formalization.",
+      "evidence": [
+        "../../polymarket-external-signal-scan-2026-08-17/README.md",
+        "../../polymarket-xtracker-2026-08-17/README.md"
+      ]
+    },
+    {
+      "rank": 5,
+      "idea": "Same-event sibling probability surface",
+      "claim_type": "cross-contract movement forecast",
+      "evidence_level": "formal development",
+      "status": "rejected_temporal_replay",
+      "best_evidence": "Sibling state helped exploratory whole-event folds but was slightly worse than target-only ridge in the authored expanding, label-matured replay.",
+      "why_not_tradable": "The gain disappeared under the legal training chronology; no executable cross-leg test followed.",
+      "next_research_value": "Related contracts may matter, but only complete, synchronized, time-legal surfaces should be revisited.",
+      "evidence": [
+        "../../polymarket-sibling-surface-2026-08-17/README.md"
+      ]
+    },
+    {
+      "rank": 6,
+      "idea": "Boundary, volatility, and jump-magnitude regressions",
+      "claim_type": "future movement magnitude forecast",
+      "evidence_level": "formal development",
+      "status": "rejected_absolute_error",
+      "best_evidence": "State, activity, and staleness improved relative magnitude forecasts, but volatility-only models lost to time-to-close and formal models missed absolute MSE gates.",
+      "why_not_tradable": "Magnitude without direction is not a trade; the formal forecast was not accurate enough even for its narrower target.",
+      "next_research_value": "State and inactivity remain useful inputs for volatility or abstention models.",
+      "evidence": [
+        "../../polymarket-boundary-volatility-2026-08-17/README.md",
+        "../../polymarket-general-feature-search-2026-08-17/README.md"
+      ]
+    },
+    {
+      "rank": 7,
+      "idea": "First-move direction and delayed post-jump continuation",
+      "claim_type": "directional trading signal",
+      "evidence_level": "chronological development",
+      "status": "rejected_instability_and_cost",
+      "best_evidence": "Direction won only 4/15 events; delayed continuation lost to controls, and the long-only cost screen was negative or concentrated.",
+      "why_not_tradable": "Directional performance was unstable across events and did not survive delay and cost screens.",
+      "next_research_value": "Provides a direct negative result against naive momentum after a jump.",
+      "evidence": [
+        "../../polymarket-first-move-direction-2026-08-17/README.md",
+        "../../polymarket-delayed-post-jump-2026-08-17/README.md"
+      ]
+    },
+    {
+      "rank": 8,
+      "idea": "Post-jump reversal-before-continuation",
+      "claim_type": "directional event hazard",
+      "evidence_level": "fresh development replication",
+      "status": "promising_development_only",
+      "best_evidence": "Fresh replication passed state/shock and incremental gates on 6,174 OOF shocks across 128 events; the sampled-price one-cent screen passed, but sign-conditional and earlier stability evidence was mixed.",
+      "why_not_tradable": "The test used sampled prices rather than executable quotes and never passed protected validation or a latency/depth simulation.",
+      "next_research_value": "Highest-ranked internal directional mechanism for a fresh quote-based replication.",
+      "evidence": [
+        "../../polymarket-post-jump-reversal-hazard-2026-08-17/README.md",
+        "../../polymarket-fresh-reversal-replication-2026-08-17/README.md",
+        "../../polymarket-fresh-fixed-horizon-properties-2026-08-17/README.md"
+      ]
+    },
+    {
+      "rank": 9,
+      "idea": "Forty-eight-hour meaningful-move incidence ranking",
+      "claim_type": "cross-sectional movement ranking",
+      "evidence_level": "chronological development",
+      "status": "ranking_lead_calibration_rejected",
+      "best_evidence": "The within-event ranking lift was 0.439 and positive in 13/13 eligible events, but fixed absolute calibration failed.",
+      "why_not_tradable": "It ranks where movement is likely but supplies neither direction nor a calibrated probability, executable entry, or P&L rule.",
+      "next_research_value": "Potential pre-trade eligibility or volatility-allocation component, not a standalone strategy.",
+      "evidence": [
+        "../../polymarket-48h-move-incidence-2026-08-17/README.md"
+      ]
+    },
+    {
+      "rank": 10,
+      "idea": "Time to the next meaningful probability move",
+      "claim_type": "movement timing forecast",
+      "evidence_level": "frozen development candidate",
+      "status": "promising_protocol_not_protected_ready",
+      "best_evidence": "State plus staleness reduced observation/event-macro MSE from 0.10689/0.10471 to 0.08621/0.08177 over 1,013 OOF predictions.",
+      "why_not_tradable": "It predicts timing, not direction; its frozen aliases did not resolve to an issued protected plan and no quote-based trade was evaluated.",
+      "next_research_value": "Useful for trade timing, abstention, and order-monitoring if joined to a directional external signal.",
+      "evidence": [
+        "../../polymarket-move-duration-2026-08-17/README.md"
+      ]
+    },
+    {
+      "rank": 11,
+      "idea": "State-, duration-, and path-dependent zero-inflated marked-jump law",
+      "claim_type": "complete observed-sample process law",
+      "evidence_level": "fresh no-refit replication",
+      "status": "strong_process_finding_not_trade",
+      "best_evidence": "Event-macro NLL improved 7.74% and won 112/113 development events; the frozen law improved 7.88% and won 27/27 later events.",
+      "why_not_tradable": "It models whether, which way, and how far the registered sample changes, but is not an executable-price model and its sign component is much weaker than arrival and magnitude.",
+      "next_research_value": "Best paper-level stochastic-process result and a strong simulator/risk-model foundation.",
+      "evidence": [
+        "../development-receipts/12_composed_process_family_comparison.json",
+        "../successor-corpus/development-receipts/13_frozen_process_successor_replay.json"
+      ]
+    },
+    {
+      "rank": 12,
+      "idea": "Continuous quiet-duration arrival hazard",
+      "claim_type": "next-update probability forecast",
+      "evidence_level": "protected rejection with promising completed rows",
+      "status": "most_promising_component_rejected_system",
+      "best_evidence": "Later no-refit event Brier improved 33.38% with 27/27 wins; formal development passed; protected completed-row Brier was 0.18925 but only 65/100 decisions completed.",
+      "why_not_tradable": "The protected system failed coverage, failure-rate, and concentration standards and predicts activity rather than direction or net return.",
+      "next_research_value": "Most promising internal eligibility/arrival component, but the exact protected system is terminally rejected and its exposed holdout cannot be reused.",
+      "evidence": [
+        "../development-receipts/18_formal_continuous_arrival_hazard.json",
+        "../protected-receipts/19_continuous_arrival_hazard_protected_resolution.json"
+      ]
+    },
+    {
+      "rank": 13,
+      "idea": "Fade stale CME FedWatch level gaps in the September +25 bp FOMC contract",
+      "claim_type": "external-data directional trading hypothesis",
+      "evidence_level": "post-hoc single-contract development",
+      "status": "most_promising_trade_hypothesis_not_validated",
+      "best_evidence": "The direct CME-gap trade lost at every completed 6/12/24/48-hour decision. Its post-hoc inverse made +$19.165 at 48 hours over seven overlapping 100-share trades after fees, with four winners.",
+      "why_not_tradable": "The inversion and horizon were selected after inspection; the sample is one contract, one short regime, seven overlapping decisions, and CME's dated CSV lacks historical intraday availability.",
+      "next_research_value": "Predeclare the 48-hour fade on future FOMC or rate-decision contracts with fresh timestamped external vintages; abstain from the current stale gap.",
+      "evidence": [
+        "../../polymarket-active-external-data-2026-08-18/fomc-fedwatch-result.md",
+        "../../polymarket-active-external-data-2026-08-18/fomc-fedwatch-final-development.json"
+      ]
+    }
+  ]
+}

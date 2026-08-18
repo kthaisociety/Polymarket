@@ -1,0 +1,24 @@
+# Execution log
+
+This append-only narrative indexes operational attempts; immutable data and scientific evidence
+remain in their exact receipts.
+
+| Time (UTC) | Attempt | Result | Scientific effect |
+|---|---|---|---|
+| 2026-08-18 19:09 | Measure server storage before campaign writes | `/dev/sda1`: 322,239,832,064 total; 147,608,072,192 used; 161,473,957,888 available; 48% reported use | Boundary only; no data added or removed |
+| 2026-08-18 19:10 | Scout bounded active market families through `human_ro` | 12,267 server rows currently marked open; top recent-notional families included FOMC, Brazil election, and Hormuz deadlines | Startup evidence only; values were not modeled |
+| 2026-08-18 19:18 | Retain fixed-time top-100 active inventory | Failed before result: PostgreSQL inferred the reused `$2` parameter as an interval in timestamp arithmetic | No inventory receipt; query changed only by explicit `timestamptz` cast |
+| 2026-08-18 19:20 | Retry fixed-time top-100 inventory with typed timestamp | Retained 100 contracts; SHA-256 `c1a46337e5a64a24a66238ed2e50702a0d687c62ff5f5f8dfef71df04e376b8e`; credentials absent | Authorized scouting corpus only; no hypothesis score |
+| 2026-08-18 19:21 | Create isolated server root and copy baseline/inventory | Created `/home/tage/chronos-external-data/active-external-2026-08-18`; no pre-existing path was removed | Server storage ownership boundary active |
+| 2026-08-18 19:18 | Download official CME FedWatch history for the 16 September meeting | Retained `FedMeeting_20260916.csv`; 100,368 bytes; SHA-256 `1222e3e7dc496e5d46128c0e8c21c088c3b105b0461aab955afd708147c7b8e0` | Candidate external vintage only; date-only rows receive conservative next-day-noon availability |
+| 2026-08-18 19:23 | Retain every FOMC book snapshot across the 12-day overlap | Operator-stopped after more than two minutes without an artifact; the research process could not reach an SSH forward created in a different sandbox network namespace | No scientific value or partial artifact retained; database speed was not implicated |
+| 2026-08-18 19:25 | Retain ten exact FOMC decision/exit book snapshots | Operator-stopped after two minutes without an artifact for the same cross-namespace tunnel defect | No scientific artifact retained; rerun with a tunnel scoped to the same bounded command |
+| 2026-08-18 19:30 | Acquire official one-minute CLOB history through Chronos source expansion | HTTP retention succeeded (17,034 samples), but strict derivation rejected samples 14 minutes beyond the requested end bound | Correct fail-closed behavior; request cutoff expanded only to the already observed public response boundary before retry |
+| 2026-08-18 19:32 | Retry CLOB registration at the observed public boundary | HTTP retention succeeded (17,049 samples); strict derivation again rejected a final sample eight seconds beyond the exact bound | Kernel rule preserved; raw response and failed receipt retained, but not granted temporal authority |
+| 2026-08-18 19:34 | Retain current FOMC top quote through a command-scoped tunnel | YES bid 0.28 / ask 0.29 at 19:34:37 UTC; exact quote receipt SHA-256 `d16ae306603a73bda66ea0e6e6edff28298588f09e4b50029b03ae927d856491` | Execution context only; top quote is not depth-qualified |
+| 2026-08-18 19:35 | Retain ten predeclared daily decision/exit L2 snapshots | Succeeded in 4.7 seconds after correcting tunnel scope; SHA-256 `bba7046e70d3b57fe6ba9d3da1e1bf94d98753f60666a988aea40fdc9b2e9e18` | Proved earlier stalls were orchestration/network namespace, not evaluator or database slowness |
+| 2026-08-18 19:36 | Run CME-gap 24-hour executable development test in `AnalysisHarness` | 7/7 following-CME trades lost; net -$49.075 per sequence of 100-share trades after taker fees | Reject direct use of stale dated CME level |
+| 2026-08-18 19:37 | Retain fixed 6/12/24/48-hour L2 slice | 27 snapshots; SHA-256 `ca8e3e58af2467f41f2d9ad89808c01c61ff2762158e82bea59f1f52386a5018` | Exact multi-horizon executable development input |
+| 2026-08-18 19:38 | Run fixed multi-horizon and post-hoc fade diagnostics in `AnalysisHarness` | Following CME lost at every completed decision at every horizon; 48-hour fade returned +$19.165 over 7 overlapping trades, 4 wins, but was discovered after horizon inspection | Direct signal rejected; fade retained only as a fragile hypothesis for new events, not a trade |
+| 2026-08-18 19:39 | Copy campaign-owned raw artifacts to isolated server root and verify | All three new hashes matched; filesystem remained 48% used with 161,810,337,792 bytes available | Nothing deleted; ownership manifest updated |
+| 2026-08-18 19:44 | Verify implementation and research artifacts | Ruff and formatting passed; basedpyright reported 0 errors; full suite passed 474 tests with engine path and localhost fixtures enabled | Coherent checkpoint eligible for local commit |

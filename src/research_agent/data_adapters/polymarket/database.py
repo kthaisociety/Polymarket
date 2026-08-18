@@ -57,7 +57,7 @@ async def read_live_polymarket_tape(
     )
     try:
         async with pool.acquire() as connection:
-            role = await connection.fetchrow(_READ_ONLY_PROOF_QUERY)
+            role = await connection.fetchrow(READ_ONLY_PROOF_QUERY)
         require_read_only_role(role)
         return await ingest_polymarket_contract_tape(
             EnginePolymarketResearchReader(pool),
@@ -90,7 +90,7 @@ async def read_live_polymarket_resolution_corpus(
             pool.acquire() as connection,
             connection.transaction(isolation="repeatable_read", readonly=True),
         ):
-            role = await connection.fetchrow(_READ_ONLY_PROOF_QUERY)
+            role = await connection.fetchrow(READ_ONLY_PROOF_QUERY)
             require_read_only_role(role)
             corpus = await DatabasePolymarketCorpusReader(connection).read_corpus(request)
         retention = store.retain(corpus)
@@ -124,7 +124,7 @@ def require_read_only_role(role: Mapping[str, object] | None) -> None:
         raise RuntimeError(msg)
 
 
-_READ_ONLY_PROOF_QUERY = (
+READ_ONLY_PROOF_QUERY = (
     "SELECT current_user AS role, "
     "current_setting('default_transaction_read_only') AS default_read_only, "
     "current_setting('transaction_read_only') AS transaction_read_only, "

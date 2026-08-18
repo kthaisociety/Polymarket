@@ -4,6 +4,11 @@ This index maps manuscript claims to immutable local receipts. Hashes are SHA-25
 receipt bytes. Development evidence is selection-exposed unless explicitly labeled as unchanged
 fresh replication. No listed artifact is a protected finding.
 
+The cross-study, least-to-most-promising research-readiness ranking is retained separately in
+[`signal-ranking.md`](signal-ranking.md), backed by the structured
+[`signal-ranking.json`](signal-ranking.json). Ranking changes presentation and prioritization only;
+it cannot change any receipt's scientific or validation status.
+
 | ID | Scientific role | Exact receipt | SHA-256 |
 |---|---|---|---|
 | E01 | Hourly process signatures | [`../development-receipts/01_fresh_process_signatures.json`](../development-receipts/01_fresh_process_signatures.json) | `53cb9e82d71ed5d5b16b2adfd1a99512d9a76c48bc28a9a3a42745aa2c2df6cb` |

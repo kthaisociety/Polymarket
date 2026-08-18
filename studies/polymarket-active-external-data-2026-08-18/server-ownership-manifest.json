@@ -1,0 +1,83 @@
+{
+  "schema": "chronos-owned-external-data-manifest/v1",
+  "campaign_id": "chronos-active-external-2026-08-18",
+  "owner": "chronos-active-external-2026-08-18",
+  "server": "eigenServer",
+  "root": "/home/tage/chronos-external-data/active-external-2026-08-18",
+  "baseline": "storage-baseline.json",
+  "delete_policy": {
+    "use_available_capacity_first": true,
+    "allow_only_manifest_owned_paths": true,
+    "allow_preexisting_deletion": false,
+    "allow_paths_outside_root": false,
+    "retain_deletion_receipt": true
+  },
+  "objects": [
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/storage-baseline.json",
+      "kind": "campaign_boundary",
+      "source": "local retained campaign artifact",
+      "sha256": "f9cc20460153d58cccb7fa853f55eb20037347542456f9ff89001b8ba5c2a1d2",
+      "bytes": 618,
+      "created_at": "2026-08-18T19:14:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": false,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/active-inventory.json",
+      "kind": "sanitized_production_inventory",
+      "source": "bounded repeatable-read human_ro query",
+      "sha256": "c1a46337e5a64a24a66238ed2e50702a0d687c62ff5f5f8dfef71df04e376b8e",
+      "bytes": 145878,
+      "created_at": "2026-08-18T19:20:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/FedMeeting_20260916.csv",
+      "kind": "external_source_raw",
+      "source": "official CME FedWatch browser download",
+      "sha256": "1222e3e7dc496e5d46128c0e8c21c088c3b105b0461aab955afd708147c7b8e0",
+      "bytes": 100368,
+      "created_at": "2026-08-18T19:18:23.975134+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/fomc-horizon-books.jsonl.gz",
+      "kind": "sanitized_production_book_slice",
+      "source": "27 fixed decision and 6/12/24/48-hour snapshots under human_ro",
+      "sha256": "ca8e3e58af2467f41f2d9ad89808c01c61ff2762158e82bea59f1f52386a5018",
+      "bytes": 14191,
+      "created_at": "2026-08-18T19:37:00+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/fomc-current-quote.json",
+      "kind": "sanitized_production_current_quote",
+      "source": "one proved human_ro book_tops query",
+      "sha256": "d16ae306603a73bda66ea0e6e6edff28298588f09e4b50029b03ae927d856491",
+      "bytes": 687,
+      "created_at": "2026-08-18T19:34:38+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    },
+    {
+      "path": "/home/tage/chronos-external-data/active-external-2026-08-18/chronos-fomc-clob-workspace-v2.tar.gz",
+      "kind": "chronos_data_workspace_archive",
+      "source": "official public CLOB history fetch plus fail-closed derivation receipt",
+      "sha256": "44660f702a661c452801c844de63b54f1e5130c47567995676c5aea3646f2400",
+      "bytes": 56746,
+      "created_at": "2026-08-18T19:39:15+00:00",
+      "owner": "chronos-active-external-2026-08-18",
+      "removable_if_needed": true,
+      "deleted_at": null
+    }
+  ]
+}
