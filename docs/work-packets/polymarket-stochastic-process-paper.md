@@ -538,3 +538,12 @@ the memoryless hurdle, `2.1038` for the state hurdle, and `1.9409` for the full 
 566,501 out-of-time rows/113 events. The full law improved 7.74% over state, won 112/113 events
 against state and 113/113 against diffusion, and improved both chronological halves. This
 authorizes the already frozen source-13 fresh successor replay, not protected access.
+
+Source 13 passed unchanged on the later successor development cohort. Across 17,671 predictions
+and 27 eligible events, event-macro NLL was `4.5819` for bounded diffusion, `3.2401` for the
+memoryless hurdle, `3.1161` for the state hurdle, and `2.8704` for the frozen full hurdle. The full
+law improved 7.88% over state, won 27/27 events against state and diffusion, and beat both in each
+chronological half. Source and receipt SHA-256 are
+`0934e2f9283a772a65e9f1080a0b9ad5c53f310acfe29e95df205e291fd303d4` and
+`dc48119c03b492217c3ab26ae781aaf1e6a5a87342d772cbcb78057095940e13`. This is a no-refit fresh
+replication, not a protected result or permission to change the model, gates, or claim.

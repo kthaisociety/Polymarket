@@ -144,3 +144,25 @@ direction more than half the time, and all 7 events with enough long-quiet cover
 intervals are respectively 43.81% (38.71–49.52%), 0.324 (0.250–0.404), 58.45%
 (55.53–61.41%), and 0.074 (0.052–0.096). The long-quiet cell remains sparse. The receipt SHA-256 is
 `aebb42800f7a63678993f8608a4bd39f7c6fbeb8fd2f74b0d90c8cc5698e11bb`.
+
+## Frozen process-law replication
+
+Source 13 copied the exact all-development parameter arrays, model definitions, interval score,
+warm-up, and gates from source 12 before reading successor values. It performs no fitting. Across
+17,671 chronological predictions and 27 eligible successor events, the results were:
+
+| Frozen one-hour observation law | Observation mean NLL | Event-macro mean NLL |
+|---|---:|---:|
+| Bounded state-dependent zero-drift Gaussian diffusion | 4.209 | 4.582 |
+| Memoryless zero-inflated lognormal marked jump | 2.845 | 3.240 |
+| State-conditioned zero-inflated lognormal marked jump | 2.732 | 3.116 |
+| State + duration/path zero-inflated lognormal marked jump | **2.476** | **2.870** |
+
+The full frozen law improved event-macro NLL by 7.88% versus the state hurdle, won 27/27 event
+comparisons against state and 27/27 against diffusion, and beat both models in each chronological
+half. The fixed replication gate passed with zero order breaks and no protected exposure. Exact
+receipt SHA-256: `dc48119c03b492217c3ab26ae781aaf1e6a5a87342d772cbcb78057095940e13`.
+
+This result discriminates complete probability laws for registered sampled probabilities. It is
+not evidence that samples are trades, midquotes, latent beliefs, or executable prices, and it does
+not authorize access to the successor corpus's final 65-event protected block.

@@ -93,6 +93,13 @@ against diffusion. Thus point mass, state, duration, reversal, and clustered mag
 useful restrictions, not merely separate descriptive curiosities. The law still targets sampled
 probabilities and does not identify latent beliefs or executable prices.
 
+Source 13 freezes that exact law and replays it without fitting on a later corpus. Event-macro NLL
+is 4.582 for diffusion, 3.240 for the memoryless hurdle, 3.116 for the state hurdle, and 2.870 for
+the full law across 27 eligible events. The full law improves 7.88% over state and wins every event
+comparison against state and diffusion. The same structural restrictions therefore transfer to a
+later cohort even though absolute score levels change, supporting a stable family with
+regime-dependent parameters rather than a universal fitted law.
+
 ## Calibration and financial-theory layer
 
 Proper scoring rules, reliability diagrams, chronological validation, and cluster-aware inference

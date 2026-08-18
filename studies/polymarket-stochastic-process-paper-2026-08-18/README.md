@@ -354,3 +354,14 @@ the observed sampled process; it does not prove the same law for a latent effici
 The final all-development law is retained solely for source 13's no-refit successor replay. Its
 arrays, source/receipt ancestry, interval width, warm-up, score, and gates are literal constants in
 that source and were verified to exactly equal the source-12 receipt before successor execution.
+Source 13 then scored 17,671 observations across 27 eligible events in the later successor corpus,
+without fitting or changing a threshold. Event-macro NLL was 4.582 for diffusion, 3.240 for the
+memoryless hurdle, 3.116 for the state hurdle, and 2.870 for the frozen full hurdle. The frozen law
+improved 7.88% over state, won 27/27 event comparisons against both state and diffusion, and won in
+both chronological halves. Its fixed replication gate passed. The source SHA-256 is
+`0934e2f9283a772a65e9f1080a0b9ad5c53f310acfe29e95df205e291fd303d4`; the successor receipt
+SHA-256 is `dc48119c03b492217c3ab26ae781aaf1e6a5a87342d772cbcb78057095940e13`.
+
+This is a no-refit chronological replication of the observed-sample law, not a protected result.
+It strengthens model-family discrimination but does not identify a latent belief process,
+executable return, causal mechanism, or universal parameterization.
