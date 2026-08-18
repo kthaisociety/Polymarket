@@ -183,3 +183,11 @@ both chronological halves and non-overlapping daily event-equal drift is also ne
 overpricing interpretation requires mean probability to exceed outcome frequency by at least two
 percentage points at three of four fixed horizons under both market weighting and event-macro
 weighting. Payout-conditional results cannot be used as features or trading evidence.
+
+Source 02 completed and both fixed falsifiers passed. The one-hour event-equal mean was negative in
+both chronological halves, non-overlapping event-equal daily change was `-0.00957`, and market- and
+event-weighted probabilities exceeded outcome frequencies by more than two percentage points at
+all four horizons. This opens a separate calibration/financial-theory branch, but does not consume
+one of the three declared process-model branches. Its next allowed analyses are fixed event-cluster
+uncertainty, predeclared semantic/regime stability, and chronological calibration models that must
+compare against the raw market probability.

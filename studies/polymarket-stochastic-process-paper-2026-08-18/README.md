@@ -95,4 +95,51 @@ latent belief and executable quote processes remain unidentified.
 No trade rule, formal candidate, protected request, finding, or durable-memory update has been
 created.
 
-Source 02 is predeclared but has not yet executed.
+## Drift-composition result
+
+Source 02 succeeded with source SHA-256
+`f6d2fec0f8bc25c37b863f5c0df79e77de273c16cad6e2ae134b66c5b9b5a8fe`. Its exact receipt is
+[`development-receipts/02_drift_composition_falsifier.json`](development-receipts/02_drift_composition_falsifier.json),
+SHA-256 `8f8765ad35db116bb30d64f45d3c9325edc5bb46bcd6863972878f3f85c2c699`.
+
+The negative mean increment did not disappear when long paths or large events stopped dominating:
+
+| Weighting/view | Mean probability change |
+|---|---:|
+| Regular one-hour, observation weighted | −0.0180¢ |
+| Regular one-hour, market equal | −0.0456¢ |
+| Regular one-hour, event equal | −0.0449¢ |
+| Early-half event equal | −0.0406¢ |
+| Late-half event equal | −0.0492¢ |
+| Non-overlapping daily, market equal | −1.054¢ |
+| Non-overlapping daily, event equal | −0.957¢ |
+
+Only 14/157 event-equal one-hour means were positive. Event-equal daily drift remained negative
+through its 90th percentile (`−0.000748`). The predeclared drift-composition falsifier therefore
+passed.
+
+Realized-payout diagnosis explains the direction mechanically but not the cross-sectional
+calibration gap. The 509 eventual NO contracts lost 31.69¢ from first to last retained sample on
+average, while 53 eventual YES contracts gained 35.39¢. Payout is future information and cannot be
+a predictor.
+
+### Fixed-horizon calibration lead
+
+One closest retained sample per market produced the following calibration evidence:
+
+| Hours before close | Markets / events | Mean price | YES rate | Price minus YES rate | Event-macro gap |
+|---:|---:|---:|---:|---:|---:|
+| 24 | 562 / 157 | 13.53% | 9.43% | +4.10 pp | +4.14 pp |
+| 72 | 548 / 156 | 13.53% | 8.58% | +4.95 pp | +4.69 pp |
+| 168 | 523 / 149 | 17.44% | 8.22% | +9.22 pp | +7.01 pp |
+| 336 | 403 / 125 | 14.89% | 7.94% | +6.95 pp | +7.44 pp |
+
+Both market-weighted and event-macro gaps exceeded the fixed two-percentage-point threshold at all
+four horizons. The broad-overpricing falsifier passed. Reliability rows show that the gap is
+concentrated in low-to-mid probabilities; high-probability cells are small and do not support a
+symmetric claim.
+
+This is selection-exposed development evidence for a favorite–longshot-like calibration pattern,
+not proof of mispricing. Remaining rivals include semantic event mix, incomplete related-contract
+surfaces, cohort selection, and sampled-price versus executable-quote differences. Clustered
+uncertainty and fixed semantic/regime tests must run before the paper states a general effect.
