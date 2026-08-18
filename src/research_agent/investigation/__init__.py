@@ -34,6 +34,8 @@ from research_agent.investigation.program import (
 )
 from research_agent.investigation.protected import (
     AuthoredBacktestEngine,
+    AuthoredBacktestProgress,
+    AuthoredBacktestProgressStage,
     AuthoredProtectedPlan,
     AuthoredProtectedPlanError,
     AuthoredProtectedPlanIssuer,
@@ -71,6 +73,8 @@ from research_agent.investigation.resolution import (
 __all__ = [
     "ARCHIVE_SCHEMA_VERSION",
     "AuthoredBacktestEngine",
+    "AuthoredBacktestProgress",
+    "AuthoredBacktestProgressStage",
     "AuthoredCandidate",
     "AuthoredCandidateManifest",
     "AuthoredDevelopmentEvaluator",

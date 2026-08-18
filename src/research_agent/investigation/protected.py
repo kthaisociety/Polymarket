@@ -51,7 +51,13 @@ if TYPE_CHECKING:
     from collections.abc import Callable
     from datetime import datetime
 
-    from research_agent.data_foundation import DataCatalogSnapshot, RegisteredObservation, SampleKey
+    from research_agent.data_foundation import (
+        DataCatalogSnapshot,
+        FieldRef,
+        InformationSet,
+        RegisteredObservation,
+        SampleKey,
+    )
     from research_agent.investigation.engine import RuntimeInvestigationCoordinator
     from research_agent.investigation.program import ScientificProgramSession
     from research_agent.investigation.records import (
@@ -341,6 +347,8 @@ class _LabelMaterialization:
 
 
 type _ChannelObservationIdentity = tuple[tuple[str, tuple[str, ...]], ...]
+type _InformationSetCacheKey = tuple[str, datetime, tuple[FieldRef, ...]]
+type _ObservationSliceCacheKey = tuple[str, FieldRef, tuple[tuple[str, str], ...]]
 type _FeatureCacheKey = tuple[str, str, SampleKey]
 type _LabelCacheKey = tuple[
     str,
@@ -356,6 +364,10 @@ type _LabelCacheKey = tuple[
 class _ProtectedMaterializationCache:
     """Pure authored materializations scoped to exactly one protected execution."""
 
+    information_sets: dict[_InformationSetCacheKey, InformationSet] = field(default_factory=dict)
+    observation_slices: dict[_ObservationSliceCacheKey, tuple[RegisteredObservation, ...]] = field(
+        default_factory=dict
+    )
     features: dict[_FeatureCacheKey, _FeatureMaterialization] = field(default_factory=dict)
     labels: dict[_LabelCacheKey, _LabelMaterialization] = field(default_factory=dict)
 
@@ -366,6 +378,23 @@ class _Stage(Enum):
     FIT = "fit"
     PREDICTION = "prediction"
     OUTCOME = "outcome"
+
+
+class AuthoredBacktestProgressStage(Enum):
+    """Non-sensitive stages observable during one protected execution."""
+
+    RESOLVING_CONTENT = "resolving_content"
+    EXECUTING_DECISIONS = "executing_decisions"
+    SEALING_RUN = "sealing_run"
+
+
+@dataclass(frozen=True, slots=True)
+class AuthoredBacktestProgress:
+    """Structural progress that never includes protected keys, values, or outcomes."""
+
+    stage: AuthoredBacktestProgressStage
+    completed_decisions: int
+    total_decisions: int
 
 
 class _DecisionFailureError(RuntimeError):
@@ -400,6 +429,7 @@ class AuthoredBacktestEngine:
         programs: ScientificProgramHarness | None = None,
         runs: BacktestRunRegistry | None = None,
         operations: PrivilegedOperationCoordinator | None = None,
+        progress: Callable[[AuthoredBacktestProgress], None] | None = None,
     ) -> None:
         self._investigations = investigations
         self._plans = plans
@@ -412,6 +442,7 @@ class AuthoredBacktestEngine:
         self._programs = programs or ScientificProgramHarness()
         self._runs = runs or BacktestRunRegistry()
         self._operations = operations or PrivilegedOperationCoordinator()
+        self._progress = progress
 
     def __copy__(self) -> AuthoredBacktestEngine:
         raise TypeError("authored backtest execution authority cannot be copied")
@@ -583,6 +614,8 @@ class AuthoredBacktestEngine:
                 disclosure_status="loader-invocation-is-disclosure",
             )
         )
+        total_decisions = len(scenario.decision_sample_keys)
+        self._emit_progress(AuthoredBacktestProgressStage.RESOLVING_CONTENT, 0, total_decisions)
         try:
             loaded = loader(view.resource_binding_ref)
             catalog = loaded.catalog
@@ -620,24 +653,37 @@ class AuthoredBacktestEngine:
                 status=BacktestRunStatus.COMPLETED_WITH_FAILURES,
             )
         materializations = _ProtectedMaterializationCache()
+        decisions_list: list[BacktestDecisionRecord] = []
+        self._emit_progress(AuthoredBacktestProgressStage.EXECUTING_DECISIONS, 0, total_decisions)
         with self._programs.session(candidate.source) as program:
-            decisions = tuple(
-                self._execute_decision_safely(
-                    ordinal,
-                    key,
-                    catalog,
-                    candidate,
-                    scenario,
-                    exposure,
-                    program,
-                    materializations,
+            for ordinal, key in enumerate(scenario.decision_sample_keys):
+                decisions_list.append(
+                    self._execute_decision_safely(
+                        ordinal,
+                        key,
+                        catalog,
+                        candidate,
+                        scenario,
+                        exposure,
+                        program,
+                        materializations,
+                    )
                 )
-                for ordinal, key in enumerate(scenario.decision_sample_keys)
-            )
+                self._emit_progress(
+                    AuthoredBacktestProgressStage.EXECUTING_DECISIONS,
+                    ordinal + 1,
+                    total_decisions,
+                )
+        decisions = tuple(decisions_list)
         status = (
             BacktestRunStatus.COMPLETED_WITH_FAILURES
             if any(decision.failures for decision in decisions)
             else BacktestRunStatus.COMPLETED
+        )
+        self._emit_progress(
+            AuthoredBacktestProgressStage.SEALING_RUN,
+            total_decisions,
+            total_decisions,
         )
         return self._seal(
             request,
@@ -651,6 +697,20 @@ class AuthoredBacktestEngine:
             decisions=decisions,
             status=status,
         )
+
+    def _emit_progress(
+        self,
+        stage: AuthoredBacktestProgressStage,
+        completed_decisions: int,
+        total_decisions: int,
+    ) -> None:
+        if self._progress is None:
+            return
+        try:
+            self._progress(AuthoredBacktestProgress(stage, completed_decisions, total_decisions))
+        except Exception:
+            # Observability must never alter protected scientific execution.
+            return
 
     def _execute_decision_safely(
         self,
@@ -873,6 +933,27 @@ class AuthoredBacktestEngine:
             (),
         )
 
+    @staticmethod
+    def _information_set(
+        catalog: DataCatalogSnapshot,
+        *,
+        decision_time: datetime,
+        requested_fields: tuple[FieldRef, ...],
+        materializations: _ProtectedMaterializationCache,
+    ) -> InformationSet:
+        """Reuse one exact legal view within an immutable protected execution."""
+        cache_key = (catalog.identity, decision_time, requested_fields)
+        cached = materializations.information_sets.get(cache_key)
+        if cached is not None:
+            return cached
+        information = InformationSetBuilder().build(
+            catalog,
+            decision_time=decision_time,
+            requested_fields=requested_fields,
+        )
+        materializations.information_sets[cache_key] = information
+        return information
+
     def _features(
         self,
         catalog: DataCatalogSnapshot,
@@ -893,17 +974,22 @@ class AuthoredBacktestEngine:
                 "scenario population differs from the authored manifest",
                 (),
             )
-        information = InformationSetBuilder().build(
+        information = self._information_set(
             catalog,
             decision_time=key.decision_time,
             requested_fields=manifest.information_fields,
+            materializations=materializations,
         )
         histories = {
             field.field_id: [
                 _observation_json(item)
-                for item in information.for_field(field)
+                for item in self._observation_slice(
+                    information,
+                    field,
+                    key.dimensions,
+                    materializations,
+                )
                 if item.reference_time <= key.decision_time
-                and tuple(sorted(item.dimensions)) == key.dimensions
             ]
             for field in manifest.predictor_fields
         }
@@ -961,6 +1047,25 @@ class AuthoredBacktestEngine:
             materialized.observation_ids,
             materialized.accesses,
         )
+
+    @staticmethod
+    def _observation_slice(
+        information: InformationSet,
+        field_ref: FieldRef,
+        dimensions: tuple[tuple[str, str], ...],
+        materializations: _ProtectedMaterializationCache,
+    ) -> tuple[RegisteredObservation, ...]:
+        cache_key = (information.information_set_id, field_ref, dimensions)
+        cached = materializations.observation_slices.get(cache_key)
+        if cached is not None:
+            return cached
+        observations = tuple(
+            item
+            for item in information.observations
+            if item.field_ref == field_ref and tuple(sorted(item.dimensions)) == dimensions
+        )
+        materializations.observation_slices[cache_key] = observations
+        return observations
 
     def _training_example(
         self,
@@ -1022,16 +1127,21 @@ class AuthoredBacktestEngine:
                 "authored outcome horizon has not matured",
                 (),
             )
-        information = InformationSetBuilder().build(
+        information = self._information_set(
             catalog,
             decision_time=label_clock,
             requested_fields=(manifest.outcome_field,),
+            materializations=materializations,
         )
         observations = tuple(
             item
-            for item in information.for_field(manifest.outcome_field)
-            if tuple(sorted(item.dimensions)) == key.dimensions
-            and key.decision_time < item.reference_time <= outcome_end
+            for item in self._observation_slice(
+                information,
+                manifest.outcome_field,
+                key.dimensions,
+                materializations,
+            )
+            if key.decision_time < item.reference_time <= outcome_end
         )
         if len(observations) < manifest.minimum_outcome_points:
             raise _DecisionFailureError(
@@ -1040,17 +1150,22 @@ class AuthoredBacktestEngine:
                 "authored outcome path is incomplete",
                 (information.information_set_id,),
             )
-        historical_information = InformationSetBuilder().build(
+        historical_information = self._information_set(
             catalog,
             decision_time=key.decision_time,
             requested_fields=manifest.information_fields,
+            materializations=materializations,
         )
         histories = {
             field.field_id: [
                 _observation_json(item)
-                for item in historical_information.for_field(field)
+                for item in self._observation_slice(
+                    historical_information,
+                    field,
+                    key.dimensions,
+                    materializations,
+                )
                 if item.reference_time <= key.decision_time
-                and tuple(sorted(item.dimensions)) == key.dimensions
             ]
             for field in manifest.predictor_fields
         }

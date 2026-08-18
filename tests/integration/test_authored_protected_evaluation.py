@@ -38,6 +38,8 @@ from research_agent.data_foundation import (
 from research_agent.data_foundation._identity import stable_identity
 from research_agent.investigation import (
     AuthoredBacktestEngine,
+    AuthoredBacktestProgress,
+    AuthoredBacktestProgressStage,
     AuthoredCandidateManifest,
     AuthoredFreezeService,
     AuthoredProgramProposal,
@@ -587,6 +589,77 @@ def test_protected_materialization_cache_preserves_decisions_and_refit_frequency
     )
 
 
+def test_protected_information_set_cache_reuses_only_the_exact_legal_view() -> None:
+    catalog = _catalog(25, 51)
+    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    materializations = _ProtectedMaterializationCache()
+    requested_fields = (catalog.observations[0].field_ref,)
+    decision_time = ORIGIN + DAY * 36
+
+    first = engine._information_set(  # pyright: ignore[reportPrivateUsage]
+        catalog,
+        decision_time=decision_time,
+        requested_fields=requested_fields,
+        materializations=materializations,
+    )
+    repeated = engine._information_set(  # pyright: ignore[reportPrivateUsage]
+        catalog,
+        decision_time=decision_time,
+        requested_fields=requested_fields,
+        materializations=materializations,
+    )
+    later = engine._information_set(  # pyright: ignore[reportPrivateUsage]
+        catalog,
+        decision_time=decision_time + DAY,
+        requested_fields=requested_fields,
+        materializations=materializations,
+    )
+
+    assert repeated is first
+    assert later is not first
+    assert later.decision_time == decision_time + DAY
+    assert len(materializations.information_sets) == 2
+
+    dimensions = catalog.observations[0].dimensions
+    first_slice = engine._observation_slice(  # pyright: ignore[reportPrivateUsage]
+        first,
+        requested_fields[0],
+        dimensions,
+        materializations,
+    )
+    repeated_slice = engine._observation_slice(  # pyright: ignore[reportPrivateUsage]
+        first,
+        requested_fields[0],
+        dimensions,
+        materializations,
+    )
+    later_slice = engine._observation_slice(  # pyright: ignore[reportPrivateUsage]
+        later,
+        requested_fields[0],
+        dimensions,
+        materializations,
+    )
+
+    assert repeated_slice is first_slice
+    assert later_slice is not first_slice
+    assert all(item.dimensions == dimensions for item in first_slice)
+    assert len(materializations.observation_slices) == 2
+
+
+def test_protected_progress_observer_cannot_change_execution() -> None:
+    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+
+    def fail(_: AuthoredBacktestProgress) -> None:
+        raise RuntimeError("observer failure")
+
+    engine._progress = fail  # pyright: ignore[reportPrivateUsage]
+    engine._emit_progress(  # pyright: ignore[reportPrivateUsage]
+        AuthoredBacktestProgressStage.EXECUTING_DECISIONS,
+        3,
+        10,
+    )
+
+
 def test_label_cache_key_tracks_revisions_available_between_decisions() -> None:
     development_catalog = _catalog(1, 25)
     protected_catalog = _catalog_with_outcome_revision()
@@ -883,6 +956,7 @@ def test_exact_frozen_authored_source_executes_through_protected_walk_forward(
     )
     assert isinstance(view, AuthorizedProtectedDataView)
     recorder = ExposureRecorder(registry=exposures, ledger=ledger, clock=_clock)
+    progress: list[AuthoredBacktestProgress] = []
     engine = AuthoredBacktestEngine(
         investigations=coordinator,
         plans=plan_registry,
@@ -892,6 +966,7 @@ def test_exact_frozen_authored_source_executes_through_protected_walk_forward(
         exposures=recorder,
         ledger=ledger,
         clock=_clock,
+        progress=progress.append,
     )
     with pytest.raises(TypeError, match="execution authority cannot be copied"):
         copy.copy(engine)
@@ -1007,6 +1082,22 @@ def test_exact_frozen_authored_source_executes_through_protected_walk_forward(
     assert run.system_id == candidate.candidate_id
     assert run.frozen_system_id == freeze.frozen.frozen_system_id
     assert run.exposure_id == exposures.records()[0].exposure_id
+    assert progress[0] == AuthoredBacktestProgress(
+        AuthoredBacktestProgressStage.RESOLVING_CONTENT, 0, len(run.decisions)
+    )
+    assert progress[1] == AuthoredBacktestProgress(
+        AuthoredBacktestProgressStage.EXECUTING_DECISIONS, 0, len(run.decisions)
+    )
+    assert progress[-1] == AuthoredBacktestProgress(
+        AuthoredBacktestProgressStage.SEALING_RUN,
+        len(run.decisions),
+        len(run.decisions),
+    )
+    assert [
+        item.completed_decisions
+        for item in progress
+        if item.stage is AuthoredBacktestProgressStage.EXECUTING_DECISIONS
+    ] == list(range(len(run.decisions) + 1))
     assert load_calls == []
     assert all(decision.fit is not None for decision in run.decisions)
     assert all(decision.prediction is not None for decision in run.decisions)
