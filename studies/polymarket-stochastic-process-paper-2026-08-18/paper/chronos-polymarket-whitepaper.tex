@@ -249,8 +249,14 @@ active markets tend to remain active, while inactive markets tend to remain inac
 
 \subsection{Independent source and frequency check}
 
+This is a narrow validation exercise, not the main empirical sample. The main estimates above use
+562 markets from 157 events, and the unchanged later-cohort evaluation uses another 147 markets
+from 29 events. The ten-market panel is used only to ask whether the main signatures disappear
+when the same contracts are observed through an independently acquired official source at a
+five-minute frequency.
+
 Hourly sampling could create artificial zeros or reversals if a finer path were moving between
-the recorded points. The official five-minute panel provides a limited check. On that panel,
+the recorded points. The official five-minute panel therefore provides a targeted check. On that panel,
 78.00\% of changes are zero, kurtosis is 203.64, the reversal rate is 67.87\%, and the 24-hour
 variance ratio is 0.067. Of 1,580 hourly observations aligned to an official-history sample within
 ten minutes, 99.49\% match exactly.
@@ -439,32 +445,53 @@ execution evidence is absent. A credible trading test would need side-specific e
 spread, fees, depth, latency, order-filling assumptions, and an abstention rule fixed before the
 protected evaluation.
 
-\section{Limitations and Further Research}
+\section{Limitations and Research Agenda}
 
-The study has six principal limitations. First, the registered samples are not fully identified
-as trades, quotes, midpoints, or latent beliefs. Second, the independent five-minute panel
-contains only ten preselected markets and is not a venue-wide order-book study. Third, event
-grouping reduces dependence across evaluation units but cannot remove every link among related
-political or economic events. Fourth, the Gaussian benchmark is intentionally simple; the results
-do not reject every continuous-time latent process observed with microstructure noise or
-endogenous sampling. Fifth, the later cohort is a transfer test of the process family, not a
-second protected experiment. Sixth, the only protected system was rejected and its exposed
-schedule cannot be used again as an untouched holdout.
+\subsection{Scope of the evidence}
 
-The next step is to combine the reliable arrival component with directional predictors. The
-arrival probability can serve as an eligibility layer: a directional model is evaluated only at
-times when a recorded update is sufficiently likely to matter. Candidate predictors include
-time-legal polling releases, macroeconomic announcements, and prices from other prediction
-venues. Those variables should be treated as predictive inputs rather than assumed arbitrage
-relations. Any candidate that clears chronological development gates must then be frozen and
-tested on a genuinely new event cohort with executable cost assumptions.
+The primary evidence is broad. The development sample contains 562 markets associated with 157
+events, and the later evaluation adds 147 markets associated with 29 new events. The ten-market
+five-minute panel serves a different purpose. It is a targeted robustness check using an
+independently acquired source: it asks whether the principal hourly signatures survive at a
+higher sampling frequency. The paper should therefore be read as a broad study of registered
+hourly probability paths, supported by a narrower high-frequency check. It is not a venue-wide
+study of five-minute order books.
 
-Further modelling work should also separate economic movement from observation mechanics. An
-order-book panel would permit explicit analysis of stale quotes, bid-ask bounce, market depth,
-and trade arrival. A continuous-time marked point process could model irregular update times
-directly, while a bounded state transformation could represent behavior near zero and one. The
-present results imply that such a model should preserve an explicit no-change mechanism and
-duration dependence rather than beginning from a homoskedastic diffusion.
+\subsection{What remains unidentified}
+
+The main data source records a probability at each timestamp, but it does not establish whether
+that value is a last trade, a midpoint, another quote-derived measure, or a stale published value.
+Consequently, an unchanged observation may represent genuine inactivity, an unchanged quote, or
+the behavior of the historical feed. Separate studies in Chronos use canonical transaction
+records, but those fills cannot retrospectively identify every observation in the main corpus.
+Distinguishing economic inactivity from publication mechanics requires historical trades and
+order books observed together.
+
+Two further qualifications concern statistical scope. Keeping related contracts within the same
+event prevents the most direct form of leakage, but separate events may still respond to common
+political or economic information. In addition, the Gaussian comparator tests a simple bounded
+diffusion; rejecting it does not exclude every continuous latent-price model with endogenous
+sampling or market-microstructure noise.
+
+The validation evidence must also be interpreted precisely. The later cohort tests whether a
+frozen model family transfers to new events, but it is not a second protected experiment. The one
+protected implementation was rejected because it failed to produce enough legal forecasts. That
+schedule is now exposed and cannot be reused as an untouched holdout.
+
+\subsection{Research agenda}
+
+The next experiment should join transactions, executable quotes, and order-book depth in a common
+event-time panel. Such data would make it possible to separate trade arrival from quote updates,
+measure bid-ask bounce and price impact directly, and determine whether apparent reversals remain
+after realistic execution costs.
+
+The modelling framework can retain the useful decomposition developed here. A first component
+estimates whether an economically meaningful update is likely to occur; a second predicts its
+direction; and a third predicts its magnitude. Directional inputs may include time-legal polling
+releases, macroeconomic announcements, and prices from related prediction venues. These variables
+are candidate predictors, not assumed arbitrage relationships. Any specification that passes
+chronological development must be frozen and evaluated on a new event cohort using executable
+bid and ask prices, fees, depth, latency, and a predeclared abstention rule.
 
 \section{Conclusion}
 
