@@ -30,11 +30,12 @@ inactivity lowers event-macro Brier from 0.261 to 0.174, wins all 27 events, and
 absolute Brier and calibration gates. This strengthens the arrival component while remaining a
 non-protected later replay.
 
-The result does not authorize a universal or protected claim. When the law is compressed to a
-sparse binary arrival forecast inside the formal Chronos harness, it narrowly misses fixed
-observation, event-macro, and late-period Brier ceilings. No freeze or protected evaluation is
-issued. The evidence supports a regime-dependent family for registered samples—not a proven latent
-belief SDE, executable-price model, or trading strategy.
+The result does not authorize a universal or protected claim. A coarse-cell sparse binary arrival
+forecast narrowly misses fixed formal Brier ceilings. An explicitly descended continuous logistic
+hazard subsequently passes the same absolute formal standard with 202 OOF predictions across 100
+events and is frozen, while protected evidence remains unexposed. The evidence supports a
+regime-dependent family for registered samples—not a proven latent belief SDE, executable-price
+model, or trading strategy.
 
 ## 1. Research questions
 
@@ -240,7 +241,7 @@ official five-minute paths match all 1,580 eligible retained hourly samples with
 99.49% are exact and mean absolute difference is 0.0000487 probability units. Coarse hourly
 sampling alone therefore does not explain the main signatures on this preselected panel.
 
-## 6. Formal negative result
+## 6. Formal development: coarse rejection and continuous-hazard pass
 
 The sparse formal arrival replay produces 231 out-of-fold predictions over 111 events. The fixed
 gate is not met:
@@ -260,8 +261,28 @@ complete-law advantage does not guarantee that one component remains strong unde
 compression. It also does not conflict with the later continuous-hazard replay: the rejected formal
 candidate used coarse probability/quiet cells and one sparse common anchor per event, whereas the
 replayed logistic hazard uses continuous staleness features on the full eligible hourly schedule.
-The correct next step is a new formal candidate with its own identity and development gate, not a
+The correct next step was a new formal candidate with its own identity and development gate, not a
 reinterpretation of the rejected receipt.
+
+That descended candidate keeps the same next-regular-sample target, sparse metadata-selected
+anchors, event-aware temporal evaluation, and absolute thresholds. It replaces only the coarse
+probability/quiet cells with the already replicated continuous logistic features. The resulting
+formal evidence is:
+
+| Formal continuous-hazard check | Result | Fixed ceiling/floor | Status |
+|---|---:|---:|---|
+| OOF predictions | 202 | at least 200 | Pass |
+| Events | 100 | at least 80 | Pass |
+| Observation Brier | 0.182558 | at most 0.200000 | Pass |
+| Event-macro Brier | 0.190182 | at most 0.200000 | Pass |
+| Early event-macro Brier | 0.187409 | at most 0.220000 | Pass |
+| Late event-macro Brier | 0.192956 | at most 0.220000 | Pass |
+| Absolute calibration gap | 0.004628 | at most 0.050000 | Pass |
+| Largest event share of squared error | 0.046600 | at most 0.100000 | Pass |
+
+An independent freeze service seals the exact candidate and its predeclared protected plan. This
+is still selection-exposed development evidence: it does not erase the coarse-cell rejection, and
+no protected value is read in this stage.
 
 ![Formal arrival Brier result](figures/formal-arrival-brier.svg)
 
@@ -315,13 +336,13 @@ alone. That is predictive evidence about the observation/update process, not dir
   it is a fixed falsifier, not an independent replication cohort.
 - The diffusion comparator is deliberately simple. Rejection does not eliminate every bounded
   continuous-time latent process with microstructure noise or endogenous sampling.
-- No protected evaluation was run because the formal arrival candidate failed development.
+- No protected evaluation has yet been run; the continuous hazard is frozen development evidence.
 - No result establishes objective-probability equality, causality, alpha, Sharpe ratio, or profit
   after spread, fees, latency, slippage, and market impact.
 - The current protected evaluator lacks a governed distribution-valued log-score plugin, so the
   full density law remains development plus fresh-replication evidence.
-- The continuous arrival hazard has later no-refit evidence but has not yet passed a newly authored
-  formal development identity or protected evaluation.
+- The continuous arrival hazard has later no-refit evidence and a frozen formal development
+  identity, but not yet a protected evaluation.
 
 ## 10. Conclusion
 
@@ -332,7 +353,8 @@ Black–Scholes-style replication are poor defaults. Across broad development an
 cohort, the most useful sampled-process family is a state-, duration-, and path-conditioned
 zero-inflated marked jump. The paper's strongest claim is structural and observational. Its
 narrower coarse-cell formal arrival claim is rejected, while a distinct continuous staleness
-hazard passes fixed later no-refit gates. The protected holdout remains fresh.
+hazard passes fixed later no-refit and governed formal-development gates. The protected holdout
+remains fresh.
 
 ## References and evidence
 

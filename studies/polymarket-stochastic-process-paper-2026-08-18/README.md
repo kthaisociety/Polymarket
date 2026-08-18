@@ -1,7 +1,7 @@
 # Polymarket stochastic-process paper study
 
 Epistemic status: **FRESH COMPLETE-LAW AND ARRIVAL-HAZARD REPLICATION; REPRESENTATION ROBUSTNESS;
-FORMAL SPARSE ARRIVAL REJECTION; PROTECTED DATA UNEXPOSED**.
+CONTINUOUS ARRIVAL HAZARD FROZEN IN FORMAL DEVELOPMENT; PROTECTED DATA UNEXPOSED**.
 
 This study operationalizes the two research questions in the KTH AI Society project plan
 *Financial Mathematics and Machine Learning on Prediction Markets*. The empirical core asks which
@@ -72,6 +72,9 @@ evidence or inherits authority across different field types.
 - [`source/17_frozen_arrival_hazard_successor_replay.py`](source/17_frozen_arrival_hazard_successor_replay.py):
   literal no-refit replay of the source-16 hazards and fixed absolute/relative gates on the later
   successor cohort.
+- [`source/18_formal_continuous_arrival_hazard.py`](source/18_formal_continuous_arrival_hazard.py):
+  governed temporal development of the exact continuous hazard on the sparse formal schedule,
+  including independent freeze after its fixed credibility gate passed.
 
 The paper-working literature and claim map is retained in
 [`literature/theory-transfer-map.md`](literature/theory-transfer-map.md). It distinguishes direct,
@@ -466,3 +469,34 @@ sparse-anchor candidate through the formal harness; source 17 uses the full regi
 schedule, and its successor cohort has prior exposure to distinct process analyses. The next
 scientifically justified step is a new exact formal candidate for this continuous hazard, not a
 reinterpretation of the rejected candidate or direct protected access.
+
+## Formal continuous arrival hazard
+
+Source 18 descended explicitly from both the source-14 rejection and the source-16/17 positive
+evidence. It kept the sparse-anchor target, absolute gates, chronological machinery, and protected
+predeclaration while replacing the coarse cells with the predeclared continuous logistic features.
+The authority-side filter retained only keys with the required 25 regular observations and did not
+replace dropped anchors.
+
+| Formal continuous-hazard development check | Result | Fixed ceiling/floor | Status |
+|---|---:|---:|---|
+| OOF predictions | 202 | at least 200 | Pass |
+| Events | 100 | at least 80 | Pass |
+| Observation Brier | 0.18256 | at most 0.20 | Pass |
+| Event-macro Brier | 0.19018 | at most 0.20 | Pass |
+| Early event-macro Brier | 0.18741 | at most 0.22 | Pass |
+| Late event-macro Brier | 0.19296 | at most 0.22 | Pass |
+| Absolute calibration gap | 0.00463 | at most 0.05 | Pass |
+| Largest-event squared-error share | 0.04660 | at most 0.10 | Pass |
+
+The formal candidate ID is
+`authored-candidate:10b63992c977425e8b92bcc8d510a753775c1ed3708c89cbeff27734819b9de9`;
+the frozen system ID is
+`frozen-system:7b69995916de44043510c7d82a95b165d9aee6e2843d4bc00ca111808107b8eb`.
+Source SHA-256 is `6d1ea89c4f4bcfb764567e11d814a4d04ff302947820077ec606dc2de6b37359`;
+receipt SHA-256 is `417e7c9de63538f558a1cdd97609d6d6c82a49b7195bebaee830f8aafec0f192`.
+
+This pass overturns neither the source-14 receipt nor its rejected candidate. It establishes that a
+new continuous hazard survives the same class of formal sparse evaluation. The result is still
+selection-exposed development evidence. The exact protected plan is sealed, but no protected value
+has been exposed.

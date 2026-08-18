@@ -14,5 +14,6 @@ Current status: the complete marked-hurdle law passed chronological development 
 later no-refit replay. Fixed boundary, log-odds, maturity-regime, and six-hour-clock falsifiers also
 passed in development. A frozen continuous staleness hazard then passed fixed relative and absolute
 arrival gates on the later cohort without refitting. A distinct sparse coarse-cell formal binary
-arrival compression failed its fixed development gate. No protected evaluation was run, and the
-final holdout remains unexposed.
+arrival compression failed its fixed development gate; its explicitly descended continuous
+replacement passed governed formal development and was frozen. No protected evaluation was run,
+and the final holdout remains unexposed.

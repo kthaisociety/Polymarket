@@ -120,6 +120,17 @@ Source 17 performs no fitting. Its source SHA-256 is
 `aaf439a67f61d42f50e5b4f711a8f6255a2fefce9733f9b3b43f6a91d7dc2f95`; the retained receipt
 SHA-256 is `0ffda46feea1e16ea9398ac9054ad70bc5b7cc1992874926b6b4e6abdbb8843f`.
 
+## Replay the formal continuous arrival hazard
+
+```bash
+.venv/bin/python \
+  studies/polymarket-stochastic-process-paper-2026-08-18/source/18_formal_continuous_arrival_hazard.py
+```
+
+The retained path is conflict-detecting. The source SHA-256 is
+`6d1ea89c4f4bcfb764567e11d814a4d04ff302947820077ec606dc2de6b37359`; the receipt SHA-256 is
+`417e7c9de63538f558a1cdd97609d6d6c82a49b7195bebaee830f8aafec0f192`.
+
 ## Generate figures
 
 ```bash
