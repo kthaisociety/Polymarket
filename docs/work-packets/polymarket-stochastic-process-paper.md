@@ -439,3 +439,10 @@ starts at the later of market open or seven days before close, and uses integral
 Missing targets remain missing. It reads no probability or payout. Only this manifest may be turned
 into strict `polymarket-price-history-need/v1` documents and passive scout requests; public fetching
 remains a later exact, content-addressed transition.
+
+Source 09 completed with all 10 fixed targets. The receipt SHA-256 is
+`e4270a572f3dd9df26d42e4fb23ce3f4ec66d5e3618dd9e03b1a56b9d882ec18`. Every selected row is the
+retained YES outcome at index zero, carries an exact decimal CLOB token, uses five-minute fidelity,
+and spans no more than the final seven days before close. Seven identity/lifecycle fields were read;
+probability, payout, ancestor, and protected fields were not accessed. The manifest is authority
+for generating exact need/scout documents only, not evidence about the five-minute process.
