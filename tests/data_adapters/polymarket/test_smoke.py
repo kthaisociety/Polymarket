@@ -1,6 +1,7 @@
 """Fail-closed command tests for the live Polymarket smoke boundary."""
 
 # ruff: noqa: SLF001
+# pyright: reportPrivateUsage=false
 
 from __future__ import annotations
 

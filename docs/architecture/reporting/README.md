@@ -9,6 +9,10 @@ flowchart LR
     FINDING["ValidatedFinding"] -->|"report.render-finding"| REPORT["Human-facing report"]
     EVIDENCE["Canonical evidence and provenance"] --> REPORT
     CAVEATS["Validation status and caveats"] --> REPORT
+
+    CAMPAIGNS["Retained campaigns and receipts"] -->|"report.audit-paper"| AUDIT["PaperAuditReport"]
+    PROTOCOL["Claims, tests, intervals, search families"] --> AUDIT
+    AUDIT --> PAPER["Audited concise paper"]
 ```
 
 Wording, ordering, layout, and explanation may change. Evidence, caveats, provenance, validation
@@ -25,6 +29,13 @@ They contain no fields for replacing the conclusion, metrics, caveats, status, e
 provenance. Every supported style renders every canonical scientific field; "concise" changes
 presentation density, not scientific coverage. Reporting also states that scientific promotion is
 not a downstream business or economic decision and provides no action/recommendation interface.
+
+The adjacent paper-audit boundary covers development, negative, blocked, and replicated evidence
+that cannot become a `ValidatedFinding` merely because it is worth publishing. It independently
+verifies every declared campaign manifest, execution, completion, and receipt identity; inventories
+duplicate reruns; applies fixed requirements by claim kind; and binds displayed values to exact
+receipt fields. Publication acceptance means only that the paper's bounded wording matches its
+evidence. It cannot promote a finding, restore freshness, or authorize trading.
 
 - [Transition contracts](transitions/README.md)
 - [Implementation map](IMPLEMENTATION.md)

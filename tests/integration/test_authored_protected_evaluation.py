@@ -1,6 +1,7 @@
 """Application proof that frozen authored source reaches protected execution unchanged."""
 
 # ruff: noqa: D103, EM101, PLR0915, PLR2004, SLF001, TRY003
+# pyright: reportPrivateUsage=false
 
 from __future__ import annotations
 
@@ -68,9 +69,9 @@ from research_agent.investigation.program import (
     ProgramResult,
     ScientificProgramHarness,
 )
-from research_agent.investigation.protected import (
+from research_agent.investigation.protected import (  # pyright: ignore[reportPrivateUsage]
     _ProtectedMaterializationCache,
-)  # pyright: ignore[reportPrivateUsage]
+)
 from research_agent.protected_evaluation import (
     AuthorizedProtectedDataView,
     BacktestGovernance,
@@ -544,7 +545,7 @@ def _direct_decisions(
     *,
     share_materializations: bool,
 ) -> tuple[tuple[BacktestDecisionRecord, ...], Counter[str]]:
-    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    engine = object.__new__(AuthoredBacktestEngine)
     harness = _CountingProgramHarness()
     shared = _ProtectedMaterializationCache()
     with harness.session(candidate.source) as program:
@@ -591,7 +592,7 @@ def test_protected_materialization_cache_preserves_decisions_and_refit_frequency
 
 def test_protected_information_set_cache_reuses_only_the_exact_legal_view() -> None:
     catalog = _catalog(25, 51)
-    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    engine = object.__new__(AuthoredBacktestEngine)
     materializations = _ProtectedMaterializationCache()
     requested_fields = (catalog.observations[0].field_ref,)
     decision_time = ORIGIN + DAY * 36
@@ -647,7 +648,7 @@ def test_protected_information_set_cache_reuses_only_the_exact_legal_view() -> N
 
 
 def test_protected_progress_observer_cannot_change_execution() -> None:
-    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    engine = object.__new__(AuthoredBacktestEngine)
 
     def fail(_: AuthoredBacktestProgress) -> None:
         raise RuntimeError("observer failure")
@@ -666,7 +667,7 @@ def test_label_cache_key_tracks_revisions_available_between_decisions() -> None:
     plan = _plan(protected_catalog)
     candidate = _candidate_for(development_catalog, plan)
     key = SampleKey(ORIGIN + DAY * 25, protected_catalog.observations[0].dimensions)
-    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    engine = object.__new__(AuthoredBacktestEngine)
     materializations = _ProtectedMaterializationCache()
     harness = _CountingProgramHarness()
 
@@ -713,7 +714,7 @@ def test_immature_label_exclusion_is_not_negative_cached() -> None:
     plan = _plan(protected_catalog)
     candidate = _candidate_for(development_catalog, plan)
     key = SampleKey(ORIGIN + DAY * 35, protected_catalog.observations[0].dimensions)
-    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    engine = object.__new__(AuthoredBacktestEngine)
     materializations = _ProtectedMaterializationCache()
     harness = _CountingProgramHarness()
 
@@ -752,7 +753,7 @@ def test_materializations_are_isolated_by_candidate_catalog_and_execution() -> N
         expected_parent_trial_id=None,
     )
     key = SampleKey(ORIGIN + DAY * 36, protected_catalog.observations[0].dimensions)
-    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    engine = object.__new__(AuthoredBacktestEngine)
     materializations = _ProtectedMaterializationCache()
     harness = _CountingProgramHarness()
 
@@ -795,7 +796,7 @@ def test_failed_authored_materialization_is_not_cached_or_repaired() -> None:
         expected_parent_trial_id=None,
     )
     key = SampleKey(ORIGIN + DAY * 36, protected_catalog.observations[0].dimensions)
-    engine = cast("AuthoredBacktestEngine", object.__new__(AuthoredBacktestEngine))
+    engine = object.__new__(AuthoredBacktestEngine)
     materializations = _ProtectedMaterializationCache()
     harness = _CountingProgramHarness()
 

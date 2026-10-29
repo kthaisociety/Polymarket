@@ -1,0 +1,56 @@
+{
+  "analysis_as_of": "2026-08-24T09:13:44.071211+00:00",
+  "coverage": {
+    "evaluation_event_count": 69,
+    "evaluation_fill_count": 62800,
+    "high_skill_event_count": 61,
+    "high_skill_fill_count": 14910,
+    "high_skill_fill_share": "0.23742038216560509554"
+  },
+  "decision": {
+    "chronological_halves_non_negative": true,
+    "coverage_passed": true,
+    "incremental_edge_passed": false,
+    "passed": false,
+    "status": "REJECT_FIXED_B1_MATCHED_STATE_CANDIDATE"
+  },
+  "decision_rule": {
+    "chronological_halves_must_be_non_negative": true,
+    "minimum_cells": 100,
+    "minimum_event_macro_difference": "0.010",
+    "minimum_events": 30,
+    "minimum_fills_per_cohort_per_cell": 5,
+    "price_band_width": "0.05"
+  },
+  "durable_state_effects": [],
+  "epistemic_status": "EXPLORATORY_DEVELOPMENT",
+  "formal_object_refs": [],
+  "matched_result": {
+    "early_high_minus_non_high_edge": "0.01547894582024019356453628421",
+    "high_event_macro_edge": "0.01917762945818262165330895178",
+    "high_fill_count": 12875,
+    "high_minus_non_high_event_macro_edge": "0.00867292886230265056950653684",
+    "late_high_minus_non_high_edge": "0.00423422215060425296405235377",
+    "matched_cell_count": 531,
+    "matched_event_count": 38,
+    "non_high_event_macro_edge": "0.01050470059587997108380241493",
+    "non_high_fill_count": 39053,
+    "positive_event_share": "0.52631578947368421053"
+  },
+  "partition": {
+    "development_event_count": 95,
+    "embargoed_event_count": 95,
+    "training_cutoff": "2026-08-11T18:30:10+00:00",
+    "training_event_count": 284
+  },
+  "schema_version": "polymarket-skilled-wallet-matched-state/v1",
+  "source_name": "03_skilled_wallet_matched_state.sql",
+  "source_sha256": "bc3ce47ee7b5b40f63e76c64724b392c41a1da3d3ad387f9772be510304d7422",
+  "status": "SUCCEEDED",
+  "warnings": [
+    "Development selection evidence only; the final event block is excluded from label joins.",
+    "Matching controls event, aggressor side, five-point fill-price band, and time to resolution.",
+    "The matched-state test still uses recorded fill prices and is not an executable-entry test.",
+    "The production database is mutable; the fixed as-of ceiling excludes later timestamps but not later backfills."
+  ]
+}

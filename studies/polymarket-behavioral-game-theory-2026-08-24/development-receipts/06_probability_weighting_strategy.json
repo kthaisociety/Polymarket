@@ -1,0 +1,191 @@
+{
+  "details": {
+    "adverse_execution_hurdle": 0.02,
+    "all_paths_are_yes_labeled": false,
+    "decisions": {
+      "FAVORITE_FOLLOW": {
+        "minimum_events": 20,
+        "minimum_markets": 30,
+        "passed": false,
+        "status": "REJECT_FIXED_CANDIDATE"
+      },
+      "LONGSHOT_FADE": {
+        "minimum_events": 30,
+        "minimum_markets": 100,
+        "passed": true,
+        "status": "RETAIN_FOR_FRESH_EVALUATION"
+      }
+    },
+    "horizon_hours": [72.0, 168.0],
+    "horizon_tolerances": [12.0, 24.0],
+    "label_counts": {
+      "Up": 3,
+      "Yes": 1149
+    },
+    "minimum_incremental_edge": 0.01,
+    "order_break_count": 0,
+    "paired_rows": [
+      {
+        "comparison": "LONGSHOT_MINUS_ADJACENT_LOW",
+        "early_paired_difference": 0.10208796296296296,
+        "hours_before_close": 72.0,
+        "late_paired_difference": 0.032342171717171714,
+        "paired_event_count": 31,
+        "paired_event_macro_difference": 0.05259094982078853
+      },
+      {
+        "comparison": "LONGSHOT_MINUS_ADJACENT_LOW",
+        "early_paired_difference": 0.441,
+        "hours_before_close": 168.0,
+        "late_paired_difference": 0.048226725467514935,
+        "paired_event_count": 23,
+        "paired_event_macro_difference": 0.1165351210383819
+      },
+      {
+        "comparison": "FAVORITE_MINUS_ADJACENT_HIGH",
+        "early_paired_difference": null,
+        "hours_before_close": 72.0,
+        "late_paired_difference": -0.055499999999999994,
+        "paired_event_count": 1,
+        "paired_event_macro_difference": -0.055499999999999994
+      },
+      {
+        "comparison": "FAVORITE_MINUS_ADJACENT_HIGH",
+        "early_paired_difference": null,
+        "hours_before_close": 168.0,
+        "late_paired_difference": null,
+        "paired_event_count": 0,
+        "paired_event_macro_difference": null
+      }
+    ],
+    "probability_bands": {
+      "ADJACENT_HIGH_FOLLOW": "(0.80,0.90]",
+      "ADJACENT_LOW_FADE": "[0.10,0.20)",
+      "FAVORITE_FOLLOW": "(0.90,0.98]",
+      "LONGSHOT_FADE": "[0.02,0.10)"
+    },
+    "schema_version": "polymarket-probability-weighting-strategy/v1",
+    "strategy_rows": [
+      {
+        "early_event_macro_net_edge": -0.00843541666666667,
+        "event_count": 109,
+        "event_macro_net_edge": 0.001598114169215085,
+        "hours_before_close": 72.0,
+        "late_event_macro_net_edge": 0.007414653784219,
+        "market_count": 181,
+        "positive_event_share": 0.9541284403669725,
+        "strategy": "LONGSHOT_FADE"
+      },
+      {
+        "early_event_macro_net_edge": 0.012315476190476187,
+        "event_count": 93,
+        "event_macro_net_edge": 0.018424187640316673,
+        "hours_before_close": 168.0,
+        "late_event_macro_net_edge": 0.023454891187244125,
+        "market_count": 169,
+        "positive_event_share": 0.956989247311828,
+        "strategy": "LONGSHOT_FADE"
+      },
+      {
+        "early_event_macro_net_edge": -0.05602941176470589,
+        "event_count": 54,
+        "event_macro_net_edge": -0.048152777777777774,
+        "hours_before_close": 72.0,
+        "late_event_macro_net_edge": -0.04453378378378378,
+        "market_count": 74,
+        "positive_event_share": 0.7592592592592593,
+        "strategy": "ADJACENT_LOW_FADE"
+      },
+      {
+        "early_event_macro_net_edge": -0.08519062499999999,
+        "event_count": 55,
+        "event_macro_net_edge": -0.02065893939393939,
+        "hours_before_close": 168.0,
+        "late_event_macro_net_edge": 0.005815598290598296,
+        "market_count": 91,
+        "positive_event_share": 0.8,
+        "strategy": "ADJACENT_LOW_FADE"
+      },
+      {
+        "early_event_macro_net_edge": 0.044624999999999984,
+        "event_count": 32,
+        "event_macro_net_edge": -0.004781249999999999,
+        "hours_before_close": 72.0,
+        "late_event_macro_net_edge": -0.01183928571428571,
+        "market_count": 32,
+        "positive_event_share": 0.96875,
+        "strategy": "FAVORITE_FOLLOW"
+      },
+      {
+        "early_event_macro_net_edge": 0.03012499999999997,
+        "event_count": 28,
+        "event_macro_net_edge": -0.012910714285714288,
+        "hours_before_close": 168.0,
+        "late_event_macro_net_edge": -0.02008333333333333,
+        "market_count": 28,
+        "positive_event_share": 0.9642857142857143,
+        "strategy": "FAVORITE_FOLLOW"
+      },
+      {
+        "early_event_macro_net_edge": -0.885,
+        "event_count": 18,
+        "event_macro_net_edge": -0.10505555555555554,
+        "hours_before_close": 72.0,
+        "late_event_macro_net_edge": -0.05917647058823528,
+        "market_count": 18,
+        "positive_event_share": 0.7777777777777778,
+        "strategy": "ADJACENT_HIGH_FOLLOW"
+      },
+      {
+        "early_event_macro_net_edge": -0.38,
+        "event_count": 9,
+        "event_macro_net_edge": 0.015555555555555564,
+        "hours_before_close": 168.0,
+        "late_event_macro_net_edge": 0.1285714285714286,
+        "market_count": 9,
+        "positive_event_share": 0.8888888888888888,
+        "strategy": "ADJACENT_HIGH_FOLLOW"
+      }
+    ]
+  },
+  "development_event_count": 256,
+  "development_market_count": 1152,
+  "durable_state_effects": [],
+  "epistemic_status": "EXPLORATORY",
+  "execution": {
+    "action_id": "polymarket-behavioral-development:0d5f047b06dc3885c4b3ef596adc03a82d3e5a3453cbc1b8ccfaa1073a2a7d46",
+    "actual_accesses": [
+      {"dataset_ref": "polymarket-development-prices:30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410", "field_id": "market_id", "ordinal": 0, "view_id": "polymarket-development-prices"},
+      {"dataset_ref": "polymarket-development-prices:30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410", "field_id": "observation_ordinal", "ordinal": 1, "view_id": "polymarket-development-prices"},
+      {"dataset_ref": "polymarket-development-prices:30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410", "field_id": "observed_at_epoch_seconds", "ordinal": 2, "view_id": "polymarket-development-prices"},
+      {"dataset_ref": "polymarket-development-prices:30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410", "field_id": "market_probability", "ordinal": 3, "view_id": "polymarket-development-prices"},
+      {"dataset_ref": "polymarket-development-outcomes:30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410", "field_id": "market_id", "ordinal": 4, "view_id": "polymarket-development-outcomes"},
+      {"dataset_ref": "polymarket-development-outcomes:30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410", "field_id": "event_chronological_ordinal", "ordinal": 5, "view_id": "polymarket-development-outcomes"},
+      {"dataset_ref": "polymarket-development-outcomes:30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410", "field_id": "outcome_label", "ordinal": 6, "view_id": "polymarket-development-outcomes"},
+      {"dataset_ref": "polymarket-development-outcomes:30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410", "field_id": "close_time_epoch_seconds", "ordinal": 7, "view_id": "polymarket-development-outcomes"},
+      {"dataset_ref": "polymarket-development-outcomes:30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410", "field_id": "resolution_payout", "ordinal": 8, "view_id": "polymarket-development-outcomes"}
+    ],
+    "code_sha256": "0d5f047b06dc3885c4b3ef596adc03a82d3e5a3453cbc1b8ccfaa1073a2a7d46",
+    "random_seed": null
+  },
+  "formal_object_refs": [],
+  "partition_id": "30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410",
+  "partition_method": "whole-event-chronological-latest-resolution/v1",
+  "protected_event_count": 65,
+  "protected_market_count": 357,
+  "protected_values_exposed": false,
+  "resource_limits": {"max_inline_bytes": 200000, "max_memory_bytes": 4294967296, "max_output_bytes": 1000000, "max_result_bytes": 2000000, "max_source_bytes": 64000, "wall_time_seconds": 180.0},
+  "snapshot_ref": "polymarket-corpus:184b83f7f8012da4ca9116c8b6bad2076570ad5f0bada95b22615ee2f5cceae8",
+  "source_name": "06_probability_weighting_strategy.py",
+  "source_sha256": "0d5f047b06dc3885c4b3ef596adc03a82d3e5a3453cbc1b8ccfaa1073a2a7d46",
+  "status": "succeeded",
+  "summary": "Fixed probability-weighting strategy screen against adjacent probability-state rivals.",
+  "warnings": [
+    "The whole-event development partition is selection-exposed; protected values remain hidden.",
+    "Sampled probabilities are not executable bid or ask quotes.",
+    "Each market contributes at most one sample per fixed horizon.",
+    "Event-macro and paired-event summaries preserve the primary dependence boundary.",
+    "The two-cent hurdle is a stress screen, not an observed spread, fee, depth, or impact model.",
+    "Passing permits only fresh immutable evaluation, never promotion or trading."
+  ]
+}

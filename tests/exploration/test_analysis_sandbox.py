@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import cast
+
 import pytest
 
 from research_agent.exploration import (
@@ -95,9 +97,10 @@ result = structured_return("pure logit", {"logit": logit, "recovered": recovered
     )
 
     assert observation.status is AnalysisStatus.SUCCEEDED
-    assert observation.details is not None
-    assert observation.details["logit"] == pytest.approx(-1.0986122886681098)
-    assert observation.details["recovered"] == pytest.approx(0.25)
+    assert isinstance(observation.details, dict)
+    details = cast("dict[str, object]", observation.details)
+    assert details["logit"] == pytest.approx(-1.0986122886681098)
+    assert details["recovered"] == pytest.approx(0.25)
 
 
 def test_pure_sqrt_supports_authored_statistical_diagnostics() -> None:

@@ -1,6 +1,7 @@
 """Registration-to-sandbox integration tests for live Polymarket exploration."""
 
 # ruff: noqa: SLF001
+# pyright: reportPrivateUsage=false
 
 from __future__ import annotations
 

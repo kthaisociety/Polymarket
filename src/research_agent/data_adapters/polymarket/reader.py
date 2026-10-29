@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Protocol, cast
 
 from research_agent.data_adapters.polymarket.models import (
@@ -18,29 +19,9 @@ from research_agent.data_adapters.polymarket.models import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
+    from collections.abc import Sequence
     from datetime import datetime
     from decimal import Decimal
-
-    from core.db.queries import Executor
-    from market.models import Fill, Identity
-
-    class _Status(Protocol):
-        message: str
-
-
-class _StatusOr[Value](Protocol):
-    def ok(self) -> bool:
-        """Return whether the engine read succeeded."""
-        ...
-
-    def value(self) -> Value:
-        """Return the successful engine read value."""
-        ...
-
-    def status(self) -> _Status:
-        """Return the failed engine read status."""
-        ...
 
 
 class _FetchExecutor(Protocol):
@@ -48,6 +29,10 @@ class _FetchExecutor(Protocol):
 
     async def fetch(self, query: str, *args: object) -> Sequence[Mapping[str, object]]:
         """Return rows for one parameterized SELECT."""
+        ...
+
+    async def fetchrow(self, query: str, *args: object) -> Mapping[str, object] | None:
+        """Return one row for a parameterized SELECT."""
         ...
 
 
@@ -75,20 +60,22 @@ class PolymarketResearchReader(Protocol):
 
 
 class EnginePolymarketResearchReader:
-    """Adapt the BDL engine's public market reads without owning the database."""
+    """Read the legacy BDL schema through a Chronos-owned read-only surface.
 
-    def __init__(self, executor: Executor) -> None:
-        """Retain the engine executor used only through public read functions."""
+    The public name is retained for compatibility with existing Chronos studies. The
+    implementation is standalone and does not import the parent BDL engine.
+    """
+
+    def __init__(self, executor: _FetchExecutor) -> None:
+        """Retain a proved read-only database executor."""
         self._executor = executor
 
     async def read_vintage(self) -> PolymarketBlockVintage:
         """Read and validate the two persisted on-chain sweep cursors."""
-        from market import reads  # noqa: PLC0415 - optional BDL composition dependency
-
-        history = await reads.read_cursor(self._executor, _HISTORY_CURSOR)
-        forward = await reads.read_cursor(self._executor, _FORWARD_CURSOR)
-        history_payload = _require_result(history, _HISTORY_CURSOR)
-        forward_payload = _require_result(forward, _FORWARD_CURSOR)
+        history = await self._executor.fetchrow(_CURSOR_SQL, _HISTORY_CURSOR)
+        forward = await self._executor.fetchrow(_CURSOR_SQL, _FORWARD_CURSOR)
+        history_payload = None if history is None else history.get("cursor")
+        forward_payload = None if forward is None else forward.get("cursor")
         lower = _cursor_block(history_payload, _HISTORY_CURSOR)
         upper = _cursor_block(forward_payload, _FORWARD_CURSOR)
         return PolymarketBlockVintage(
@@ -101,28 +88,20 @@ class EnginePolymarketResearchReader:
     async def read_contracts(
         self, market_ids: tuple[str, ...]
     ) -> tuple[PolymarketContractRecord, ...]:
-        """Compose contract metadata only from public engine read functions."""
-        from market import reads  # noqa: PLC0415 - optional BDL composition dependency
-
-        counts = _require_result(
-            await reads.read_outcome_counts(self._executor, _VENUE), "outcome counts"
-        )
-        identity = _require_result(
-            await reads.read_identity(self._executor, _VENUE), "outcome identity"
-        )
-        close_times = _require_result(
-            await reads.read_close_times(self._executor, _VENUE),
-            "contract close times",
-        )
-        resolved = _require_result(
-            await reads.read_resolved_market_ids(self._executor, _VENUE),
-            "resolved contracts",
-        )
-        payouts = _require_result(
-            await reads.read_resolved_payouts(self._executor, _VENUE),
-            "resolved outcome payouts",
-        )
-        outcomes = _outcomes_by_market(identity, payouts)
+        """Read exact contract metadata from the legacy production schema."""
+        count_rows = await self._executor.fetch(_OUTCOME_COUNTS_SQL, _VENUE)
+        identity_rows = await self._executor.fetch(_IDENTITY_SQL, _VENUE)
+        close_rows = await self._executor.fetch(_CLOSE_TIMES_SQL, _VENUE)
+        resolved_rows = await self._executor.fetch(_RESOLVED_MARKETS_SQL, _VENUE)
+        payout_rows = await self._executor.fetch(_RESOLVED_PAYOUTS_SQL, _VENUE)
+        counts = {
+            str(row["market_id"]): int(cast("int", row["outcome_count"])) for row in count_rows
+        }
+        close_times = {
+            str(row["market_id"]): cast("datetime", row["close_time"]) for row in close_rows
+        }
+        resolved = {str(row["market_id"]) for row in resolved_rows}
+        outcomes = _outcomes_by_market(identity_rows, payout_rows)
         return tuple(
             PolymarketContractRecord(
                 market_id=market_id,
@@ -135,14 +114,9 @@ class EnginePolymarketResearchReader:
         )
 
     async def read_fills(self, market_id: str) -> tuple[PolymarketFillRecord, ...]:
-        """Map the engine's public taker-tape result into adapter-local records."""
-        from market import reads  # noqa: PLC0415 - optional BDL composition dependency
-
-        fills = _require_result(
-            await reads.read_market_taker_fills(self._executor, _VENUE, market_id),
-            f"taker fills for {market_id}",
-        )
-        return tuple(_fill_record(fill) for fill in fills)
+        """Map one direct taker-tape read into adapter-local records."""
+        rows = await self._executor.fetch(_MARKET_TAKER_FILLS_SQL, _VENUE, market_id)
+        return tuple(_fill_record(row) for row in rows)
 
 
 class DatabasePolymarketCorpusReader:
@@ -190,30 +164,36 @@ class DatabasePolymarketCorpusReader:
         return PolymarketCorpus(request, contracts, resolutions, prices)
 
 
-def _require_result[Value](result: _StatusOr[Value], description: str) -> Value:
-    if not result.ok():
-        msg = f"Polymarket database read failed for {description}: {result.status().message}"
-        raise RuntimeError(msg)
-    return result.value()
-
-
 def _cursor_block(payload: object, name: str) -> int:
-    if not isinstance(payload, dict) or not isinstance(payload.get("block"), int):
+    if not isinstance(payload, Mapping):
         msg = f"Polymarket cursor {name} does not carry an exact block"
         raise TypeError(msg)
-    return payload["block"]
+    block = cast("Mapping[str, object]", payload).get("block")
+    if not isinstance(block, int):
+        msg = f"Polymarket cursor {name} does not carry an exact block"
+        raise TypeError(msg)
+    return block
 
 
 def _outcomes_by_market(
-    identity: Identity, payouts: Mapping[tuple[str, int], Decimal]
+    identity_rows: Sequence[Mapping[str, object]],
+    payout_rows: Sequence[Mapping[str, object]],
 ) -> dict[str, tuple[PolymarketOutcomeRecord, ...]]:
+    payouts = {
+        (str(row["market_id"]), int(cast("int", row["outcome_index"]))): cast(
+            "Decimal", row["payout"]
+        )
+        for row in payout_rows
+    }
     grouped: dict[str, list[PolymarketOutcomeRecord]] = {}
-    for token, outcome in identity.items():
-        grouped.setdefault(outcome.market_id, []).append(
+    for row in identity_rows:
+        market_id = str(row["market_id"])
+        outcome_index = int(cast("int", row["outcome_index"]))
+        grouped.setdefault(market_id, []).append(
             PolymarketOutcomeRecord(
-                outcome.outcome_index,
-                token,
-                payouts.get((outcome.market_id, outcome.outcome_index)),
+                outcome_index,
+                str(row["outcome_token"]),
+                payouts.get((market_id, outcome_index)),
             )
         )
     return {
@@ -222,20 +202,65 @@ def _outcomes_by_market(
     }
 
 
-def _fill_record(fill: Fill) -> PolymarketFillRecord:
-    block = fill.raw.get("block_number")
+def _fill_record(row: Mapping[str, object]) -> PolymarketFillRecord:
+    block = row["block_number"]
     return PolymarketFillRecord(
-        fill_uid=fill.fill_uid,
-        fill_time=fill.fill_time,
-        market_id=fill.market_id,
-        outcome_index=fill.outcome_index,
-        outcome_token=fill.outcome_token or "",
-        side=fill.side,
-        price=fill.price,
-        size=fill.size,
+        fill_uid=str(row["fill_uid"]),
+        fill_time=cast("datetime", row["fill_time"]),
+        market_id=str(row["market_id"]),
+        outcome_index=int(cast("int", row["outcome_index"])),
+        outcome_token=str(row["outcome_token"]),
+        side=str(row["side"]),
+        price=cast("Decimal", row["price"]),
+        size=cast("Decimal", row["size"]),
         block_number=block if isinstance(block, int) else None,
-        transaction_hash=fill.tx_hash,
+        transaction_hash=cast("str | None", row["tx_hash"]),
     )
+
+
+_CURSOR_SQL = "SELECT cursor FROM ops.ingest_cursors WHERE name = $1"
+
+_OUTCOME_COUNTS_SQL = """
+SELECT market_id, outcome_count
+FROM market.markets
+WHERE venue = $1
+"""
+
+_IDENTITY_SQL = """
+SELECT outcome_token, market_id, outcome_index
+FROM market.market_outcomes
+WHERE venue = $1 AND outcome_token IS NOT NULL
+"""
+
+_CLOSE_TIMES_SQL = """
+SELECT market_id, close_time
+FROM market.markets
+WHERE venue = $1 AND tracked AND close_time IS NOT NULL
+"""
+
+_RESOLVED_MARKETS_SQL = """
+SELECT market_id
+FROM market.markets
+WHERE venue = $1 AND status = 'resolved'
+"""
+
+_RESOLVED_PAYOUTS_SQL = """
+SELECT market_id, outcome_index, payout
+FROM market.market_outcomes
+WHERE venue = $1 AND payout IS NOT NULL
+"""
+
+_MARKET_TAKER_FILLS_SQL = """
+-- One market's per-print tape: each match once, from the taker's side.
+SELECT venue, fill_time, fill_uid, market_id, outcome_index, outcome_token,
+       account, side, price, size, tx_hash, log_index,
+       (raw->>'block_number')::bigint AS block_number
+FROM market.fills
+WHERE venue = $1 AND market_id = $2
+  AND (raw->'topics' IS NULL
+       OR lower('0x' || right(raw->'topics'->>3, 40)) = lower(raw->>'address'))
+ORDER BY fill_time, COALESCE(log_index, 0)
+"""
 
 
 def _corpus_contracts(
@@ -271,7 +296,8 @@ def _corpus_contracts(
         if not isinstance(payouts_value, list | tuple):
             msg = f"Polymarket resolution {market_id} has no payout vector"
             raise TypeError(msg)
-        payouts = tuple(cast("Decimal", value) for value in payouts_value)
+        payout_values = cast("Sequence[object]", payouts_value)
+        payouts = tuple(cast("Decimal", value) for value in payout_values)
         contracts.append(
             PolymarketCorpusContract(
                 market_id=market_id,

@@ -9,5 +9,7 @@ Chronos was imported as a clean Git archive from:
 No nested `.git` directory or source-repository working-tree artifact is present. Insurance
 datasets, insurance research reports, EIOPA/Kolada adapters, and their source-specific tests were
 excluded from Chronos. The generic kernel, governance architecture, deterministic tests, research
-skills, and operator surfaces were retained. Chronos now evolves independently inside
-`bdl-polymarket/research/chronos/`.
+skills, and operator surfaces were retained. Chronos subsequently developed inside
+`bdl-polymarket/research/chronos/`. Its filtered history and complete current research state were
+extracted into this standalone `Polymarket` repository on 2026-10-29. The parent engine,
+deployment system, and Kthais project are not part of this repository.

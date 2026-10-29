@@ -59,6 +59,30 @@ _DEVELOPMENT_PARTITION_METHOD = "whole-event-chronological-latest-resolution/v1"
 _REPLICATION_PARTITION_METHOD = "whole-event-chronological-fresh-replication/v1"
 
 
+def polymarket_development_view_specs(
+    partition_id: str,
+) -> tuple[tuple[str, str, str, tuple[str, ...]], ...]:
+    """Return value-free registered-view identities and schemas for a partition."""
+    if not partition_id:
+        msg = "development view specification requires a partition identity"
+        raise ValueError(msg)
+    environment_ref = f"polymarket-development-environment:{partition_id}"
+    return (
+        (
+            _PRICE_VIEW,
+            f"polymarket-development-prices:{partition_id}",
+            environment_ref,
+            _PRICE_FIELDS,
+        ),
+        (
+            _OUTCOME_VIEW,
+            f"polymarket-development-outcomes:{partition_id}",
+            environment_ref,
+            _OUTCOME_FIELDS,
+        ),
+    )
+
+
 @dataclass(frozen=True, slots=True)
 class PolymarketEventPartition:
     """Exact whole-event chronological development/protected partition."""

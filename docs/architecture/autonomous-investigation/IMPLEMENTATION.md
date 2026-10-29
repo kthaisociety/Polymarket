@@ -174,6 +174,32 @@ local filesystem remains the persistence authority. Content identities detect or
 or un-rehashed edits, but this does not claim cryptographic protection from an administrator who can
 rewrite the database and recompute every identity.
 
+## Harness-enforced research campaigns
+
+`exploration/campaign.py` adds a durable campaign authority around authored exploratory programs.
+Before execution, one immutable manifest binds every analysis ID to exact source bytes, declared
+and required field accesses, dataset/environment references, the evidence ceiling, and an
+`AnalysisHarness` binding identity. That binding hashes the registered view values as well as the
+policy, session, and resource limits, so a caller cannot substitute different values under the
+same human-readable dataset labels. The authority itself invokes the harness and derives the
+action, actual accesses, source digest, execution status, and result artifacts; externally created
+or legacy receipts have no admission route.
+
+`CampaignStore` publishes manifests, executions, externalized result bytes, and completion
+receipts as immutable conflict-detecting objects. Restart recovery re-verifies campaign, source,
+binding, receipt, and artifact identities. Completion requires one successful, admissible receipt
+and an explicit disposition for every manifest row, rejects undeclared rows, and prevents an
+execution-validated disposition beneath a lower evidence ceiling. Completion proves exact
+execution only: exposed reruns remain exposed, sampled marks remain non-executable, and the
+authority cannot open protected data or issue a finding.
+
+The Polymarket catalog runner composes this boundary with registered development,
+fresh-replication, and parent-bound taker-fill views. A catalog-wide rerun tier may only reduce,
+never exceed, each study's prior evidence ceiling. Sources that are formal transitions,
+superseded failures, protected one-shot resolutions, or scientifically data-blocked enter a
+separate value-bound non-replay audit; the audit proves complete accounting without pretending
+those sources were validly re-executed.
+
 ## Application evidence
 
 - **Green:** question → authored interaction feature/label/model → legal expanding OOF evidence →
@@ -242,6 +268,10 @@ rewrite the database and recompute every identity.
 - **Green:** the runtime registration observation and rebuilt provider context contain bounded prior
   status, question, catalog, terminal evidence, reasons, time, and drill-down references. No fuzzy
   match can silently suppress or inject a question.
+- **Green:** a campaign refuses an injected receipt, a source-byte change, an omitted required
+  access, a same-label/different-value harness, a missing disposition, and an evidence-tier
+  elevation; exact restart recovers and verifies immutable manifest, executions, artifacts, and
+  completion.
 
 ## Honest remaining work
 

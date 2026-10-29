@@ -1,0 +1,104 @@
+{
+  "status": "succeeded",
+  "epistemic_status": "EXPLORATORY",
+  "summary": "Fixed ambiguity-aversion strategy screen against simple wording in matched event/probability cells.",
+  "source_name": "10_ambiguity_aversion_strategy.py",
+  "source_sha256": "2026b73ece328958385801fbc3d057e42271efd4b2f8401ea304e11194b02f6d",
+  "snapshot_ref": "polymarket-corpus:184b83f7f8012da4ca9116c8b6bad2076570ad5f0bada95b22615ee2f5cceae8",
+  "partition_id": "30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410",
+  "partition_method": "whole-event-chronological-latest-resolution/v1",
+  "development_event_count": 256,
+  "development_market_count": 1152,
+  "protected_event_count": 65,
+  "protected_market_count": 357,
+  "protected_values_exposed": false,
+  "details": {
+    "schema_version": "polymarket-ambiguity-aversion/v1",
+    "horizon_hours": 168.0,
+    "horizon_tolerance_hours": 24.0,
+    "probability_scope": "[0.20,0.80]",
+    "adverse_execution_hurdle": 0.02,
+    "minimum_incremental_edge": 0.01,
+    "proxy": {
+      "complex_minimum_score": 2,
+      "simple_score": 0,
+      "score_counts_all_development_markets": [856, 283, 13, 0, 0],
+      "category_counts_all_development_markets": {
+        "length_ge_80": 66,
+        "conditional": 0,
+        "alternative": 26,
+        "boundary": 217
+      }
+    },
+    "label_counts": {
+      "Yes": 1149,
+      "Up": 3
+    },
+    "order_break_count": 0,
+    "missing_horizon_count": 111,
+    "outside_probability_count": 673,
+    "eligible_intermediate_score_count": 80,
+    "cohort_rows": [
+      {
+        "cohort": "COMPLEX",
+        "market_count": 2,
+        "event_count": 1,
+        "event_macro_net_edge": -0.445,
+        "early_event_macro_net_edge": null,
+        "late_event_macro_net_edge": -0.445,
+        "positive_event_share": 0.0
+      },
+      {
+        "cohort": "SIMPLE",
+        "market_count": 286,
+        "event_count": 72,
+        "event_macro_net_edge": -0.20176800144300147,
+        "early_event_macro_net_edge": -0.3342161011904762,
+        "late_event_macro_net_edge": -0.15082642461704962,
+        "positive_event_share": 0.2222222222222222
+      }
+    ],
+    "paired_result": {
+      "paired_event_count": 0,
+      "paired_cell_count": 0,
+      "complex_minus_simple_event_macro_net_edge": null,
+      "early_complex_minus_simple_net_edge": null,
+      "late_complex_minus_simple_net_edge": null
+    },
+    "decision_checks": {
+      "coverage_passed": false,
+      "chronology_passed": false,
+      "paired_coverage_passed": false,
+      "paired_increment_passed": false
+    },
+    "decision": "REJECT_FIXED_AMBIGUITY_PROXY_CANDIDATE"
+  },
+  "execution": {
+    "action_id": "polymarket-behavioral-development:2026b73ece328958385801fbc3d057e42271efd4b2f8401ea304e11194b02f6d",
+    "code_sha256": "2026b73ece328958385801fbc3d057e42271efd4b2f8401ea304e11194b02f6d",
+    "random_seed": null,
+    "actual_accesses": [
+      ["polymarket-development-prices", "market_id"],
+      ["polymarket-development-prices", "observation_ordinal"],
+      ["polymarket-development-prices", "observed_at_epoch_seconds"],
+      ["polymarket-development-prices", "market_probability"],
+      ["polymarket-development-outcomes", "market_id"],
+      ["polymarket-development-outcomes", "event_chronological_ordinal"],
+      ["polymarket-development-outcomes", "question"],
+      ["polymarket-development-outcomes", "outcome_label"],
+      ["polymarket-development-outcomes", "close_time_epoch_seconds"],
+      ["polymarket-development-outcomes", "resolution_payout"]
+    ]
+  },
+  "warnings": [
+    "The whole-event development partition is selection-exposed; protected values remain hidden.",
+    "Question wording is a fixed observable proxy, not proof of subjective ambiguity or causal aversion.",
+    "Descriptions and resolution rules are absent and were not inferred from question text.",
+    "Sampled probabilities are not executable bid or ask quotes.",
+    "Each market contributes at most one sample at the fixed horizon.",
+    "The two-cent hurdle is a stress screen, not an observed spread, fee, depth, or impact model.",
+    "Passing permits only fresh immutable replication, never promotion or trading."
+  ],
+  "formal_object_refs": [],
+  "durable_state_effects": []
+}

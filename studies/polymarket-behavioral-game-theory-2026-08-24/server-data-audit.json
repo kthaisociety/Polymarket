@@ -1,0 +1,155 @@
+{
+  "contracts": {
+    "event_count": 2677,
+    "first_open_time": "2025-05-02 15:48:10.582000+00:00",
+    "last_metadata_update": "2026-08-24 09:06:31.481018+00:00",
+    "market_count": 15647,
+    "missing_event_id_count": 1,
+    "open_count": 12471,
+    "resolved_count": 3176
+  },
+  "dual_clock_quality_24h": {
+    "recent_delta_raw_keys": [
+      "best_ask",
+      "best_bid",
+      "hash",
+      "price",
+      "side",
+      "size",
+      "token_id"
+    ],
+    "reference_time_columns_deployed": false
+  },
+  "durable_state_effects": [],
+  "epistemic_status": "EXPLORATORY_DATA_SUITABILITY_AUDIT",
+  "formal_object_refs": [],
+  "labeled_taker_tape": {
+    "resolved_markets_with_taker_fills_30d": 3011,
+    "resolved_prints_30d": 710543,
+    "taker_prints_30d": 1882063,
+    "wallets_in_resolved_markets_30d": 47602
+  },
+  "labels": {
+    "gamma_exact_winner_market_count": 172,
+    "gamma_exact_winner_outcome_count": 344,
+    "missing_token_count": 0,
+    "outcome_count": 31294
+  },
+  "planner_estimates": [
+    {
+      "last_analyze": null,
+      "last_autoanalyze": null,
+      "n_live_tup": 0,
+      "relname": "book_deltas",
+      "schemaname": "market"
+    },
+    {
+      "last_analyze": null,
+      "last_autoanalyze": null,
+      "n_live_tup": 0,
+      "relname": "book_snapshots",
+      "schemaname": "market"
+    },
+    {
+      "last_analyze": null,
+      "last_autoanalyze": null,
+      "n_live_tup": 0,
+      "relname": "candles",
+      "schemaname": "market"
+    },
+    {
+      "last_analyze": null,
+      "last_autoanalyze": null,
+      "n_live_tup": 0,
+      "relname": "fills",
+      "schemaname": "market"
+    },
+    {
+      "last_analyze": null,
+      "last_autoanalyze": "2026-08-24 09:06:41.880734+00:00",
+      "n_live_tup": 138398,
+      "relname": "market_outcomes",
+      "schemaname": "market"
+    },
+    {
+      "last_analyze": null,
+      "last_autoanalyze": "2026-08-24 09:06:41.617086+00:00",
+      "n_live_tup": 69199,
+      "relname": "markets",
+      "schemaname": "market"
+    },
+    {
+      "last_analyze": null,
+      "last_autoanalyze": null,
+      "n_live_tup": 0,
+      "relname": "price_series",
+      "schemaname": "market"
+    },
+    {
+      "last_analyze": null,
+      "last_autoanalyze": "2026-08-13 13:54:08.640413+00:00",
+      "n_live_tup": 38865,
+      "relname": "resolutions",
+      "schemaname": "market"
+    }
+  ],
+  "recent_market_data": {
+    "book_delta_markets_24h": 30,
+    "book_deltas_24h": 2125764,
+    "book_snapshot_markets_7d": 32,
+    "book_snapshots_7d": 130489,
+    "fill_markets_7d": 8675,
+    "fills_7d": 1145689,
+    "price_markets_7d": 13144,
+    "price_points_7d": 3933367,
+    "unattributed_fills_7d": 0
+  },
+  "resolution_outcome_index_crosscheck": {
+    "comparable_market_count": 105,
+    "comparable_outcome_count": 210,
+    "direct_direction_match_count": 210,
+    "maximum_terminal_gap": "0.0335",
+    "reversed_direction_match_count": 0
+  },
+  "resolutions": {
+    "first_resolution_time": "2026-07-26 19:47:42+00:00",
+    "last_resolution_time": "2026-08-24 06:42:40+00:00",
+    "nonbinary_payout_count": 0,
+    "resolution_count": 3109
+  },
+  "role_proof": {
+    "can_insert_fills": false,
+    "can_insert_markets": false,
+    "can_insert_price_series": false,
+    "can_insert_resolutions": false,
+    "can_update_fills": false,
+    "can_update_markets": false,
+    "can_update_price_series": false,
+    "can_update_resolutions": false,
+    "default_read_only": "on",
+    "role": "human_ro",
+    "transaction_read_only": "on"
+  },
+  "server_transaction_time": "2026-08-24 09:13:44.071211+00:00",
+  "source_name": "audit_server_data.py",
+  "source_sha256": "72c3cdade83824e0c758cb90730cc70795d59a6fadc15db5e451afa026b175aa",
+  "status": "SUCCEEDED",
+  "taker_tape": {
+    "first_fill_time_7d": "2026-08-17 09:13:48+00:00",
+    "last_fill_time_7d": "2026-08-24 08:26:51+00:00",
+    "missing_account_count": 0,
+    "missing_block_count": 0,
+    "taker_markets_7d": 8675,
+    "taker_prints_7d": 445833,
+    "taker_wallets_7d": 35327,
+    "transaction_count_7d": 445833
+  },
+  "warnings": [
+    "The production database is mutable; this receipt preserves aggregate results, not exact source rows.",
+    "market.fills is a per-party ledger; behavioral tape work must apply the taker aggregate-leg predicate.",
+    "Fill availability is on-chain block inclusion and does not establish CLOB execution or collector receipt time.",
+    "Gamma near-terminal prices validate payout direction only; they are not exact settlement labels.",
+    "The deployed L2 schema lacks reference_time, so collector-time rows cannot support sub-second causal latency claims.",
+    "Planner estimates for Timescale hypertables are not row-count evidence and remain visible only as an audit warning."
+  ]
+}

@@ -12,14 +12,32 @@ import traceback
 from contextlib import suppress
 from dataclasses import dataclass
 from math import exp, isfinite, log, sqrt
-from typing import TYPE_CHECKING, Final, Self, cast
+from typing import TYPE_CHECKING, Final, Protocol, Self, cast
 
 from research_agent.investigation.records import ProgramAccess
 
 if TYPE_CHECKING:
-    from multiprocessing.connection import Connection
     from multiprocessing.process import BaseProcess
     from types import CodeType
+
+
+class _PipeConnection(Protocol):
+    def send(self, obj: object) -> None:
+        """Send one value through the worker pipe."""
+        ...
+
+    def recv(self) -> object:
+        """Receive one value from the worker pipe."""
+        ...
+
+    def poll(self, timeout: float = 0.0) -> bool:
+        """Return whether a value is available."""
+        ...
+
+    def close(self) -> None:
+        """Close the pipe endpoint."""
+        ...
+
 
 type JsonValue = bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"] | None
 
@@ -246,7 +264,7 @@ class ScientificProgramSession:
     def __init__(
         self,
         process: BaseProcess,
-        connection: Connection,
+        connection: _PipeConnection,
         limits: ProgramLimits,
     ) -> None:
         self._process = process
@@ -330,7 +348,7 @@ def _validate_source(source: str) -> None:
 
 
 def _worker(
-    send: Connection,
+    send: _PipeConnection,
     source: str,
     invocation: ProgramInvocation,
     max_result_bytes: int,
@@ -347,7 +365,7 @@ def _worker(
 
 
 def _session_worker(
-    connection: Connection,
+    connection: _PipeConnection,
     source: str,
     max_result_bytes: int,
     max_memory_bytes: int,
@@ -459,7 +477,7 @@ def _decode_result(invocation: ProgramInvocation, raw: dict[str, object]) -> Pro
     return ProgramResult(value, accesses)
 
 
-def _terminate(process: BaseProcess, connection: Connection) -> None:
+def _terminate(process: BaseProcess, connection: _PipeConnection) -> None:
     if process.is_alive():
         process.terminate()
         process.join()

@@ -1,0 +1,26 @@
+{
+  "ancestor_event_count": 321,
+  "ancestor_snapshot_ref": "polymarket-corpus:184b83f7f8012da4ca9116c8b6bad2076570ad5f0bada95b22615ee2f5cceae8",
+  "audit_source_name": "audit_fresh_replication_boundary.py",
+  "audit_source_sha256": "3d56a3ad8ff58160d5ac31e911d1f2220d80aa6ecc39c1bb56897c6c8452da1a",
+  "corpus_receipt_sha256": "92a6caf551a4a65a866c3a88ab43ca76274ff744124de9b64b6f8264aca009d0",
+  "current_event_count": 391,
+  "current_snapshot_ref": "polymarket-corpus:0c27543ac944a6d946b52bbf5749b419fc6a0f3d15a8632d30205376a865e40a",
+  "development_event_count_before_ancestor_embargo": 312,
+  "embargoed_ancestor_event_count": 312,
+  "fresh_development_event_count": 0,
+  "novel_event_count": 70,
+  "novel_protected_event_count": 70,
+  "protected_event_count": 79,
+  "protected_values_exposed": false,
+  "required_total_event_count_for_first_legal_successor": 403,
+  "schema_version": "polymarket-fresh-replication-boundary/v1",
+  "source_executed": false,
+  "status": "INSUFFICIENT_FRESH_COVERAGE",
+  "strict_ancestor_prefix_verified": true,
+  "warnings": [
+    "All events absent from the selection corpus remain in the current final 20% protected block.",
+    "No probability or payout value from a novel event was exposed to authored study code.",
+    "The frozen source must not run until at least two legal fresh development events exist."
+  ]
+}

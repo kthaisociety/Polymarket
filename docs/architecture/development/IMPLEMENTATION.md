@@ -185,6 +185,30 @@ promotion standards, and exposure policy are owned by the
 requires a complete frozen system and an independently authorized, predeclared request; development
 diagnostics cannot cross it implicitly.
 
+## Polymarket LL-04e development screen
+
+The low-latency adapter's `book_activity_advancement.py` applies one fixed, no-fit development
+standard to an immutable LL-04c campaign for the exact LL-04d activity policy. Its 13 clauses
+separate coverage insufficiency from economic rejection and require chronological breadth,
+scorable joint attempts, retained participation, bounded unresolved outcomes, positive pooled and
+early/late block evidence, limited positive-block concentration, and improvement over both
+one-component rivals. Every clause and disposition is recomputed from the retained campaign.
+
+This narrow screen is selection-exposed development evidence, not a substitute for
+`DevelopmentEvaluator`, a `Validator`, or the protected-evaluation gate. Its most favorable status
+is `ADVANCE_TO_PAPER_EXECUTION_STUDY`; it cannot issue freeze inputs, scientific validation, a
+finding, or execution authority. Any meaning-changing threshold revision requires a new standard
+and trial ancestry.
+
+The adjacent LL-04f retained-snapshot application plan composes exact verified L2 objects through
+that screen while preserving environment, scope, block, market, parent-recipe, policy, standard,
+and source-hash identity. It prevents manual intermediate reconstruction from silently changing
+the development question. LL-04g adds a content-addressed immutable local receipt and refuses a
+structurally changed plan before any corpus load. It is still not a ledger or independent clock:
+later scientific use must prove through separately ordered durable evidence that the receipt
+existed before quote values were inspected. A successful composition is only development evidence
+with the LL-04e status encoded in its result.
+
 ## Executable adversaries
 
 `tests/development/test_controlled_development.py` and

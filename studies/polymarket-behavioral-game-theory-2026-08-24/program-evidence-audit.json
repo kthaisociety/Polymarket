@@ -1,0 +1,122 @@
+{
+  "schema_version": "polymarket-behavioral-program-evidence-audit/v1",
+  "status": "PASSED",
+  "error_count": 0,
+  "errors": [],
+  "receipt_count": 10,
+  "source_hashes_verified": 10,
+  "invariants": {
+    "all_retained_source_hashes_match": true,
+    "no_protected_values_exposed": true,
+    "no_durable_state_effects": true,
+    "production_reads_proved_read_only": true
+  },
+  "server_authority": {
+    "role": "human_ro",
+    "default_read_only": "on",
+    "transaction_read_only": "on",
+    "mutation_privilege_count": 0,
+    "server_audit_source_sha256": "72c3cdade83824e0c758cb90730cc70795d59a6fadc15db5e451afa026b175aa"
+  },
+  "b3_fresh_boundary": {
+    "status": "INSUFFICIENT_FRESH_COVERAGE",
+    "current_event_count": 391,
+    "fresh_development_event_count": 0,
+    "source_executed": false,
+    "protected_values_exposed": false,
+    "first_legal_successor_total": 403,
+    "minimum_runnable_total": 404
+  },
+  "receipts": [
+    {
+      "receipt": "01_focal_price_anchoring.json",
+      "source": "01_focal_price_anchoring.py",
+      "source_sha256": "651bea00bb42886dc5b24a8e9f2443fa52f9ec24b51eaf006b8d92cdf31007e3",
+      "status": "succeeded",
+      "decision": "NO_STABLE_FOCAL_EFFECT",
+      "protected_values_exposed": false,
+      "durable_state_effect_count": 0
+    },
+    {
+      "receipt": "02_fold_local_skilled_wallet.json",
+      "source": "02_fold_local_skilled_wallet.sql",
+      "source_sha256": "a77b75d13cc42963a9cad507b09798002f53904455a71bc55bd353b1801cb2e7",
+      "status": "SUCCEEDED",
+      "decision": "MECHANISM_SUPPORTED_FOR_EXECUTABLE_FOLLOW_UP",
+      "protected_values_exposed": false,
+      "durable_state_effect_count": 0
+    },
+    {
+      "receipt": "03_skilled_wallet_matched_state.json",
+      "source": "03_skilled_wallet_matched_state.sql",
+      "source_sha256": "bc3ce47ee7b5b40f63e76c64724b392c41a1da3d3ad387f9772be510304d7422",
+      "status": "SUCCEEDED",
+      "decision": "REJECT_FIXED_B1_MATCHED_STATE_CANDIDATE",
+      "protected_values_exposed": false,
+      "durable_state_effect_count": 0
+    },
+    {
+      "receipt": "04_delayed_wallet_and_expert_consensus.json",
+      "source": "04_delayed_wallet_and_expert_consensus.sql",
+      "source_sha256": "b1d2aae380856be68c4a37a1be053e8f9616576f358dbb1bd57f3d7d374de2e3",
+      "status": "SUCCEEDED",
+      "decision": "REJECT_FIXED_B2_EXPERT_CONSENSUS_CANDIDATE",
+      "protected_values_exposed": false,
+      "durable_state_effect_count": 0
+    },
+    {
+      "receipt": "05_delayed_wallet_state_activity_match.json",
+      "source": "05_delayed_wallet_state_activity_match.sql",
+      "source_sha256": "c8185919a02968c45f5ef01e36bd73d2fc94e573f95b11e912a7e06c35e0eff6",
+      "status": "SUCCEEDED",
+      "decision": "REJECT_FIXED_B1_DELAYED_STATE_ACTIVITY_CANDIDATE",
+      "protected_values_exposed": false,
+      "durable_state_effect_count": 0
+    },
+    {
+      "receipt": "06_probability_weighting_strategy.json",
+      "source": "06_probability_weighting_strategy.py",
+      "source_sha256": "0d5f047b06dc3885c4b3ef596adc03a82d3e5a3453cbc1b8ccfaa1073a2a7d46",
+      "status": "succeeded",
+      "decision": "RETAIN_FOR_FRESH_EVALUATION",
+      "protected_values_exposed": false,
+      "durable_state_effect_count": 0
+    },
+    {
+      "receipt": "07_disposition_history_sufficiency.json",
+      "source": "07_disposition_history_sufficiency.sql",
+      "source_sha256": "c4cdcfb489ef5de55a33e78c77bcdfb8b3d774a5130c60be3702ef0472daf964",
+      "status": "BLOCKED_DATA_SUBSTRATE",
+      "decision": "BLOCK_DISPOSITION_SCREEN",
+      "protected_values_exposed": false,
+      "durable_state_effect_count": 0
+    },
+    {
+      "receipt": "08_crowded_extrapolation_exhaustion.json",
+      "source": "08_crowded_extrapolation_exhaustion.sql",
+      "source_sha256": "605dd6e40a8200ab1950e02f1fc5dca1838af6289c2b9ae4c683b21eea8abba7",
+      "status": "SUCCEEDED",
+      "decision": "REJECT_FIXED_CROWDED_EXTRAPOLATION_CANDIDATE",
+      "protected_values_exposed": false,
+      "durable_state_effect_count": 0
+    },
+    {
+      "receipt": "09_negrisk_coordination_data_sufficiency.json",
+      "source": "09_negrisk_coordination_data_sufficiency.sql",
+      "source_sha256": "8163a608fd8c12703d3e3e6b3b74f7a5550dd84f00fbd1fb89b19149a907f255",
+      "status": "BLOCKED_DATA_SUBSTRATE",
+      "decision": "BLOCK_COMPLETE_SET_STRATEGY",
+      "protected_values_exposed": false,
+      "durable_state_effect_count": 0
+    },
+    {
+      "receipt": "10_ambiguity_aversion_strategy.json",
+      "source": "10_ambiguity_aversion_strategy.py",
+      "source_sha256": "2026b73ece328958385801fbc3d057e42271efd4b2f8401ea304e11194b02f6d",
+      "status": "succeeded",
+      "decision": "REJECT_FIXED_AMBIGUITY_PROXY_CANDIDATE",
+      "protected_values_exposed": false,
+      "durable_state_effect_count": 0
+    }
+  ]
+}

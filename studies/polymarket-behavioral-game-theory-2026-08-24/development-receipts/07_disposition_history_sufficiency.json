@@ -1,0 +1,58 @@
+{
+  "schema_version": "polymarket-disposition-history-sufficiency/v1",
+  "status": "BLOCKED_DATA_SUBSTRATE",
+  "epistemic_status": "DATA_SUITABILITY_AUDIT",
+  "source_name": "07_disposition_history_sufficiency.sql",
+  "source_sha256": "c4cdcfb489ef5de55a33e78c77bcdfb8b3d774a5130c60be3702ef0472daf964",
+  "input_repository_state": "bdl-polymarket@712fc693bd17",
+  "authority": {
+    "role": "human_ro",
+    "default_transaction_read_only": "on",
+    "transaction_read_only": "on"
+  },
+  "audit": {
+    "audited_at": "2026-08-24T10:07:37.071643+00:00",
+    "configured_genesis_block": 33605403,
+    "history_cursor_block": 33605403,
+    "history_complete": true,
+    "scope_repairs_total": 9905,
+    "scope_repairs_pending": 7162,
+    "incomplete_done_repairs": 0,
+    "repairs_complete": false,
+    "required_tables_nonempty": true,
+    "required_select_privileges": true,
+    "decision": "BLOCK_DISPOSITION_SCREEN"
+  },
+  "required_tables": [
+    "internal.pm_order_fills",
+    "internal.pm_position_splits",
+    "internal.pm_position_merges",
+    "internal.pm_redemptions",
+    "market.fills",
+    "market.markets",
+    "market.market_outcomes"
+  ],
+  "deferred": [
+    "exact fill-to-market/outcome mapping proof",
+    "exact CTF-condition-to-market mapping proof",
+    "historical wallet inventory replay",
+    "behavioral mechanism test",
+    "strategy test"
+  ],
+  "cancelled_zero-result_attempts": [
+    {
+      "elapsed_seconds": 245,
+      "reason": "unbounded exhaustive aggregate and identity joins were disproportionate before the operational gate"
+    },
+    {
+      "elapsed_seconds": 92,
+      "reason": "optimized universal mapping proof remained unnecessary while repair completeness could still fail"
+    }
+  ],
+  "warnings": [
+    "market.positions is current diagnostic output and was not accepted as historical input",
+    "pending scope repairs can omit earlier fills for newly tracked markets and bias cost basis",
+    "this receipt contains aggregate operational facts and no wallet addresses, contract outcomes, prices, payouts, DSN, or secret"
+  ],
+  "durable_state_effects": []
+}

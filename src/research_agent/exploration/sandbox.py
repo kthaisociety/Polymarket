@@ -528,6 +528,16 @@ class AnalysisHarness:
         self._policy = policy
         self.artifacts = artifacts
         self._limits = resource_limits or ResourceLimits()
+        self._binding_identity = _harness_binding_identity(
+            self._views,
+            self._policy,
+            self._limits,
+        )
+
+    @property
+    def binding_identity(self) -> str:
+        """Identify exact view values, authority policy, and enforced resource limits."""
+        return self._binding_identity
 
     def authorized_runtime_surfaces(
         self,
@@ -919,3 +929,48 @@ class AnalysisHarness:
         if len(encoded) <= self._limits.max_inline_bytes:
             return value
         return encoded[: self._limits.max_inline_bytes].decode(errors="ignore")
+
+
+def _harness_binding_identity(
+    views: Mapping[str, AuthorizedDataView],
+    policy: CapabilityPolicy,
+    limits: ResourceLimits,
+) -> str:
+    """Hash exact immutable capability contents without materializing one giant encoding."""
+    digest = hashlib.sha256()
+
+    def update(value: JsonValue | tuple[JsonValue, ...]) -> None:
+        encoded = json.dumps(
+            value,
+            allow_nan=False,
+            ensure_ascii=False,
+            separators=(",", ":"),
+            sort_keys=True,
+        ).encode()
+        digest.update(len(encoded).to_bytes(8, "big"))
+        digest.update(encoded)
+
+    update("chronos-analysis-harness-binding/v2")
+    for view_id in sorted(views):
+        view = views[view_id]
+        update(view.view_id)
+        update(view.dataset_ref)
+        update(view.environment_ref)
+        update(view.protected)
+        for field_id in sorted(view.fields):
+            update(field_id)
+            values = view.fields[field_id]
+            update(len(values))
+            update(values)
+    update(policy.session_id)
+    update(policy.environment_ref)
+    for view_id in sorted(policy.allowed_fields_by_view):
+        update(view_id)
+        update(tuple(sorted(policy.allowed_fields_by_view[view_id])))
+    update(limits.wall_time_seconds)
+    update(limits.max_source_bytes)
+    update(limits.max_inline_bytes)
+    update(limits.max_output_bytes)
+    update(limits.max_result_bytes)
+    update(limits.max_memory_bytes)
+    return f"analysis-harness:{digest.hexdigest()}"

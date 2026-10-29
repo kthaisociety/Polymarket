@@ -1,5 +1,17 @@
 """Capability-constrained, provisional exploratory analysis."""
 
+from research_agent.exploration.campaign import (
+    AnalysisDisposition,
+    CampaignAnalysis,
+    CampaignArtifact,
+    CampaignCompletionError,
+    CampaignCompletionReceipt,
+    CampaignExecutionReceipt,
+    CampaignManifest,
+    CampaignStore,
+    EvidenceTier,
+    ResearchCampaignAuthority,
+)
 from research_agent.exploration.sandbox import (
     AnalysisCapabilitySurface,
     AnalysisHarness,
@@ -19,6 +31,7 @@ from research_agent.exploration.sandbox import (
 
 __all__ = [
     "AnalysisCapabilitySurface",
+    "AnalysisDisposition",
     "AnalysisHarness",
     "AnalysisRequest",
     "AnalysisStatus",
@@ -26,10 +39,19 @@ __all__ = [
     "ArtifactRef",
     "ArtifactStore",
     "AuthorizedDataView",
+    "CampaignAnalysis",
+    "CampaignArtifact",
+    "CampaignCompletionError",
+    "CampaignCompletionReceipt",
+    "CampaignExecutionReceipt",
+    "CampaignManifest",
+    "CampaignStore",
     "CapabilityPolicy",
     "DataAccessRecord",
     "DataAccessRequest",
+    "EvidenceTier",
     "ExecutionProvenance",
+    "ResearchCampaignAuthority",
     "ResourceLimits",
     "StructuredObservation",
 ]

@@ -1,0 +1,419 @@
+{
+  "schema_version": "chronos-polymarket-corpus-campaign/v1",
+  "campaign_id": "polymarket-behavioral-and-stochastic-enforced-rerun-v2-2026-08-24",
+  "mandate": "Rerun the final runnable behavioral, game-theoretic, and stochastic/time-series Polymarket analyses through a value-bound provenance-enforced Chronos campaign, including revised wallet strategies on the registered parent-bound taker panel, without restoring freshness to exposed data.",
+  "session_id": "polymarket-enforced-campaign-2026-08-24",
+  "execution_evidence_tier": "EXPOSED_REPRODUCTION",
+  "inputs": [
+    {
+      "input_id": "original-development",
+      "snapshot_sha256": "610b8b9d423d94332923f1e2033410007a890b9da0f9dc67936f17e92263fb2f",
+      "snapshot_size": 19434443,
+      "partition_id": "49d5e9a97985a44e3277f43ee55ce1281c430a1d0a1823754a9a759ac56d3bd1",
+      "wall_time_seconds": 600.0,
+      "max_memory_bytes": 4000000000,
+      "max_inline_bytes": 500000,
+      "max_result_bytes": 4000000
+    },
+    {
+      "input_id": "first-fresh-replication",
+      "snapshot_sha256": "8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6",
+      "snapshot_size": 318684407,
+      "ancestor_snapshot_sha256": "610b8b9d423d94332923f1e2033410007a890b9da0f9dc67936f17e92263fb2f",
+      "ancestor_snapshot_size": 19434443,
+      "partition_id": "2144b8338515271f342738c3ed7ad62565d98343c3e3284353780b436fbd9a40",
+      "wall_time_seconds": 600.0,
+      "max_memory_bytes": 4000000000,
+      "max_inline_bytes": 500000,
+      "max_result_bytes": 4000000
+    },
+    {
+      "input_id": "paper-successor-replication",
+      "snapshot_sha256": "184b83f7f8012da4ca9116c8b6bad2076570ad5f0bada95b22615ee2f5cceae8",
+      "snapshot_size": 428280682,
+      "ancestor_snapshot_sha256": "8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6",
+      "ancestor_snapshot_size": 318684407,
+      "partition_id": "f7b47ea95c3630f083552bce84126711fb1a23b20ec7caa33e7527ba977586d7",
+      "wall_time_seconds": 600.0,
+      "max_memory_bytes": 4000000000,
+      "max_inline_bytes": 500000,
+      "max_result_bytes": 4000000
+    },
+    {
+      "input_id": "behavioral-selection-development",
+      "snapshot_sha256": "184b83f7f8012da4ca9116c8b6bad2076570ad5f0bada95b22615ee2f5cceae8",
+      "snapshot_size": 428280682,
+      "partition_id": "30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410",
+      "wall_time_seconds": 600.0,
+      "max_memory_bytes": 4000000000,
+      "max_inline_bytes": 500000,
+      "max_result_bytes": 4000000
+    },
+    {
+      "input_id": "behavioral-fill-development",
+      "snapshot_sha256": "184b83f7f8012da4ca9116c8b6bad2076570ad5f0bada95b22615ee2f5cceae8",
+      "snapshot_size": 428280682,
+      "partition_id": "30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410",
+      "behavioral_fill_snapshot_sha256": "81253fd1f305683e44428ece03036cecfec50b399e6471f6c31de699dbaba3d3",
+      "behavioral_fill_snapshot_size": 456449306,
+      "wall_time_seconds": 900.0,
+      "max_memory_bytes": 6000000000,
+      "max_inline_bytes": 500000,
+      "max_result_bytes": 4000000
+    }
+  ],
+  "analyses": [
+    {
+      "analysis_id": "stochastic.process-tradability.linear-diagnostics.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-process-tradability-2026-08-17/sources/02_process_diagnostics_linear.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.process-tradability.walkforward-drift.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-process-tradability-2026-08-17/sources/03_event_walkforward_drift_and_pseudotrading.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.process-tradability.execution-falsifiers.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-process-tradability-2026-08-17/sources/05_reversal_execution_falsifiers_permitted.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.process-tradability.semantic-catalog.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-process-tradability-2026-08-17/sources/06_development_contract_semantic_catalog.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "game-theory.exhaustive-bucket-underround.v1",
+      "family": "game-theory",
+      "source": "../polymarket-process-tradability-2026-08-17/sources/07_exhaustive_bucket_underround.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.process-tradability.outcome-identity-audit.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-process-tradability-2026-08-17/sources/08_outcome_label_identity_audit.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.first-move-direction.policy-safe.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-first-move-direction-2026-08-17/source/02_direction_benchmark_policy_safe.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.move-incidence.transfer.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-48h-move-incidence-2026-08-17/source/01_move_incidence_transfer.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.move-incidence.tie-safe.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-48h-move-incidence-2026-08-17/source/02_move_incidence_tie_safe.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.move-incidence.recent-prior.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-48h-move-incidence-2026-08-17/source/03_move_incidence_recent_prior.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.move-incidence.top-quintile.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-48h-move-incidence-2026-08-17/source/04_move_incidence_top_quintile.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.move-duration.benchmark.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-move-duration-2026-08-17/source/01_duration_benchmark.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.move-duration.mechanism-compression.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-move-duration-2026-08-17/source/02_duration_mechanism_compression.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.post-jump.reversal-first-hazard.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-post-jump-reversal-hazard-2026-08-17/source/01_reversal_first_hazard.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.post-jump.delayed-entry.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-delayed-post-jump-2026-08-17/source/01_delayed_post_jump.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "game-theory.bracket-overround-compression.v1",
+      "family": "game-theory",
+      "source": "../polymarket-bracket-overround-2026-08-17/source/01_discovery_overround_compression.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "rejected"
+    },
+    {
+      "analysis_id": "stochastic.sibling-surface.alignment-safe.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-sibling-surface-2026-08-17/source/02_sibling_surface_benchmark_alignment_safe.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.sibling-surface.compression.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-sibling-surface-2026-08-17/source/03_sibling_surface_compression.py",
+      "input_id": "original-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.fresh-fixed-horizon.properties.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-fresh-fixed-horizon-properties-2026-08-17/source/01_fixed_horizon_properties.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.fresh-reversal.replication.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-fresh-reversal-replication-2026-08-17/source/01_fresh_reversal_replication.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.process-signatures.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/01_fresh_process_signatures.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.drift-composition.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/02_drift_composition_falsifier.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.arrival-model.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/03_arrival_model_comparison.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.nonzero-sign.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/04_nonzero_sign_model_comparison.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.nonzero-magnitude.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/05_nonzero_magnitude_model_comparison.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.semantic-inventory.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/06_development_semantic_inventory.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.semantic-composition.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/08_semantic_composition_falsifier.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.clob-manifest.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/09_fixed_clob_measurement_manifest.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.event-cluster-uncertainty.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/11_event_cluster_process_uncertainty.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.composed-family.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/12_composed_process_family_comparison.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.representation-robustness.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/15_representation_robustness.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.arrival-hazard-freeze-input.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/16_freeze_arrival_hazard.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.contract-heterogeneity.initial.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/20_contract_structure_heterogeneity.py",
+      "input_id": "first-fresh-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.process-signatures.successor.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/01_fresh_process_signatures.py",
+      "input_id": "paper-successor-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.drift-composition.successor.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/02_drift_composition_falsifier.py",
+      "input_id": "paper-successor-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.semantic-composition.successor.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/08_semantic_composition_falsifier.py",
+      "input_id": "paper-successor-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.event-cluster-uncertainty.successor.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/11_event_cluster_process_uncertainty.py",
+      "input_id": "paper-successor-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.frozen-process-replay.successor.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/13_frozen_process_successor_replay.py",
+      "input_id": "paper-successor-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "stochastic.paper.frozen-arrival-replay.successor.v1",
+      "family": "stochastic-process",
+      "source": "../polymarket-stochastic-process-paper-2026-08-18/source/17_frozen_arrival_hazard_successor_replay.py",
+      "input_id": "paper-successor-replication",
+      "evidence_tier": "FRESH_DEVELOPMENT_REPLICATION",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "behavioral.focal-price-anchoring.v1",
+      "family": "behavioral-game-theory",
+      "source": "../polymarket-behavioral-game-theory-2026-08-24/source/01_focal_price_anchoring.py",
+      "input_id": "behavioral-selection-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "rejected"
+    },
+    {
+      "analysis_id": "behavioral.probability-weighting.v1",
+      "family": "behavioral-game-theory",
+      "source": "../polymarket-behavioral-game-theory-2026-08-24/source/06_probability_weighting_strategy.py",
+      "input_id": "behavioral-selection-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "retained"
+    },
+    {
+      "analysis_id": "behavioral.ambiguity-aversion.v1",
+      "family": "behavioral-game-theory",
+      "source": "../polymarket-behavioral-game-theory-2026-08-24/source/10_ambiguity_aversion_strategy.py",
+      "input_id": "behavioral-selection-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "rejected"
+    },
+    {
+      "analysis_id": "behavioral.skilled-wallet-matched-state.v2",
+      "family": "behavioral-game-theory",
+      "source": "source/02_03_skilled_wallet_matched_state_v2.py",
+      "input_id": "behavioral-fill-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "rejected"
+    },
+    {
+      "analysis_id": "behavioral.delayed-expert-consensus.v2",
+      "family": "behavioral-game-theory",
+      "source": "source/04_delayed_expert_consensus_v2.py",
+      "input_id": "behavioral-fill-development",
+      "evidence_tier": "EXPLORATORY_DEVELOPMENT",
+      "disposition": "rejected"
+    }
+  ]
+}

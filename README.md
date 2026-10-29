@@ -1,8 +1,9 @@
 # Chronos: Autonomous Time-Series Research Kernel
 
-Chronos is a self-contained research project inside `bdl-polymarket`. It was imported from the
-canonical time-series harness at the exact commit recorded in [`VENDORED_FROM.md`](VENDORED_FROM.md)
-and now evolves independently from that repository and from Kthais.
+Chronos is the autonomous research system in this standalone `Polymarket` repository. It was
+imported from the canonical time-series harness at the exact commit recorded in
+[`VENDORED_FROM.md`](VENDORED_FROM.md), later developed inside `bdl-polymarket`, and now evolves
+independently from both repositories and from Kthais.
 
 A reusable scientific research kernel for asking:
 
@@ -123,7 +124,7 @@ research begins from the production database adapter, not from a copied external
 
 ```mermaid
 flowchart TD
-    DB[("BDL production database")] --> READ["Engine public market reads"]
+    DB[("BDL production database")] --> READ["Chronos read-only parameterized queries"]
     READ --> META["Contract, outcome, payout metadata"]
     READ --> TAPE["Taker-side fill tape"]
     READ --> VINTAGE["History and forward block cursors"]
@@ -160,9 +161,11 @@ flowchart TD
     NEGATIVE_DEV --> HISTORY["Development trial ancestry"]
 ```
 
-The database adapter is intentionally narrower than the researcher. It registers prices, sizes,
-signed flow, and exact blocks. The researcher remains free to write new analysis, feature, label,
-and model code inside the existing constrained execution and evaluation boundaries.
+The database adapter is intentionally narrower than the researcher. It retains a standalone,
+SELECT-only compatibility boundary for the existing BDL database schema and registers prices,
+sizes, signed flow, and exact blocks. No BDL engine source checkout is required. The researcher
+remains free to write new analysis, feature, label, and model code inside the existing constrained
+execution and evaluation boundaries.
 
 When a concrete development hypothesis needs another public probability slice, Chronos can also
 turn one passive external-scout proposal into a locally retained and registered official CLOB
@@ -190,8 +193,7 @@ collector or database received the event, and every registered observation carri
 Run the fail-closed live smoke after opening the approved `human_ro` tunnel:
 
 ```bash
-PYTHONPATH=src:../../engine/src \
-  uv run python -m research_agent.data_adapters.polymarket.smoke \
+uv run python -m research_agent.data_adapters.polymarket.smoke \
   --market-id <condition-id>
 ```
 
@@ -202,8 +204,7 @@ with `BLOCKED` and does not describe any fixture as live evidence.
 
 Run researcher-authored exploration over an exact legal view of a live registration:
 
-    PYTHONPATH=src:../../engine/src \
-      uv run python -m research_agent.data_adapters.polymarket.live_analysis \
+    uv run python -m research_agent.data_adapters.polymarket.live_analysis \
       --market-id <condition-id> \
       --decision-time <timezone-aware-ISO-8601> \
       --code <authored-analysis.py> \
@@ -226,8 +227,7 @@ question memory.
 
 Retain and register a bounded resolved-market corpus after opening the same tunnel:
 
-    PYTHONPATH=src:../../engine/src \
-      uv run python -m research_agent.data_adapters.polymarket.corpus_snapshot \
+    uv run python -m research_agent.data_adapters.polymarket.corpus_snapshot \
       --as-of <timezone-aware-ISO-8601> \
       --min-points <minimum-per-contract> \
       --max-markets <hard-bound> \

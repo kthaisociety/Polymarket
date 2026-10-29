@@ -163,9 +163,6 @@ class FetchRequest:
             msg = "redirect hosts must be unique hostnames containing the request host"
             raise ValueError(msg)
         object.__setattr__(self, "allowed_redirect_hosts", redirect_hosts)
-        if not isinstance(self.permit_redirects, bool):
-            msg = "permit_redirects must be a boolean"
-            raise TypeError(msg)
         if self.body is not None:
             object.__setattr__(self, "body", bytes(self.body))
 
@@ -592,7 +589,7 @@ class DataWorkspace:
         try:
             response_context = _open_request(raw_request, request)
             with response_context as response:
-                final_url = cast("str", response.geturl())
+                final_url = response.geturl()
                 if urllib.parse.urlsplit(final_url).scheme not in {"http", "https"}:
                     return self._failed_fetch(request_sha256, "UNSUPPORTED_REDIRECT_SCHEME")
                 declared_size = response.headers.get("Content-Length")

@@ -5,12 +5,8 @@ from __future__ import annotations
 import asyncio
 from datetime import UTC, datetime
 from decimal import Decimal
-from typing import TYPE_CHECKING, cast
 
 from research_agent.data_adapters.polymarket import EnginePolymarketResearchReader
-
-if TYPE_CHECKING:
-    from core.db.queries import Executor
 
 MARKET = "0xmarket"
 INCLUDED_BLOCK = 150
@@ -19,31 +15,31 @@ INCLUDED_BLOCK = 150
 class _ProductionProtocolExecutor:
     """SQL executor implementing the same calls consumed by public market reads."""
 
-    async def fetchrow(self, sql: str, *parameters: object) -> dict[str, object] | None:
-        assert "ops.ingest_cursors" in sql
-        name = parameters[0]
+    async def fetchrow(self, query: str, *args: object) -> dict[str, object] | None:
+        assert "ops.ingest_cursors" in query
+        name = args[0]
         block = 100 if name == "pm-onchain-history" else 200
         return {"cursor": {"block": block}}
 
-    async def fetch(self, sql: str, *parameters: object) -> list[dict[str, object]]:
-        del parameters
-        if "outcome_count" in sql:
+    async def fetch(self, query: str, *args: object) -> list[dict[str, object]]:
+        del args
+        if "outcome_count" in query:
             return [{"market_id": MARKET, "outcome_count": 2}]
-        if "outcome_token IS NOT NULL" in sql:
+        if "outcome_token IS NOT NULL" in query:
             return [
                 {"outcome_token": "yes", "market_id": MARKET, "outcome_index": 0},
                 {"outcome_token": "no", "market_id": MARKET, "outcome_index": 1},
             ]
-        if "tracked AND close_time IS NOT NULL" in sql:
+        if "tracked AND close_time IS NOT NULL" in query:
             return [{"market_id": MARKET, "close_time": datetime(2026, 2, 1, tzinfo=UTC)}]
-        if "status = 'resolved'" in sql:
+        if "status = 'resolved'" in query:
             return [{"market_id": MARKET}]
-        if "payout IS NOT NULL" in sql:
+        if "payout IS NOT NULL" in query:
             return [
                 {"market_id": MARKET, "outcome_index": 0, "payout": Decimal(1)},
                 {"market_id": MARKET, "outcome_index": 1, "payout": Decimal(0)},
             ]
-        if "One market's per-print tape" in sql:
+        if "One market's per-print tape" in query:
             return [
                 {
                     "venue": "polymarket",
@@ -66,9 +62,8 @@ class _ProductionProtocolExecutor:
 
 
 def test_engine_reader_uses_public_reads_for_exact_contract_tape() -> None:
-    """The production adapter composes the engine's real public read functions."""
-    fake: object = _ProductionProtocolExecutor()
-    reader = EnginePolymarketResearchReader(cast("Executor", fake))
+    """The legacy-schema reader works without importing the parent engine."""
+    reader = EnginePolymarketResearchReader(_ProductionProtocolExecutor())
 
     vintage = asyncio.run(reader.read_vintage())
     contracts = asyncio.run(reader.read_contracts((MARKET,)))

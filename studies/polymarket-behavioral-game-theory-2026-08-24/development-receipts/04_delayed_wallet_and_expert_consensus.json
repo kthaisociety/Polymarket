@@ -1,0 +1,178 @@
+{
+  "adverse_execution_hurdle": "0.010",
+  "analysis_as_of": "2026-08-24T09:13:44.071211+00:00",
+  "b1_delayed": {
+    "cohorts": [
+      {
+        "covered_signal_count": 9837,
+        "early_event_macro_net_edge": "0.00493370727997349859",
+        "event_count": 61,
+        "event_macro_net_edge": "0.03335369728463025945",
+        "late_event_macro_net_edge": "0.05178828539575896920",
+        "positive_event_share": "0.57377049180327868852",
+        "skill_cohort": "HIGH_SKILL"
+      },
+      {
+        "covered_signal_count": 29155,
+        "early_event_macro_net_edge": "0.003995059105446042154286",
+        "event_count": 69,
+        "event_macro_net_edge": "0.008343106277121167817308",
+        "late_event_macro_net_edge": "0.01149544047658563392",
+        "positive_event_share": "0.52173913043478260870",
+        "skill_cohort": "NON_HIGH"
+      }
+    ],
+    "coverage": [
+      {
+        "covered_event_count": 61,
+        "covered_signal_count": 9837,
+        "coverage_share": "0.99969512195121951220",
+        "signal_count": 9840,
+        "signal_event_count": 61,
+        "skill_cohort": "HIGH_SKILL"
+      },
+      {
+        "covered_event_count": 69,
+        "covered_signal_count": 29155,
+        "coverage_share": "0.99945151006136231189",
+        "signal_count": 29171,
+        "signal_event_count": 69,
+        "skill_cohort": "NON_HIGH"
+      }
+    ],
+    "decision": {
+      "coverage_passed": true,
+      "high_skill_halves_positive": true,
+      "paired_increment_passed": true,
+      "passed": true,
+      "status": "CONDITIONAL_LEAD_REQUIRES_COMBINED_STATE_ACTIVITY_TEST"
+    },
+    "decision_rule": {
+      "high_skill_halves_must_be_positive": true,
+      "minimum_high_skill_events": 30,
+      "minimum_high_skill_signals": 1000,
+      "minimum_paired_event_macro_difference": "0.010"
+    },
+    "paired_result": {
+      "early_high_minus_non_high_net_edge": "-0.017638447472440469009345",
+      "high_minus_non_high_event_macro_net_edge": "0.016684855758050577823700",
+      "late_high_minus_non_high_net_edge": "0.03894862001566639199",
+      "paired_event_count": 61
+    }
+  },
+  "b2_expert_consensus": {
+    "cohorts": [
+      {
+        "cohort": "EXPERT_CONSENSUS",
+        "covered_signal_count": 748,
+        "early_event_macro_net_edge": "0.00878827625747268604",
+        "event_count": 49,
+        "event_macro_net_edge": "0.02868653756669718882",
+        "late_event_macro_net_edge": "0.04361023354861556590",
+        "positive_event_share": "0.55102040816326530612"
+      },
+      {
+        "cohort": "NON_HIGH_CONSENSUS",
+        "covered_signal_count": 1360,
+        "early_event_macro_net_edge": "0.08883704070682901328",
+        "event_count": 57,
+        "event_macro_net_edge": "0.043010082710384227063099",
+        "late_event_macro_net_edge": "0.009681385985697109814444",
+        "positive_event_share": "0.57894736842105263158"
+      },
+      {
+        "cohort": "SINGLE_HIGH",
+        "covered_signal_count": 1269,
+        "early_event_macro_net_edge": "0.03625271500762776506",
+        "event_count": 59,
+        "event_macro_net_edge": "0.04661095769447090015",
+        "late_event_macro_net_edge": "0.05322872385550956980",
+        "positive_event_share": "0.57627118644067796610"
+      }
+    ],
+    "coverage": [
+      {
+        "cohort": "EXPERT_CONSENSUS",
+        "covered_event_count": 49,
+        "covered_signal_count": 748,
+        "coverage_share": "1.00000000000000000000",
+        "mean_agreement_share": "0.93755731153111320373",
+        "mean_wallet_count": "4.3783422459893048",
+        "signal_count": 748,
+        "signal_event_count": 49
+      },
+      {
+        "cohort": "NON_HIGH_CONSENSUS",
+        "covered_event_count": 57,
+        "covered_signal_count": 1360,
+        "coverage_share": "1.00000000000000000000",
+        "mean_agreement_share": "0.92928872041524928462",
+        "mean_wallet_count": "5.2830882352941176",
+        "signal_count": 1360,
+        "signal_event_count": 57
+      },
+      {
+        "cohort": "SINGLE_HIGH",
+        "covered_event_count": 59,
+        "covered_signal_count": 1269,
+        "coverage_share": "1.00000000000000000000",
+        "mean_agreement_share": "1.00000000000000000000",
+        "mean_wallet_count": "1.00000000000000000000",
+        "signal_count": 1269,
+        "signal_event_count": 59
+      }
+    ],
+    "decision": {
+      "consensus_halves_positive": true,
+      "coverage_passed": true,
+      "passed": false,
+      "rival_increment_passed": false,
+      "status": "REJECT_FIXED_B2_EXPERT_CONSENSUS_CANDIDATE"
+    },
+    "decision_rule": {
+      "consensus_halves_must_be_positive": true,
+      "minimum_agreement_share": "0.75",
+      "minimum_consensus_events": 30,
+      "minimum_consensus_signals": 500,
+      "minimum_paired_event_macro_advantage_over_each_rival": "0.010",
+      "minimum_wallet_count": 2
+    },
+    "paired_rivals": [
+      {
+        "early_expert_minus_rival_net_edge": "-0.06190097415212122343",
+        "expert_minus_rival_event_macro_net_edge": "0.011206136803107129914638",
+        "late_expert_minus_rival_net_edge": "0.062651881549378934119383",
+        "paired_event_count": 46,
+        "rival_cohort": "NON_HIGH_CONSENSUS"
+      },
+      {
+        "early_expert_minus_rival_net_edge": "-0.03818168218842560948",
+        "expert_minus_rival_event_macro_net_edge": "-0.01467931890643502668",
+        "late_expert_minus_rival_net_edge": "0.00272983908022466428",
+        "paired_event_count": 47,
+        "rival_cohort": "SINGLE_HIGH"
+      }
+    ]
+  },
+  "durable_state_effects": [],
+  "epistemic_status": "EXPLORATORY_DEVELOPMENT",
+  "formal_object_refs": [],
+  "partition": {
+    "development_event_count": 95,
+    "embargoed_event_count": 95,
+    "training_cutoff": "2026-08-11T18:30:10+00:00",
+    "training_event_count": 284
+  },
+  "schema_version": "polymarket-delayed-wallet-consensus/v1",
+  "source_name": "04_delayed_wallet_and_expert_consensus.sql",
+  "source_sha256": "b1d2aae380856be68c4a37a1be053e8f9616576f358dbb1bd57f3d7d374de2e3",
+  "status": "SUCCEEDED",
+  "warnings": [
+    "Development selection evidence only; the final event block is excluded from label joins.",
+    "Hourly sampled prices are delayed public-state proxies, not executable quotes.",
+    "No missing delayed price falls back to the originating fill price.",
+    "Binary token trades are mapped to one canonical outcome-zero vote per wallet and market hour.",
+    "The fixed one-cent hurdle is an adverse-execution stress, not an estimated fee, spread, or impact model.",
+    "The production database is mutable; the fixed as-of ceiling excludes later timestamps but not later backfills."
+  ]
+}

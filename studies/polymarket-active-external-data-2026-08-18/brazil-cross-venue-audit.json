@@ -1,0 +1,51 @@
+{
+  "authority": "The exact ordinary winner event matches. Only the stated Kalshi-YES plus Polymarket-NO direction receives conservative minimum-payout authority because of the differing unresolved-result cutoffs.",
+  "inputs": {
+    "kalshi_inventory_sha256": "1b3995cf29f6f1788c443d4ecf16482b10bf34fa41c1c6586ae01f5837daa750",
+    "polymarket_audit_sha256": "614d9bcbaa3d2d0d280f323ad20f1b6232af8c91c1440214bc45dadfcf8786a3"
+  },
+  "pairs": [
+    {
+      "candidate": "lula",
+      "conservative_dominance_pair": "buy Kalshi YES plus buy Polymarket NO",
+      "cutoff_mismatch": "Polymarket routes an election result unknown by 2027-06-30 23:59 ET to Other; Kalshi can remain open until 2027-10-25.",
+      "kalshi_expiration_time": "2027-10-25T14:00:00Z",
+      "kalshi_market_id": "KXBRPRES-26-LULA",
+      "kalshi_rules_primary": "If Luiz In\u00e1cio Lula da Silva has won the 2026 Brazilian presidential election, then the market resolves to Yes.",
+      "minimum_combined_payout_under_documented_outcomes": 1.0,
+      "polymarket_description": "A presidential election is scheduled to take place in Brazil on October 4, 2026.\n\nThis market will resolve according to the listed candidate that wins this election.\n\nThis market includes any potential second round. If the result of this election isn't known by June 30, 2027, 11:59 PM ET, the market will resolve to \"Other\".\n\nThis market will resolve based on the result of the election as indicated by a consensus of credible reporting. If there is ambiguity, this market will resolve based solely on the official results as reported by the Brazilian government, specifically the Superior Electoral Court (Tribunal Superior Eleitoral, TSE) (e.g., https://dadosabertos.tse.jus.br/).",
+      "polymarket_fees": {
+        "exponent": 1,
+        "rate": "0.04",
+        "rebate_rate": "0.25",
+        "taker_only": true
+      },
+      "polymarket_market_id": "0xdf8e2dc5860027decbe6164555c3c1c9645c3bd33e16b9dc57ca87125047d4a8",
+      "question": "Will Luiz In\u00e1cio Lula da Silva win the 2026 Brazilian presidential election?",
+      "reverse_pair_is_risk_free": false,
+      "same_ordinary_winner_event": true
+    },
+    {
+      "candidate": "flavio",
+      "conservative_dominance_pair": "buy Kalshi YES plus buy Polymarket NO",
+      "cutoff_mismatch": "Polymarket routes an election result unknown by 2027-06-30 23:59 ET to Other; Kalshi can remain open until 2027-10-25.",
+      "kalshi_expiration_time": "2027-10-25T14:00:00Z",
+      "kalshi_market_id": "KXBRPRES-26-FBOL",
+      "kalshi_rules_primary": "If Fl\u00e1vio Bolsonaro has won the 2026 Brazilian presidential election, then the market resolves to Yes.",
+      "minimum_combined_payout_under_documented_outcomes": 1.0,
+      "polymarket_description": "A presidential election is scheduled to take place in Brazil on October 4, 2026.\n\nThis market will resolve according to the listed candidate that wins this election.\n\nThis market includes any potential second round. If the result of this election isn't known by June 30, 2027, 11:59 PM ET, the market will resolve to \"Other\".\n\nThis market will resolve based on the result of the election as indicated by a consensus of credible reporting. If there is ambiguity, this market will resolve based solely on the official results as reported by the Brazilian government, specifically the Superior Electoral Court (Tribunal Superior Eleitoral, TSE) (e.g., https://dadosabertos.tse.jus.br/).",
+      "polymarket_fees": {
+        "exponent": 1,
+        "rate": "0.04",
+        "rebate_rate": "0.25",
+        "taker_only": true
+      },
+      "polymarket_market_id": "0x1a01bf78f56a507fcb666d564d8c8b91b0750679163ed6e96746102c9b7d285d",
+      "question": "Will Fl\u00e1vio Bolsonaro win the 2026 Brazilian presidential election?",
+      "reverse_pair_is_risk_free": false,
+      "same_ordinary_winner_event": true
+    }
+  ],
+  "protected_values_exposed": false,
+  "schema": "chronos-brazil-cross-venue-semantic-audit/v1"
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "chronos-polymarket-corpus-campaign/v1",
+  "campaign_id": "polymarket-behavioral-enforced-rerun-addon-v1-2026-08-24",
+  "mandate": "Reproduce the fixed delayed activity-matched skilled-wallet and crowded-extrapolation falsifiers on the registered parent-bound taker panel without restoring freshness to the exposed corpus.",
+  "session_id": "polymarket-enforced-campaign-2026-08-24",
+  "execution_evidence_tier": "EXPOSED_REPRODUCTION",
+  "inputs": [
+    {
+      "input_id": "behavioral-fill-development",
+      "snapshot_sha256": "184b83f7f8012da4ca9116c8b6bad2076570ad5f0bada95b22615ee2f5cceae8",
+      "snapshot_size": 428280682,
+      "partition_id": "30bce30fd476737e438c8326f3dbd25e3fd15af958546206d869f7d38ef66410",
+      "behavioral_fill_snapshot_sha256": "81253fd1f305683e44428ece03036cecfec50b399e6471f6c31de699dbaba3d3",
+      "behavioral_fill_snapshot_size": 456449306,
+      "wall_time_seconds": 900.0,
+      "max_memory_bytes": 6000000000,
+      "max_inline_bytes": 500000,
+      "max_result_bytes": 4000000
+    }
+  ],
+  "analyses": [
+    {
+      "analysis_id": "behavioral.delayed-wallet-state-activity-match.v2",
+      "family": "behavioral-economics",
+      "source": "source/05_delayed_wallet_state_activity_match_v2.py",
+      "input_id": "behavioral-fill-development",
+      "evidence_tier": "EXPOSED_REPRODUCTION",
+      "disposition": "rejected"
+    },
+    {
+      "analysis_id": "behavioral.crowded-extrapolation-exhaustion.v2",
+      "family": "behavioral-economics",
+      "source": "source/08_crowded_extrapolation_exhaustion_v2.py",
+      "input_id": "behavioral-fill-development",
+      "evidence_tier": "EXPOSED_REPRODUCTION",
+      "disposition": "rejected"
+    }
+  ]
+}

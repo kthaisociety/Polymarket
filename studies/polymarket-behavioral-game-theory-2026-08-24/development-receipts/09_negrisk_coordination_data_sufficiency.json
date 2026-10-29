@@ -1,0 +1,85 @@
+{
+  "schema_version": "polymarket-negrisk-coordination-readiness/v1",
+  "status": "BLOCKED_DATA_SUBSTRATE",
+  "epistemic_status": "DATA_SUITABILITY_AUDIT",
+  "source_name": "09_negrisk_coordination_data_sufficiency.sql",
+  "source_sha256": "8163a608fd8c12703d3e3e6b3b74f7a5550dd84f00fbd1fb89b19149a907f255",
+  "input_repository_state": "bdl-polymarket@712fc693bd1728794ba76f9cb6627e957b1ec7b4",
+  "authority": {
+    "role": "human_ro",
+    "default_transaction_read_only": "on",
+    "transaction_read_only": "on"
+  },
+  "audited_at": "2026-08-24T10:18:03.801380+00:00",
+  "clock_schema": {
+    "snapshots_reference_time_column": false,
+    "deltas_reference_time_column": false
+  },
+  "summary": {
+    "database_event_count": 2677,
+    "observed_negrisk_event_count": 1243,
+    "semantic_candidate_count": 1013,
+    "full_current_top_event_count": 6,
+    "current_two_sided_top_leg_count": 1986,
+    "newest_top_at": "2026-08-24T10:18:01.966676+00:00"
+  },
+  "representative_current_top_scopes": [
+    {
+      "event_id": "166435",
+      "total_yes_legs": 10,
+      "current_top_yes_legs": 10,
+      "all_top_sweep_times_equal": true,
+      "top_sweep_time": "2026-08-24T10:18:01.966676+00:00"
+    },
+    {
+      "event_id": "766099",
+      "total_yes_legs": 9,
+      "current_top_yes_legs": 9,
+      "current_state_stale": true
+    },
+    {
+      "event_id": "563179",
+      "total_yes_legs": 5,
+      "current_top_yes_legs": 5,
+      "current_state_stale": true
+    }
+  ],
+  "decision": "BLOCK_COMPLETE_SET_STRATEGY",
+  "deployment_evidence": {
+    "production_release_sha": "f27716db25bf579f1e38c39cff8aa46cef3e7b7b",
+    "pm_books_active": true,
+    "pm_books_active_since": "2026-08-16T17:27:02+00:00",
+    "dual_clock_delta_location": "uncommitted local worktree",
+    "origin_main_has_reference_time_columns": false,
+    "secure_activation_path": "merge reviewed change to main, then operator-controlled promote",
+    "hot_patch_attempted": false
+  },
+  "failed_gates": [
+    "production market.book_snapshots lacks reference_time",
+    "production market.book_deltas lacks reference_time",
+    "no post-change dual-clock full-event history can be retained from this deployment"
+  ],
+  "deferred": [
+    "historical per-leg anchor and overlap scan",
+    "exact Gamma event endpoint retention",
+    "basket price, depth, fee, fill, and return calculation"
+  ],
+  "cancelled_zero-result_attempts": [
+    {
+      "reason": "fail-closed source referenced absent production reference_time column",
+      "values_returned": false
+    },
+    {
+      "elapsed_seconds": 63,
+      "reason": "legacy seven-day delta aggregation was unnecessary after the schema gate failed",
+      "values_returned": false
+    }
+  ],
+  "warnings": [
+    "current book_tops coverage is descriptive collector state and not historical causal evidence",
+    "market rows carry event_id and neg_risk but exact Gamma event bytes remain unretained",
+    "no basket price, size, fee amount, payout, question, or return value was read or retained",
+    "displayed state does not prove fills, atomicity, queue position, or failed-leg unwind cost"
+  ],
+  "durable_state_effects": []
+}

@@ -1,0 +1,82 @@
+{
+  "adverse_execution_hurdle": "0.010",
+  "analysis_as_of": "2026-08-24T09:13:44.071211+00:00",
+  "coverage": [
+    {
+      "delayed_mark_count": 9837,
+      "prior_mark_count": 9826,
+      "signal_count": 9840,
+      "skill_cohort": "HIGH_SKILL",
+      "state_coverage_share": "0.99827235772357723577",
+      "state_eligible_event_count": 61,
+      "state_eligible_signal_count": 9823
+    },
+    {
+      "delayed_mark_count": 29155,
+      "prior_mark_count": 29158,
+      "signal_count": 29171,
+      "skill_cohort": "NON_HIGH",
+      "state_coverage_share": "0.99900586198621919029",
+      "state_eligible_event_count": 68,
+      "state_eligible_signal_count": 29142
+    }
+  ],
+  "decision": {
+    "coverage_passed": true,
+    "difference_halves_passed": false,
+    "high_skill_halves_passed": false,
+    "incremental_edge_passed": false,
+    "passed": false,
+    "status": "REJECT_FIXED_B1_DELAYED_STATE_ACTIVITY_CANDIDATE"
+  },
+  "decision_rule": {
+    "activity_bands": [
+      "1",
+      "2-4",
+      "5-9",
+      "10+"
+    ],
+    "difference_halves_must_be_non_negative": true,
+    "high_skill_halves_must_be_positive": true,
+    "minimum_cells": 75,
+    "minimum_event_macro_difference": "0.010",
+    "minimum_events": 25,
+    "minimum_signals_per_cohort_per_cell": 3,
+    "momentum_threshold": "0.02",
+    "price_band_width": "0.05"
+  },
+  "durable_state_effects": [],
+  "epistemic_status": "EXPLORATORY_DEVELOPMENT",
+  "formal_object_refs": [],
+  "matched_result": {
+    "early_high_event_macro_net_edge": "0.07127205188063978100",
+    "early_high_minus_non_high_net_edge": "-0.002127309689901827040861",
+    "high_event_macro_net_edge": "0.01615977047488276810",
+    "high_minus_non_high_event_macro_net_edge": "0.003827182977381071254582",
+    "high_signal_count": 7748,
+    "late_high_event_macro_net_edge": "-0.02697158019049228548",
+    "late_high_minus_non_high_net_edge": "0.008487220716993774268406",
+    "matched_cell_count": 773,
+    "matched_event_count": 41,
+    "non_high_event_macro_net_edge": "0.012332587497501696840696",
+    "non_high_signal_count": 19710,
+    "positive_event_share": "0.36585365853658536585"
+  },
+  "partition": {
+    "development_event_count": 95,
+    "embargoed_event_count": 95,
+    "training_cutoff": "2026-08-11T18:30:10+00:00",
+    "training_event_count": 284
+  },
+  "schema_version": "polymarket-delayed-wallet-state-activity-match/v1",
+  "source_name": "05_delayed_wallet_state_activity_match.sql",
+  "source_sha256": "c8185919a02968c45f5ef01e36bd73d2fc94e573f95b11e912a7e06c35e0eff6",
+  "status": "SUCCEEDED",
+  "warnings": [
+    "Development selection evidence only; the final event block is excluded from label joins.",
+    "Matching controls event, direction, delayed price, resolution horizon, entry-time momentum, and wallet activity.",
+    "Hourly prices are sampled public-state proxies, not executable quotes.",
+    "The fixed one-cent hurdle is an adverse-execution stress rather than a complete cost model.",
+    "The production database is mutable; the fixed as-of ceiling excludes later timestamps but not later backfills."
+  ]
+}

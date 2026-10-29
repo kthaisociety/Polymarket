@@ -1,0 +1,89 @@
+{
+  "cohorts": [
+    {
+      "cohort": "ALL",
+      "early_event_macro_edge": "0.02040317600579681882910505008",
+      "event_count": 69,
+      "event_macro_edge": "0.01669352462961299854129672937",
+      "fill_count": 62800,
+      "fill_mean_edge": "0.01454815162106394996741928255",
+      "late_event_macro_edge": "0.01400402738187972883263569686",
+      "market_count": 231,
+      "market_macro_edge": "0.02185803352547960680110310744",
+      "positive_event_share": "0.59420289855072463768"
+    },
+    {
+      "cohort": "ELIGIBLE_POSITIVE",
+      "early_event_macro_edge": "0.01977507620262413132381587447",
+      "event_count": 63,
+      "event_macro_edge": "0.02949182904155025470448596646",
+      "fill_count": 25961,
+      "fill_mean_edge": "0.01322787357612610380632538434",
+      "late_event_macro_edge": "0.03547136925012017678489833076",
+      "market_count": 203,
+      "market_macro_edge": "0.04135072214492918627110322693",
+      "positive_event_share": "0.60317460317460317460"
+    },
+    {
+      "cohort": "HIGH_SKILL",
+      "early_event_macro_edge": "0.02037231420412190640257573441",
+      "event_count": 61,
+      "event_macro_edge": "0.04140153016715797994339967405",
+      "fill_count": 14910,
+      "fill_mean_edge": "0.01662372657748723065254053612",
+      "late_event_macro_edge": "0.05504210268372191953744763490",
+      "market_count": 191,
+      "market_macro_edge": "0.05227922497593247877319180963",
+      "positive_event_share": "0.70491803278688524590"
+    },
+    {
+      "cohort": "LOW_SKILL",
+      "early_event_macro_edge": "0.03311717834229067782586645386",
+      "event_count": 60,
+      "event_macro_edge": "0.01754908844957280903285465327",
+      "fill_count": 8962,
+      "fill_mean_edge": "0.02084894591610979891567529997",
+      "late_event_macro_edge": "0.00717036185442756317084678620",
+      "market_count": 180,
+      "market_macro_edge": "0.00511373241790985107708844669",
+      "positive_event_share": "0.55000000000000000000"
+    }
+  ],
+  "development_gate": {
+    "event_macro_high_skill_minus_all": "0.02470800553754498140210294468",
+    "minimum_event_count": 30,
+    "minimum_fill_count": 1000,
+    "minimum_incremental_edge": "0.01",
+    "passed": true,
+    "required_positive_chronological_halves": true,
+    "status": "MECHANISM_SUPPORTED_FOR_EXECUTABLE_FOLLOW_UP"
+  },
+  "durable_state_effects": [],
+  "epistemic_status": "EXPLORATORY_DEVELOPMENT",
+  "formal_object_refs": [],
+  "partition": {
+    "development_event_count": 95,
+    "embargoed_event_count": 95,
+    "training_cutoff": "2026-08-11T18:30:10+00:00",
+    "training_event_count": 284
+  },
+  "schema_version": "polymarket-fold-local-skilled-wallet/v1",
+  "skill_population": {
+    "eligible_wallet_count": 7450,
+    "high_skill_wallet_count": 2461,
+    "low_skill_wallet_count": 2267,
+    "wallet_count": 89598
+  },
+  "source_name": "02_fold_local_skilled_wallet.sql",
+  "source_sha256": "a77b75d13cc42963a9cad507b09798002f53904455a71bc55bd353b1801cb2e7",
+  "status": "SUCCEEDED",
+  "warnings": [
+    "This is development evidence from recorded taker fill prices, not delayed executable entry.",
+    "The final event block is excluded by the SQL source but is not a governed Chronos protected backtest.",
+    "Wallet identity is the aggressive account on the on-chain aggregate taker leg.",
+    "Signed settlement edge does not deduct fees, spread, latency, or market impact.",
+    "The high-skill incremental edge is concentrated in the late evaluation half; the early high-skill and all-flow event-macro edges are nearly equal.",
+    "The low-skill cohort remained positive in development, so the score is not a stable symmetric ranking without further rival tests.",
+    "Price state, topic specialization, event composition, and activity remain mandatory rivals."
+  ]
+}

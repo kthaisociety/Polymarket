@@ -1,5 +1,7 @@
 """Causal and retention adversaries for the resolved-market research corpus."""
 
+# pyright: reportPrivateUsage=false
+
 from __future__ import annotations
 
 import asyncio
@@ -557,8 +559,9 @@ result = structured_return(
         "indices": (0, 0, 0, 0),
         "tokens": ("yes-0", "yes-1", "yes-2", "yes-3"),
     }
-    assert "Question 4?" not in result.details["questions"]
-    assert "yes-4" not in result.details["tokens"]
+    details = cast("dict[str, object]", result.details)
+    assert "Question 4?" not in cast("tuple[str, ...]", details["questions"])
+    assert "yes-4" not in cast("tuple[str, ...]", details["tokens"])
 
 
 def _registered_event_field(
@@ -703,10 +706,14 @@ def test_development_view_issues_authoritative_chronological_event_ordinals() ->
         for ordinal, event_id in enumerate(analysis.partition.development_event_ids)
     }
 
-    price_events = analysis.price_view.fields["event_id"]
-    price_ordinals = analysis.price_view.fields["event_chronological_ordinal"]
-    outcome_events = analysis.outcome_view.fields["event_id"]
-    outcome_ordinals = analysis.outcome_view.fields["event_chronological_ordinal"]
+    price_events = cast("tuple[str, ...]", analysis.price_view.fields["event_id"])
+    price_ordinals = cast(
+        "tuple[int, ...]", analysis.price_view.fields["event_chronological_ordinal"]
+    )
+    outcome_events = cast("tuple[str, ...]", analysis.outcome_view.fields["event_id"])
+    outcome_ordinals = cast(
+        "tuple[int, ...]", analysis.outcome_view.fields["event_chronological_ordinal"]
+    )
 
     assert all(
         expected[event] == ordinal

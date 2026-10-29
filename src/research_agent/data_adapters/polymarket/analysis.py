@@ -163,7 +163,7 @@ def _wide_columns(
         caveats = cast("list[str]", row["caveats"])
         caveats.extend(item for item in observation.caveats if item not in caveats)
     expected = frozenset(scientific_field_ids)
-    ordered_rows = []
+    ordered_rows: list[dict[str, object]] = []
     for key in sorted(grouped):
         row = grouped[key]
         present = frozenset(field_id for field_id in scientific_field_ids if field_id in row)

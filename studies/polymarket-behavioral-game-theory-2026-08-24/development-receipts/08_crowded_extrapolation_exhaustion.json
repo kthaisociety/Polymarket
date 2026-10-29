@@ -1,0 +1,106 @@
+{
+  "schema_version": "polymarket-crowded-extrapolation/v1",
+  "status": "SUCCEEDED",
+  "epistemic_status": "EXPLORATORY_DEVELOPMENT_REJECTION",
+  "source_name": "08_crowded_extrapolation_exhaustion.sql",
+  "source_sha256": "605dd6e40a8200ab1950e02f1fc5dca1838af6289c2b9ae4c683b21eea8abba7",
+  "input_repository_state": "bdl-polymarket@712fc693bd17",
+  "authority": {
+    "role": "human_ro",
+    "default_transaction_read_only": "on",
+    "transaction_read_only": "on"
+  },
+  "analysis_as_of": "2026-08-24T09:13:44.071211+00:00",
+  "adverse_execution_hurdle": 0.010,
+  "partition": {
+    "training_event_count": 284,
+    "development_event_count": 95,
+    "embargoed_event_count": 95,
+    "training_cutoff": "2026-08-11T18:30:10+00:00"
+  },
+  "pending_repair_markets_excluded": true,
+  "coverage": [
+    {
+      "cohort": "CROWDED_CHASE",
+      "covered_signal_count": 25,
+      "covered_event_count": 14,
+      "exit_6h_count": 21,
+      "exit_24h_count": 9,
+      "mean_wallet_count": 12.28,
+      "mean_agreement_share": 0.8751484293926966,
+      "mean_absolute_prior_move": 0.17238
+    },
+    {
+      "cohort": "CROWDED_FLAT",
+      "covered_signal_count": 62,
+      "covered_event_count": 23,
+      "exit_6h_count": 55,
+      "exit_24h_count": 46,
+      "mean_wallet_count": 8.290322580645162,
+      "mean_agreement_share": 0.8883387878034708,
+      "mean_absolute_prior_move": 0.007298387096774194
+    },
+    {
+      "cohort": "THIN_CHASE",
+      "covered_signal_count": 65,
+      "covered_event_count": 16,
+      "exit_6h_count": 63,
+      "exit_24h_count": 50,
+      "mean_wallet_count": 1.4153846153846155,
+      "mean_agreement_share": 1.0,
+      "mean_absolute_prior_move": 0.12865384615384615
+    }
+  ],
+  "cohorts": [
+    {
+      "cohort": "CROWDED_CHASE",
+      "covered_signal_count": 25,
+      "event_count": 14,
+      "event_macro_fade_return_6h": -0.04258796296296296,
+      "event_macro_fade_return_24h": -0.06854166666666667,
+      "event_macro_settlement_net_edge": -0.06404761904761905,
+      "early_event_macro_settlement_net_edge": -0.11984375,
+      "late_event_macro_settlement_net_edge": 0.010347222222222223,
+      "positive_event_share": 0.35714285714285715
+    },
+    {
+      "cohort": "CROWDED_FLAT",
+      "covered_signal_count": 62,
+      "event_count": 23,
+      "event_macro_fade_return_6h": -0.0097375,
+      "event_macro_fade_return_24h": -0.014588815789473685,
+      "event_macro_settlement_net_edge": 0.013180253623188406,
+      "early_event_macro_settlement_net_edge": 0.042625,
+      "late_event_macro_settlement_net_edge": -0.01894128787878788,
+      "positive_event_share": 0.5217391304347826
+    },
+    {
+      "cohort": "THIN_CHASE",
+      "covered_signal_count": 65,
+      "event_count": 16,
+      "event_macro_fade_return_6h": -0.04431527777777778,
+      "event_macro_fade_return_24h": -0.02884970238095238,
+      "event_macro_settlement_net_edge": -0.06701475694444445,
+      "early_event_macro_settlement_net_edge": -0.01651851851851852,
+      "late_event_macro_settlement_net_edge": -0.0973125,
+      "positive_event_share": 0.3125
+    }
+  ],
+  "paired_rivals": null,
+  "decision_checks": {
+    "coverage_passed": false,
+    "path_reversal_passed": false,
+    "chronology_passed": false,
+    "both_rivals_passed": false
+  },
+  "decision": "REJECT_FIXED_CROWDED_EXTRAPOLATION_CANDIDATE",
+  "warnings": [
+    "Development selection evidence only; embargo event payouts were not joined.",
+    "Hourly sampled prices are public-state proxies, not executable quotes.",
+    "No missing mark fell back to a fill price or a sample outside its fixed window.",
+    "Known pending-repair markets were excluded; the mutable database can still receive later backfills.",
+    "The taker aggregate-leg predicate and one-wallet-per-market-hour collapse prevent party-leg and intrahour vote inflation.",
+    "No paired rival cell met the fixed two-signals-per-cohort requirement; the candidate independently failed breadth, path, and chronology gates."
+  ],
+  "durable_state_effects": []
+}
