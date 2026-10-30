@@ -156,7 +156,7 @@ None.
 - Eleven focused LL-04e adversaries passed after implementation.
 - Twenty-eight focused LL-04c/d/e campaign, policy, and advancement tests passed.
 - The full Polymarket adapter suite passed: 169 tests under the documented
-  `PYTHONPATH=src:../../engine/src` composition environment.
+  `PYTHONPATH=src` composition environment.
 - The broader Chronos suite passed: 538 tests, excluding only
   `tests/data_workspace/test_generic_workspace.py` and
   `tests/data_workspace/test_source_scouting.py`, the same two loopback-HTTP modules excluded by

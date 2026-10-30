@@ -5,7 +5,7 @@
 - Packet: `sandbox.declare-offline-study-resources`.
 - Owning architecture block: open-ended exploration.
 - Semantic responsibility: operator-declared bounded resources for exact offline authored studies.
-- Input repository state: `bdl-polymarket@055c6af1`, including the retained fresh-replication
+- Input repository state: `historical checkpoint 055c6af1`, including the retained fresh-replication
   `MemoryError` receipt.
 
 ## Objective
@@ -24,7 +24,7 @@ without weakening data scope, sandbox syntax, provenance, or protected boundarie
 - Relevant interfaces: `ResourceLimits`, retained-corpus builder, public offline study parser, and
   conflict-detecting receipts.
 - Explicitly excluded: scientific source/gates, data selection, authorization fields, sandbox safe
-  syntax/calls, protected execution, production engine/database, and other repositories.
+  syntax/calls, protected execution, production database, and other repositories.
 
 ## Change boundary
 

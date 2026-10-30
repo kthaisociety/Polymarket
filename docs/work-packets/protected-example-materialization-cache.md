@@ -3,7 +3,7 @@
 ## Identity
 
 - Packet: `chronos.optimize-protected-example-materialization`.
-- Trigger: the exact Polymarket move-duration holdout started from `bdl-polymarket@08f06e70`
+- Trigger: the exact Polymarket move-duration holdout started from `historical checkpoint 08f06e70`
   demonstrated repeated legal-example reconstruction after the worker-reuse repair.
 - Status: **COMPLETE**. The original protected process remains in flight against the modules it
   loaded before this change and was neither restarted nor duplicated.
@@ -24,8 +24,8 @@ one protected execution.
 ## Authority and change boundary
 
 - Permitted implementation: Chronos authored protected evaluator, focused tests, implementation
-  documentation, and benchmarks under `research/chronos` only.
-- Forbidden: Kthais, production engine, sibling repository, Polymarket data semantics, candidate
+  documentation, and benchmarks in this repository only.
+- Forbidden: external application, production data service, sibling repository, Polymarket data semantics, candidate
   source, protected plan, thresholds, sample keys, fit/predict frequency, sandbox language, resource
   limits, exposure timing, validation, promotion, or terminal-memory authority.
 - Cache lifetime: one `_execute_once` call. No cache may cross candidate, catalog, plan, protected

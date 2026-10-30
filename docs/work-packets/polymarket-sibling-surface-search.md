@@ -6,7 +6,7 @@
 - Owning architecture block: development-only exploration, with conditional formalization.
 - Semantic transition: retained development event panel → time-legal sibling-surface features →
   chronological candidate or retained rejection.
-- Input repository state: `bdl-polymarket@52fb551e` on
+- Input repository state: `historical checkpoint 52fb551e` on
   `codex/polymarket-time-series-research`.
 
 ## Objective

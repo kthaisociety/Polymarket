@@ -4,7 +4,7 @@
 
 - Packet: `polymarket.run-event-grouped-development-research`
 - Owning blocks: exploration, formalization, and development.
-- Input state: `bdl-polymarket@c6b20c70` on `codex/polymarket-time-series-research`.
+- Input state: `historical checkpoint c6b20c70` on `codex/polymarket-time-series-research`.
 
 ## Objective
 
@@ -19,7 +19,7 @@ probability baseline, and carry only defensible candidates into temporal develop
 - Exact source corpus:
   `polymarket-corpus:610b8b9d423d94332923f1e2033410007a890b9da0f9dc67936f17e92263fb2f`.
 - Explicitly excluded until a separate gate passes: protected values, protected metrics, promotion,
-  reporting, cross-task learning, production writes, engine/Kthais changes, and trading claims.
+  reporting, cross-task learning, production writes, external-system changes, and trading claims.
 
 ## Research design
 
@@ -44,7 +44,7 @@ probability baseline, and carry only defensible candidates into temporal develop
   warrants it, and active Chronos documentation/memory needed by the resulting transition.
 - Forbidden: database access in authored code, filesystem/network/process capabilities in authored
   code, any protected event value in an exploratory view or receipt, tuning on protected output,
-  and modifications outside `research/chronos`.
+  and modifications outside this repository.
 
 ## Correctness and adversaries
 

@@ -53,7 +53,7 @@ def main() -> None:
     parser.add_argument("--receipt", type=Path, required=True)
     args = parser.parse_args()
     need = PolymarketPriceHistoryNeed(
-        environment_id="bdl-polymarket-production-readonly",
+        environment_id="polymarket-production-readonly",
         market_id=_MARKET_ID,
         event_id=_EVENT_ID,
         outcome_index=0,

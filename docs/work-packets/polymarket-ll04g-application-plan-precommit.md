@@ -117,7 +117,7 @@ None.
   sequence sensitivity, exact retry, verification, missing/tampered/conflicting objects,
   pre-corpus rejection, public import, and unchanged LL-04f composition.
 - The full Polymarket adapter suite passed: 185 tests under
-  `PYTHONPATH=src:../../engine/src`.
+  `PYTHONPATH=src`.
 - The broader Chronos suite passed: 554 tests, excluding only the two previously documented
   sandbox-incompatible loopback HTTP modules.
 - Ruff formatting passed across 44 Polymarket files; Ruff checking passed; full basedpyright passed

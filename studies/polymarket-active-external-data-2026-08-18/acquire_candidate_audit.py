@@ -18,7 +18,7 @@ from research_agent.data_adapters.polymarket.database import (
     require_read_only_role,
 )
 
-_DATABASE_URL_ENV = "BDL__DB__URL"
+_DATABASE_URL_ENV = "POLYMARKET_DATABASE_URL"
 _MARKET_QUERY = """
 SELECT market_id, event_id, question, slug, status, open_time, close_time, raw
 FROM market.markets
@@ -55,7 +55,7 @@ def _default(value: object) -> object:
 
 
 async def _read(database_url: str, market_ids: tuple[str, ...]) -> dict[str, object]:
-    from core.db.pool import close_pool, create_pool
+    from research_agent.data_adapters.polymarket.pool import close_pool, create_pool
 
     pool = await create_pool(database_url, min_size=1, max_size=1)
     try:
@@ -71,7 +71,7 @@ async def _read(database_url: str, market_ids: tuple[str, ...]) -> dict[str, obj
             coverage = await connection.fetch(_COVERAGE_QUERY, market_ids)
         return {
             "schema": "chronos-active-candidate-audit/v1",
-            "environment_id": "bdl-polymarket-production-readonly",
+            "environment_id": "polymarket-production-readonly",
             "market_ids": market_ids,
             "authority": {
                 "database_role": "human_ro",

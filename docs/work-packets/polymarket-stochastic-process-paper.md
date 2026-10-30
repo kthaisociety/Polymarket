@@ -9,7 +9,7 @@
      structural differences require different mathematics?
   2. Which type of stochastic process best describes a Polymarket contract?
 - Empirical core: question 2. Question 1 is answered by interpreting the same controlled evidence.
-- Starting repository state: `bdl-polymarket@6106701a` on
+- Starting repository state: `historical checkpoint 6106701a` on
   `codex/polymarket-time-series-research`.
 
 ## Exact research question
@@ -208,7 +208,7 @@ The research package must ultimately retain:
 ## Explicit exclusions
 
 - No production writes or credential output.
-- No Kthais, production-engine, or sibling-repository changes.
+- No external application, production-data-service, or sibling-repository changes.
 - No claim that current market price equals objective probability without assumptions.
 - No treating dependent contracts or overlapping rows as IID.
 - No synthetic paths before the observed process and fitted parameters are legally specified.

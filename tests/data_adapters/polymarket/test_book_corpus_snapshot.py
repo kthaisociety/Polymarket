@@ -85,7 +85,7 @@ def test_missing_database_url_is_explicitly_blocked(
     tmp_path: Path,
 ) -> None:
     """Missing approved production access is a blocked result, never empty success."""
-    monkeypatch.delenv("BDL__DB__URL", raising=False)
+    monkeypatch.delenv("POLYMARKET_DATABASE_URL", raising=False)
 
     status = book_corpus_snapshot.main(_arguments(tmp_path))
     payload = json.loads(capsys.readouterr().out)
@@ -102,7 +102,7 @@ def test_command_retains_exact_scope_and_emits_only_sanitized_metadata(
     tmp_path: Path,
 ) -> None:
     """A successful run preserves exact request identity without leaking its DSN."""
-    monkeypatch.setenv("BDL__DB__URL", SENSITIVE_DATABASE_URL)
+    monkeypatch.setenv("POLYMARKET_DATABASE_URL", SENSITIVE_DATABASE_URL)
     monkeypatch.setattr(book_corpus_snapshot, "read_live_book_corpus", _read_exact_corpus)
     receipt = tmp_path / "receipt.json"
 
@@ -142,7 +142,7 @@ def test_invalid_scope_fails_without_reading_live_data(
     replacement: tuple[str, str],
 ) -> None:
     """Invalid clocks and legs fail before the live reader can observe the request."""
-    monkeypatch.setenv("BDL__DB__URL", "postgresql://must-not-be-read")
+    monkeypatch.setenv("POLYMARKET_DATABASE_URL", "postgresql://must-not-be-read")
 
     async def fail_if_called(
         _database_url: str,
@@ -172,7 +172,7 @@ def test_existing_different_receipt_is_not_overwritten(
     tmp_path: Path,
 ) -> None:
     """A receipt path containing different bytes remains immutable."""
-    monkeypatch.setenv("BDL__DB__URL", SENSITIVE_DATABASE_URL)
+    monkeypatch.setenv("POLYMARKET_DATABASE_URL", SENSITIVE_DATABASE_URL)
     monkeypatch.setattr(book_corpus_snapshot, "read_live_book_corpus", _read_exact_corpus)
     receipt = tmp_path / "receipt.json"
     receipt.write_text("different\n")

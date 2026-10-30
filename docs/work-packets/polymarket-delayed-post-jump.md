@@ -6,7 +6,7 @@
 - Owning responsibility: development-only constrained exploration with conditional formalization.
 - Input corpus: `polymarket-corpus:610b8b9d423d94332923f1e2033410007a890b9da0f9dc67936f17e92263fb2f`.
 - Partition: `49d5e9a97985a44e3277f43ee55ce1281c430a1d0a1823754a9a759ac56d3bd1`.
-- Repository checkpoint at predeclaration: `bdl-polymarket@e70c31b6` on
+- Repository checkpoint at predeclaration: `historical checkpoint e70c31b6` on
   `codex/polymarket-time-series-research`.
 
 ## Question
@@ -26,7 +26,7 @@ after results.
 - Permitted fields: development market identity, authoritative chronological event ordinal,
   observation ordinal/time, and sampled market probability.
 - Excluded: final seven protected events/45 markets, resolution payouts, question semantics,
-  external data, production writes, Kthais, the production engine, sibling repositories, and any
+  external data, production writes, external application, the production data service, sibling repositories, and any
   claim that sampled probabilities are executable quotes.
 - The final seven events remain unavailable unless an exact development candidate independently
   passes the fixed gate, is replayed through the formal authored evaluator, frozen, and authorized

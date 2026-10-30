@@ -102,7 +102,7 @@ too small to cover four crossed legs and came from one dependent election. See
 
 ## Low-latency successor program
 
-Chronos has now synthesized the internal study ledger, the engine strategy-lab ancestry, the exact
+Chronos has now synthesized the internal study ledger, the retained strategy-lab ancestry, the exact
 Brazil cross-venue semantic audit, and the retained 59,000-row two-venue taker tape into a ranked
 low-latency hypothesis program. The first branch is conservative Kalshi-YES plus Polymarket-NO
 payout dominance, followed by cross-venue lead-lag, book-confirmed post-jump reversal,
@@ -110,7 +110,7 @@ staleness-conditioned execution, and order-book imbalance.
 
 The existing fill tape cannot test those execution claims: it contains only outcome-index-zero
 prints and no simultaneous book depth, collector receipt time, order acknowledgement, or
-partial-fill path. The engine now preserves separate venue-event and collector-absorb clocks for
+partial-fill path. The collector now preserves separate venue-event and collector-absorb clocks for
 new book rows, and Chronos has a bounded legacy-excluding reader, immutable retention, anchored L2
 replay, causal top-of-book registration, and a predeclared H1 gross payout-dominance screen with
 as-of joins, staleness, top-size, and fixed-delay controls. No post-change production corpus has yet
@@ -146,7 +146,7 @@ re-confirms them after action delay, trades YES or NO symmetrically at marketabl
 on price target, stop, imbalance decay, or timeout. Top-touch imbalance remains a fixed rival.
 Eleven focused tests cover far-depth-only signals, same-time coalescing, left truncation, delayed
 decay cancellation, both directions, touch PnL, missing exits, and incomplete coverage. The old
-engine thresholds remain unscored ancestry, and no H5 empirical result exists.
+historical thresholds remain unscored ancestry, and no H5 empirical result exists.
 
 The capture entry point is
 `python -m research_agent.data_adapters.polymarket.book_corpus_snapshot --help`. A useful run still

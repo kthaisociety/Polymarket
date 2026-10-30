@@ -124,8 +124,8 @@ async def ingest_polymarket_contract_tape(
         version=_SCHEMA_VERSION,
         environment_id=request.environment_id,
         provenance_ref=(
-            "bdl-engine:market.reads.read_market_taker_fills+"
-            "read_identity+read_outcome_counts+read_close_times+read_resolved_market_ids"
+            "polymarket-database:parameterized-taker-fills+identity+outcome-counts+"
+            "close-times+resolved-market-ids/v1"
         ),
         fields=_FIELDS,
     )
@@ -150,7 +150,7 @@ async def ingest_polymarket_contract_tape(
                 "resolved payouts are descriptive metadata only until resolution availability "
                 "is registered under an exact rule"
             ),
-            "event/group identity is unavailable through the current public engine read surface",
+            "event/group identity is unavailable through the current database read surface",
         ),
         registered=registered,
         catalog=catalog,

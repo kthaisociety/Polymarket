@@ -7,7 +7,7 @@
 - Semantic transition or responsibility: retained registered two-leg top states plus an exact gross
   strategy definition into a causal, fixed-delay feasibility screen
 - Input repository state: `712fc693bd1728794ba76f9cb6627e957b1ec7b4` plus the completed
-  dual-clock engine and `polymarket-low-latency-book-corpus` working-tree deltas
+  dual-clock data model and `polymarket-low-latency-book-corpus` working-tree deltas
 
 ## Objective
 
@@ -110,5 +110,5 @@ None at packet open.
   cross-venue atomicity is absent.
 - The screen intentionally does not search thresholds, latencies, or staleness. Those values are
   part of definition identity and must be fixed before production quote values are inspected.
-- No empirical result exists: `BDL__DB__URL` and `BDL__CONFIG` are not configured in this workspace,
-  and the dual-clock engine change has not been deployed to generate admissible rows.
+- No empirical result exists: `POLYMARKET_DATABASE_URL` is not configured in this workspace,
+  and the dual-clock collector change has not been deployed to generate admissible rows.

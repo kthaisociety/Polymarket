@@ -27,7 +27,7 @@ def _profile() -> TemporalDatasetProfile:
     return TemporalDatasetProfile(
         dataset_id="polymarket-xtracker-post-events",
         schema_version="v1",
-        environment_id="bdl-polymarket-production-readonly",
+        environment_id="polymarket-production-readonly",
         semantic_provenance_ref="https://xtracker.polymarket.com/docs@2026-08-17",
         availability_rule_version="xtracker-imported-at/v1",
         fields=(

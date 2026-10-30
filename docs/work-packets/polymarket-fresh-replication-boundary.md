@@ -6,7 +6,7 @@
 - Owning architecture block: open-ended exploration.
 - Semantic responsibility: exact expanded snapshot plus exact ancestor snapshot to a least-authority
   fresh-event `AuthorizedDataView`.
-- Input repository state: `bdl-polymarket@3610db31` on
+- Input repository state: `historical checkpoint 3610db31` on
   `codex/polymarket-time-series-research`.
 
 ## Objective
@@ -23,7 +23,7 @@ events or the expanded protected values.
   index, and `sandbox.authorize-execution`.
 - Relevant adjacent interfaces: immutable Polymarket corpus snapshots, public offline study runner,
   actual-access provenance, and conflict-detecting receipts.
-- Explicitly excluded: Kthais, the production engine, the sibling Insurance repository, scientific
+- Explicitly excluded: external application, the production data service, the sibling Insurance repository, scientific
   model behavior, formalization, protected execution, promotion, database writes, and live reads.
 - Assumption: deterministic corpus selection makes the smaller snapshot's contract identity and
   resolution chronology an exact prefix of the larger snapshot; the implementation must verify
@@ -72,7 +72,7 @@ None. The repair remains inside Chronos's Polymarket-to-exploration composition.
 ### Result
 
 - Status: **COMPLETE**.
-- Input repository state: `bdl-polymarket@3610db31`.
+- Input repository state: `historical checkpoint 3610db31`.
 - Resulting repository state: the local commit containing this receipt on
   `codex/polymarket-time-series-research`.
 

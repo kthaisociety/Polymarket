@@ -16,7 +16,7 @@ sanitized receipt through the existing proved `human_ro` database boundary.
 
 ## Context boundary
 
-- Global authority loaded: `AGENTS.md`, `research/chronos/AGENTS.md`, `CONTEXT.md`, locked
+- Global authority loaded: `AGENTS.md`, `CONTEXT.md`, locked
   decisions, invariants, and the semantic architecture map.
 - Owning block and transition contract: data-foundation `README.md`, `transitions/README.md`,
   `IMPLEMENTATION.md`, `data.retain-source-snapshot`, and `data.register-observations`.
@@ -24,7 +24,7 @@ sanitized receipt through the existing proved `human_ro` database boundary.
   `read_live_book_corpus`, the resolved-corpus command contract, and the H1/H3/H5 consumers.
 - Explicitly excluded work: database deployment, tunnel creation, venue subscriptions, strategy
   evaluation, fee inference, trade execution, protected evidence, and H4 implementation.
-- Assumptions: the engine schema is already deployed by an operator before a useful live run; the
+- Assumptions: the dual-clock database schema is already deployed by an operator before a useful live run; the
   supplied scope-authority reference and leg identities come from a separately reviewed semantic
   audit; the command never invents either.
 
@@ -105,9 +105,9 @@ None.
 - Results: command/corpus `16 passed`; adapter `117 passed`; broader Chronos `486 passed`; Ruff all
   checks passed; 30 adapter files formatted; basedpyright 0 errors/warnings; `git diff --check`
   clean. The real no-DSN command returned structured `BLOCKED` with no data read.
-- Boundary/debug observations: the first broad adapter invocation omitted the documented engine
-  source path and produced one `ModuleNotFoundError` after 116 passes; the exact documented
-  `PYTHONPATH=src:../../engine/src` rerun passed 117/117.
+- Boundary/debug observations: the first broad adapter invocation omitted a required source path
+  and produced one `ModuleNotFoundError` after 116 passes; the exact documented
+  `PYTHONPATH=src` rerun passed 117/117.
 - Violating mutation or counterfactual demonstrated: naive timestamps, malformed/noncanonical legs,
   and unavailable database authority cannot reach successful acquisition; different receipt bytes
   cannot be replaced; the supplied database URL is absent from output and retained receipt.
@@ -120,7 +120,7 @@ None.
   collector absorb time; `reference_time` remains distinct; only retained bytes anchor identity.
 - New facts discovered: the scientific L2 boundary was already capture-capable internally; the
   missing component was an operator-safe public entry point rather than another reader or strategy.
-- Unresolved uncertainty: no useful production corpus has been captured, engine deployment is not
+- Unresolved uncertainty: no useful production corpus has been captured, collector deployment is not
   proved here, and the command does not observe clock-health records, fees, acknowledgements, fills,
   cancels, queue position, or partial-fill paths.
 - Remaining reds or follow-up dependencies: deploy/verify the dual-clock collector, issue exact

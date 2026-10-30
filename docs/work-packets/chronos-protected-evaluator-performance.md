@@ -4,7 +4,7 @@
 - Trigger: the exact frozen continuous-arrival candidate in
   `studies/polymarket-stochastic-process-paper-2026-08-18/source/19_continuous_arrival_hazard_protected_resolution.py`.
 - Scope: generic Chronos protected authored evaluation only. No Polymarket science, candidate
-  source, protected plan, Kthais, production engine, or sibling repository is changed.
+  source, protected plan, external application, production data service, or sibling repository is changed.
 - Status: **COMPLETE**; implementation verified and committed locally as `ae15ae50`; the
   pre-change reference execution reached a sealed protected negative.
 

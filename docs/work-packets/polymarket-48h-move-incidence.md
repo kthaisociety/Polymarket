@@ -3,7 +3,7 @@
 ## Identity
 
 - Packet: `polymarket.test-48h-move-incidence`.
-- Input repository state: `bdl-polymarket@d3551fbb` plus the pure-`sqrt` sandbox packet.
+- Input repository state: `historical checkpoint d3551fbb` plus the pure-`sqrt` sandbox packet.
 - Responsibility: exact duration-study sampling → binary 48-hour crossing label → chronological
   development evidence.
 
@@ -48,7 +48,7 @@ closes the branch. Passing permits one authored formal replay, not freeze or pro
   event groups independent.
 - The features were selected using the continuous-duration question, so this is selection-exposed
   transfer evidence rather than a pristine feature discovery.
-- No production writes, external data, Kthais, engine changes, sibling-repository changes, protected
+- No production writes, external data, external-system changes, sibling-repository changes, protected
   access, or terminal-memory mutation are permitted.
 
 ## Boundary revisions

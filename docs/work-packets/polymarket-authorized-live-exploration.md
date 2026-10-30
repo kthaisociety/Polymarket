@@ -7,7 +7,7 @@
 - Semantic transition or responsibility: Turn one live, read-only, temporally registered
   Polymarket contract tape into an exact non-protected `AuthorizedDataView` and execute unchanged
   researcher-authored analysis through the existing `AnalysisHarness`.
-- Input repository state: `bdl-polymarket@fdac9ca9` on
+- Input repository state: `historical checkpoint fdac9ca9` on
   `codex/polymarket-time-series-research`.
 
 ## Objective
@@ -28,7 +28,7 @@ with `available_at` after the decision time.
   `AnalysisHarness`, the existing Polymarket ingestion result, and the fail-closed `human_ro` smoke.
 - Explicitly excluded work: scientific feature/label/model defaults, outcome labels, formal
   candidates, development evaluation, freeze, protected exposure, promotion, durable memory,
-  Kthais, engine changes, and production writes.
+  external-system changes, and production writes.
 - Assumptions: live fills are exploratory development data only; the existing
   `polymarket-onchain-block-inclusion/v1` rule and snapshot caveats remain unchanged.
 
@@ -40,7 +40,7 @@ with `available_at` after the decision time.
   in-memory artifacts, bounded stdout containing no credentials, test-local temporary files, and
   committed research-only documentation/artifacts.
 - Forbidden state effects: database writes, credential output or persistence, implicit current
-  time, protected access, scientific promotion, engine or sibling-research mutation.
+  time, protected access, scientific promotion, or external-system mutation.
 
 ## Correctness
 
@@ -82,11 +82,10 @@ with `available_at` after the decision time.
   `artifact.persist-analysis-output` dependency to let an operator select an explicit artifact
   directory and persist exact digest-verified sandbox artifacts. Authored code receives no path or
   filesystem capability.
-- The complete gate then exposed that `scripts/check.sh` did not compose the engine public-read
-  path required by the already-shipped Polymarket adapter, although focused verification supplied
-  it manually. The packet expands to the Chronos-only gate script so complete verification uses the
-  same declared `src:../../engine/src` composition as the public live commands. No engine code or
-  sibling research code changes.
+- The complete gate then exposed that `scripts/check.sh` did not compose the adapter source path,
+  although focused verification supplied it manually. The packet expands the gate script so
+  complete verification uses the same declared `src` composition as the public live commands.
+  No external-system or sibling-research code changes.
 
 ## Transition receipt
 
@@ -94,7 +93,7 @@ with `available_at` after the decision time.
 
 - Packet: `polymarket.compose-authorized-live-exploration`
 - Status: **COMPLETE**
-- Input repository state: `bdl-polymarket@fdac9ca9` on
+- Input repository state: `historical checkpoint fdac9ca9` on
   `codex/polymarket-time-series-research`.
 - Resulting repository state: the local commit containing this receipt on the same branch.
 

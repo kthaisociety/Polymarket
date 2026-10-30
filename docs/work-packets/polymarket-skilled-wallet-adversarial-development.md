@@ -7,7 +7,7 @@
 - Semantic transition or responsibility: Challenge the development-only skilled-wallet lead with
   fixed price-state, time-to-resolution, execution-delay, cost, chronology, and independent-wallet
   agreement adversaries before any protected evaluation or promotion decision.
-- Input repository state: `bdl-polymarket@712fc693bd17` on
+- Input repository state: `historical checkpoint 712fc693bd17` on
   `codex/polymarket-time-series-research`, with the completed behavioral-discovery packet and
   pre-existing uncommitted low-latency work preserved.
 
@@ -134,7 +134,7 @@ post-hoc rescue.
 
 - Packet: `polymarket.skilled-wallet-adversarial-development`
 - Status: **COMPLETE**.
-- Input repository state: `bdl-polymarket@712fc693bd17` with pre-existing low-latency work.
+- Input repository state: `historical checkpoint 712fc693bd17` with pre-existing low-latency work.
 - Resulting repository state: research-only authored SQL, receipts, and documentation added on the
   same dirty branch; runtime and production state are unchanged.
 

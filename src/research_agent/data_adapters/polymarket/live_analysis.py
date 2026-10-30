@@ -25,7 +25,7 @@ from research_agent.exploration import AnalysisStatus, ResourceLimits
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-_DATABASE_URL_ENV = "BDL__DB__URL"
+_DATABASE_URL_ENV = "POLYMARKET_DATABASE_URL"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -35,7 +35,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--decision-time", required=True)
     parser.add_argument("--code", type=Path, required=True)
     parser.add_argument("--field", action="append", required=True)
-    parser.add_argument("--environment-id", default="bdl-polymarket-production-readonly")
+    parser.add_argument("--environment-id", default="polymarket-production-readonly")
     parser.add_argument("--session-id", default="polymarket-live-exploration")
     parser.add_argument("--action-id", default="analyze-registered-polymarket-tape")
     parser.add_argument("--random-seed", type=int)
@@ -55,7 +55,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                 {
                     "status": "BLOCKED",
                     "error_code": "READ_ONLY_DATABASE_URL_UNSET",
-                    "required_action": "open the approved human_ro tunnel and set BDL__DB__URL",
+                    "required_action": (
+                        "open the approved human_ro tunnel and set POLYMARKET_DATABASE_URL"
+                    ),
                     "live_data_read": False,
                 },
                 sort_keys=True,

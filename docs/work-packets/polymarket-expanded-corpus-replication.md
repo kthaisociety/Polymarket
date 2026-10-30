@@ -3,7 +3,7 @@
 ## Identity
 
 - Packet: `polymarket.acquire-expanded-corpus-for-replication`.
-- Predeclaration checkpoint: `bdl-polymarket@d1f5cabb`.
+- Predeclaration checkpoint: `historical checkpoint d1f5cabb`.
 - Live boundary: existing Chronos repeatable-read `human_ro` corpus snapshot command.
 - Fixed as-of time: `2026-08-17T21:00:00+00:00`.
 

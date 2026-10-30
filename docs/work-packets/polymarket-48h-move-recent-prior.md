@@ -5,7 +5,7 @@
 - Packet: `polymarket.test-48h-move-recent-prior`.
 - Parent evidence: tie-safe development source
   `feff143400734a79ef10d0ab14accb29f020c1f7a4307f9eb583541ada52043c`.
-- Input repository state: `bdl-polymarket@08d919d8`.
+- Input repository state: `historical checkpoint 08d919d8`.
 
 ## Question and mechanism
 
@@ -53,7 +53,7 @@ authored formal development replay with explicit parent ancestry, not freeze or 
 - The same sampled-passage, dependence, selection-exposure, and non-executability caveats apply.
 - The four-event window is a fixed scientific choice, not fitted. Its adequacy must be demonstrated,
   not assumed.
-- No production writes, external acquisition, Kthais/engine/sibling changes, protected request, or
+- No production writes, external acquisition, external-system changes, protected request, or
   terminal-memory mutation.
 
 ## Result and boundary revision

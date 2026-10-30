@@ -70,7 +70,7 @@ pair, source-venue, and calendar-subperiod diagnostics.
 
 ## Boundary revisions
 
-1. The first exact run found all 4,713 retained Kalshi rows have `side = BUY`. Engine inspection
+1. The first exact run found all 4,713 retained Kalshi rows have `side = BUY`. Schema inspection
    established that Kalshi normalization stores the taker's selected outcome leg and the acquisition
    query retained only `outcome_index = 0`; NO-taking trades needed for the opposite YES direction
    never entered the artifact. The packet contracts to one-sided same-leg BUY-path diagnostics and

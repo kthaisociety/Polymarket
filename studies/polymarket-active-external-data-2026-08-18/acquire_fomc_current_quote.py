@@ -18,7 +18,7 @@ from research_agent.data_adapters.polymarket.database import (
     require_read_only_role,
 )
 
-_DATABASE_URL_ENV = "BDL__DB__URL"
+_DATABASE_URL_ENV = "POLYMARKET_DATABASE_URL"
 _MARKET_ID = "0x876506d8b2bd7a0d3fa4fe18c024eee6e1dd81ee24c26795dadd6cfe4a7b5d0d"
 _QUERY = """
 SELECT ts, seq, bid, ask
@@ -36,7 +36,7 @@ def _default(value: object) -> object:
 
 
 async def _read(database_url: str) -> dict[str, object]:
-    from core.db.pool import close_pool, create_pool
+    from research_agent.data_adapters.polymarket.pool import close_pool, create_pool
 
     pool = await create_pool(database_url, min_size=1, max_size=1)
     try:
@@ -51,7 +51,7 @@ async def _read(database_url: str) -> dict[str, object]:
                 raise RuntimeError("selected FOMC outcome has no two-sided current quote")
         return {
             "schema": "chronos-current-executable-quote/v1",
-            "environment_id": "bdl-polymarket-production-readonly",
+            "environment_id": "polymarket-production-readonly",
             "market_id": _MARKET_ID,
             "outcome_index": 0,
             "quote": dict(row),

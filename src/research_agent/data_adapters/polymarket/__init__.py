@@ -165,7 +165,7 @@ from research_agent.data_adapters.polymarket.models import (
 )
 from research_agent.data_adapters.polymarket.reader import (
     DatabasePolymarketCorpusReader,
-    EnginePolymarketResearchReader,
+    DatabasePolymarketResearchReader,
     PolymarketResearchReader,
 )
 from research_agent.data_adapters.polymarket.source_expansion import (
@@ -247,12 +247,12 @@ __all__ = [
     "DatabaseBehavioralFillReader",
     "DatabaseBookCorpusReader",
     "DatabasePolymarketCorpusReader",
+    "DatabasePolymarketResearchReader",
     "DepthImbalanceAttempt",
     "DepthImbalanceDefinition",
     "DepthImbalanceMetrics",
     "DepthImbalanceScreen",
     "DepthImbalanceTerminalStatus",
-    "EnginePolymarketResearchReader",
     "PayoutDominanceDefinition",
     "PayoutDominanceOpportunity",
     "PayoutDominanceScreen",

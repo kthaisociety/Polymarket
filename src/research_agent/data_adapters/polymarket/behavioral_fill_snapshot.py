@@ -27,7 +27,7 @@ from research_agent.data_adapters.polymarket.database import (
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-_DATABASE_URL_ENV = "BDL__DB__URL"
+_DATABASE_URL_ENV = "POLYMARKET_DATABASE_URL"
 
 
 def build_parser() -> argparse.ArgumentParser:

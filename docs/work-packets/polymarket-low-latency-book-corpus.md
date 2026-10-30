@@ -5,7 +5,7 @@
 - Packet: `polymarket-low-latency-book-corpus`
 - Owning architecture block: data foundation
 - Semantic transition or responsibility: exact bounded dual-clock L2 rows from the proved read-only
-  engine database into immutable retained bytes and replay-ready registered top-of-book observations
+  database into immutable retained bytes and replay-ready registered top-of-book observations
 - Input repository state: `712fc693bd1728794ba76f9cb6627e957b1ec7b4` plus the completed
   `polymarket-book-receipt-time` working-tree delta
 
@@ -23,7 +23,7 @@ as `reference_time` and collector absorb time as `available_at`.
 - Owning block and transition contract: data-foundation `IMPLEMENTATION.md`,
   `data.register-observations`, and `data.build-information-set`
 - Relevant adjacent interfaces: content-addressed Polymarket corpus retention, direct read-only
-  database reader, `market.book_snapshots`, `market.book_deltas`, and the dual-clock engine models
+  database reader, `market.book_snapshots`, `market.book_deltas`, and the dual-clock data models
 - Explicitly excluded work: production deployment or mutation, semantic cross-venue contract
   matching, fees, queue position, order simulation, feature selection, hypothesis scoring,
   protected evaluation, and live trading
@@ -77,7 +77,7 @@ as `reference_time` and collector absorb time as `available_at`.
 - Packet: `polymarket-low-latency-book-corpus`
 - Status: **COMPLETE** for the bounded Chronos read/retain/replay/register boundary.
 - Input repository state: `712fc693bd1728794ba76f9cb6627e957b1ec7b4` plus the completed
-  dual-clock engine working-tree delta.
+  dual-clock data-model working-tree delta.
 - Resulting repository state: the working tree containing this receipt; no commit or deployment
   was created.
 
@@ -125,6 +125,6 @@ as `reference_time` and collector absorb time as `available_at`.
 - Registration intentionally publishes displayed state, not fills. Fee schedules, tick/status
   histories, clock-health telemetry, queue position, partial fills, failed-leg hedging, and capital
   costs remain required before conservative locked value can be measured.
-- No post-change production rows were read because the engine schema/model change has not been
+- No post-change production rows were read because the dual-clock schema/model change has not been
   deployed. This receipt is data infrastructure, not a retained LL-01 corpus, hypothesis result,
   trade recommendation, formal candidate, protected request, or finding.

@@ -6,7 +6,7 @@
 - Owning architecture block: constrained exploration with conditional formalization/development.
 - Responsibility: retained development probability paths → legal non-overlapping duration labels →
   chronological evidence → retained rejection or one exact candidate.
-- Input state: `bdl-polymarket@bd41fefc` on `codex/polymarket-time-series-research`.
+- Input state: `historical checkpoint bd41fefc` on `codex/polymarket-time-series-research`.
 
 ## Objective
 
@@ -22,7 +22,7 @@ fixed-horizon magnitude prediction to a capped first-passage duration.
 - Permitted fields: development market identity, chronological event ordinal, retained observation
   ordinal/time, and sampled market probability.
 - Excluded: the final 7 events/45 markets, resolution values, production reads or writes, external
-  data, current lifecycle close times, executable-price claims, Kthais, and the production engine.
+  data, current lifecycle close times, executable-price claims, external application, and the production data service.
 - Sampled probabilities are retained observations. A two-cent sampled displacement does not prove
   that an executable trade crossed that distance between samples.
 

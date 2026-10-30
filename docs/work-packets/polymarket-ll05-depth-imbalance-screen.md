@@ -11,7 +11,7 @@
 
 ## Evidence ancestry and correction
 
-The engine lab's A11 idea computes
+The retained strategy lab's A11 idea computes
 `(bid_depth - ask_depth) / (bid_depth + ask_depth)` over every returned level. Its reasoned,
 unscored starting gates are imbalance at least `.50`, spread no more than `.03`, total displayed
 depth at least `100`, and a two-minute maximum hold. The lab explicitly records that these values

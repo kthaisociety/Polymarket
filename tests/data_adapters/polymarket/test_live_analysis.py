@@ -200,7 +200,7 @@ def test_live_analysis_without_database_url_is_explicitly_blocked(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """The public analysis command never converts missing live access into fixture evidence."""
-    monkeypatch.delenv("BDL__DB__URL", raising=False)
+    monkeypatch.delenv("POLYMARKET_DATABASE_URL", raising=False)
 
     status = live_analysis.main(
         [
@@ -220,6 +220,6 @@ def test_live_analysis_without_database_url_is_explicitly_blocked(
     assert payload == {
         "error_code": "READ_ONLY_DATABASE_URL_UNSET",
         "live_data_read": False,
-        "required_action": "open the approved human_ro tunnel and set BDL__DB__URL",
+        "required_action": "open the approved human_ro tunnel and set POLYMARKET_DATABASE_URL",
         "status": "BLOCKED",
     }

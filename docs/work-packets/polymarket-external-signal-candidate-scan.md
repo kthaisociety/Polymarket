@@ -5,7 +5,7 @@
 - Packet: `polymarket.scan-development-external-signal-candidates`.
 - Owning responsibility: development-only constrained exploration and conditional public-source
   expansion.
-- Input repository state: `bdl-polymarket@43bb5c5c` on
+- Input repository state: `historical checkpoint 43bb5c5c` on
   `codex/polymarket-time-series-research`.
 
 ## Objective
@@ -24,8 +24,8 @@ until one exact field, publication clock, join, baseline, and falsifier are name
   clocks, and retained price-point count. Probability paths and resolution payouts are unnecessary
   for candidate selection and are excluded from the opening scan.
 - Explicit exclusions: production writes, protected metadata or values, current web values treated
-  as historical observations, credentialed acquisition, post-hoc correlation shopping, Kthais, the
-  production engine, and sibling repositories.
+  as historical observations, credentialed acquisition, post-hoc correlation shopping, external application, the
+  production data service, and sibling repositories.
 - Existing XTracker evidence is prior negative ancestry: a high-dimensional count/pace ridge failed
   on one post-count event. It does not rule out a fixed structural mapping, but one event cannot
   establish a general model.

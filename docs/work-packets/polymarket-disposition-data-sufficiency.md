@@ -7,7 +7,7 @@
 - Semantic transition or responsibility: Prove or reject whether the production on-chain history
   can causally reconstruct wallet inventory and average cost immediately before each fill, before
   any disposition-effect strategy is authored or tested.
-- Input repository state: `bdl-polymarket@712fc693bd17` on
+- Input repository state: `historical checkpoint 712fc693bd17` on
   `codex/polymarket-time-series-research`, after the frozen probability-weighting candidate.
 
 ## Objective
@@ -21,9 +21,9 @@ data substrate and do not manufacture historical positions from the current posi
 ## Context boundary
 
 - Authority loaded: Chronos global authority; data-foundation and exploration architecture;
-  time-series analysis and feature-design principles; engine position replay semantics.
+  time-series analysis and feature-design principles; position replay semantics.
 - Production authority: `human_ro`, repeatable-read, transaction read-only, SELECT only.
-- Configured Polymarket genesis block: `33605403` from `engine/config/apps/ingest.toml`.
+- Configured Polymarket genesis block: `33605403` from the retained ingestion configuration.
 - Explicit exclusions: writes to production; protected-corpus access; current `market.positions` as
   historical truth; outcome-based account selection; executable-price or public-mempool claims.
 

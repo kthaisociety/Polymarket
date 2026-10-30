@@ -23,7 +23,7 @@ from research_agent.data_adapters.polymarket.database import (
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
-_DATABASE_URL_ENV = "BDL__DB__URL"
+_DATABASE_URL_ENV = "POLYMARKET_DATABASE_URL"
 _MARKET_ID = "0x876506d8b2bd7a0d3fa4fe18c024eee6e1dd81ee24c26795dadd6cfe4a7b5d0d"
 _QUERY = """
 WITH targets AS (
@@ -86,7 +86,7 @@ async def _acquire(
     targets: tuple[datetime, ...],
     output: Path,
 ) -> tuple[int, str, int]:
-    from core.db.pool import close_pool, create_pool
+    from research_agent.data_adapters.polymarket.pool import close_pool, create_pool
 
     pool = await create_pool(database_url, min_size=1, max_size=1)
     temporary = output.with_suffix(f"{output.suffix}.partial")
@@ -106,7 +106,7 @@ async def _acquire(
                     header = {
                         "kind": "header",
                         "schema": "chronos-polymarket-book-snapshots-jsonl/v1",
-                        "environment_id": "bdl-polymarket-production-readonly",
+                        "environment_id": "polymarket-production-readonly",
                         "market_id": _MARKET_ID,
                         "outcome_index": 0,
                         "target_times": targets,

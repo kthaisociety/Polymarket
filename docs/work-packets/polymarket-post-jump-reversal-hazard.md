@@ -6,7 +6,7 @@
 - Corpus: `polymarket-corpus:610b8b9d423d94332923f1e2033410007a890b9da0f9dc67936f17e92263fb2f`.
 - Whole-event partition:
   `49d5e9a97985a44e3277f43ee55ce1281c430a1d0a1823754a9a759ac56d3bd1`.
-- Predeclaration checkpoint: `bdl-polymarket@b2ea6794`.
+- Predeclaration checkpoint: `historical checkpoint b2ea6794`.
 - Selection-exposed ancestry: delayed post-jump source/receipt
   `a923a7f0…`/`311fc5cb…` found aggregate delayed reversal but rejected its continuous
   shock-plus-staleness return model.
@@ -29,8 +29,8 @@ foundation for a contrarian execution candidate, not proof of executable profit.
 
 - Authorized fields: development market ID, chronological event ordinal, observation ordinal/time,
   and sampled probability.
-- Protected final seven events/45 markets, payouts, external data, production writes, Kthais,
-  engine code, and sibling repositories remain excluded.
+- Protected final seven events/45 markets, payouts, external data, production writes, external application,
+  external-system code, and sibling repositories remain excluded.
 - Sampled probabilities are observations, not historical quotes. No bid, ask, depth, queue, or
   fill assumption may be invented.
 

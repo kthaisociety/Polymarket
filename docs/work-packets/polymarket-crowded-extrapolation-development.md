@@ -8,7 +8,7 @@
 - Semantic transition or responsibility: Test whether distinct-wallet crowding adds reversal
   information specifically when aggressive traders extrapolate an already-salient price move,
   beyond either trend state or crowd breadth alone.
-- Input repository state: `bdl-polymarket@712fc693bd17` on
+- Input repository state: `historical checkpoint 712fc693bd17` on
   `codex/polymarket-time-series-research`, after B1/B2 rejection, B3 freezing, and B5 data-readiness
   rejection.
 
@@ -36,7 +36,7 @@ on both component rivals.
 - Permitted: this packet; one SELECT-only authored source; one sanitized development receipt;
   behavioral study/index updates.
 - Allowed effects: one repeatable-read `human_ro` query and local research artifacts.
-- Forbidden: production or engine mutation, edits to unrelated low-latency work, refitting after
+- Forbidden: production-system mutation, edits to unrelated low-latency work, refitting after
   inspection, protected evaluation, or fallbacks from missing delayed marks to originating fills.
 
 ## Correctness
@@ -56,7 +56,7 @@ on both component rivals.
 ## Predeclared definitions
 
 - Canonical direction: outcome-0 BUY or outcome-1 SELL is `+1`; the complementary actions are
-  `-1`. Only the engine's one-row-per-match taker aggregate leg is admitted.
+  `-1`. Only the database adapter's one-row-per-match taker aggregate leg is admitted.
 - Crowd: at least five distinct wallet votes in one market/hour, at least 75% agreeing, no tie.
 - Thin: one or two distinct wallets, unanimous when two.
 - Chase: the consensus direction agrees with a sampled outcome-0 move of at least five percentage

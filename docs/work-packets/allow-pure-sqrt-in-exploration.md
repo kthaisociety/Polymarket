@@ -5,7 +5,7 @@
 - Packet: `sandbox.allow-pure-sqrt`.
 - Owning architecture block: open-ended exploration.
 - Semantic transition or responsibility: `sandbox.execute-analysis` pure numerical call surface.
-- Input repository state: `bdl-polymarket@94ea6b1d`.
+- Input repository state: `historical checkpoint 94ea6b1d`.
 
 ## Objective
 
@@ -61,7 +61,7 @@ None.
 
 - Packet: `sandbox.allow-pure-sqrt`.
 - Status: `COMPLETE`.
-- Input repository state: `bdl-polymarket@94ea6b1d`.
+- Input repository state: `historical checkpoint 94ea6b1d`.
 - Resulting repository state: local working state pending the packet commit.
 
 ### Delivered state delta

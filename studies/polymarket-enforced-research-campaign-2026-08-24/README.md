@@ -23,12 +23,12 @@ formal, superseded, protected, and data-blocked sources are covered by an exact 
 Run the registered-corpus catalog from the repository root:
 
 ```bash
-PYTHONPATH=research/chronos/src:engine/src .venv/bin/python -m \
+PYTHONPATH=src .venv/bin/python -m \
   research_agent.data_adapters.polymarket.run_campaign_studies \
-  --catalog research/chronos/studies/polymarket-enforced-research-campaign-2026-08-24/corpus-campaign.json \
+  --catalog studies/polymarket-enforced-research-campaign-2026-08-24/corpus-campaign.json \
   --corpus-workspace data/chronos/polymarket-corpora \
   --behavioral-fill-workspace data/chronos/polymarket-behavioral-fills \
-  --campaign-directory research/chronos/studies/polymarket-enforced-research-campaign-2026-08-24/corpus-campaign-v2
+  --campaign-directory studies/polymarket-enforced-research-campaign-2026-08-24/corpus-campaign-v2
 ```
 
 The add-on, five-minute, and non-replay commands are retained as

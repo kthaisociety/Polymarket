@@ -6,7 +6,7 @@
 - Owning architecture block: open-ended exploration, composed with development validation.
 - Semantic transition or responsibility: retained development-only probability paths → provisional
   stochastic-process diagnosis → controlled chronological pseudo-trading evidence.
-- Input repository state: `bdl-polymarket@6fe5949a` on
+- Input repository state: `historical checkpoint 6fe5949a` on
   `codex/polymarket-time-series-research`.
 
 ## Objective
@@ -27,7 +27,7 @@ grid without exposing the final protected event block.
   development partition, `AnalysisHarness`, study receipt persistence, CLOB source expansion, and
   the final seven-event protected block.
 - Explicitly excluded work: protected exposure without an independent freeze/governance decision,
-  production writes, Kthais/engine changes, invented quote history, trading execution, result-based
+  production writes, external-system changes, invented quote history, trading execution, result-based
   deletion, and declaring sampled probabilities executable.
 - Assumptions: the retained hourly `price_series` is a sampled outcome-token probability process.
   It is not a fill series, quote midpoint, bid/ask, or guaranteed executable price. Contract/event
@@ -146,4 +146,4 @@ grid without exposing the final protected event block.
 - Memory: repository study history and ledger are updated. Validated terminal question memory is
   unchanged because only an independently governed protected finding or rejection can write it.
 - Verification: Ruff clean; basedpyright 0 errors; complete Chronos suite 436 passed with the
-  containing engine path and loopback-only test servers enabled.
+  required source path and loopback-only test servers enabled.

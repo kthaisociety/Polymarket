@@ -6,7 +6,7 @@
 - Owning architecture block: data foundation, then development-only exploration.
 - Semantic transition or responsibility: exact official public post records → retained source →
   conservative temporal registration → development-only event-panel test or retained rejection.
-- Input repository state: `bdl-polymarket@bbb79f2b` on
+- Input repository state: `historical checkpoint bbb79f2b` on
   `codex/polymarket-time-series-research`.
 
 ## Objective
@@ -25,7 +25,7 @@ run the predictor if those semantics fail.
 - Relevant adjacent interfaces: generic `SourceScoutingService`, `DataWorkspace`,
   `TemporalRegistrationAuthority`, retained development corpus, and authored study execution.
 - Explicit exclusions: protected events or outcomes, production database writes, X/Twitter direct
-  scraping, post content as a feature, credentials, unregistered web values, Kthais/engine changes,
+  scraping, post content as a feature, credentials, unregistered web values, external-system changes,
   or treating development evidence as validated learning.
 - Assumptions subject to verification: `createdAt` is post reference time; `importedAt` is the
   conservative XTracker availability time; exact market interval is
@@ -110,6 +110,6 @@ run the predictor if those semantics fail.
   target-path/static-bracket ridge and `0.008214` for zero change. It won zero of four blocks against
   either control and is rejected.
 - Ruff formatting/lint and strict basedpyright are clean. The complete test gate passes with 444
-  tests when run with the required engine import path and permitted loopback fixtures.
-- No protected value, production write, freeze, promotion, Kthais/engine change, push, merge, or PR
+  tests when run with the required source import path and permitted loopback fixtures.
+- No protected value, production write, freeze, promotion, external-system change, push, merge, or PR
   occurred.

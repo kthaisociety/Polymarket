@@ -7,7 +7,7 @@
 - Semantic responsibility: an exact credible authored candidate and authority-issued plan resolve
   through independently configured freeze, governance, resource, evaluation, and validation
   capabilities without researcher-supplied authority or protected-plan substitution.
-- Input repository state: `bdl-polymarket@7b844dc9` on
+- Input repository state: `historical checkpoint 7b844dc9` on
   `codex/polymarket-time-series-research`.
 
 ## Objective
@@ -30,7 +30,7 @@ or retain a safe pre-content denial/failure without pretending that protected ev
   SHA-256 `be6215c4fe5f3ae0d4d8e46e5a490499995bf7cc7febe13c7bcfcfa5abf885d5`,
   committed at `08f06e70` before protected disclosure.
 - Explicitly excluded: changing target, sample, features, model, penalty, training protocol,
-  thresholds, metrics, claim, protected partition, or any Chronos/engine implementation.
+  thresholds, metrics, claim, protected partition, or any Chronos runtime implementation.
 - Assumption: this trusted repository runner is host composition, not researcher-authored sandbox
   code. Its program strings receive only phase-scoped scientific interfaces and cannot import or
   receive issuer capabilities, authority registries, grants, protected catalogs, or decisions.
@@ -45,7 +45,7 @@ or retain a safe pre-content denial/failure without pretending that protected ev
   receipt. The frozen source is read-only.
 - Forbidden state effects: protected read before permit/exposure; caller-appointed authority through
   `resolve()`; exposure rollback; duplicate run on retry; development revision; result-dependent
-  threshold/claim change; production database mutation; production engine or sibling-repository
+  threshold/claim change; production database mutation; production data service or sibling-repository
   change.
 
 ## Correctness

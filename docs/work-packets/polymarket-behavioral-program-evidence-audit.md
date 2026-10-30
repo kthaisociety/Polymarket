@@ -8,7 +8,7 @@
 - Semantic transition or responsibility: Deterministically audit the complete behavioral strategy
   program and publish a fair evidence scorecard against the prior time-series and low-latency
   programs without promoting any result.
-- Input repository state: `bdl-polymarket@712fc693bd1728794ba76f9cb6627e957b1ec7b4` on
+- Input repository state: `historical checkpoint 712fc693bd1728794ba76f9cb6627e957b1ec7b4` on
   `codex/polymarket-time-series-research`, with the completed B1--B10 receipts and unrelated dirty
   low-latency work preserved.
 

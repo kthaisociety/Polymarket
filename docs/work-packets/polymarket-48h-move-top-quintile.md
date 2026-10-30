@@ -5,7 +5,7 @@
 - Packet: `polymarket.test-48h-move-top-quintile`.
 - Parent evidence: tie-safe development source
   `feff143400734a79ef10d0ab14accb29f020c1f7a4307f9eb583541ada52043c`.
-- Input repository state: `bdl-polymarket@a0d3c58d`.
+- Input repository state: `historical checkpoint a0d3c58d`.
 
 ## Question and fixed mechanism
 
@@ -43,7 +43,7 @@ freeze, protected access, direction, execution, or profitability.
 - Within-event selection avoids pooled event-composition lift but does not create independent rows.
 - Features were selected through the related duration study, so this remains selection-exposed
   development evidence with explicit ancestry.
-- No production read/write, external acquisition, Kthais/engine/sibling change, protected request,
+- No production read/write, external acquisition, external-system change, protected request,
   or terminal-memory mutation.
 
 ## Result and disposition

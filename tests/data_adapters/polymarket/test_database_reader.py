@@ -6,7 +6,7 @@ import asyncio
 from datetime import UTC, datetime
 from decimal import Decimal
 
-from research_agent.data_adapters.polymarket import EnginePolymarketResearchReader
+from research_agent.data_adapters.polymarket import DatabasePolymarketResearchReader
 
 MARKET = "0xmarket"
 INCLUDED_BLOCK = 150
@@ -61,9 +61,9 @@ class _ProductionProtocolExecutor:
         raise AssertionError(message)
 
 
-def test_engine_reader_uses_public_reads_for_exact_contract_tape() -> None:
-    """The legacy-schema reader works without importing the parent engine."""
-    reader = EnginePolymarketResearchReader(_ProductionProtocolExecutor())
+def test_database_reader_uses_parameterized_reads_for_exact_contract_tape() -> None:
+    """The standalone reader uses only its local read-only database protocol."""
+    reader = DatabasePolymarketResearchReader(_ProductionProtocolExecutor())
 
     vintage = asyncio.run(reader.read_vintage())
     contracts = asyncio.run(reader.read_contracts((MARKET,)))

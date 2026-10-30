@@ -12,8 +12,8 @@ Core scientific objective:
 \boxed{\text{Given information available at }t,\text{ discover whether anything predicts }y_{t+h}.}
 \]
 
-Chronos's first live adapter is Polymarket; its originating Insurance application is recorded in
-`VENDORED_FROM.md`. They use the same scientific kernel rather than separate domain kernels.
+Chronos's first live adapter is Polymarket. The scientific kernel remains reusable rather than
+embedding a separate domain kernel for every research subject.
 
 Do not introduce a separate `DomainAdapter` **or `DomainResearchSpec`** layer merely because the target/data semantics differ. The same research kernel receives a different `ResearchTask`, datasets, hypotheses, evaluation criteria, and report framing.
 

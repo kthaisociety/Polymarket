@@ -1,9 +1,8 @@
 # Chronos: Autonomous Time-Series Research Kernel
 
-Chronos is the autonomous research system in this standalone `Polymarket` repository. It was
-imported from the canonical time-series harness at the exact commit recorded in
-[`VENDORED_FROM.md`](VENDORED_FROM.md), later developed inside `bdl-polymarket`, and now evolves
-independently from both repositories and from Kthais.
+Chronos is the autonomous research system in this standalone `Polymarket` repository. The
+repository contains its complete runtime, data adapters, scientific governance, tests, research
+skills, studies, and documentation.
 
 A reusable scientific research kernel for asking:
 
@@ -124,7 +123,7 @@ research begins from the production database adapter, not from a copied external
 
 ```mermaid
 flowchart TD
-    DB[("BDL production database")] --> READ["Chronos read-only parameterized queries"]
+    DB[("Polymarket research database")] --> READ["Chronos read-only parameterized queries"]
     READ --> META["Contract, outcome, payout metadata"]
     READ --> TAPE["Taker-side fill tape"]
     READ --> VINTAGE["History and forward block cursors"]
@@ -161,11 +160,10 @@ flowchart TD
     NEGATIVE_DEV --> HISTORY["Development trial ancestry"]
 ```
 
-The database adapter is intentionally narrower than the researcher. It retains a standalone,
-SELECT-only compatibility boundary for the existing BDL database schema and registers prices,
-sizes, signed flow, and exact blocks. No BDL engine source checkout is required. The researcher
-remains free to write new analysis, feature, label, and model code inside the existing constrained
-execution and evaluation boundaries.
+The database adapter is intentionally narrower than the researcher. It exposes a standalone,
+SELECT-only boundary for the Polymarket research schema and registers prices, sizes, signed flow,
+and exact blocks. The researcher remains free to write new analysis, feature, label, and model code
+inside the existing constrained execution and evaluation boundaries.
 
 When a concrete development hypothesis needs another public probability slice, Chronos can also
 turn one passive external-scout proposal into a locally retained and registered official CLOB
@@ -199,8 +197,9 @@ uv run python -m research_agent.data_adapters.polymarket.smoke \
 
 The command prints no DSN, password, fill values, or question text. It first proves the current role
 is `human_ro`, transactions default to read-only, and the role lacks update/insert privileges. It
-then reports only identities, counts, digests, vintage, and caveats. Without `BDL__DB__URL` it exits
-with `BLOCKED` and does not describe any fixture as live evidence.
+then reports only identities, counts, digests, vintage, and caveats. Without
+`POLYMARKET_DATABASE_URL` it exits with `BLOCKED` and does not describe any fixture as live
+evidence.
 
 Run researcher-authored exploration over an exact legal view of a live registration:
 

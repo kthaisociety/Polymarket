@@ -18,7 +18,7 @@ from research_agent.data_adapters.polymarket.database import (
     require_read_only_role,
 )
 
-_DATABASE_URL_ENV = "BDL__DB__URL"
+_DATABASE_URL_ENV = "POLYMARKET_DATABASE_URL"
 _MAX_LIMIT = 1000
 _QUERY = """
 WITH recent AS (
@@ -55,7 +55,7 @@ def _default(value: object) -> object:
 
 
 async def _read(database_url: str, *, as_of: datetime, limit: int) -> dict[str, object]:
-    from core.db.pool import close_pool, create_pool
+    from research_agent.data_adapters.polymarket.pool import close_pool, create_pool
 
     pool = await create_pool(database_url, min_size=1, max_size=1)
     try:
@@ -68,7 +68,7 @@ async def _read(database_url: str, *, as_of: datetime, limit: int) -> dict[str, 
             rows = await connection.fetch(_QUERY, as_of, limit)
         return {
             "schema": "chronos-active-kalshi-inventory/v1",
-            "environment_id": "bdl-polymarket-production-readonly",
+            "environment_id": "polymarket-production-readonly",
             "as_of": as_of,
             "selection": {
                 "venue": "kalshi",

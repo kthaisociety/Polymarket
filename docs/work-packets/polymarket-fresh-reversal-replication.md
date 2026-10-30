@@ -3,7 +3,7 @@
 ## Identity and ancestry
 
 - Packet: `polymarket.replicate-post-jump-reversal-hazard-on-fresh-events`.
-- Predeclaration checkpoint: `bdl-polymarket@1c581999`.
+- Predeclaration checkpoint: `historical checkpoint 1c581999`.
 - Expanded corpus:
   `polymarket-corpus:8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6`.
 - Ancestor corpus:

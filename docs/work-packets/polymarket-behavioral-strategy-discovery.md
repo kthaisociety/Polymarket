@@ -8,7 +8,7 @@
 - Semantic transition or responsibility: Preserve a live server data-suitability audit, predeclare
   plural game-theoretic and behavioral strategy hypotheses, and execute one development-only
   authored falsification screen through `sandbox.execute-analysis`.
-- Input repository state: `bdl-polymarket@712fc693bd17` on
+- Input repository state: `historical checkpoint 712fc693bd17` on
   `codex/polymarket-time-series-research`, with pre-existing uncommitted low-latency work preserved.
 
 ## Objective
@@ -59,7 +59,7 @@ falsifiers, and returns a protected-value-free development result for the first 
 - Expected inputs and outputs: exact live aggregate queries plus snapshot
   `polymarket-corpus:184b83f7...` and fixed authored source produce a sanitized data audit, a
   hypothesis comparison program, and one exact development receipt.
-- Violating mutation or counterexample: replace the engine's taker-leg predicate with all
+- Violating mutation or counterexample: replace the database adapter's taker-leg predicate with all
   `market.fills`; the audit must reveal roughly doubled print volume and mechanically offsetting
   sides. Permit the protected event block; the existing partition regressions must fail.
 - Required local tests/evals: authored source executes successfully through the retained-corpus
@@ -90,7 +90,7 @@ falsifiers, and returns a protected-value-free development result for the first 
 
 - Packet: `polymarket.behavioral-strategy-discovery`
 - Status: **COMPLETE**.
-- Input repository state: `bdl-polymarket@712fc693bd17` with pre-existing low-latency changes.
+- Input repository state: `historical checkpoint 712fc693bd17` with pre-existing low-latency changes.
 - Resulting repository state: uncommitted research-only additions on the same branch; pre-existing
   implementation changes remain untouched.
 

@@ -6,7 +6,7 @@
 - Owning architecture block: exploration with conditional formalization/development.
 - Responsibility: development corpus → mechanism-group feature/label evidence → retained rejection
   or exact authored candidate.
-- Input state: `bdl-polymarket@ae83ad9d` on `codex/polymarket-time-series-research`.
+- Input state: `historical checkpoint ae83ad9d` on `codex/polymarket-time-series-research`.
 
 ## Objective
 
@@ -20,7 +20,7 @@ improve multiple legal six-hour labels across chronological event groups.
 - Data: exact retained corpus `polymarket-corpus:610b8b9d423d94332923f1e2033410007a890b9da0f9dc67936f17e92263fb2f`;
   whole-event partition `49d5e9a97985a44e3277f43ee55ce1281c430a1d0a1823754a9a759ac56d3bd1`.
 - Excluded: protected 7 events/45 markets, production writes, executable-price claims, external
-  data, Kthais/engine/sibling changes, and post-result threshold search.
+  data, external-system changes, and post-result threshold search.
 - Assumption: retained sampled probabilities, exact lifecycle close times, and server event identity
   carry only the semantics registered by the adapter.
 

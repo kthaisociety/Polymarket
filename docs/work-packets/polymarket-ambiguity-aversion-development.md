@@ -7,7 +7,7 @@
 - Semantic transition or responsibility: Test whether fixed, text-observable resolution-complexity
   proxies identify an ambiguity-aversion underpricing strategy after probability state, event
   dependence, chronology, and an adverse-execution hurdle.
-- Input repository state: `bdl-polymarket@712fc693bd1728794ba76f9cb6627e957b1ec7b4` on
+- Input repository state: `historical checkpoint 712fc693bd1728794ba76f9cb6627e957b1ec7b4` on
   `codex/polymarket-time-series-research`, after B1/B2/B4/B7 rejection, B3 freezing, and B5/B6
   data-readiness blocks.
 

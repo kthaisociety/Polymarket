@@ -135,10 +135,9 @@ uv run basedpyright \
   src/research_agent/data_adapters/polymarket tests/data_adapters/polymarket
 ```
 
-The real smoke additionally requires the approved `human_ro` tunnel and `BDL__DB__URL`. A missing
-connection exits `BLOCKED`, not green. The async PostgreSQL driver and bounded-retry pool are direct
-Chronos runtime dependencies; the shipped smoke has no parent-repository code or environment-path
-dependency.
+The real smoke additionally requires the approved `human_ro` tunnel and
+`POLYMARKET_DATABASE_URL`. A missing connection exits `BLOCKED`, not green. The async PostgreSQL
+driver and bounded-retry pool are direct Chronos runtime dependencies.
 
 The live read-only acceptance was rerun through the standalone Chronos environment. It proved
 `human_ro`, session and transaction read-only settings, and denied insert/update privileges before
@@ -177,8 +176,7 @@ canonical `(venue, market_id, outcome_index)` legs, and fixes a half-open collec
 The direct reader
 queries snapshots and deltas with parameter arrays, requires `reference_time IS NOT NULL`, and
 then rechecks every leg, clock, bound, row kind, decimal level, ordering key, and snapshot anchor in
-Python. This deliberately excludes legacy rows whose `ts` preceded the engine's dual-clock
-contract.
+Python. This deliberately excludes legacy rows whose `ts` predates the dual-clock contract.
 
 Canonical source rows are retained under a content-addressed SHA-256 identity before replay. Each
 leg is reconstructed independently; deltas before its first retained snapshot cannot publish
@@ -202,7 +200,7 @@ It requires the separately reviewed scope-authority reference, repeated canonica
 existing `human_ro` repeatable-read boundary, retains and reloads canonical bytes, registers the
 replay, and emits only sanitized request identity, hashes, bounds, counts, and caveats. Missing
 database access reports `BLOCKED`; malformed scope and conflicting receipt bytes fail explicitly.
-The command neither deploys the engine collector nor discovers or authorizes market semantics.
+The command neither deploys a data collector nor discovers or authorizes market semantics.
 
 ## Dual-clock activity and quiet-duration features
 

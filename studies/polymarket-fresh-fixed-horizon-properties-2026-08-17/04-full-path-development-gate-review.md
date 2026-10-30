@@ -16,7 +16,7 @@ or durable question-memory status.
   `authored-development-evidence:d8df309e4dd98a1273282e3408ba162ec10683df0f6375931b388cf8f583dec8`.
 - Direct parent trial:
   `authored-development-trial:b92401ee03b8468d5284143987b66c7542ac33de6c4a94da5c5b257fbc5ba23c`.
-- Environment: `bdl-polymarket-production-readonly`.
+- Environment: production read-only (exact historical identity retained in the issued receipt).
 - Expanded snapshot:
   `polymarket-corpus:8c73260377ea5cb3e569bbc3c744ce9b62a95c8f54dafb73d07671845ccec4c6`.
 - Ancestor snapshot:

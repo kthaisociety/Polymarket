@@ -7,7 +7,7 @@
 - Semantic transition or responsibility: Prove or reject whether venue-authorized NegRisk event
   semantics and causal, simultaneous, full-depth book capture can support the B6 complete-set
   coordination strategy before any basket edge is inspected.
-- Input repository state: `bdl-polymarket@712fc693bd1728794ba76f9cb6627e957b1ec7b4` on
+- Input repository state: `historical checkpoint 712fc693bd1728794ba76f9cb6627e957b1ec7b4` on
   `codex/polymarket-time-series-research`, with unrelated dirty low-latency work preserved.
 
 ## Objective
@@ -39,7 +39,7 @@ unless the semantic and causal-data gates pass.
   documentation; and, only after a passing audit, a separate predeclared development packet.
 - Allowed state effects: bounded production SELECTs inside a proved read-only transaction and local
   research artifacts.
-- Forbidden: engine or production mutation, retroactive scope expansion, strategy-value inspection
+- Forbidden: production-system mutation, retroactive scope expansion, strategy-value inspection
   before readiness, protected-value access, or edits to unrelated low-latency implementation.
 
 ## Correctness

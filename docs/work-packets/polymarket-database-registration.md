@@ -6,8 +6,7 @@
 - Owning architecture block: Data foundation
 - Semantic transition or responsibility: Read an exact Polymarket contract tape from the
   production read interface and register it as time-legal, domain-neutral observations.
-- Input repository state: `bdl-polymarket@f27716db`; Chronos vendored from
-  `insurance-market-data@fb0e8cb49c94a0cbdabb817226e9dcf6279f1083`.
+- Input repository state: `historical checkpoint f27716db`.
 
 ## Objective
 
@@ -21,10 +20,9 @@ identity. No observation outside the pinned block window may enter the registrat
   data lifecycle, test strategy, and alignment rules.
 - Owning block and transition contract: data-foundation README, implementation map, and
   `data.register-observations`.
-- Relevant adjacent interfaces: `data.build-information-set`, `data.build-training-sample`, the BDL
-  engine's public `market.reads` functions, and `core.db.pool.create_pool`. The standalone Chronos
-  package directly declares the pool's `asyncpg` runtime dependency.
-- Explicitly excluded work: Kthais imports, engine/database mutation, autonomous question selection,
+- Relevant adjacent interfaces: `data.build-information-set`, `data.build-training-sample`, the
+  parameterized Polymarket query surface, and the local async PostgreSQL pool.
+- Explicitly excluded work: external application imports, database mutation, autonomous question selection,
   feature or target selection, fitting, protected access, validation, memory, and reporting changes.
 - Assumptions: A Polymarket on-chain fill becomes publicly observable at its recorded block time.
   This rule is versioned and carries the caveat that confirmation and collector latency are not
@@ -32,11 +30,11 @@ identity. No observation outside the pinned block window may enter the registrat
 
 ## Change boundary
 
-- Permitted files or components: `research/chronos/`, root `README.md`, and `research/README.md`.
+- Permitted files or components: the Chronos package, root `README.md`, and research documentation.
 - Allowed state effects: Construct immutable in-memory registrations and print non-secret smoke
   receipts. Tests may create temporary files.
 - Forbidden state effects: Database writes, DSN or password persistence/output, protected evidence
-  exposure, changes to Kthais, and changes to `engine/`.
+  exposure, changes to external application, and changes to the external collection service.
 
 ## Correctness
 
@@ -64,11 +62,9 @@ identity. No observation outside the pinned block window may enter the registrat
 
 ## Boundary revisions
 
-The initial idea of routing through Kthais was rejected. Chronos is an independent vendored kernel.
-Kthais was inspected only to locate the approved production connection pattern. The original live
-DB gate was blocked by missing workstation access. That blocker was later cleared through approved
-SSH and age-recipient setup. The first standalone live attempt then exposed an undeclared `asyncpg`
-dependency; `polymarket.compose-live-read-environment` records its repair.
+The first live database gate was blocked by missing workstation access. That blocker was later
+cleared through approved SSH and age-recipient setup. The first isolated live attempt then exposed
+an undeclared `asyncpg` dependency; `polymarket.compose-live-read-environment` records its repair.
 
 ## Transition receipt
 
@@ -76,16 +72,14 @@ dependency; `polymarket.compose-live-read-environment` records its repair.
 
 - Packet: `polymarket.register-contract-tape`
 - Status: **COMPLETE** for the research-only adapter and live production read-only acceptance gate.
-- Input repository state: `bdl-polymarket@f27716db` with Chronos vendored one-way from
-  `insurance-market-data@fb0e8cb49c94a0cbdabb817226e9dcf6279f1083`.
+- Input repository state: `historical checkpoint f27716db`.
 - Resulting repository state: the commit containing this receipt on
   `codex/polymarket-time-series-research`.
 
 ### Delivered state delta
 
-- Files and interfaces changed: a self-contained Chronos kernel under `research/chronos`, a
-  production-protocol Polymarket reader, a fail-closed ingestion boundary, a read-only smoke CLI,
-  causal tests, and root/research navigation.
+- Files and interfaces changed: a self-contained Chronos kernel, a parameterized Polymarket reader,
+  a fail-closed ingestion boundary, a read-only smoke CLI, causal tests, and root navigation.
 - Behavior added, removed, or preserved: exact contract/outcome/print identities and inclusive
   block vintages enter the unchanged domain-neutral registration boundary. Resolution payouts are
   metadata only. No label is inferred, no event group is invented, and no protected evidence is
@@ -98,13 +92,12 @@ dependency; `polymarket.compose-live-read-environment` records its repair.
 ### Evidence
 
 - Tests and evals run:
-  `PYTHONPATH=src:../../engine/src .venv/bin/pytest -q`;
+  `PYTHONPATH=src .venv/bin/pytest -q`;
   `.venv/bin/ruff format --check .`; `.venv/bin/ruff check .`; `.venv/bin/basedpyright`.
 - Results: `400 passed`; `141 files already formatted`; Ruff clean; basedpyright
   `0 errors, 0 warnings, 0 notes`.
-- Boundary/debug observations: the executor tests invoke the engine's real public
-  `market.reads` functions against a protocol-compatible test executor. Those tests are not
-  described as live data.
+- Boundary/debug observations: the executor tests exercise the same parameterized query protocol
+  against a protocol-compatible test executor. Those tests are not described as live data.
 - Violating mutation or counterfactual demonstrated: inserting a backfilled fill inside an
   unchanged cursor window preserves the block-vintage identifier but changes the source digest.
   Missing blocks, foreign outcomes, duplicate print identities, and unavailable connection

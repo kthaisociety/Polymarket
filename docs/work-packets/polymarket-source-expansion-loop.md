@@ -6,7 +6,7 @@
 - Owning architecture block: data foundation.
 - Semantic transition or responsibility: exact scouted source candidate → retained, derived, and
   temporally registered Polymarket research dataset.
-- Input repository state: `bdl-polymarket@747c1345` on
+- Input repository state: `historical checkpoint 747c1345` on
   `codex/polymarket-time-series-research`.
 
 ## Objective
@@ -25,7 +25,7 @@ the production database.
   `data.derive-dataset`, and `data.register-observations`.
 - Relevant adjacent interfaces: `SourceScoutingService`, `DataWorkspace`,
   `TemporalRegistrationAuthority`, the Polymarket corpus identities, and constrained analysis.
-- Explicitly excluded work: production database writes, engine/Kthais changes, authenticated
+- Explicitly excluded work: production database writes, external-system changes, authenticated
   trading endpoints, general web-crawler implementation inside Chronos, automatic scientific
   usefulness claims, feature/model fitting, protected exposure, and durable memory mutation.
 - Assumptions: Polymarket's documented public `GET https://clob.polymarket.com/prices-history`
@@ -42,7 +42,7 @@ the production database.
 - Allowed state effects: append unverified scouting metadata, fetch one exact selected public URL,
   retain immutable response/parser/output bytes and manifests below an operator-selected local
   workspace, and create in-memory registered observations/catalog attestations.
-- Forbidden state effects: any production/engine/database mutation; arbitrary or unselected URL
+- Forbidden state effects: any production/database mutation; arbitrary or unselected URL
   fetch; credential retention; redirect to an unapproved host/path; response values in sanitized
   receipts; inferred event/token identity; registration from an unverified source; or direct
   research-state/promotion mutation.
@@ -98,7 +98,7 @@ the production database.
 
 - Packet: `polymarket.expand-research-source`
 - Status: **COMPLETE**
-- Input repository state: `bdl-polymarket@747c1345` on
+- Input repository state: `historical checkpoint 747c1345` on
   `codex/polymarket-time-series-research`.
 - Resulting repository state: the local commit containing this receipt on the same branch.
 

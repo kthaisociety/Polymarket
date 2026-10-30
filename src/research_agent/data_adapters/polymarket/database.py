@@ -30,7 +30,7 @@ from research_agent.data_adapters.polymarket.ingestion import ingest_polymarket_
 from research_agent.data_adapters.polymarket.pool import close_pool, create_pool
 from research_agent.data_adapters.polymarket.reader import (
     DatabasePolymarketCorpusReader,
-    EnginePolymarketResearchReader,
+    DatabasePolymarketResearchReader,
 )
 
 if TYPE_CHECKING:
@@ -91,7 +91,7 @@ async def read_live_polymarket_tape(
             role = await connection.fetchrow(READ_ONLY_PROOF_QUERY)
         require_read_only_role(role)
         return await ingest_polymarket_contract_tape(
-            EnginePolymarketResearchReader(pool),
+            DatabasePolymarketResearchReader(pool),
             request,
         )
     finally:

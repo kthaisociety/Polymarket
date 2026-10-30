@@ -2,9 +2,9 @@
 
 ## Exact source and field meaning
 
-- Production reads use either the engine's public market-read surface or the bounded corpus
-  adapter's parameterized SELECTs under the proved `human_ro` role. The session and transaction
-  must be read-only, and insert/update privileges must remain denied.
+- Production reads use the standalone adapter's bounded parameterized SELECTs under the proved
+  `human_ro` role. The session and transaction must be read-only, and insert/update privileges must
+  remain denied.
 - The fill view identifies a contract by exact market/condition identity but has no event grouping.
   The retained resolution corpus additionally preserves server `event_id`, question, lifecycle,
   sampled price path, and append-only settlement identity.

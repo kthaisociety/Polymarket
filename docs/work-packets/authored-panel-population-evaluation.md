@@ -7,7 +7,7 @@
   protected evaluation.
 - Responsibility: authored candidate plus a declared population-dimension schema → legal
   per-slice histories, labels, fits, predictions, and immutable evidence across multiple entities.
-- Input state: `bdl-polymarket@302ebfa1` on `codex/polymarket-time-series-research`.
+- Input state: `historical checkpoint 302ebfa1` on `codex/polymarket-time-series-research`.
 
 ## Objective
 

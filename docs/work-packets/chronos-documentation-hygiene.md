@@ -7,7 +7,7 @@
 - Semantic transition or responsibility: make the current Chronos/Polymarket documentation path
   small and truthful without deleting canonical authority, scientific evidence, or historical
   receipts.
-- Input repository state: `bdl-polymarket@6a6ca81b` plus the open
+- Input repository state: `historical checkpoint 6a6ca81b` plus the open
   `polymarket.route-startup-and-method-guidance` packet.
 
 ## Objective
@@ -25,7 +25,7 @@ active claim that Chronos's first real task or current data source is Insurance.
 - Relevant adjacent interfaces: active project skills, specification entry points, architecture
   block maps, completed work packets, and documentation regression tests.
 - Explicitly excluded work: deleting canonical specifications, changing implementation behavior,
-  rewriting historical receipts/provenance, altering the engine or sibling repositories, and
+  rewriting historical receipts/provenance, altering external systems or sibling repositories, and
   claiming blocked Polymarket labels/protected evaluation.
 - Assumptions: disk size is not the main problem; ambiguous status and default context loading are.
 
@@ -71,7 +71,7 @@ None.
 
 - Packet: `documentation.reduce-context-and-stale-domain-copy`
 - Status: **COMPLETE**.
-- Input repository state: `bdl-polymarket@6a6ca81b` plus the open
+- Input repository state: `historical checkpoint 6a6ca81b` plus the open
   `polymarket.route-startup-and-method-guidance` packet.
 - Resulting repository state: the local commit containing this receipt on the same branch.
 
@@ -90,7 +90,7 @@ None.
 - Repository-navigation tests verify local links, status classification, the bounded startup route,
   and the absence of stale Insurance identity in active skill metadata.
 - The complete quality gate passed with `410 passed`, clean formatting and lint, and zero type-check
-  findings. `git diff --check` passed and every changed path is confined to `research/chronos`.
+  findings. `git diff --check` passed and every changed path is confined to this repository.
 - No canonical specification, historical work packet, experiment, or provenance record was deleted.
 
 ### Knowledge carried forward

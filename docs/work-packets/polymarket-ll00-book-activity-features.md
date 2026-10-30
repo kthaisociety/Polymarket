@@ -22,7 +22,7 @@ without using future events, row multiplicity, or venue timestamps as availabili
 - Owning block and transition contract: data-foundation `README.md`, transition index,
   `IMPLEMENTATION.md`, and `data.register-observations`; the feature-design principles govern the
   authored feature meaning but grant no registration, fitting, or protected authority.
-- Relevant adjacent interfaces: `BookCorpusSnapshot`, `BookEventRecord`, exact engine snapshot/delta
+- Relevant adjacent interfaces: `BookCorpusSnapshot`, `BookEventRecord`, exact snapshot/delta
   sequence semantics, H3/H5 attempt labels, and prior arrival evidence E16/R17/P19.
 - Explicitly excluded work: threshold selection, model fitting, H4 gate scoring, order/action latency
   inference, queue or fill simulation, protected evaluation, database access, and live trading.

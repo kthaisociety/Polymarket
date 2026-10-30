@@ -3,7 +3,7 @@
 ## Identity
 
 - Packet: `polymarket.test-bracket-overround-compression`.
-- Input repository state: `bdl-polymarket@94ea6b1d` on
+- Input repository state: `historical checkpoint 94ea6b1d` on
   `codex/polymarket-time-series-research`.
 - Owning responsibility: development-only internal-market mechanism test.
 
@@ -25,7 +25,7 @@ This is a portfolio-coherence mechanism, not another single-contract transform s
 - Confirmation, if earned, is limited to later development events `739241`, `748763`, and `727674`.
 - Questions must parse into pairwise non-overlapping count brackets inside every event. Completeness
   is not required: mutual exclusion alone makes probability mass above one incoherent.
-- Production writes, protected values, external data, Kthais, the production engine, and sibling
+- Production writes, protected values, external data, external application, the production data service, and sibling
   repositories are excluded.
 
 ## Fixed discovery design

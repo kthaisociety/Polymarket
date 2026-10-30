@@ -7,7 +7,7 @@
 - Semantic transition or responsibility: Convert the existing broad calibration lead into fixed
   longshot-fade and favorite-follow strategy screens, with adjacent probability-state rivals,
   event dependence, chronology, and an adverse-execution hurdle.
-- Input repository state: `bdl-polymarket@712fc693bd17` on
+- Input repository state: `historical checkpoint 712fc693bd17` on
   `codex/polymarket-time-series-research`, after the rejected B1/B2 wallet packet.
 
 ## Objective

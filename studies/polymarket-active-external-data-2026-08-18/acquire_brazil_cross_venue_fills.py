@@ -19,7 +19,7 @@ from research_agent.data_adapters.polymarket.database import (
     require_read_only_role,
 )
 
-_DATABASE_URL_ENV = "BDL__DB__URL"
+_DATABASE_URL_ENV = "POLYMARKET_DATABASE_URL"
 _POLYMARKET_IDS = (
     "0xdf8e2dc5860027decbe6164555c3c1c9645c3bd33e16b9dc57ca87125047d4a8",
     "0x1a01bf78f56a507fcb666d564d8c8b91b0750679163ed6e96746102c9b7d285d",
@@ -59,7 +59,7 @@ def _line(value: object) -> bytes:
 async def _acquire(
     database_url: str, *, start: datetime, end: datetime, output: Path
 ) -> dict[str, object]:
-    from core.db.pool import close_pool, create_pool
+    from research_agent.data_adapters.polymarket.pool import close_pool, create_pool
 
     pool = await create_pool(database_url, min_size=1, max_size=1)
     temporary = output.with_suffix(f"{output.suffix}.partial")
@@ -85,7 +85,7 @@ async def _acquire(
                         {
                             "kind": "header",
                             "schema": "chronos-brazil-cross-venue-taker-fills/v1",
-                            "environment_id": "bdl-polymarket-production-readonly",
+                            "environment_id": "polymarket-production-readonly",
                             "kalshi_market_ids": _KALSHI_IDS,
                             "polymarket_market_ids": _POLYMARKET_IDS,
                             "outcome_index": 0,

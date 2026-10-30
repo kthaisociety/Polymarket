@@ -227,7 +227,7 @@ def test_public_corpus_command_without_database_url_is_explicitly_blocked(
     tmp_path: Path,
 ) -> None:
     """The public command never turns missing production access into fixture evidence."""
-    monkeypatch.delenv("BDL__DB__URL", raising=False)
+    monkeypatch.delenv("POLYMARKET_DATABASE_URL", raising=False)
 
     status = corpus_snapshot.main(
         [

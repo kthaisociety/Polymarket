@@ -153,7 +153,7 @@ None.
   refs, duplicate refs and markets, mixed recipes/kinds, chronology, source order, and campaign
   detachment.
 - The full Polymarket adapter suite passed: 179 tests under
-  `PYTHONPATH=src:../../engine/src`.
+  `PYTHONPATH=src`.
 - The broader Chronos suite passed: 548 tests, excluding only the two previously documented
   sandbox-incompatible loopback HTTP modules.
 - Ruff formatting and checking passed across 42 Polymarket adapter files; full basedpyright passed
@@ -170,7 +170,7 @@ None.
   soon as capture exists, without a new code path or manual scientific reconstruction.
 - Structural plan identity does not prove wall-clock precommitment. A real campaign still needs a
   persisted pre-inspection plan receipt before snapshot values are exposed.
-- The current runtime has no configured `BDL__DB__URL`; no post-change production L2 corpus was
+- The current runtime has no configured `POLYMARKET_DATABASE_URL`; no post-change production L2 corpus was
   available for this packet.
 - Remaining dependencies are dual-clock collector deployment, approved bounded capture, a real
   persisted plan/receipt, measured order latency and fees, semantic event grouping, and prospective

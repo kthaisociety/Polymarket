@@ -6,7 +6,7 @@
 - Owning architecture block: open-ended exploration, with conditional formalization/development.
 - Semantic transition or responsibility: development-only sampled probability paths → authored
   boundary-aware features and falsifiers → retained candidate or rejection.
-- Input repository state: `bdl-polymarket@626f0e74` on
+- Input repository state: `historical checkpoint 626f0e74` on
   `codex/polymarket-time-series-research`.
 
 ## Objective
@@ -27,7 +27,7 @@ candidate first survives development evidence.
   partition `49d5e9a97985a44e3277f43ee55ce1281c430a1d0a1823754a9a759ac56d3bd1`,
   official-source scout/retain/register path, formalization, development, and protected governance.
 - Explicit exclusions: protected values before freeze/permit, production writes, invented
-  alternative data, unregistered web values in analysis, Kthais/engine changes, and calling sampled
+  alternative data, unregistered web values in analysis, external-system changes, and calling sampled
   probabilities executable quotes.
 - Assumptions: retained paths are hourly sampled YES-token probabilities with exact question/event
   identity; the final seven event groups/45 markets remain protected.
@@ -101,6 +101,6 @@ candidate first survives development evidence.
   expanding-mean baseline.
 - CME FedWatch was identified as the exact external probability source, but official access is
   credentialed/paid. FRED realized-rate series were rejected as semantically weaker substitutes.
-- No protected backtest, production write, Kthais/engine change, push, merge, or PR occurred.
+- No protected backtest, production write, external-system change, push, merge, or PR occurred.
 - Validated question memory remains unchanged because this is development evidence, while the
   repository study/receipt retains the negative result for future research context.

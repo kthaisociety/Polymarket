@@ -39,7 +39,7 @@ class PolymarketBlockVintage:
 
 @dataclass(frozen=True, slots=True)
 class PolymarketOutcomeRecord:
-    """One exact outcome identity exposed by the engine read surface."""
+    """One exact outcome identity exposed by the database read surface."""
 
     outcome_index: int
     outcome_token: str
@@ -75,7 +75,7 @@ class PolymarketContractRecord:
 
 @dataclass(frozen=True, slots=True)
 class PolymarketFillRecord:
-    """One taker-side contract print returned by the engine read surface."""
+    """One taker-side contract print returned by the database read surface."""
 
     fill_uid: str
     fill_time: datetime

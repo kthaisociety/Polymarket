@@ -6,9 +6,9 @@ CLAIM**.
 Research decision time: `2026-08-23T10:36:21+00:00`.
 
 This memo turns the existing Chronos evidence into a falsifiable low-latency research program. It
-does not reinterpret sampled probabilities or transaction prints as executable quotes. The engine
-and Chronos now implement the dual-clock capture, exact bounded read, immutable retention, replay,
-and registration boundary. The first empirical branch still needs that engine change deployed and
+does not reinterpret sampled probabilities or transaction prints as executable quotes. The
+collector and Chronos now implement the dual-clock capture, exact bounded read, immutable retention,
+replay, and registration boundary. The first empirical branch still needs that collector change deployed and
 a post-change production corpus captured; no historical quote values were manufactured.
 
 ## Mandate and definition
@@ -39,7 +39,7 @@ views may be diagnostics, but none replaces the event clock without a stated mec
 | Sibling surfaces, bracket overround, and first-move direction | Exploratory gains failed formal replay, cost, breadth, or stability gates. | Do not reopen these exact branches through threshold search. |
 | FedWatch, PortWatch, Brazil polls, and XTracker | Direct follow rules failed; post-hoc or discovery effects were sparse or reversed on confirmation. | Slow public-series following is not the opening low-latency branch. |
 | Marked-jump and quiet-duration studies | Sticky, zero-inflated marked-jump structure and update-arrival predictability were broad and reproducible. | Use process state to decide when a fast strategy should participate, not as standalone directional P&L. |
-| Engine strategy lab | Order-book imbalance, parity, maker capture, and cross-venue matching were implemented or scoped, but the lab records no real scoring or live fills for them. | Treat code and thresholds as hypothesis ancestry, not evidence. Chronos must estimate them from retained event-time data. |
+| Retained strategy lab | Order-book imbalance, parity, maker capture, and cross-venue matching were implemented or scoped, but the lab records no real scoring or live fills for them. | Treat code and thresholds as hypothesis ancestry, not evidence. Chronos must estimate them from retained event-time data. |
 
 The current evidence therefore rejects a generic `fast momentum` or `fast mean reversion` mandate.
 The research program begins from mechanisms that survived some prior control or have a payoff
@@ -233,7 +233,7 @@ the receipt to durable externally ordered evidence before value inspection. See
 **Question.** Conditional on a tight spread and minimum real depth, does multi-level book imbalance
 predict an executable price move over 1–30 seconds?
 
-**Prior.** The engine lab contains a reasoned implementation, but its threshold, 30-second cadence,
+**Prior.** The retained strategy lab contains a reasoned implementation, but its threshold, 30-second cadence,
 and hold limit were never calibrated on retained Polymarket book events.
 
 The cited Polymarket paper supports retaining depth beyond the touch; it does not report a
@@ -326,7 +326,7 @@ or a trading claim.
 
 ## Next research transition
 
-The next transition is deployment of the new dual-clock engine schema/collector followed by a
+The next transition is deployment of the new dual-clock schema/collector followed by a
 bounded invocation of the exact Chronos `book_corpus_snapshot` command. The command now binds the
 reviewed scope-authority reference, canonical legs, and half-open collector interval to the proved
 `human_ro` repeatable-read path, immutable retention, replay, registration, and a sanitized receipt.

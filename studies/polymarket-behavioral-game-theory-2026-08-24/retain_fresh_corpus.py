@@ -11,7 +11,7 @@ from tools.dev.prod_secrets import read_secret
 
 if __name__ == "__main__":
     password = quote(read_secret("human_ro_password"), safe="")
-    os.environ["BDL__DB__URL"] = (
+    os.environ["POLYMARKET_DATABASE_URL"] = (
         f"postgresql://human_ro:{password}@127.0.0.1:15432/bdl"
     )
     raise SystemExit(main())

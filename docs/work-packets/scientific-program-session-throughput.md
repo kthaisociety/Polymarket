@@ -6,7 +6,7 @@
 - Owning architecture block: autonomous authored investigation.
 - Semantic responsibility: execute a bounded sequence of phase-separated authored-program
   invocations without changing scientific inputs, outputs, capability access, or identity.
-- Input repository state: `bdl-polymarket@00c39203` on
+- Input repository state: `historical checkpoint 00c39203` on
   `codex/polymarket-time-series-research`, plus the active move-duration protected-evaluation
   artifacts not yet committed.
 
@@ -68,7 +68,7 @@ wall-time reduction on a deterministic multi-invocation benchmark.
 
 ## Completion evidence
 
-- Focused tests pass under the documented engine import path.
+- Focused tests pass under the documented source import path.
 - Ruff format/check and basedpyright pass for the changed scope.
 - Full 448-test suite and complete local quality gate pass.
 - Benchmark method/count and observed timings are retained in the transition receipt.

@@ -59,12 +59,8 @@ class PolymarketResearchReader(Protocol):
         ...
 
 
-class EnginePolymarketResearchReader:
-    """Read the legacy BDL schema through a Chronos-owned read-only surface.
-
-    The public name is retained for compatibility with existing Chronos studies. The
-    implementation is standalone and does not import the parent BDL engine.
-    """
+class DatabasePolymarketResearchReader:
+    """Read Polymarket research facts through a local read-only database surface."""
 
     def __init__(self, executor: _FetchExecutor) -> None:
         """Retain a proved read-only database executor."""
@@ -88,7 +84,7 @@ class EnginePolymarketResearchReader:
     async def read_contracts(
         self, market_ids: tuple[str, ...]
     ) -> tuple[PolymarketContractRecord, ...]:
-        """Read exact contract metadata from the legacy production schema."""
+        """Read exact contract metadata from the production research schema."""
         count_rows = await self._executor.fetch(_OUTCOME_COUNTS_SQL, _VENUE)
         identity_rows = await self._executor.fetch(_IDENTITY_SQL, _VENUE)
         close_rows = await self._executor.fetch(_CLOSE_TIMES_SQL, _VENUE)

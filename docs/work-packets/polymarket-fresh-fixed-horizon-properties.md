@@ -126,7 +126,7 @@ construction without protected exposure.
 
 ## Formal authored trial predeclaration
 
-Predeclaration checkpoint: `bdl-polymarket@50db42dd`.
+Predeclaration checkpoint: `historical checkpoint 50db42dd`.
 
 The exploratory whole-event fold orders events by authoritative resolution chronology, but its
 authored code does not independently prove that every earlier event label matured before every
@@ -169,7 +169,7 @@ and is not freeze-eligible; protected exposure remains false.
 
 ## Final predeclared path-model revision
 
-Revision checkpoint: `bdl-polymarket@433000d7`.
+Revision checkpoint: `historical checkpoint 433000d7`.
 
 The 12-feature model is eligible for one formal revision because its exact feature set and fixed
 logistic recipe were declared before both fixed-horizon runs and it passed the exploratory

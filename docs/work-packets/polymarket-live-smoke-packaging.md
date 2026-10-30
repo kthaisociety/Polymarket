@@ -11,18 +11,18 @@
 
 - Permitted: Chronos package metadata and lockfile, smoke packaging regression, and owning
   data-foundation documentation.
-- Forbidden: engine/database mutation, credential persistence or output, scientific-state changes,
-  and dependence on the parent repository's virtual environment.
+- Forbidden: database mutation, credential persistence or output, scientific-state changes,
+  and dependence on an undeclared external virtual environment.
 - Governing invariants: I13, I17, I24, and I26.
 
 ## Failure and counterexample
 
-The adapter tests passed while the standalone live command failed before connection on the engine
-database and metrics runtime (`asyncpg`, `tenacity`, and `prometheus-client`). The parent BDL
+The adapter tests passed while the standalone live command failed before connection because its
+database and metrics runtime (`asyncpg`, `tenacity`, and `prometheus-client`) was incomplete. The
 environment contained these dependencies, so running there produced a misleading success. A
 package is not standalone when a shipped command needs undeclared dependencies.
 
-The causal regression reads Chronos' package declaration and fails if any required engine database
+The causal regression reads Chronos' package declaration and fails if any required database
 or metrics runtime is no longer a direct dependency.
 
 ## Transition receipt
@@ -30,7 +30,7 @@ or metrics runtime is no longer a direct dependency.
 - Status: **COMPLETE**.
 - Delta: declare `asyncpg>=0.31.0`, `tenacity>=9`, and `prometheus-client>=0.26.0`, regenerate the
   Chronos lock, and retain the packaging regression.
-- Integration evidence: run the smoke from `research/chronos` with its own `uv` environment and the
+- Integration evidence: run the smoke from the repository root with its own `uv` environment and the
   approved read-only tunnel. Require `human_ro`, both read-only settings, and denied insert/update
   privileges before accepting any live read.
 - Remaining reds: immutable database snapshots, historical collector availability, authoritative

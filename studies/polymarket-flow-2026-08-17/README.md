@@ -15,9 +15,9 @@ event subject matter.
 
 ## Exact evidence
 
-Both contracts were read through the engine's public market reads under proved `human_ro`, with
-session and transaction read-only settings and denied insert/update privileges. The common cursor
-vintage in the retained receipts is `polygon-blocks:45176009-92169181`.
+Both contracts were read through the standalone parameterized query surface under proved
+`human_ro`, with session and transaction read-only settings and denied insert/update privileges.
+The common cursor vintage in the retained receipts is `polygon-blocks:45176009-92169181`.
 
 | Contract | Decision cutoff | Tape coverage | Fills | Source / legal-view identity |
 |---|---|---|---:|---|

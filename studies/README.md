@@ -4,6 +4,11 @@ This index retains repository-authored live studies that have not reached termin
 question memory. A study entry is evidence history, not a `ValidatedFinding`, `NegativeResult`, or
 `QuestionMemoryRecord`. Those statuses require the independently governed runtime transitions.
 
+Some immutable receipts retain their original environment identifiers. Those strings are evidence
+identity only: they are not packages, remotes, runtimes, or current configuration dependencies.
+Current live commands use `POLYMARKET_DATABASE_URL` and default to
+`polymarket-production-readonly`.
+
 | Study | Exact scope | Epistemic status | Disposition | Terminal memory |
 |---|---|---|---|---|
 | [Aggressor flow and subsequent contract-price changes](polymarket-flow-2026-08-17/) | Two exact low-price contract tapes; 120,455 fills | `EXPLORATORY — NEGATIVE` | Raw flow reversal rejected as transaction-direction mechanics | None |

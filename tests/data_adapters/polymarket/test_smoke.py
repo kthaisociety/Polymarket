@@ -34,7 +34,7 @@ def test_smoke_without_approved_database_url_is_explicitly_blocked(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """No configured read-only connection remains a visible non-live blocker."""
-    monkeypatch.delenv("BDL__DB__URL", raising=False)
+    monkeypatch.delenv("POLYMARKET_DATABASE_URL", raising=False)
 
     status = smoke.main(["--market-id", "0xmarket"])
     payload = json.loads(capsys.readouterr().out)

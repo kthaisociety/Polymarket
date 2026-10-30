@@ -7,7 +7,7 @@
 - Semantic transition or responsibility: route a repository-aware researcher from an exact live
   Polymarket scope into the existing analysis, candidate-design, and backtest-gate skills while
   keeping optional financial-ML ideas outside the default context.
-- Input repository state: `bdl-polymarket@6a6ca81b` on
+- Input repository state: `historical checkpoint 6a6ca81b` on
   `codex/polymarket-time-series-research`.
 
 ## Objective
@@ -25,7 +25,7 @@ follow the existing three-stage guidance loop without loading a book-sized promp
 - Relevant adjacent interfaces: Polymarket live registration and analysis CLI, the three existing
   research-guidance skills, exact study artifacts, and the independent protected-evaluation gate.
 - Explicitly excluded work: implicit runtime prompt injection, `ContextPacket` changes, database or
-  engine changes, formal Polymarket labels, protected evaluation, promotion, and durable question
+  external-service changes, formal Polymarket labels, protected evaluation, promotion, and durable question
   memory.
 - Assumptions: supplied chapters are user-provided research material to summarize as optional idea
   families; their procedures are neither architectural authority nor automatic defaults.
@@ -76,7 +76,7 @@ None.
 
 - Packet: `polymarket.route-startup-and-method-guidance`
 - Status: **COMPLETE**.
-- Input repository state: `bdl-polymarket@6a6ca81b` on
+- Input repository state: `historical checkpoint 6a6ca81b` on
   `codex/polymarket-time-series-research`.
 - Resulting repository state: the local commit containing this receipt on the same branch.
 

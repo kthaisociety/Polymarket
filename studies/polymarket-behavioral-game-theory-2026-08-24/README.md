@@ -31,7 +31,7 @@ Usable development surfaces:
 Two adversarial checks matter immediately:
 
 1. `market.fills` is a per-party ledger. Reading all 1,146,454 recent rows would double count match
-   volume and mechanically offset signed flow. The engine's taker-leg predicate yields 446,155
+   volume and mechanically offset signed flow. The database adapter's taker-leg predicate yields 446,155
    one-row-per-match aggregate prints.
 2. Gamma resolved prices are near terminal (`0.9995`/`0.0005`) and its exact-equality-derived
    `is_winner` field is therefore unusable in the observed cohort. Against 105 contracts with both
@@ -107,7 +107,7 @@ Two adversarial checks matter immediately:
 - Rivals: tax/portfolio constraints, market resolution proximity, and mechanically forced exits.
 - Falsifier: gain/loss state adds no chronological information after wallet and market fixed
   effects.
-- Status: **REJECTED ON CURRENT DATA READINESS**. The engine can replay fills plus splits, merges,
+- Status: **REJECTED ON CURRENT DATA READINESS**. The local replay can process fills plus splits, merges,
   and redemptions, and the global history cursor has reached genesis. However, 7,162 of 9,905
   market-scope repair spans were pending at the 2026-08-24 audit. Current-position rows cannot be
   used as past information, and incomplete prehistory can manufacture gain/loss states, so no B5
@@ -201,7 +201,7 @@ time. Whole event groups are ordered by their latest market-resolution time: the
 training block, the next 20% form the development evaluation block, and the final 20% are embargoed
 from value queries by this source.
 
-- The engine's taker aggregate-leg predicate reduces each Polymarket match bundle to one aggressive
+- The database adapter's taker aggregate-leg predicate reduces each Polymarket match bundle to one aggressive
   wallet row. The per-party ledger is never summed directly.
 - Wallet skill is the equal-market mean of signed settlement edge from training fills in the
   probability band `[0.05, 0.95]`: `payout - fill_price` for BUY and `fill_price - payout` for SELL.

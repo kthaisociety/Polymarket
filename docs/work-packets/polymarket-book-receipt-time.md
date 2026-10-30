@@ -22,16 +22,16 @@ explicitly unknown rather than receiving an invented timestamp.
   map, and code style guide
 - Owning block and transition contract: data-foundation `README.md`, `IMPLEMENTATION.md`,
   `transitions/README.md`, `data.register-observations`, and `data.build-information-set`
-- Relevant adjacent interfaces: engine `BookSnapshot`/`BookDelta`, Polymarket and Kalshi book-stream
+- Relevant adjacent interfaces: `BookSnapshot`/`BookDelta`, Polymarket and Kalshi book-stream
   adapters, book-table writers, and `market.book_snapshots`/`market.book_deltas`
 - Explicitly excluded work: Chronos quote registration, LL-01 value analysis, fee modeling, order
   simulation, production deployment, production data mutation, and protected evaluation
-- Assumptions: the authoritative engine data-model contract governs `ts` as collector absorb time;
+- Assumptions: the authoritative data-model contract governs `ts` as collector absorb time;
   neither stored clock grants Chronos `available_at` authority without a registration policy
 
 ## Change boundary
 
-- Permitted files or components: engine book models, source adapters, SQL schema/inserts, their unit
+- Permitted files or components: book models, source adapters, SQL schema/inserts, their unit
   and integration tests, directly owned documentation, and this packet/receipt
 - Allowed state effects: add a nullable `reference_time` column for migration compatibility, stamp
   `ts` at collector absorb, and write a non-null aware reference time for every new row
@@ -64,7 +64,7 @@ explicitly unknown rather than receiving an invented timestamp.
 
 - Targeted unit tests for both venue book adapters
 - Book writer integration test through PostgreSQL
-- Ruff, formatter, and type checks over touched engine files
+- Ruff, formatter, and type checks over touched collector files
 - `git diff --check` and an architecture review of the final diff
 - A transition receipt recording what the new timestamp proves and what remains red for LL-01
 
@@ -81,7 +81,7 @@ explicitly unknown rather than receiving an invented timestamp.
 ### Result
 
 - Packet: `polymarket-book-receipt-time`
-- Status: **COMPLETE** for the engine capture and persistence boundary.
+- Status: **COMPLETE** for the collector capture and persistence boundary.
 - Input repository state: `712fc693bd1728794ba76f9cb6627e957b1ec7b4`, with the pre-existing
   Chronos study work and external-data artifacts preserved.
 - Resulting repository state: the working tree containing this receipt; no commit was created.

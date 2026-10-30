@@ -8,7 +8,7 @@
 - Semantic transition or responsibility: Admit and complete a repository research campaign only
   from authority-issued Chronos executions over exact registered inputs; reject direct-script or
   manually asserted evidence.
-- Input repository state: `bdl-polymarket@712fc693bd1728794ba76f9cb6627e957b1ec7b4` on
+- Input repository state: `historical checkpoint 712fc693bd1728794ba76f9cb6627e957b1ec7b4` on
   `codex/polymarket-time-series-research`, preserving all pre-existing behavioral, stochastic,
   low-latency, and dual-clock worktree changes.
 

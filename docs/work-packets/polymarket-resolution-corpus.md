@@ -7,7 +7,7 @@
 - Semantic transition or responsibility: convert an exact read-only production selection of
   Polymarket contract identity, sampled price paths, and on-chain settlement facts into immutable
   retained source bytes and temporally registered predictor/label observations.
-- Input repository state: `bdl-polymarket@ecfeb31d` on
+- Input repository state: `historical checkpoint ecfeb31d` on
   `codex/polymarket-time-series-research`; current production inspection proved the new server
   tables and fields under `human_ro`.
 
@@ -28,7 +28,7 @@ predictors and mature labels with separate availability rules for later developm
 - Relevant adjacent interfaces: existing Polymarket records/reader/database/ingestion commands,
   generic temporal registration, the production `human_ro` connection proof, and the ignored local
   `data/` artifact root.
-- Explicitly excluded work: engine/Kthais changes, database writes, model fitting, candidate
+- Explicitly excluded work: external-system changes, database writes, model fitting, candidate
   selection, freeze, protected disclosure, validation, reporting, and durable memory mutation.
 - Assumptions: `market.resolutions.resolved_time` is the recorded on-chain settlement availability
   time; `market.price_series.ts` is the public sampled-price observation time under an explicit
@@ -90,7 +90,7 @@ None.
 
 - Packet: `polymarket.retain-and-register-resolution-corpus`
 - Status: **COMPLETE**.
-- Input repository state: `bdl-polymarket@ecfeb31d` on
+- Input repository state: `historical checkpoint ecfeb31d` on
   `codex/polymarket-time-series-research`.
 - Resulting repository state: the local commit containing this receipt on the same branch.
 
@@ -99,7 +99,7 @@ None.
 - Added strict bounded corpus records, a parameterized SELECT-only production reader, canonical
   content-addressed retention, distinct price and resolution registrations, a read-only repeatable-
   read composition, and a sanitized public snapshot command.
-- Preserved the original fill-tape adapter. No engine, Kthais, trading, or database-write code
+- Preserved the original fill-tape adapter. No external collection-service, trading, or database-write code
   changed.
 - Updated active navigation and research guidance to distinguish fill-only limitations from the
   exact semantics now available through a verified retained corpus.

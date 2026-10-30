@@ -3,7 +3,7 @@
 ## Identity
 
 - Packet: `polymarket.test-first-move-direction`.
-- Input repository state: `bdl-polymarket@692fd71b` on
+- Input repository state: `historical checkpoint 692fd71b` on
   `codex/polymarket-time-series-research`.
 - Responsibility: retained development probability paths → non-overlapping signed first-passage
   labels → chronological directional evidence → retained rejection or one formalization candidate.
@@ -101,7 +101,7 @@ result to mechanism evidence.
   all event views, gate results, warnings, and `protected_values_exposed=false`.
 - Permitted changes are this packet and one study's source, receipts, README, and study index. A
   concrete harness defect may be repaired only after a general failing regression is added.
-- Forbidden: production reads/writes, Kthais, engine or sibling-repository changes, external data,
+- Forbidden: production reads/writes, external application, external-system changes, external data,
   protected values, threshold rescue, result deletion, executable-price claims, freeze, promotion,
   or terminal-memory mutation.
 
